@@ -6,17 +6,22 @@
 <div id="signUpBody" >
     <img src="grafiken/Capa 2 (1).png" id="joinImage">
     <div id="signUpContainer">
-            <div ></div>
-            <div id="signUpTitle">sign in</div>
+            <div id="backArrow">
+                <img src="grafiken/arrow-left-line.png" onclick="goToLogIn()">
+            </div>
+            <div id="signUpTitle">Sign in</div>
             <input type="name" id="signUpName" placeholder="Name" class="inputSignUp">
             <input type="email" id="signUpEmail" placeholder="Email" class="inputSignUp">
             <input type="password" id="sihnUpPassword" placeholder="Password" class="inputSignUp">
             <input type="password" id="signUpPasswordConfirmation" placeholder="Confirm Password" class="inputSignUp">
-           
             <div id="rememberMeContainerSignUp">
                 <input type="checkbox" id="acceptSignUp">
                 <label for="acceptSignUp">I accept the Privacy policy</label>
             </div>
             <button class="btn btn-primary">Sign Up</button>
+    </div>
+    <div id="footerContainerSignup">
+        <div class="privacyLegalSignUp">Privacy Policy</div>
+        <div class="privacyLegalSignUp">Legal Notice</div>
     </div>
 </div>

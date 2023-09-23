@@ -7,6 +7,7 @@ function startJoin() {
         putImageAside();
         createLogInContainer();
         signUpBtns();
+        footer();
     }, 200);
 }
 
@@ -21,7 +22,7 @@ function putImageAside() {
     joinStartImage.style.transform="none";
     setTimeout(() => {
         joinStartImage.src="grafiken/Capa 2.png"
-    }, 500);
+    }, 800);
     logIn.style.transition = "background-color 1s ease"
     logIn.style.backgroundColor="white"
 }
@@ -44,7 +45,7 @@ function createLogInContainer(){
             </div>
         </div>
         `
-    }, 500);
+    }, 800);
 }
 
 function signUpBtns(){
@@ -56,9 +57,21 @@ function signUpBtns(){
             <button class="btn btn-primary" onclick="signUpPage()">sign up</button>
         </div>
         `
-    }, 500);
+    }, 800);
 }
 
 function signUpPage() {
     window.location.href = 'signUp.html';
+}
+
+function footer(){
+    const logIn = document.getElementById("logIn");
+    setTimeout(() => {
+        logIn.innerHTML+=/*html*/`
+        <div id="footerContainer">
+            <div class="privacyLegal">Privacy Policy</div>
+            <div class="privacyLegal">Legal Notice</div>
+        </div>
+        `
+    }, 800);
 }
