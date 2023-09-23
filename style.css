@@ -46,6 +46,16 @@
     border-bottom:1px solid skyblue;
 }
 
+#logInEmail{
+    background: white url(/grafiken/mail.png) right no-repeat;
+    padding-right: 17px
+}
+
+#logInPassword{
+    background: white url(/grafiken/lock.png) right no-repeat;
+    padding-right: 17px
+}
+
 
 #rememberMeContainer{
     margin-right: 8px;
@@ -108,6 +118,26 @@
 .inputSignup:focus{
     outline:none;
     border-bottom:1px solid skyblue;
+}
+
+#signUpName{
+    background: white url(/grafiken/person.png) right no-repeat;
+    padding-right: 17px
+}
+
+#signUpEmail{
+    background: white url(/grafiken/mail.png) right no-repeat;
+    padding-right: 17px
+}
+
+#signUpPassword{
+    background: white url(/grafiken/lock.png) right no-repeat;
+    padding-right: 17px
+}
+
+#signUpPasswordConfirmation{
+    background: white url(/grafiken/lock.png) right no-repeat;
+    padding-right: 17px
 }
 
 #footerContainer{
