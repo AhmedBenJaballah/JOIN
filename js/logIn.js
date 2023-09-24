@@ -61,7 +61,7 @@ function signUpBtns(){
 }
 
 function signUpPage() {
-    window.location.href = 'signUp.html';
+    window.location.href = '../signUp.html';
 }
 
 function footer(){
