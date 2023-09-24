@@ -41,11 +41,15 @@ function createLogInContainer(){
             </div>
             <div id="logInBtns">
                 <button class="btn btn-primary">Log In</button>
-                <button class="btn btn-light"> Guest Log In</button>
+                <button class="btn btn-light" onclick="goToSummary()"> Guest Log In</button>
             </div>
         </div>
         `
     }, 800);
+}
+
+function goToSummary(){
+    window.location.href = '/summary.html';
 }
 
 function signUpBtns(){
@@ -61,7 +65,7 @@ function signUpBtns(){
 }
 
 function signUpPage() {
-    window.location.href = '../signUp.html';
+    window.location.href = '/signUp.html';
 }
 
 function footer(){
