@@ -12,11 +12,14 @@ align-items: center;
 }
 
 #joinStartImage{
-    margin-left: 20px;
-    height: 40px;
+    margin-left: 40px;
+    height: 50px;
 }
 
 #kanban{
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-right: 20px;
     color:white;
 }
