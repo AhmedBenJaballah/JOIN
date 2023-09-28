@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="js/signUp.js"></script>
+    
 <link rel="stylesheet" href="css/signUp.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 </head>
-<body>
+<body onload="init()">
     <div id="signUpBody">
         <img src="grafiken/Capa 2 (1).png" id="joinImage">
         <div id="signUpContainer">
@@ -18,20 +18,26 @@
                     <img src="grafiken/arrow-left-line.png" onclick="goToLogIn()">
                 </div>
                 <div id="signUpTitle">Sign in</div>
-                <input type="name" id="signUpName" placeholder="Name" class="inputSignUp">
-                <input type="email" id="signUpEmail" placeholder="Email" class="inputSignUp">
-                <input type="password" id="signUpPassword" placeholder="Password" class="inputSignUp">
-                <input type="password" id="signUpPasswordConfirmation" placeholder="Confirm Password" class="inputSignUp">
-                <div id="rememberMeContainerSignUp">
+                <form onsubmit="register(); return false;">
+                    <input type="name" id="signUpName" placeholder="Name" class="inputSignUp" required >
+                    <input type="email" id="signUpEmail" placeholder="Email" class="inputSignUp" required>
+                    <input type="password" id="signUpPassword" placeholder="Password" class="inputSignUp" required>
+                    <input type="password" id="signUpPasswordConfirmation" placeholder="Confirm Password" class="inputSignUp" required>
+                    <div id="rememberMeContainerSignUp">
                     <input type="checkbox" id="acceptSignUp">
                     <label for="acceptSignUp">I accept the Privacy policy</label>
                 </div>
-                <button class="btn btn-primary">Sign Up</button>
+                <button id="registerBtn" class="btn btn-primary">Sign Up</button>
+                </form>
         </div>
         <div id="footerContainerSignup">
             <div class="privacyLegalSignUp">Privacy Policy</div>
             <div class="privacyLegalSignUp">Legal Notice</div>
         </div>
     </div>
+
+    
+  <script src="js/storage.js"></script>
+  <script src="js/signUp.js"></script>
 </body>
 </html>

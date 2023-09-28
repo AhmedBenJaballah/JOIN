@@ -33,8 +33,8 @@ function createLogInContainer(){
         logIn.innerHTML+=/*html*/`
         <div id="logInContainer">
             <div id="logInTitle">Log in</div>
-            <input type="email" id="logInEmail" placeholder="Email" class="inputLogIn">
-            <input type="password" id="logInPassword" placeholder="Password" class="inputLogIn">
+            <input type="email" id="logInEmail" placeholder="Email" class="inputLogIn" required>
+            <input type="password" id="logInPassword" placeholder="Password" class="inputLogIn" required>
             <div id="rememberMeContainer">
                 <input type="checkbox" id="rememberMe">
                 <label for="rememberMe">Remember me</label>
