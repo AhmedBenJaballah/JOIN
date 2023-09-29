@@ -1,0 +1,84 @@
+#content{
+    display: flex;
+}
+
+#contacts{
+    width: calc(100vw - 200px);
+    height: calc(100vh - 80px);
+    display: flex;
+}
+
+#scrollContacts{
+    border-right: 1px solid #ccc;
+    width: 35%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+#addContact{
+   width: 80%;
+    margin:15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background-color: #4589FF;
+}
+
+#addContact img{
+    padding-left: 10px;
+}
+#contactList{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.letter{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.firstLetter{
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 1px solid #ccc; 
+    width: 80%;
+    padding-bottom: 30px;
+    padding-left: 25px;
+}
+
+#person{
+    margin-top: 10px;
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+#person:hover {
+    background-color: #4589FF;
+    border-radius: 8px;
+    color: white ;
+}
+
+#roundName{
+    border:1px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: orangered;
+    height: 40px;
+    width: 40px;
+    margin-right: 30px;
+}
+

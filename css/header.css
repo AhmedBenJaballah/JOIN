@@ -4,7 +4,7 @@ body{
 
 header{
 height: 80px;
-width: 100vw;
+width: 100%;
 background-color: #4589FF;
 display: flex;
 justify-content: space-between;
