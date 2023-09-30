@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/contacts.css">
+    <script src="js/storage.js"></script>
     <script src="js/contacts.js"></script>
     <script src="js/policy.js"></script>
+    <script src="js/script.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -19,16 +22,6 @@
             <div id="scrollContacts">
                 <button id="addContact" class="btn btn-primary" onclick="addContact()">Add new contact <img src="grafiken/person_add.png"> </button>
                 <div id="contactList">
-                    <div class="letter">
-                        <div class="firstLetter">A</div>
-                        <div id="person" onclick="renderInfo()">
-                            <div id="roundName"> AM</div>
-                            <div id="info">
-                                <div id="namePerson">Anton Mayer</div>
-                                <div id="emailPerson">anton@gmail.com</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div id="displayContact"></div>
@@ -46,13 +39,13 @@
 
             <div class="addContactSidebarContainer">
                 <img src="grafiken/Group 13.png">
-                <form id="formContacts" onsubmit="create(); return false;">
-                    <input type="name" id="name" placeholder="Name" class="inputContact" required >
-                    <input type="email" id="email" placeholder="Email" class="inputContact" required>
-                    <input type="phone" id="phone" placeholder="Phone" class="inputContact" required>
+                <form id="formContacts" onsubmit="createPerson(); return false;">
+                    <input type="name" id="nameC" placeholder="Name" class="inputContact" required >
+                    <input type="email" id="emailC" placeholder="Email" class="inputContact" required>
+                    <input type="phone" id="phoneC" placeholder="Phone" class="inputContact" required>
                     <div class="btns">
                         <button id="cancelBtn" class="btn btn-outline-primary" onclick="closeSidebar()">Cancel <i class="bi bi-x"></i></button>
-                        <button id="createBtn" class="btn btn-primary">Create contact <i class="bi bi-check-lg"></i></button>
+                        <button  type="submit" id="createBtn" class="btn btn-primary">Create contact <i class="bi bi-check-lg"></i></button>
                     </div>
                 </form>
             </div>
@@ -60,7 +53,5 @@
     </div>
 
 
-
-    <script src="js/script.js"></script>
 </body>
 </html>
