@@ -9,6 +9,17 @@
     gap: 10px;
 }
 
+#formSignUP{
+    width: 100%;
+    height: 70%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+
+}
+
 #signUpBody{
     height: 100vh;
     width: 100vw;
@@ -54,7 +65,7 @@
     cursor: pointer;
 }
 
-.inputSignup:focus{
+.inputSignUp:focus{
     outline:none;
     border-bottom:1px solid skyblue;
 }

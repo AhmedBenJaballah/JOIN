@@ -1,0 +1,7 @@
+function policy(){
+
+}
+
+function notice(){
+
+}
