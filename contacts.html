@@ -29,7 +29,7 @@
     </div>
 
     <div id="dialog" class="displayNone" onclick="closeSidebar()">
-        <div id="sidebarLeft" class="contentSidebarLeft" onclick="doNotClose(event)">
+        <div id="sidebarRight" class="contentsidebarRight" onclick="doNotClose(event)">
             <div class="joinHeader">
                 <div id="xClose" onclick="closeSidebar()"><i class="bi bi-x-lg"></i></div>
                 <img src="grafiken/Capa 2 (1).png">
@@ -50,6 +50,29 @@
                 </form>
             </div>
         </div>
+
+        <div id="sidebarLeft" class="contentsidebarLeft" onclick="doNotClose(event)">
+            <div class="joinHeader">
+                <div id="xCloseLeft" onclick="closeSidebar()"><i class="bi bi-x-lg"></i></div>
+                <img src="grafiken/Capa 2 (1).png">
+                <h1> <b> Edit contact </b> </h1>
+            </div>
+
+            <div class="addContactSidebarContainer">
+                <img src="grafiken/Group 13.png">
+                <form id="formContacts" onsubmit="editPerson(); return false;">
+                    <input type="name" id="nameEdit" placeholder="Name" class="inputContact" required >
+                    <input type="email" id="emailEdit" placeholder="Email" class="inputContact" required>
+                    <input type="phone" id="phoneEdit" placeholder="Phone" class="inputContact" required>
+                    <div class="btns">
+                        <button id="cancelBtn" class="btn btn-outline-primary" >Delete <i class="bi bi-x"></i></button>
+                        <button  type="submit" id="createBtn" class="btn btn-primary">Save <i class="bi bi-check-lg"></i></button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
     </div>
 
 
