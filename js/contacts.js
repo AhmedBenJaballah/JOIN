@@ -18,9 +18,14 @@ async function loadContacts(){
 
 function addContact(){
     const dialog = document.getElementById("dialog");
+    const sidebarLeft = document.getElementById("sidebarLeft");
     dialog.classList.remove("displayNone");
     dialog.classList.add("addSidebar");
-    let sidebar = document.getElementById("sidebarLeft");
+    dialog.style.justifyContent="flex-end";
+    sidebarLeft.classList.add("displayNone");
+    let sidebar = document.getElementById("sidebarRight");
+    sidebar.classList.remove("displayNone");
+    
     setTimeout(() => {
         sidebar.style.transition = "width 0.1s ease";
         sidebar.style.width = "45vw";
@@ -28,7 +33,7 @@ function addContact(){
 }
 
 function closeSidebar(){
-    let sidebar=document.getElementById("sidebarLeft")
+    let sidebar=document.getElementById("sidebarRight")
     sidebar.style.width="0px"
     setTimeout(() => {
     dialog.classList.add("displayNone");
@@ -133,19 +138,13 @@ function getRandomBrightColor() {
 
 function renderInfo(name,email,color,phone){
     const display= document.getElementById("displayContact")
-  
-
-    console.log('Name:', name);
-    console.log('E-Mail:', email);
-   console.log('E-Mail:', color);
-   console.log('E-Mail:', phone);
     display.innerHTML=/*html*/`
     <div class="renderContacts">
         <div class="displayRoundName" style="background-color:${color}">${initials(name)}</div>
         <div class="renderName">
             <div class="renderOnlyName">${name}</div>
             <div class="editAndDelete">
-                <div class="alignImg"><img src="grafiken/edit.png">Edit</div>
+                <div class="alignImg" onclick="modification('${name}','${email}','${color}','${phone}')"><img src="grafiken/edit.png">Edit</div>
                 <div class="alignImg"><img src="grafiken/delete.png">Delete</div>
             </div>
         </div>
@@ -157,5 +156,29 @@ function renderInfo(name,email,color,phone){
         <h5>Phone</h5>
         <div>${phone}</div>
     </div>
-    `
+      `
+}
+function modification(name,email,color,phone){
+    const dialog = document.getElementById("dialog");
+    const sidebarLeft = document.getElementById("sidebarLeft");
+    const sidebarRight = document.getElementById("sidebarRight");
+    dialog.classList.remove("displayNone");
+    dialog.classList.add("addSidebar");
+    sidebarRight.classList.add("displayNone");
+    sidebarLeft.classList.remove("displayNone");
+    dialog.style.justifyContent="flex-start";
+    const nameEdit = document.getElementById("nameEdit");
+    const emailEdit = document.getElementById("emailEdit");
+    const phoneEdit = document.getElementById("phoneEdit");
+  
+    nameEdit.value=name
+    emailEdit.value=email
+    phoneEdit.value=phone
+
+    
+}   
+
+function editPerson(){
+    nameC.value="f"
+
 }
