@@ -138,4 +138,8 @@ body {
 .tasks:hover .img-num img {
     border: 3px solid white;
     border-radius: 50%;
+    
+}
+.tasks img {
+    transform: scale(1.1,1.1);
 }

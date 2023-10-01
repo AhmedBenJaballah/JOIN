@@ -37,4 +37,32 @@
     font-size: 24px;
     margin-left: 32px;
 }
-
+p {
+    margin-left: 32px;
+    font-size: 24px;
+}
+.radio-group{
+    margin-left: 32px;
+    
+}
+.btn-outline-danger {
+    margin-right: 16px;
+    padding: 0;
+    color: black !important;
+    padding: 8px !important;
+    
+}
+label > img {
+    position: relative;
+    margin-left:10px;
+    margin-right: px;
+}
+.second-vector {
+    position: relative;
+    top: -5.6px;
+    right: 34.5px;
+}
+.second-vector-low {
+    position: relative;
+    top: -5.6px;
+    right: 35.5px;
