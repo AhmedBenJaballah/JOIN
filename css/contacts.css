@@ -180,17 +180,17 @@ color: #4589ff;
   border-bottom: 1px solid skyblue;
 }
 
-#name {
+#nameC {
   background: white url(/grafiken/person.png) right no-repeat;
   padding-right: 17px;
 }
 
-#email {
+#emailC {
   background: white url(/grafiken/mail.png) right no-repeat;
   padding-right: 17px;
 }
 
-#phone {
+#phoneC {
   background: white url(/grafiken/call.png) right no-repeat;
   padding-right: 17px;
 }
@@ -219,4 +219,62 @@ color: #4589ff;
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #c7c5c5; 
+  }
+
+  .renderContacts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-right: 80px;
+    margin-left: 80px;
+    margin-bottom: 40px;
+  }
+
+  .displayRoundName{
+    border: 3px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 40px;
+    height: 100px;
+    width: 100px;
+    margin-right: 30px;
+    box-shadow:-2px 0px 6px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .renderName{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .renderOnlyName{
+    font-size: 40px;
+    font-weight: bold;
+  }
+
+  .editAndDelete{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:15px
+  }
+
+  .alignImg{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .renderEmailAndPhone{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 80px;
   }

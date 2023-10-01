@@ -8,7 +8,8 @@ async function loadContacts(){
             const name=contacts[i]["name"];
             const color=contacts[i]["color"];
             const email=contacts[i]["email"];
-            renderContactList(name,color,email);
+            const phone=contacts[i]["phone"];
+            renderContactList(name,color,email,phone);
         }
     } catch(e){
         console.error('Loading error:', e);
@@ -48,15 +49,15 @@ async function createPerson(){
     });
     await setItem('contacts', JSON.stringify(contacts));
     closeSidebar();
-    renderContactList(nameC.value,color,emailC.value);
+    renderContactList(nameC.value,color,emailC.value,phoneC.value);
   
 }
 
-function renderContactList(name,color,email){
+function renderContactList(name,color,email,phone){
     const contactlist=document.getElementById("contactList")
     const letter = document.getElementById(`${(name[0]).toUpperCase()}`)
     if(letter){
-        letter.innerHTML+=templatePersonWithLetter(name,color,email)
+        letter.innerHTML+=templatePersonWithLetter(name,color,email,phone)
         //letter.scrollIntoView({ behavior: 'smooth', block: 'end' });
         //letter.style.backgroundColor="#4589ff"
         // let divs = Array.from(letter.querySelectorAll('.namePerson'));
@@ -71,9 +72,9 @@ function renderContactList(name,color,email){
         // });
     }
     else{
-    contactlist.innerHTML+=templatePersonWithOutLetter(name,color,email);
+    contactlist.innerHTML+=templatePersonWithOutLetter(name,color,email,phone);
     }
-    sortAlpha(contactlist,letter);
+    sortAlpha(contactlist);
 }
 
 
@@ -91,9 +92,9 @@ function sortAlpha(contactlist){
     });
 }
 
-function templatePersonWithLetter(name,color,email){
+function templatePersonWithLetter(name,color,email,phone){
 return     /*html*/`                   
-    <div class="person" onclick="renderInfo(event)">
+    <div class="person" onclick="renderInfo('${name}','${email}','${color}','${phone}')">
         <div class="roundName" style="background-color:${color}">${initials(name)}</div>
         <div class="info">
             <div class="namePerson">${name}</div>
@@ -103,11 +104,11 @@ return     /*html*/`
 `
 }
 
-function templatePersonWithOutLetter(name,color,email){
+function templatePersonWithOutLetter(name,color,email,phone){
 return /*html*/`                   
     <div class="letter" id="${(name[0]).toUpperCase()}">
         <div class="firstLetter">${(name[0]).toUpperCase()}</div>
-        <div class="person" onclick="renderInfo(event)">
+        <div class="person" onclick="renderInfo('${name}','${email}','${color}','${phone}')">
             <div class="roundName" style="background-color:${color}">${initials(name)}</div>
             <div class="info">
                 <div class="namePerson">${name}</div>
@@ -130,19 +131,31 @@ function getRandomBrightColor() {
     return color;
 }
 
-function renderInfo(event){
+function renderInfo(name,email,color,phone){
     const display= document.getElementById("displayContact")
-    const clickedElement = event.currentTarget;
-
-
-    const name = clickedElement.querySelector('.namePerson').textContent;
-    const email = clickedElement.querySelector('.emailPerson').textContent;
-   const color = clickedElement.style
+  
 
     console.log('Name:', name);
     console.log('E-Mail:', email);
    console.log('E-Mail:', color);
-    display.innerHTML+=/*html*/`
-    <div class="roundName">${initials(name)}</div>
+   console.log('E-Mail:', phone);
+    display.innerHTML=/*html*/`
+    <div class="renderContacts">
+        <div class="displayRoundName" style="background-color:${color}">${initials(name)}</div>
+        <div class="renderName">
+            <div class="renderOnlyName">${name}</div>
+            <div class="editAndDelete">
+                <div class="alignImg"><img src="grafiken/edit.png">Edit</div>
+                <div class="alignImg"><img src="grafiken/delete.png">Delete</div>
+            </div>
+        </div>
+    </div>
+    <div class="renderEmailAndPhone">
+        <h4>Contact Information</h4>
+        <h5>Email</h5>
+        <div style="color:#4589ff">${email}</div>
+        <h5>Phone</h5>
+        <div>${phone}</div>
+    </div>
     `
 }
