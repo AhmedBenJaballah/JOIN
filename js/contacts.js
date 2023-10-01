@@ -232,7 +232,9 @@ async function editPerson(name,email,color,phone){
     contactList.innerHTML = "";
     const display= document.getElementById("displayContact")
     display.innerHTML="";
+    closeSidebar2();
     await loadContacts();
+    
 }
 
 async function deleteContact(name,email,color,phone){
@@ -243,7 +245,9 @@ async function deleteContact(name,email,color,phone){
     contactList.innerHTML = "";
     const display= document.getElementById("displayContact")
     display.innerHTML="";
+    closeSidebar2();
     await loadContacts();
+    
 }
 
 function successfullyCreated() {
