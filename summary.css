@@ -22,6 +22,7 @@ body {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s;
    
 }
 .task-img  {
@@ -39,14 +40,15 @@ body {
     width: 3px;
     height: 130px;
     background-color: white;
+    transition: background-color 0.3s;
+    
    
   
 }
 .urgent-box {
     display: flex;
     padding: 10px 40px;
-
-   align-items: center;   
+    align-items: center;   
 }
 
 
@@ -69,6 +71,7 @@ body {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     padding-top: 20px;
+    transition: background-color 0.3s;
     
 }
 .urgent-left {
@@ -83,7 +86,7 @@ body {
     margin-right: 20px; /* Abstand zwischen dem Bild und dem Text */
 }
 .urgent-box p {
-    font-size: 20px;
+    font-size: 22px;
 }
 .date span {
     font-size: 30px;
@@ -94,7 +97,6 @@ body {
 }
 .img-num {
     display: flex;
-<<<<<<< HEAD
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
@@ -111,7 +113,29 @@ body {
     font-weight: bold;
     font-size: 18px
 }
-=======
-
+.summary-box:hover {
+    transform: scale(1.1,1.1);
+    background-color: white;
 }
->>>>>>> f9169a1e7e15d5be33a141646c039c09c3745e3d
+.summary-box:hover .vertical-line  {
+    background-color: rgb(69,137,255);
+    color: rgb(69,137,255)
+}
+.summary-box:hover .date,
+.summary-box:hover p,
+.summary-box:hover .number,
+.summary-box:hover .deadline{
+    color: rgb(69,137,255);
+}
+.tasks:hover {
+    background-color: rgb(0,93,255);
+    transform: scale(1.3,1.1);
+}
+.tasks:hover span,
+.tasks:hover p{
+    color: white;
+}
+.tasks:hover .img-num img {
+    border: 3px solid white;
+    border-radius: 50%;
+}
