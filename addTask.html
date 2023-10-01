@@ -1,15 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="add-task.css">
     <script src="js/policy.js"></script>
 </head>
+
 <body onload="init()">
     <div w3-include-html="includes/header.html"></div>
-    <div w3-include-html="includes/sidebar.html"></div>
+    <div class="main-container">
+        <div w3-include-html="includes/sidebar.html"></div>
+        <div class="add-task-section">
+           <!-- <h3>Add Task</h3> -->
+            <form id="task-form">
+                <label for="task-title"></label>
+                <input type="text" id="task-title" name="task-title" required placeholder="Enter a title">
+                <br>
+                <label class="task-description" for="task-description">Description(optional)</label><br>
+                <textarea id="task-description" name="task-description" rows="3" cols="29" placeholder="Enter a Description"></textarea>
+                <br>
+                <label class="task-date" for="task-date">Due date</label><br>
+                <input  type="date" name="task-date"  id="task-date" required placeholder="/mm/yyyy">
+                <!--<button type="submit">Add Task</button>-->
+            </form>
+        </div>
+        
+    </div>
 
     <script src="js/script.js"></script>
 </body>
+
 </html>
