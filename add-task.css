@@ -1,3 +1,6 @@
+body {
+    box-sizing: border-box;
+}
 .main-container {
     display: flex;
 }
@@ -43,27 +46,87 @@ p {
 }
 .radio-group{
     margin-left: 32px;
+    box-sizing: border-box;
     
-}
+} 
+
 .btn-outline-danger {
     margin-right: 16px;
     padding: 0;
     color: black !important;
-    padding: 8px !important;
+    padding: 8px 16px !important;
+    border-color: rgba(0,0,0,0.2) !important;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    border-radius: 8px !important;
+    border-bottom: 2px solid rgba(0,0,0,0.2) !important;
+    
+    
     
 }
 label > img {
     position: relative;
     margin-left:10px;
-    margin-right: px;
+    margin-bottom: 5px;
 }
-.second-vector {
-    position: relative;
-    top: -5.6px;
-    right: 34.5px;
+.btn-outline-danger:hover {
+    border-bottom: 2px solid  rgb(255,61,0) !important ;
+    background-color: white !important;
+   
+  
 }
-.second-vector-low {
-    position: relative;
-    top: -5.6px;
-    right: 35.5px;
+.btn-outline-danger:focus, .btn-outline-danger:active {
+    background-color:rgb(255,61,0) !important;
+    transition: 0s !important;
+    outline: none !important;
+    color: white !important;
+    border: none !important;
+}
+.btn-outline-danger:focus img{
+    background-color: white !important ;
+
+}
+.medium:active, .medium:focus {
+    background-color: rgb(255,168,0) !important;
+}
+.low:active, .low:focus {
+    background-color:rgb(122,226,41) !important ;
+
+}
+.assigned {
+    margin-top: 20px;
+    font-size: 24px;
+    border: none;
+}
+.assigned-select {
+    margin-top: 20px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    outline: none;
+    width: 400px;
+}
+.assigned-select:focus {
+    border-bottom: 2px solid rgb(69,137,255);
+}
+.assigned-select option:first-child {
+    display: none;
+}
+
+.category-select option:first-child {
+    display: none;
+}
+.category-select {
+    margin-top: 20px;
+    font-size: 24px;
+    width: 400px;
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    outline: none;
+}
+.category{
+    font-size: 24px;
+    margin-top: 24px
+} 
+.category-select:focus {
+    border-bottom: 2px solid rgb(69,137,255);
+
 }
