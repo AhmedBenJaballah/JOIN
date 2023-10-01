@@ -63,6 +63,25 @@ async function createPerson(){
     await setItem('contacts', JSON.stringify(contacts));
     closeSidebar();
     renderContactList(nameC.value,color,emailC.value,phoneC.value);
+
+    let element = document.getElementById(`${(nameC.value[0]).toUpperCase()}`);
+    element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    let alleDivs = element.getElementsByTagName('div');
+    let letztesDiv = alleDivs[alleDivs.length - 1];
+    letztesDiv.parentElement.parentElement.style.backgroundColor="#4589ff";
+    letztesDiv.style.color="white";
+    letztesDiv.parentElement.parentElement.style.color="white";
+    letztesDiv.parentElement.parentElement.style.borderRadius="15px"
+
+    document.addEventListener('click', function(event) {
+        var geklicktesElement = event.target;
+        if (geklicktesElement !== letztesDiv) {
+            letztesDiv.parentElement.parentElement.style.backgroundColor = "white";
+            letztesDiv.style.color = "#4589ff";
+            letztesDiv.parentElement.parentElement.style.color = "black"; 
+            letztesDiv.parentElement.parentElement.style.borderRadius = "";
+        }
+    });
     successfullyCreated();
 }
 
@@ -71,25 +90,12 @@ function renderContactList(name,color,email,phone){
     const letter = document.getElementById(`${(name[0]).toUpperCase()}`)
     if(letter){
         letter.innerHTML+=templatePersonWithLetter(name,color,email,phone)
-        //letter.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        //letter.style.backgroundColor="#4589ff"
-        // let divs = Array.from(letter.querySelectorAll('.namePerson'));
-        // divs.sort(function(a, b) {
-        //     var idA = a.textContent;
-        //     var idB = b.textContent;
-        //     return idA.localeCompare(idB);
-        // });
-    
-        // divs.forEach(function(div) {
-        //     letter.appendChild(div);
-        // });
     }
     else{
     contactlist.innerHTML+=templatePersonWithOutLetter(name,color,email,phone);
     }
     sortAlpha(contactlist);
 }
-
 
 function sortAlpha(contactlist){
     let divs = Array.from(document.querySelectorAll('.letter'));
@@ -145,6 +151,12 @@ function getRandomBrightColor() {
 }
 
 function renderInfo(name,email,color,phone){
+    // document.addEventListener('click', function(event) {
+
+    //     event.target.style.backgroundColor="#4589ff";
+    //     event.target.style.color="white";
+    //     event.target.style.borderRadius="15px"
+    // });
     const display= document.getElementById("displayContact")
     display.innerHTML=/*html*/`
     <div class="renderContacts">
@@ -248,4 +260,3 @@ function successfullyCreated() {
         success.style.display = "none";
     }, 1800); 
 }
-

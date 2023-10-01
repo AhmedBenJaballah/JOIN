@@ -305,9 +305,9 @@ color: #4589ff;
   }
 
   #contactCreated {
-position: fixed;
-top: 100%; 
-left: 50%; 
-transform: translate(-50%, -50%);
-display: none;
+    position: fixed;
+    top: 100%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    display: none;
 }
