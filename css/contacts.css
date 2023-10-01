@@ -303,3 +303,11 @@ color: #4589ff;
     justify-content: center;
     align-items: center;
   }
+
+  #contactCreated {
+position: fixed;
+top: 100%; 
+left: 50%; 
+transform: translate(-50%, -50%);
+display: none;
+}
