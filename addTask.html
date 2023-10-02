@@ -22,26 +22,26 @@
                 <input type="text" id="task-title" name="task-title" required placeholder="Enter a title">
                 <br>
                 <label class="task-description" for="task-description">Description(optional)</label><br>
-                <textarea id="task-description" name="task-description" rows="3" cols="29"
+                <textarea id="task-description" name="task-description" rows="3" cols="34"
                     placeholder="Enter a Description"></textarea>
                 <br>
                 <label class="task-date" for="task-date">Due date</label><br>
                 <input type="date" name="task-date" id="task-date" required placeholder="/mm/yyyy">
-                <br>
+
                 <p>Priority(optional) <br></p>
                 <div class="radio-group">
                     <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined"
                         autocomplete="off">
                     <label class="btn btn-outline-danger" for="danger-outlined-urgent" tabindex="1">Urgent
                         <img src="/grafiken/Capa 2-prio.png">
-                      
+
                     </label>
 
                     <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined"
                         autocomplete="off">
                     <label class="btn btn-outline-danger medium" for="danger-outlined-medium" tabindex="2">Medium
                         <img src="/grafiken/Capa 2-medium.png">
-                        
+
 
                     </label>
 
@@ -52,7 +52,7 @@
                     </label>
                     <br>
                     <label for="assigned" class="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
-                        <select class="assigned-select select"> 
+                        <select class="assigned-select select">
                             <option>Select contacts to assign</option>
                             <option>#contact1</option>
                             <option>#contact1</option>
@@ -67,17 +67,27 @@
                             <option>Technical Task</option>
                             <option>User Story</option>
                         </select>
+                    </label><br>
+                    <label for="subtasks" id="subtasks" class="subtasks">subtasks(optional)<br>
+                        <input type="text">
+                        <img src="/grafiken/add.png">
+
                     </label>
 
                 </div>
-
-                <!--<button type="submit">Add Task</button>-->
+                <div class="buttons">
+                    <button type="button" class="btn btn-outline-secondary">Clear <img
+                            src="/grafiken/VectorX.png"></button>
+                    <button type="submit" class="btn btn-primary"> Create Task <img src="/grafiken/check.png"
+                            class="primary"></button>
+                </div>
             </form>
         </div>
 
     </div>
 
     <script src="js/script.js"></script>
+    <script src="addTask.js"></script>
 </body>
 
 </html>

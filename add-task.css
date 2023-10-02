@@ -1,5 +1,7 @@
 body {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 .main-container {
     display: flex;
@@ -93,12 +95,12 @@ label > img {
 
 }
 .assigned {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 24px;
     border: none;
 }
 .assigned-select {
-    margin-top: 20px;
+    margin-top: 10px;
     border: none;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     outline: none;
@@ -115,7 +117,7 @@ label > img {
     display: none;
 }
 .category-select {
-    margin-top: 20px;
+    margin-top: 10px;
     font-size: 24px;
     width: 400px;
     border: none;
@@ -124,9 +126,41 @@ label > img {
 }
 .category{
     font-size: 24px;
-    margin-top: 24px
+    margin-top: 10px
 } 
 .category-select:focus {
     border-bottom: 2px solid rgb(69,137,255);
 
 }
+.subtasks {
+    margin-top: 10px;
+    font-size: 24px;
+}
+.buttons {
+    width: 80vw;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 222px;
+   
+
+}
+.buttons button {
+    padding:  8px 18px;
+    margin-left: 16px;
+    font-size: 24px;
+}
+.btn {
+    border-radius: 10px !important;
+}
+.primary {
+    position: relative;
+    top: -3px;
+    transform: scale(1.2,1.2);   
+}
+.btn-outline-secondary:hover {
+    background-color: white !important;
+    color: rgb(69,137,255) !important;
+    box-shadow: 0 0 0 2px rgb(69, 137, 255) !important;
+
+}
+
