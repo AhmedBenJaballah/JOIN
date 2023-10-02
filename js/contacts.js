@@ -1,6 +1,8 @@
 let contacts=[];
 loadContacts();
-
+setTimeout(() => {
+    getInitials();
+}, 500);
 async function loadContacts(){
     try {
         contacts = JSON.parse(await getItem('contacts'));
@@ -17,6 +19,7 @@ async function loadContacts(){
 }
 
 function addContact(){
+    
     const dialog = document.getElementById("dialog");
     const sidebarLeft = document.getElementById("sidebarLeft");
     dialog.classList.remove("displayNone");
@@ -64,25 +67,36 @@ async function createPerson(){
     closeSidebar();
     renderContactList(nameC.value,color,emailC.value,phoneC.value);
 
-    let element = document.getElementById(`${(nameC.value[0]).toUpperCase()}`);
-    element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
-    let alleDivs = element.getElementsByTagName('div');
-    let letztesDiv = alleDivs[alleDivs.length - 1];
-    letztesDiv.parentElement.parentElement.style.backgroundColor="#4589ff";
-    letztesDiv.style.color="white";
-    letztesDiv.parentElement.parentElement.style.color="white";
-    letztesDiv.parentElement.parentElement.style.borderRadius="15px"
+    scrollAndChangeColor(nameC.value);
+    successfullyCreated();
+}
 
+function scrollAndChangeColor(name){
+    let element = document.getElementById(`${(name[0]).toUpperCase()}`);
+    element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+    let allDivs = element.getElementsByTagName('div');
+    let lastDiv = allDivs[allDivs.length - 1];
+    setBackgrounColor(lastDiv);
     document.addEventListener('click', function(event) {
-        var geklicktesElement = event.target;
-        if (geklicktesElement !== letztesDiv) {
-            letztesDiv.parentElement.parentElement.style.backgroundColor = "white";
-            letztesDiv.style.color = "#4589ff";
-            letztesDiv.parentElement.parentElement.style.color = "black"; 
-            letztesDiv.parentElement.parentElement.style.borderRadius = "";
+        var selectedElement = event.target;
+        if (selectedElement !== lastDiv) {
+            resetBackgrounColor(lastDiv);
         }
     });
-    successfullyCreated();
+}
+
+function setBackgrounColor(lastDiv){
+    lastDiv.parentElement.parentElement.style.backgroundColor="#4589ff";
+    lastDiv.style.color="white";
+    lastDiv.parentElement.parentElement.style.color="white";
+    lastDiv.parentElement.parentElement.style.borderRadius="15px"
+}
+
+function resetBackgrounColor(lastDiv){
+    lastDiv.parentElement.parentElement.style.backgroundColor = "white";
+    lastDiv.style.color = "#4589ff";
+    lastDiv.parentElement.parentElement.style.color = "black"; 
+    lastDiv.parentElement.parentElement.style.borderRadius = "";
 }
 
 function renderContactList(name,color,email,phone){

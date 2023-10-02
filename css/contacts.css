@@ -39,7 +39,6 @@
   flex-direction: column;
   width: 100%;
   overflow-y: scroll;
-  
 }
 
 .letter {
@@ -57,7 +56,7 @@
   width: 80%;
   padding-bottom: 30px;
   padding-left: 25px;
-  margin-top: 10px;  
+  margin-top: 10px;
 }
 
 .person {
@@ -69,7 +68,7 @@
 }
 
 .person:hover {
-  background-color: #D2E3FF;
+  background-color: #d2e3ff;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -87,8 +86,8 @@
   margin-right: 30px;
 }
 
-.emailPerson{
-color: #4589ff;
+.emailPerson {
+  color: #4589ff;
 }
 
 .addSidebar {
@@ -105,11 +104,11 @@ color: #4589ff;
 }
 
 .contentsidebarRight {
-    height: 100vh;
-    width: 0vw;
-    background-color: #4589ff;
-    border-bottom-left-radius: 25px;
-    border-top-left-radius: 25px;
+  height: 100vh;
+  width: 0vw;
+  background-color: #4589ff;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
 }
 
 .displayNone {
@@ -150,7 +149,7 @@ color: #4589ff;
 .addContactSidebarContainer {
   background-color: white;
   height: 65vh;
-  box-shadow:-2px 0px 6px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
   border-bottom-left-radius: 25px;
   display: flex;
   justify-content: center;
@@ -201,113 +200,123 @@ color: #4589ff;
 
 /* width */
 ::-webkit-scrollbar {
-    width: 6px;
-    margin-right: 8px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-   
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: gray; 
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #c7c5c5; 
-  }
+  width: 6px;
+  margin-right: 8px;
+}
 
-  .renderContacts{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
-    margin-right: 80px;
-    margin-left: 80px;
-    margin-bottom: 40px;
-  }
+/* Track */
+::-webkit-scrollbar-track {
+}
 
-  .displayRoundName{
-    border: 3px solid white;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 40px;
-    height: 100px;
-    width: 100px;
-    margin-right: 30px;
-    box-shadow:-2px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+}
 
-  .renderName{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-  }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #c7c5c5;
+}
 
-  .renderOnlyName{
-    font-size: 40px;
-    font-weight: bold;
-  }
+.renderContacts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-right: 80px;
+  margin-left: 80px;
+  margin-bottom: 40px;
+}
 
-  .editAndDelete{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap:15px
-  }
+.displayRoundName {
+  border: 3px solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 40px;
+  height: 100px;
+  width: 100px;
+  margin-right: 30px;
+  box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
+}
 
-  .alignImg{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 8px;
-  }
+.renderName {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
 
-  .alignImg:hover{
-    color: #4589ff;
-    cursor: pointer;
-  }
+.renderOnlyName {
+  font-size: 40px;
+  font-weight: bold;
+}
 
-  .renderEmailAndPhone{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    margin-left: 80px;
-  }
+.editAndDelete {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
 
-  .contentsidebarLeft{
-    height: 100vh;
-    width: 40vw;
-    background-color: #4589ff;
-    border-bottom-right-radius: 25px;
-    border-top-right-radius: 25px;
-  }
+.alignImg {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+}
 
-  #xCloseLeft {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.alignImg:hover {
+  color: #4589ff;
+  cursor: pointer;
+}
 
-  #contactCreated {
-    position: fixed;
-    top: 100%; 
-    left: 50%; 
-    transform: translate(-50%, -50%);
-    display: none;
+.renderEmailAndPhone {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-left: 80px;
+}
+
+.contentsidebarLeft {
+  height: 100vh;
+  width: 40vw;
+  background-color: #4589ff;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+#xCloseLeft {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#contactCreated {
+  position: fixed;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+#initials{
+  background-color: white;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  border: 2px solid #4589ff;
+  outline: 2px solid white; 
 }
