@@ -32,26 +32,43 @@
                 <div class="radio-group">
                     <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined"
                         autocomplete="off">
-                    <label class="btn btn-outline-danger" for="danger-outlined">Urgent
-                        <img src="/grafiken/Vector-prio.png">
-                        <img src="/grafiken/Vector-prio.png" class="second-vector">
+                    <label class="btn btn-outline-danger" for="danger-outlined-urgent" tabindex="1">Urgent
+                        <img src="/grafiken/Capa 2-prio.png">
+                      
                     </label>
 
                     <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined"
                         autocomplete="off">
-                    <label class="btn btn-outline-danger" for="danger-outlined">Medium
-                        <img src="/grafiken/Vector-medium.png">
-                        <img src="/grafiken/Vector-medium.png" class="second-vector">
+                    <label class="btn btn-outline-danger medium" for="danger-outlined-medium" tabindex="2">Medium
+                        <img src="/grafiken/Capa 2-medium.png">
+                        
 
                     </label>
 
                     <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined"
                         autocomplete="off">
-                    <label class="btn btn-outline-danger" for="danger-outlined">Low
-                        <img src="/grafiken/Vector-low.png">
-                        <img src="/grafiken/Vector-low.png" class="second-vector-low">
-
+                    <label class="btn btn-outline-danger low" for="danger-outlined-low" tabindex="3">Low
+                        <img src="/grafiken/Capa 2-low.png">
                     </label>
+                    <br>
+                    <label for="assigned" class="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
+                        <select class="assigned-select select"> 
+                            <option>Select contacts to assign</option>
+                            <option>#contact1</option>
+                            <option>#contact1</option>
+                            <option>#contact1</option>
+                            <option>#contact1</option>
+                        </select>
+                        <!--platzhalter optionen-->
+                    </label><br>
+                    <label for="category" class="category">Category<br>
+                        <select class="category-select" select>
+                            <option disabled selected>Select task category</option>
+                            <option>Technical Task</option>
+                            <option>User Story</option>
+                        </select>
+                    </label>
+
                 </div>
 
                 <!--<button type="submit">Add Task</button>-->
