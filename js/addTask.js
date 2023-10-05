@@ -49,7 +49,7 @@ function clearTask() {
       radioButton.checked = false;
     });
   
-    n
+    
     const assignedSelect = document.querySelector(".assigned-select");
     assignedSelect.selectedIndex = 0;
   

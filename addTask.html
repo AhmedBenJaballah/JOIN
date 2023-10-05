@@ -70,15 +70,15 @@
                             <option>User Story</option>
                         </select>
                     </label><br>
-                    <label for="subtasks" id="subtasks" class="subtasks">subtasks(optional)<br>
-                        <input type="text">
+                    <label for="subtasks"  class="subtasks">subtasks(optional)<br>
+                        <input type="text" id="subtasks">
                         <img src="/grafiken/add.png">
 
                     </label>
 
                 </div>
                 <div class="buttons">
-                    <button type="button" class="btn btn-outline-secondary" onclick="clearTask()">Clear <img
+                    <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false" autocomplete="off">Clear <img
                             src="/grafiken/VectorX.png"></button>
                     <button type="button" class="btn btn-primary" onclick="createTask()"> Create Task <img
                             src="/grafiken/check.png" class="primary"></button>

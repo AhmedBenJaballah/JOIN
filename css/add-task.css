@@ -148,6 +148,10 @@ label > img {
     padding:  8px 18px;
     margin-left: 16px;
     font-size: 24px;
+    outline: none;
+}
+.buttons button:active {
+    outline: none !important;
 }
 .btn {
     border-radius: 10px !important;
