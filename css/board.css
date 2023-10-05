@@ -1,0 +1,41 @@
+#content {
+    display: flex;
+  }
+  
+  #board {
+    width: calc(100vw - 200px);
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #features{
+    height: 150px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #search{
+    width: 300px;
+    margin:40px
+  }
+
+  #tasks{
+    width: 100%;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .aTaskArea{
+    width: 24%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }

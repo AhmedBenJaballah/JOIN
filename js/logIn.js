@@ -1,3 +1,4 @@
+let userInitial="" ;
 function startJoin() {
   const logIn = document.getElementById("logIn");
   logIn.innerHTML = /*html*/ `
@@ -93,6 +94,8 @@ async function logIn(){
         user = users.find(u =>u.email==email.value && u.password== password.value)
         if(user){
             window.location.href = 'summary.html';
+            userInitial= user.name.split(' ').map(word => word[0].toUpperCase()).join('')
+            await setItem('userInitial', userInitial);
         }
         else{
             email.style.borderBottom="1px solid red";

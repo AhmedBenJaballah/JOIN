@@ -2,7 +2,10 @@ let contacts=[];
 loadContacts();
 setTimeout(() => {
     getInitials();
-}, 500);
+}, 1000);
+
+
+
 async function loadContacts(){
     try {
         contacts = JSON.parse(await getItem('contacts'));
