@@ -1,30 +1,4 @@
-// Funktion, um eine Aufgabe zu erstellen und anzeigen
-/*function createTask() {
-    // Aufgabe aus Formularfeldern erfassen
-    let title = document.getElementById("task-title").value;
-    let description = document.getElementById("task-description").value;
-    let dueDate = document.getElementById("task-date").value;
-    let priority = document.querySelector('input[name="options-outlined"]:checked').nextElementSibling.textContent;
-    let assignedTo = document.querySelector('.assigned-select').value;
-    let category = document.querySelector('.category-select').value;
-
-    // Hier sollten Sie eine Funktion aufrufen, um die Aufgabe auf dem Server oder in einer Datenbank zu speichern.
-    // Dies kann eine AJAX-Anfrage oder eine serverseitige Funktion sein.
-
-    // Dann können Sie die Aufgabe zur Sidebar hinzufügen
-    addTaskToSidebar(title, description, dueDate, priority, assignedTo, category);
-
-    // Formular zurücksetzen
-    document.getElementById("task-form").reset();
-}
-
-// Funktion, um eine Aufgabe zur Sidebar hinzuzufügen
-function addTaskToSidebar(title, description, dueDate, priority, assignedTo, category) {
-    var taskList = document.getElementById("task-list");
-    var listItem = document.createElement("li");
-    listItem.innerHTML = `<strong>${title}</strong><br>${description}<br>Due Date: ${dueDate}<br>Priority: ${priority}<br>Assigned To: ${assignedTo}<br>Category: ${category}`;
-    taskList.appendChild(listItem);
-}*/
+let tasks = [];
 
 function createTask() {
     const taskTitle = document.getElementById("task-title").value;
@@ -55,7 +29,38 @@ function createTask() {
       </div>
     `;
 
-    // Zeige die Ausgabe in das div "output"
+  
     document.getElementById("output").innerHTML = outputHTML;
   }
 
+  
+function clearTask() {
+    
+    document.getElementById("task-title").value = "";
+  
+   
+    document.getElementById("task-description").value = "";
+  
+    document.getElementById("task-date").value = "";
+  
+    
+    const radioButtons = document.querySelectorAll('input[name="options-outlined"]');
+    radioButtons.forEach((radioButton) => {
+      radioButton.checked = false;
+    });
+  
+    n
+    const assignedSelect = document.querySelector(".assigned-select");
+    assignedSelect.selectedIndex = 0;
+  
+  
+    const categorySelect = document.querySelector(".category-select");
+    categorySelect.selectedIndex = 0;
+  
+    document.getElementById("subtasks").value = "";
+  }
+  
+  
+  const clearButton = document.querySelector('.btn-outline-secondary');
+  clearButton.addEventListener('click', clearTask);
+  
