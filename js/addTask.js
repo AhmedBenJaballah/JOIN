@@ -32,6 +32,13 @@ function createTask() {
     `;
 
   document.getElementById("output").innerHTML = outputHTML;
+
+  const popup = document.getElementById("popup");
+  popup.classList.add("show");
+  setTimeout(function() {
+      popup.classList.remove("show");
+      window.location.href = "board.html";
+  }, 1000);
 }
 
 function clearTask() {
@@ -59,6 +66,9 @@ function clearTask() {
 
 const clearButton = document.querySelector(".btn-outline-secondary");
 clearButton.addEventListener("click", clearTask);
+
+
+
 
 // contact.js
 

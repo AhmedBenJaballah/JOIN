@@ -171,6 +171,40 @@ label > img {
     border: 1px solid black;
     width: 200px;
 }
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(69, 137, 255);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 16px;
+    z-index: 9999;
+    transition: opacity 1s;
+}
+
+.popup p {
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+.popup.show {
+    display: block;
+    opacity: 1;
+}
+
+.popup.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+.popup img {
+    margin-left: 12px;
+    margin-bottom: 2px;
+}
+
 
 
 
