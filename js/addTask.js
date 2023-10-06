@@ -61,7 +61,7 @@ function createTask() {
   popup.classList.add("show");
   setTimeout(function() {
       popup.classList.remove("show");
-      window.location.href = "board.html";
+      //window.location.href = "board.html";
   }, 1000);
 }
 
