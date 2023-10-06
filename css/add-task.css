@@ -76,16 +76,21 @@ label > img {
    
   
 }
-.btn-outline-danger:focus, .btn-outline-danger:active {
+
+.btn-outline-danger:active, .btn-outline-danger:focus {
     background-color:rgb(255,61,0) !important;
     transition: 0s !important;
     outline: none !important;
     color: white !important;
     border: none !important;
 }
+
 .btn-outline-danger:focus img{
     background-color: white !important ;
 
+}
+.urgent:active, .urgent:focus {
+    background-color: rgb(255,61,0) !important;
 }
 .medium:active, .medium:focus {
     background-color: rgb(255,168,0) !important;
