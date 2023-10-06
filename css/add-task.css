@@ -206,5 +206,43 @@ label > img {
 }
 
 
+.add-task-section{
+    width: calc(100vw - 200px);
+    height: calc(100vh - 80px);
+    display: flex;
+    overflow-y: scroll;
+    margin-right: calc(100vw - 700px);
+}
 
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+    margin-right: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c7c5c5;
+  }
 
+  .roundName {
+    border: 1px solid rgb(39, 37, 37);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 40px;
+    width: 40px;
+    margin-right: 100px;
+  }

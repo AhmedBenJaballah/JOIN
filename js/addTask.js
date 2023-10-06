@@ -1,4 +1,28 @@
 let tasks = [];
+tryContact();
+
+async function tryContact() {
+  const contacts = JSON.parse(await getItem('contacts'));
+  console.log(contacts);
+
+  var select = document.getElementById("contacts");
+
+
+  for (var i = 0; i < contacts.length; i++) {
+    var option = document.createElement("option");
+    var oi = document.createElement("div");
+
+    
+    const optionInitials = contacts[i].name.split(' ').map(word => word[0].toUpperCase()).join('');
+    oi.innerHTML = optionInitials;
+    
+    option.innerHTML= `${oi.innerHTML} ${contacts[i].name}`;
+
+    oi.classList.add("roundName");
+    oi.style.backgroundColor=`${contacts[i].color}`
+    select.add(option);
+  }
+}
 
 function createTask() {
   const taskTitle = document.getElementById("task-title").value;
