@@ -34,8 +34,25 @@
   }
 
   .aTaskArea{
-    width: 24%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .aTaskAreaBoard{
+    width: 24%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .createdTask{
+    border: 1px solid gray;
+    border-radius: 15px;
+    background-color: #ccc;
+    color: gainsboro;
+    height: 25px;
+    
   }
