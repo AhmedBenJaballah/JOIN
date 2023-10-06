@@ -5,11 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="add-task.css">
+    <link rel="stylesheet" href="/css/add-task.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="js/policy.js"></script>
+    <script src="js/includes.js"></script>
+    <script src="js/contacts.js"></script>
+
 </head>
+
 
 <body onload="init()">
     <div w3-include-html="includes/header.html"></div>
@@ -32,12 +36,11 @@
                 <div class="radio-group">
                     <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined"
                         autocomplete="off">
-                    <label class="btn btn-outline-danger" for="danger-outlined-urgent" tabindex="1">Urgent
+                    <label class="btn btn-outline-danger" for="danger-outlined" tabindex="1">Urgent
                         <img src="/grafiken/Capa 2-prio.png">
-
                     </label>
 
-                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined"
+                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined-medium"
                         autocomplete="off">
                     <label class="btn btn-outline-danger medium" for="danger-outlined-medium" tabindex="2">Medium
                         <img src="/grafiken/Capa 2-medium.png">
@@ -45,19 +48,22 @@
 
                     </label>
 
-                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined"
+                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined-low"
                         autocomplete="off">
                     <label class="btn btn-outline-danger low" for="danger-outlined-low" tabindex="3">Low
                         <img src="/grafiken/Capa 2-low.png">
                     </label>
                     <br>
                     <label for="assigned" class="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
-                        <select class="assigned-select select">
+
+
+                        <select class="assigned-select select" id="contacts" onclick="loadContact()">
+                         
                             <option>Select contacts to assign</option>
                             <option>#contact1</option>
-                            <option>#contact1</option>
-                            <option>#contact1</option>
-                            <option>#contact1</option>
+                            <option>#contact2</option>
+                            <option>#contact3</option>
+                            <option>#contact4</option>
                         </select>
                         <!--platzhalter optionen-->
                     </label><br>
@@ -68,26 +74,33 @@
                             <option>User Story</option>
                         </select>
                     </label><br>
-                    <label for="subtasks" id="subtasks" class="subtasks">subtasks(optional)<br>
-                        <input type="text">
+                    <label for="subtasks" class="subtasks">subtasks(optional)<br>
+                        <input type="text" id="subtasks">
                         <img src="/grafiken/add.png">
 
                     </label>
 
                 </div>
                 <div class="buttons">
-                    <button type="button" class="btn btn-outline-secondary">Clear <img
-                            src="/grafiken/VectorX.png"></button>
-                    <button type="submit" class="btn btn-primary"> Create Task <img src="/grafiken/check.png"
-                            class="primary"></button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false"
+                        autocomplete="off">Clear <img src="/grafiken/VectorX.png"></button>
+                    <button type="button" class="btn btn-primary" onclick="createTask()"> Create Task <img
+                            src="/grafiken/check.png" class="primary"></button>
                 </div>
             </form>
+            <div class="popup" id="popup">
+                <p>Task added to board <img src="/grafiken/addedboard.png"></p>
+            </div>
         </div>
 
     </div>
+    <div id="output"></div>
 
-    <script src="js/includes.js"></script>
-    <script src="addTask.js"></script>
+
+    <script src="js/addTask.js"></script>
+
+
+
 </body>
 
 </html>
