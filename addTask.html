@@ -10,6 +10,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="js/policy.js"></script>
     <script src="js/includes.js"></script>
+    <script src="js/contacts.js"></script>
 
 </head>
 
@@ -54,12 +55,15 @@
                     </label>
                     <br>
                     <label for="assigned" class="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
-                        <select class="assigned-select select">
+
+
+                        <select class="assigned-select select" id="contacts" onclick="loadContact()">
+                         
                             <option>Select contacts to assign</option>
                             <option>#contact1</option>
-                            <option>#contact1</option>
-                            <option>#contact1</option>
-                            <option>#contact1</option>
+                            <option>#contact2</option>
+                            <option>#contact3</option>
+                            <option>#contact4</option>
                         </select>
                         <!--platzhalter optionen-->
                     </label><br>
@@ -70,7 +74,7 @@
                             <option>User Story</option>
                         </select>
                     </label><br>
-                    <label for="subtasks"  class="subtasks">subtasks(optional)<br>
+                    <label for="subtasks" class="subtasks">subtasks(optional)<br>
                         <input type="text" id="subtasks">
                         <img src="/grafiken/add.png">
 
@@ -78,8 +82,8 @@
 
                 </div>
                 <div class="buttons">
-                    <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false" autocomplete="off">Clear <img
-                            src="/grafiken/VectorX.png"></button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false"
+                        autocomplete="off">Clear <img src="/grafiken/VectorX.png"></button>
                     <button type="button" class="btn btn-primary" onclick="createTask()"> Create Task <img
                             src="/grafiken/check.png" class="primary"></button>
                 </div>
@@ -91,7 +95,7 @@
 
 
     <script src="js/addTask.js"></script>
-    
+
 
 
 </body>
