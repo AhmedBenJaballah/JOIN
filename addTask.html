@@ -22,7 +22,78 @@
     <div class="main-container">
         <div w3-include-html="includes/sidebar.html"></div>
         <div class="add-task-section">
+<<<<<<< HEAD
+            <!-- <h3>Add Task</h3> -->
+            <form id="task-form">
+                <label for="task-title"></label>
+                <input type="text" id="task-title" name="task-title" required placeholder="Enter a title">
+                <br>
+                <label class="task-description" for="task-description">Description(optional)</label><br>
+                <textarea id="task-description" name="task-description" rows="3" cols="34"
+                    placeholder="Enter a Description"></textarea>
+                <br>
+                <label class="task-date" for="task-date">Due date</label><br>
+                <input type="date" name="task-date" id="task-date" required placeholder="/mm/yyyy">
+
+                <p>Priority(optional) <br></p>
+                <div class="radio-group">
+                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined-urgent"
+                        autocomplete="off">
+                    <label class="btn btn-outline-danger urgent" for="danger-outlined-urgent" tabindex="1">Urgent
+                        <img src="/grafiken/Capa 2-prio.png">
+                    </label>
+
+                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined-medium"
+                        autocomplete="off">
+                    <label class="btn btn-outline-danger medium" for="danger-outlined-medium" tabindex="2">Medium
+                        <img src="/grafiken/Capa 2-medium.png">
+
+
+                    </label>
+
+                    <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined-low"
+                        autocomplete="off">
+                    <label class="btn btn-outline-danger low" for="danger-outlined-low" tabindex="3">Low
+                        <img src="/grafiken/Capa 2-low.png">
+                    </label>
+                    <br>
+                    <label for="assigned" class="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
+
+
+                        <select class="assigned-select select" id="contacts" onclick="loadContact()">
+                         
+                            <option>Select contacts to assign</option>
+
+                        </select>
+                        <!--platzhalter optionen-->
+                    </label><br>
+                    <label for="category" class="category">Category<br>
+                        <select class="category-select" select>
+                            <option disabled selected>Select task category</option>
+                            <option>Technical Task</option>
+                            <option>User Story</option>
+                        </select>
+                    </label><br>
+                    <label for="subtasks" class="subtasks">subtasks(optional)<br>
+                        <input type="text" id="subtasks">
+                        <img src="/grafiken/add.png">
+
+                    </label>
+
+                </div>
+                <div class="buttons">
+                    <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false"
+                        autocomplete="off">Clear <img src="/grafiken/VectorX.png"></button>
+                    <button type="button" class="btn btn-primary" onclick="createTask()"> Create Task <img
+                            src="/grafiken/check.png" class="primary"></button>
+                </div> 
+            </form>
+            <div class="popup" id="popup">
+                <p>Task added to board <img src="/grafiken/addedboard.png" ></p>
+            </div>
+=======
             <div w3-include-html="includes/add-task-template.html"></div>
+>>>>>>> f7e972f57b06d303ef092d05475c713607e5d9fb
         </div>
 
     </div>
