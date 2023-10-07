@@ -21,8 +21,11 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
   />
+
+
     <!-- <h3>Add Task</h3> -->
-    <form id="task-form">
+<body>
+        <form id="task-form">
         <label for="task-title"></label>
         <input type="text" id="task-title" name="task-title" required placeholder="Enter a title">
         <br>
@@ -61,6 +64,7 @@
                 <div id="inputDropdown" onclick="tryContact()"> <i id="dropIcon" class="bi bi-caret-down-fill"></i></div>
                 <div id="dropdown"></div>
 
+
             </label><br>
             <label for="category" class="category">Category<br>
                 <select class="category-select" select>
@@ -86,3 +90,4 @@
     <div class="popup" id="popup">
         <p>Task added to board <img src="/grafiken/addedboard.png" ></p>
     </div>
+</body>

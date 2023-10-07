@@ -12,6 +12,7 @@ async function tryContact() {
     icon.classList.remove("bi-caret-down-fill");
     icon.classList.add("bi-caret-up-fill");
     select.style.height = "300px";
+    select.style.flexDirection="column"
     for (let i = 0; i < contacts.length; i++) {
       const optionInitials = contacts[i].name.split(' ').map(word => word[0].toUpperCase()).join('');
       let isChecked = checkecdContacts.includes(i); // Überprüfen, ob der Kontakt ausgewählt ist
@@ -26,13 +27,23 @@ async function tryContact() {
         </div>
       `;
     }
+    select.innerHTML += /*html*/`
+    <button
+    id="addContactTask"
+    class="btn btn-primary"
+    onclick="addContact()"
+  >
+    Add new contact <img src="grafiken/person_add.png" />
+  </button>
+    `
   }
   
 else if (icon.classList.contains("bi-caret-up-fill")) {
   icon.classList.remove("bi-caret-up-fill");
   icon.classList.add("bi-caret-down-fill");
   select.innerHTML = "";
-  select.style.height = "50px";
+  select.style.height = "auto";
+  select.style.flexDirection="initial"
   for (let j = 0; j < checkecdContacts.length; j++) {
     console.log(checkecdContacts[j]);
     console.log(contacts[checkecdContacts[j]]);
@@ -47,6 +58,19 @@ else if (icon.classList.contains("bi-caret-up-fill")) {
 
 }
 
+function sortAlpha(contactlist){
+  let divs = Array.from(document.querySelectorAll('.letter'));
+  
+  divs.sort(function(a, b) {
+      var idA = a.textContent;
+      var idB = b.textContent;
+      return idA.localeCompare(idB);
+  });
+
+  divs.forEach(function(div) {
+      contactlist.appendChild(div);
+  });
+}
 
 async function getcha(i){
 

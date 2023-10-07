@@ -263,8 +263,11 @@ label > img {
   #dropdown{
     overflow-y: scroll;
     gap: 8px;
-    
+    position: relative;
+    display: flex;
+    flex-direction: column;
   }
+
 
   .dropdownItem{
     padding: 10px;
@@ -279,9 +282,13 @@ label > img {
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
-
 }
 
-
+#addContactTask{
+    width: 400px;
+   position: sticky;
+   bottom: 0;
+   
+}
   
   
