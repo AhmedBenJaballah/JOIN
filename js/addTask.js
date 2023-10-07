@@ -1,33 +1,40 @@
-
 //tryContact();
 
-let checkecdContacts=[];
+let checkecdContacts = [];
 
 async function tryContact() {
-  const contacts = JSON.parse(await getItem('contacts'));
+  const contacts = JSON.parse(await getItem("contacts"));
   const icon = document.getElementById("dropIcon");
   let select = document.getElementById("dropdown");
-  select.innerHTML=""
+  select.innerHTML = "";
   if (icon.classList.contains("bi-caret-down-fill")) {
     icon.classList.remove("bi-caret-down-fill");
     icon.classList.add("bi-caret-up-fill");
     select.style.height = "300px";
-    select.style.flexDirection="column"
+    select.style.flexDirection = "column";
+
     for (let i = 0; i < contacts.length; i++) {
-      const optionInitials = contacts[i].name.split(' ').map(word => word[0].toUpperCase()).join('');
+      const optionInitials = contacts[i].name
+        .split(" ")
+        .map((word) => word[0].toUpperCase())
+        .join("");
       let isChecked = checkecdContacts.includes(i); // Überprüfen, ob der Kontakt ausgewählt ist
-      
-      select.innerHTML += /*html*/`
+
+      select.innerHTML += /*html*/ `
         <div class="dropdownItem">
           <div class="nameAndInitiales">
-            <div class="roundNameDropdown" style="background-color:${contacts[i].color}">${optionInitials}</div>
+            <div class="roundNameDropdown" style="background-color:${
+              contacts[i].color
+            }">${optionInitials}</div>
             <div>${contacts[i].name}</div>
           </div>
-          <input type="checkbox" onclick="getcha(${i})" id="${i}" ${isChecked ? 'checked' : ''}>
+          <input type="checkbox" onclick="getcha(${i})" id="${i}" ${
+        isChecked ? "checked" : ""
+      }>
         </div>
       `;
     }
-    select.innerHTML += /*html*/`
+    select.innerHTML += /*html*/ `
     <button
     id="addContactTask"
     class="btn btn-primary"
@@ -35,58 +42,44 @@ async function tryContact() {
   >
     Add new contact <img src="grafiken/person_add.png" />
   </button>
-    `
-  }
-  
-else if (icon.classList.contains("bi-caret-up-fill")) {
-  icon.classList.remove("bi-caret-up-fill");
-  icon.classList.add("bi-caret-down-fill");
-  select.innerHTML = "";
-  select.style.height = "auto";
-  select.style.flexDirection="initial"
-  for (let j = 0; j < checkecdContacts.length; j++) {
-    console.log(checkecdContacts[j]);
-    console.log(contacts[checkecdContacts[j]]);
+    `;
+  } else if (icon.classList.contains("bi-caret-up-fill")) {
+    icon.classList.remove("bi-caret-up-fill");
+    icon.classList.add("bi-caret-down-fill");
+    select.innerHTML = "";
+    select.style.height = "auto";
+    select.style.flexDirection = "initial";
+    for (let j = 0; j < checkecdContacts.length; j++) {
+      console.log(checkecdContacts[j]);
+      console.log(contacts[checkecdContacts[j]]);
 
-    const optionInitials = contacts[checkecdContacts[j]].name.split(' ').map(word => word[0].toUpperCase()).join('');
-    select.innerHTML += /*html*/`
-      <div class="roundNameDropdown" style="background-color:${contacts[checkecdContacts[j]].color}">
+      const optionInitials = contacts[checkecdContacts[j]].name
+        .split(" ")
+        .map((word) => word[0].toUpperCase())
+        .join("");
+      select.innerHTML += /*html*/ `
+      <div class="roundNameDropdown" style="background-color:${
+        contacts[checkecdContacts[j]].color
+      }">
         ${optionInitials}
       </div>`;
+    }
   }
 }
 
-}
-
-function sortAlpha(contactlist){
-  let divs = Array.from(document.querySelectorAll('.letter'));
-  
-  divs.sort(function(a, b) {
-      var idA = a.textContent;
-      var idB = b.textContent;
-      return idA.localeCompare(idB);
-  });
-
-  divs.forEach(function(div) {
-      contactlist.appendChild(div);
-  });
-}
-
-async function getcha(i){
-
+async function getcha(i) {
   let checkbox = document.getElementById(`${i}`);
-  
+
   if (checkbox.checked) {
-    checkecdContacts.push(i)
-    console.log(checkecdContacts)
+    checkecdContacts.push(i);
+    console.log(checkecdContacts);
   } else {
     const index = checkecdContacts.indexOf(i);
     if (index > -1) {
       checkecdContacts.splice(index, 1);
-      console.log(checkecdContacts)
+      console.log(checkecdContacts);
     }
   }
-
 }
 /////////////////////////////////////////Ahmed//////////////////////////////////
 let tasks = [];
@@ -125,9 +118,9 @@ function createTask() {
 
   const popup = document.getElementById("popup");
   popup.classList.add("show");
-  setTimeout(function() {
-      popup.classList.remove("show");
-      //window.location.href = "board.html";
+  setTimeout(function () {
+    popup.classList.remove("show");
+    //window.location.href = "board.html";
   }, 1000);
 }
 
@@ -156,10 +149,6 @@ function clearTask() {
 
 const clearButton = document.querySelector(".btn-outline-secondary");
 clearButton.addEventListener("click", clearTask);
-
-
-
-
 
 // contact.js
 
