@@ -94,6 +94,7 @@ clearButton.addEventListener("click", clearTask);
 
 
 
+
 // contact.js
 
 /*let contacts = [];
