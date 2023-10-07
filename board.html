@@ -33,45 +33,54 @@
             </span>
           </div>
 
-          <div id="add" class="btn btn-primary">
-            add Tasks <i class="bi bi-plus-lg"></i>
+          <div id="add" onclick="addSidebar()" class="btn btn-primary">
+            add Tasks <i  class="bi bi-plus-lg"></i>
           </div>
         </div>
+
+        <div id="dialog" class="displayNone" onclick="closeSidebar()">
+          <div
+          id="sidebarRight"
+          class="contentsidebarRight"
+          onclick="doNotClose(event)"
+          >
+          <div class="add-task-section">
+            <div w3-include-html="includes/add-task-template.html"></div>
+        </div>
+        </div>
+          
+        </div>
+
         <div id="tasks">
-  
-                <div class="aTaskAreaBoard">
-                    <div class="aTaskArea">
-                        <div class="boardTitle">To do</div>
-                        <i class="plus bi bi-plus-lg"></i>
-                      </div>
-                      <div class="createdTask">No Tasks To Do
-                      </div>
-                </div>
-            
-                <div class="aTaskAreaBoard">
-                    <div class="aTaskArea">
-                        <div class="boardTitle">In progree</div>
-                        <i class=" plus bi bi-plus-lg"></i>
-                      </div>
-                      <div class="createdTask">No Tasks To Do
-                      </div>
-                </div>
-                <div class="aTaskAreaBoard">
-                    <div class="aTaskArea">
-                        <div class="boardTitle">Await feedback</div>
-                        <i class=" plus bi bi-plus-lg"></i>
-                      </div>
-                      <div class="createdTask">No Tasks To Do
-                      </div>
-                </div>
-                <div class="aTaskAreaBoard">
-                    <div class="aTaskArea">
-                        <div class="boardTitle">Done</div>
-                        <i class="plus bi bi-plus-lg"></i>
-                      </div>
-                      <div class="createdTask">No Tasks To Do
-                      </div>
-                </div>
+          <div class="aTaskAreaBoard">
+            <div class="aTaskArea">
+              <div class="boardTitle">To do</div>
+              <i class="plus bi bi-plus-lg"></i>
+            </div>
+            <div class="createdTask">No Tasks To Do</div>
+          </div>
+
+          <div class="aTaskAreaBoard">
+            <div class="aTaskArea">
+              <div class="boardTitle">In progree</div>
+              <i class="plus bi bi-plus-lg"></i>
+            </div>
+            <div class="createdTask">No Tasks To Do</div>
+          </div>
+          <div class="aTaskAreaBoard">
+            <div class="aTaskArea">
+              <div class="boardTitle">Await feedback</div>
+              <i class="plus bi bi-plus-lg"></i>
+            </div>
+            <div class="createdTask">No Tasks To Do</div>
+          </div>
+          <div class="aTaskAreaBoard">
+            <div class="aTaskArea">
+              <div class="boardTitle">Done</div>
+              <i class="plus bi bi-plus-lg"></i>
+            </div>
+            <div class="createdTask">No Tasks To Do</div>
+          </div>
         </div>
       </div>
     </div>
