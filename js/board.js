@@ -1,7 +1,36 @@
+loadtasks();
+
 setTimeout(() => {
     getInitials()
 }, 1000);
 
+
+async function loadtasks(){
+    try {
+        tasks= JSON.parse(await getItem('tasks'));
+        for (let i = 0; i < tasks.length; i++) {
+            const title=tasks[i]["title"];
+            const description=tasks[i]["description"];
+            const date=tasks[i]["date"];
+            const priority=tasks[i]["priority"];
+            const assigned=tasks[i]["assigned"];
+            const category=tasks[i]["category"];
+            const subtask=tasks[i]["subtasks"];
+
+            console.log(title,date,description,priority,assigned,category,subtask);
+            const task=document.getElementById("newTask");
+            task.classList.remove("createdTask");
+            task.classList.add("newCreatedTask");
+            task.innerHTML=/*html*/`
+            <div class="newTask">
+            <div>${category}</div>
+            </div>
+            `
+        }
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+}
 
 function addSidebar(){
     

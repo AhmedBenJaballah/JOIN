@@ -10,7 +10,7 @@ async function tryContact() {
   if (icon.classList.contains("bi-caret-down-fill")) {
     icon.classList.remove("bi-caret-down-fill");
     icon.classList.add("bi-caret-up-fill");
-    select.style.height = "300px";
+    select.style.maxHeight = "300px";
     select.style.flexDirection = "column";
 
     for (let i = 0; i < contacts.length; i++) {
@@ -83,7 +83,7 @@ async function getcha(i) {
 }
 /////////////////////////////////////////Ahmed//////////////////////////////////
 let tasks = [];
-function createTask() {
+async function createTask() {
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
@@ -97,7 +97,9 @@ function createTask() {
     taskPriority = selectedRadioButton.nextElementSibling.textContent;
   }
 
-  const assignedTo = document.querySelector(".assigned-select").value;
+  //const assignedTo = document.querySelector(".assigned-select").value;
+  //Ahmed:hallo chihad hier brauchst du assigned to nicht zu speichern es sind in der Variable
+  //Ahmed:checkecdContacts gespeichert
   const category = document.querySelector(".category-select").value;
   const subtasks = document.getElementById("subtasks").value;
 
@@ -108,11 +110,24 @@ function createTask() {
       <p><strong>Description:</strong> ${taskDescription}</p>
       <p><strong>Due Date:</strong> ${taskDate}</p>
       <p><strong>Priority:</strong> ${taskPriority}</p>
-      <p><strong>Assigned To:</strong> ${assignedTo}</p>
+      
       <p><strong>Category:</strong> ${category}</p>
       <p><strong>Subtasks:</strong> ${subtasks}</p>
       </div>
     `;
+//Ahmed: hier können wir direkt speichern
+tasks.push({
+  title:taskTitle,
+  description: taskDescription,
+  date: taskDate,
+  priority:taskPriority,
+  assigned:checkecdContacts,
+  category:category,
+  subtasks:subtasks,
+});
+await setItem('tasks', JSON.stringify(tasks));
+
+//Ahmed: hier direkt zu board kannsk deine animation anpassen
 
   document.getElementById("output").innerHTML = outputHTML;
 
@@ -120,7 +135,7 @@ function createTask() {
   popup.classList.add("show");
   setTimeout(function () {
     popup.classList.remove("show");
-    //window.location.href = "board.html";
+    window.location.href = "board.html";
   }, 1000);
 }
 
