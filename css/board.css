@@ -49,10 +49,28 @@
   }
 
   .createdTask{
-    border: 1px solid gray;
+    border: 1px dashed gray;
     border-radius: 15px;
     background-color: #ccc;
     color: gainsboro;
-    height: 25px;
-    
+    height: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .boardTitle{
+    font-weight: bold;
+  }
+
+  .plus{
+    border: 1px solid rgb(83, 105, 233);
+    color:rgb(83, 105, 233) ;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
