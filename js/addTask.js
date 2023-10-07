@@ -1,26 +1,68 @@
 
 //tryContact();
 
-
+let checkecdContacts=[];
 
 async function tryContact() {
   const contacts = JSON.parse(await getItem('contacts'));
-  console.log(contacts);
+  const icon = document.getElementById("dropIcon");
   let select = document.getElementById("dropdown");
-  select.style.height="300px"
-  for (let i = 0; i < contacts.length; i++) {
-    const optionInitials = contacts[i].name.split(' ').map(word => word[0].toUpperCase()).join('');
-    select.innerHTML += /*html*/`
-    <div class="dropdownItem">
-      <div class="nameAndInitiales">
-        <div class="roundNameDropdown" style="background-color:${contacts[i].color}">${optionInitials}</div>
-        <div>${contacts[i].name}</div>
-      </div>
-      <input type="checkbox">
-    </div>
-  `;
-
+  select.innerHTML=""
+  if (icon.classList.contains("bi-caret-down-fill")) {
+    icon.classList.remove("bi-caret-down-fill");
+    icon.classList.add("bi-caret-up-fill");
+    select.style.height = "300px";
+    for (let i = 0; i < contacts.length; i++) {
+      const optionInitials = contacts[i].name.split(' ').map(word => word[0].toUpperCase()).join('');
+      let isChecked = checkecdContacts.includes(i); // Überprüfen, ob der Kontakt ausgewählt ist
+      
+      select.innerHTML += /*html*/`
+        <div class="dropdownItem">
+          <div class="nameAndInitiales">
+            <div class="roundNameDropdown" style="background-color:${contacts[i].color}">${optionInitials}</div>
+            <div>${contacts[i].name}</div>
+          </div>
+          <input type="checkbox" onclick="getcha(${i})" id="${i}" ${isChecked ? 'checked' : ''}>
+        </div>
+      `;
+    }
   }
+  
+else if (icon.classList.contains("bi-caret-up-fill")) {
+  icon.classList.remove("bi-caret-up-fill");
+  icon.classList.add("bi-caret-down-fill");
+  select.innerHTML = "";
+  select.style.height = "50px";
+  for (let j = 0; j < checkecdContacts.length; j++) {
+    console.log(checkecdContacts[j]);
+    console.log(contacts[checkecdContacts[j]]);
+
+    const optionInitials = contacts[checkecdContacts[j]].name.split(' ').map(word => word[0].toUpperCase()).join('');
+    select.innerHTML += /*html*/`
+      <div class="roundNameDropdown" style="background-color:${contacts[checkecdContacts[j]].color}">
+        ${optionInitials}
+      </div>`;
+  }
+}
+
+}
+
+
+async function getcha(i){
+
+  let checkbox = document.getElementById(`${i}`);
+  
+  if (checkbox.checked) {
+    checkecdContacts.push(i)
+    console.log(checkecdContacts)
+  } else {
+    const index = checkecdContacts.indexOf(i);
+    if (index > -1) {
+      checkecdContacts.splice(index, 1);
+      console.log(checkecdContacts)
+    }
+  }
+
 }
 /////////////////////////////////////////Ahmed//////////////////////////////////
 let tasks = [];

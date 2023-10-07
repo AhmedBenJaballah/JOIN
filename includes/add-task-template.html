@@ -17,6 +17,10 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  />
     <!-- <h3>Add Task</h3> -->
     <form id="task-form">
         <label for="task-title"></label>
@@ -54,10 +58,8 @@
             <label for="assigned" class="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
 
 
-                <input type="dropdown" id="inputDropdown" value="Select contacts to assign" onclick="tryContact()">
-                <div id="dropdown">
-
-                </div>
+                <div id="inputDropdown" onclick="tryContact()"> <i id="dropIcon" class="bi bi-caret-down-fill"></i></div>
+                <div id="dropdown"></div>
 
             </label><br>
             <label for="category" class="category">Category<br>

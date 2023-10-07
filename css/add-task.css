@@ -252,6 +252,8 @@ label > img {
     width: 400px;
     border: none;
     border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: flex-end;
 }
 
 
