@@ -41,11 +41,12 @@
   }
 
   .aTaskAreaBoard{
+    height: calc(100vh - 230px);
     width: 24%;
     display: flex;
-    justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    overflow-y: scroll;
   }
 
   .createdTask{
@@ -127,12 +128,14 @@
 
 .newTask{
   width:100%;
-  height: 400px;
+  height: 300px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: flex-start;
   flex-direction: column;
+  border-radius: 15px;
+  margin-bottom: 20px;
 }
 
 .newCreatedTask{
@@ -141,5 +144,56 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   margin-top: 20px;
+  padding: 10px;
+}
+
+.blueStyle{
+  background-color: rgb(69, 69, 228);
+  color: white;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.orangetyle{
+  background-color: rgb(228, 127, 69);
+  color: white;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.taskTitle{
+  color: #4589FF;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.descTask{
+  color: #ccc;
+  font-size: 16px;
+}
+
+.namePriority{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.roundNameDropdownTask{
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 40px;
+  width: 40px;
+  margin-left: -10px;
+}
+.names{
+display: flex;
+justify-content: center;
+align-items: center;
+margin-left: 10px;
 }

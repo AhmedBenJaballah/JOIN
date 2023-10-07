@@ -1,6 +1,16 @@
 //tryContact();
 
 let checkecdContacts = [];
+let tasks = [];
+loadtasks();
+
+async function loadtasks(){
+  try {
+      tasks = JSON.parse(await getItem('tasks'));
+  } catch(e){
+      console.error('Loading error:', e);
+  }
+}
 
 async function tryContact() {
   const contacts = JSON.parse(await getItem("contacts"));
@@ -82,7 +92,7 @@ async function getcha(i) {
   }
 }
 /////////////////////////////////////////Ahmed//////////////////////////////////
-let tasks = [];
+
 async function createTask() {
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;
