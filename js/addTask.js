@@ -1,29 +1,29 @@
-let tasks = [];
-tryContact();
+
+//tryContact();
+
+
 
 async function tryContact() {
   const contacts = JSON.parse(await getItem('contacts'));
   console.log(contacts);
-
-  var select = document.getElementById("contacts");
-
-
-  for (var i = 0; i < contacts.length; i++) {
-    var option = document.createElement("option");
-    var oi = document.createElement("div");
-
-    
+  let select = document.getElementById("dropdown");
+  select.style.height="300px"
+  for (let i = 0; i < contacts.length; i++) {
     const optionInitials = contacts[i].name.split(' ').map(word => word[0].toUpperCase()).join('');
-    oi.innerHTML = optionInitials;
-    
-    option.innerHTML= `${oi.innerHTML} ${contacts[i].name}`;
+    select.innerHTML += /*html*/`
+    <div class="dropdownItem">
+      <div class="nameAndInitiales">
+        <div class="roundNameDropdown" style="background-color:${contacts[i].color}">${optionInitials}</div>
+        <div>${contacts[i].name}</div>
+      </div>
+      <input type="checkbox">
+    </div>
+  `;
 
-    oi.classList.add("roundName");
-    oi.style.backgroundColor=`${contacts[i].color}`
-    select.add(option);
   }
 }
-
+/////////////////////////////////////////Ahmed//////////////////////////////////
+let tasks = [];
 function createTask() {
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;

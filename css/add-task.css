@@ -237,7 +237,7 @@ label > img {
     background: #c7c5c5;
   }
 
-  .roundName {
+  .roundNameDropdown{
     border: 1px solid rgb(39, 37, 37);
     border-radius: 50%;
     display: flex;
@@ -246,5 +246,40 @@ label > img {
     color: white;
     height: 40px;
     width: 40px;
-    margin-right: 100px;
   }
+
+#inputDropdown{
+    width: 400px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+}
+
+
+
+
+
+  #dropdown{
+    overflow-y: scroll;
+    gap: 8px;
+    
+  }
+
+  .dropdownItem{
+    padding: 10px;
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nameAndInitiales{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+
+}
+
+
+  
+  
