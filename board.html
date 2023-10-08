@@ -51,7 +51,7 @@
             <div class="buttons" id="btnsAddTask">
               <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false"
                   autocomplete="off">Clear <img src="/grafiken/VectorX.png"></button>
-              <button type="button" class="btn btn-primary" onclick="createTask()"> Create Task <img
+              <button type="button" class="btn btn-primary" onclick="createTask2()"> Create Task <img
                       src="/grafiken/check.png" class="primary"></button>
           </div>
         </div>
@@ -65,7 +65,7 @@
               <div class="boardTitle">To do</div>
               <i class="plus bi bi-plus-lg" onclick="addSidebar()" ></i>
             </div>
-            <div class="createdTask"  ondrop="moveTo('newTask')" ondragover="allowDrop(event)" id="newTask">No Tasks To Do</div>
+            <div class="createdTask"  ondrop="moveTo('toDo')" ondragover="allowDrop(event)" id="newTask">No Tasks To Do</div>
           </div>
 
           <div class="aTaskAreaBoard">

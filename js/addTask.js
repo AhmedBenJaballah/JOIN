@@ -220,7 +220,7 @@ async function createTask() {
     assigned: checkecdContacts,
     category: category,
     subtasks: subtasks,
-    taskCategory: 'toDo'
+    taskCategory:'toDo'
   });
   await setItem("tasks", JSON.stringify(tasks));
 
