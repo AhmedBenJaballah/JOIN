@@ -10,7 +10,7 @@ async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
     contacts = JSON.parse(await getItem("contacts"));
-    idCounter=tasks.length
+    idCounter = tasks.length;
     renderHTML();
   } catch (e) {
     console.error("Loading error:", e);
@@ -59,71 +59,75 @@ function renderHTML(){
     }
 }
 
-function renderAllTasks(idInitials,i,tasks,task){
-  
-    const title = tasks[i]["title"];
-    const description = tasks[i]["description"];
-    const date = tasks[i]["date"];
-    const priority = tasks[i]["priority"];
-    const assigned = tasks[i]["assigned"];
-    const category = tasks[i]["category"];
-    const subtask = tasks[i]["subtasks"];
-    const subtasks=subtask.length
-    const id= tasks[i]["id"]
-    selectPath(priority)
-    task.innerHTML +=renderTask(idInitials,i,category,title,description,subtasks,id); 
-    assignedInitials = document.getElementById(`${idInitials}${i}`);
-    for (let j = 0; j < assigned.length; j++) {
-      const optionInitials = contacts[assigned[j]].name
-        .split(" ")
-        .map((word) => word[0].toUpperCase())
-        .join("");
-      assignedInitials.innerHTML += /*html*/ `
+function renderAllTasks(idInitials, i, tasks, task) {
+  const title = tasks[i]["title"];
+  const description = tasks[i]["description"];
+  const date = tasks[i]["date"];
+  const priority = tasks[i]["priority"];
+  const assigned = tasks[i]["assigned"];
+  const category = tasks[i]["category"];
+  const subtask = tasks[i]["subtasks"];
+  const subtasks = subtask.length;
+  const id = tasks[i]["id"];
+  selectPath(priority);
+  task.innerHTML += renderTask(
+    idInitials,
+    i,
+    category,
+    title,
+    description,
+    subtasks,
+    id
+  );
+  assignedInitials = document.getElementById(`${idInitials}${i}`);
+  for (let j = 0; j < assigned.length; j++) {
+    const optionInitials = contacts[assigned[j]].name
+      .split(" ")
+      .map((word) => word[0].toUpperCase())
+      .join("");
+    assignedInitials.innerHTML += /*html*/ `
               <div class="roundNameDropdownTask" style="background-color:${
                 contacts[assigned[j]].color
               }">
                 ${optionInitials}
               </div>`;
-    }
-  
+  }
 }
 
-function startDragging(id){
-  currentDraggedElement=id-1
+function startDragging(id) {
+  currentDraggedElement = id - 1;
 
-  console.log(currentDraggedElement)
+  console.log(currentDraggedElement);
 }
 
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
-async function moveTo(category){
-
-console.log(currentDraggedElement)
-  tasks[currentDraggedElement]['taskCategory']=category;
+async function moveTo(category) {
+  console.log(currentDraggedElement);
+  tasks[currentDraggedElement]["taskCategory"] = category;
   renderHTML();
 }
 
-function selectPath(priority){
-
-switch (priority) {
-  case "low":
-    path = "grafiken/Capa2-low.png";
-    break;
-  case "medium":
-    path = "grafiken/Capa2-medium.png";
-    break;
-  case "urgent":
-    path = "grafiken/Capa2-prio.png";
-    break;
-  default:
-    path = "grafiken/Capa2-prio.png";
-  break;
+function selectPath(priority) {
+  switch (priority) {
+    case "low":
+      path = "grafiken/Capa2-low.png";
+      break;
+    case "medium":
+      path = "grafiken/Capa2-medium.png";
+      break;
+    case "urgent":
+      path = "grafiken/Capa2-prio.png";
+      break;
+    default:
+      path = "grafiken/Capa2-prio.png";
+      break;
+  }
 }
-}
 
-function renderTask(idInitials,i,category,title,description,subtasks,id){
+function renderTask(idInitials, i, category, title, description, subtasks, id) {
   return /*html*/ `
   <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${i})" id="showTask">
    <div class="${
@@ -208,15 +212,17 @@ async function createTask2(selectedTaskCategory){
 }
 
 function showTask(index) {
-    const task = tasks[index];
-    const category = task["category"];
-    const title = task["title"];
-    const description = task["description"];
-    const priority = task["priority"];
-  
-    const popupDiv = document.createElement("div");
-    popupDiv.className = "popup-div";
-    popupDiv.innerHTML = /*html*/ `
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "block";
+  const task = tasks[index];
+  const category = task["category"];
+  const title = task["title"];
+  const description = task["description"];
+  const priority = task["priority"];
+
+  const popupDiv = document.createElement("div");
+  popupDiv.className = "popup-div";
+  popupDiv.innerHTML = /*html*/ `
       <div class="${
         category === "Technical Task" ? "blueStyle" : "orangeStyle"
       }">${category} </div>  <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button>
@@ -232,20 +238,20 @@ function showTask(index) {
       </div>
      
     `;
-  
-    document.body.appendChild(popupDiv);
-    setTimeout(() => {
-      popupDiv.classList.add("show");
-    }, 50);
-  }
-  
-  function closePopup() {
-    const popupDiv = document.querySelector(".popup-div");
-    popupDiv.classList.remove("show");
-    setTimeout(() => {
-      popupDiv.remove();
-    }, 300);
-  }
-  
-  
-  
+
+  document.body.appendChild(popupDiv);
+  setTimeout(() => {
+    popupDiv.classList.add("show");
+  }, 50);
+}
+overlay.addEventListener("click", closePopup);
+
+function closePopup() {
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "none";
+  const popupDiv = document.querySelector(".popup-div");
+  popupDiv.classList.remove("show");
+  setTimeout(() => {
+    popupDiv.remove();
+  }, 300);
+}
