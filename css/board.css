@@ -196,3 +196,53 @@ justify-content: center;
 align-items: center;
 margin-left: 10px;
 }
+
+.popup-div {
+  position: fixed;
+  bottom: -850px; 
+  left: 50%;
+  transform: translateX(-50%); 
+  width: 500px;
+  height: 900px;
+  background-color: #fff;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
+  box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 40px;
+  opacity: 0; 
+}
+
+.popup-div.show {
+  transform: translateX(-50%) translateY(-100%); 
+  opacity: 1; 
+}
+
+.popup-content {
+  padding: 20px;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-close-button {
+  cursor: pointer;
+  padding: 5px;
+  font-size: 24px;
+}
+
+.popup-close-button:hover {
+  color: #f00;
+}
+
+
+
+
+
+.clickable-container {
+  cursor: pointer;
+  background-color: #f0f0f0;
+  padding: 10px;
+  text-align: center;
+}
