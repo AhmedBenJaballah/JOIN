@@ -160,8 +160,19 @@
   color: white;
   padding: 4px;
   border-radius: 10px;
-}
+ 
 
+}
+.popup-div .orangeStyle{
+  font-size: 25px;
+  width: 250px;
+  margin: 28px 30px;
+}
+.popup-div .blueStyle{
+  font-size: 25px;
+  width: 250px;
+  margin: 28px 30px;
+}
 .taskTitle{
   color: #4589FF;
   font-size: 24px;
@@ -192,10 +203,10 @@
   margin-left: -10px;
 }
 .names{
-display: flex;
-justify-content: center;
-align-items: center;
-margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
 }
 
 .popup-div {
@@ -211,6 +222,34 @@ margin-left: 10px;
   border-radius: 40px;
   opacity: 0; 
 }
+.popup-buttons {
+  display: flex;
+  justify-content:flex-end;
+  padding: 10px;
+}
+.popup-buttons img {
+  width: 22px;
+  height: 22px;
+}
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.delete-button:hover {
+  font-weight: bold;
+  color: rgb(0,93,255);
+}
+.edit-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.edit-button:hover {
+  color:rgb(0,93,255);
+  font-weight: bold;
+}
+
 
 .popup-div.show {
   transform: translateX(-50%) translateY(-100%); 
@@ -235,6 +274,24 @@ margin-left: 10px;
 
 .popup-close-button:hover {
   color: #f00;
+}
+.close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 30px;
+}
+.task-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Weitere Styles nach Bedarf hinzufügen */
+}
+.popup-div .taskTitle {
+  font-size: 50px;
+}
+.popup-div .descTask {
+  font-size: 29px;
 }
 
 
