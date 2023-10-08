@@ -242,7 +242,13 @@ async function createTask2(selectedTaskCategory){
   
       renderAllTasks(selectedTaskCategory,i,tasks,task);
     
-    
+      const popup = document.getElementById("popup");
+      popup.classList.add("show");
+     
+      setTimeout(function () {
+        popup.classList.remove("show");
+        closeSidebar();
+      }, 1000);
 }
 
 function showTask(index) {

@@ -209,6 +209,12 @@
   margin-left: 10px;
 }
 
+#btnsAddTask{
+  position: fixed;
+  bottom: 20px !important;
+  right:20px !important;
+}
+
 .popup-div {
   position: fixed;
   bottom: -850px; 
