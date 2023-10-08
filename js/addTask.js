@@ -220,12 +220,13 @@ async function createTask() {
     assigned: checkecdContacts,
     category: category,
     subtasks: subtasks,
+    taskCategory: 'toDo'
   });
   await setItem("tasks", JSON.stringify(tasks));
 
   //Ahmed: hier direkt zu board kannsk deine animation anpassen
 
-  document.getElementById("output").innerHTML = outputHTML;
+  //document.getElementById("output").innerHTML = outputHTML;
 
   const popup = document.getElementById("popup");
   popup.classList.add("show");

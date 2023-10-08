@@ -29,7 +29,7 @@
       <div id="board">
         <div id="features">
           <div class="input-group" id="search">
-            <input placeholder="Fin Task" type="search" class="form-control" />
+            <input placeholder="Find Task" type="search" class="form-control" />
             <span class="input-group-btn">
               <button class="btn btn-outline-secondary bi bi-search"></button>
             </span>
@@ -48,6 +48,12 @@
           >
           <div class="add-task-section">
             <div w3-include-html="includes/add-task-template.html"></div>
+            <div class="buttons" id="btnsAddTask">
+              <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false"
+                  autocomplete="off">Clear <img src="/grafiken/VectorX.png"></button>
+              <button type="button" class="btn btn-primary" onclick="createTask()"> Create Task <img
+                      src="/grafiken/check.png" class="primary"></button>
+          </div>
         </div>
         </div>
           
@@ -59,7 +65,7 @@
               <div class="boardTitle">To do</div>
               <i class="plus bi bi-plus-lg" onclick="addSidebar()" ></i>
             </div>
-            <div class="createdTask"  id="newTask">No Tasks To Do</div>
+            <div class="createdTask"  ondrop="moveTo('newTask')" ondragover="allowDrop(event)" id="newTask">No Tasks To Do</div>
           </div>
 
           <div class="aTaskAreaBoard">
@@ -67,7 +73,7 @@
               <div class="boardTitle">In progree</div>
               <i class="plus bi bi-plus-lg" onclick="addSidebar()" ></i>
             </div>
-            <div class="createdTask">No Tasks To Do</div>
+            <div class="createdTask" draggable="true" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">No Tasks To Do</div>
           </div>
           <div class="aTaskAreaBoard">
             <div class="aTaskArea">
@@ -84,6 +90,7 @@
             <div class="createdTask">No Tasks To Do</div>
           </div>
         </div>
+
       </div>
     </div>
 
