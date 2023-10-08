@@ -31,6 +31,24 @@ async function loadtasks() {
         subtask
       );
 
+
+      let path;
+
+      switch (priority) {
+        case "low":
+          path = "grafiken/Capa2-low.png";
+          break;
+        case "medium":
+          path = "grafiken/Capa2-medium.png";
+          break;
+        case "urgent":
+          path = "grafiken/Capa2-prio.png";
+          break;
+        default:
+          path = "grafiken/Capa2-prio.png";
+        break;
+      }
+
       task.innerHTML += /*html*/ `
            <!-- jetzt kommen versuche --> <div class="newTask" onclick="showTask(${i})" id="showTask">
             <div class="${
@@ -46,7 +64,7 @@ async function loadtasks() {
             </div>
             <div class="namePriority">
                 <div id="optionInitials${i}" class="names"></div>
-                <div>${priority}</div>
+                <img src=${path}>
             </div>
             </div>
             `;

@@ -2,14 +2,15 @@
 
 let checkecdContacts = [];
 let tasks = [];
-let subtasks=[];
+let subtasks = [];
+let priority = "";
 loadtasks();
 
-async function loadtasks(){
+async function loadtasks() {
   try {
-      tasks = JSON.parse(await getItem('tasks'));
-  } catch(e){
-      console.error('Loading error:', e);
+    tasks = JSON.parse(await getItem("tasks"));
+  } catch (e) {
+    console.error("Loading error:", e);
   }
 }
 
@@ -93,17 +94,97 @@ async function getcha(i) {
   }
 }
 
+function getPriority(selected) {
+  low = document.getElementById("low");
+  medium = document.getElementById("medium");
+  urgent = document.getElementById("urgent");
+  lowImg = document.getElementById("imgLow");
+  mediumImg = document.getElementById("imgMedium");
+  urgentImg = document.getElementById("imgUrgent");
 
-function addSubtask(){
-const subtask=document.getElementById('subtasks');
-const subtaskSection=document.getElementById('subtask-section');
-subtasks.push(subtask.value)
+  switch (selected) {
+    case "low":
+      if (
+        low.style.backgroundColor == "white" ||
+        low.style.backgroundColor == ""
+      ) {
+        priority = "low";
+        low.style.color = "white";
+        low.style.backgroundColor = "yellowgreen";
+        lowImg.classList.add("white-image");
+        medium.style.backgroundColor = "white";
+        urgent.style.backgroundColor = "white";
+        medium.style.color = "black";
+        urgent.style.color = "black";
+        mediumImg.classList.remove("white-image");
+        urgentImg.classList.remove("white-image");
+        break;
+      } else {
+        low.style.backgroundColor = "white";
+        low.style.color = "black";
+        lowImg.classList.remove("white-image");
+        priority = "";
+        break;
+      }
+    case "medium":
+      if (
+        medium.style.backgroundColor == "white" ||
+        medium.style.backgroundColor == ""
+      ) {
+        priority = "medium";
+        medium.style.color = "white";
+        medium.style.backgroundColor = "#FFA800";
+        mediumImg.classList.add("white-image");
+        low.style.backgroundColor = "white";
+        urgent.style.backgroundColor = "white";
+        low.style.color = "black";
+        urgent.style.color = "black";
+        lowImg.classList.remove("white-image");
+        urgentImg.classList.remove("white-image");
+        break;
+      } else {
+        medium.style.backgroundColor = "white";
+        medium.style.color = "black";
+        mediumImg.classList.remove("white-image");
+        priority = "";
+        break;
+      }
+    case "urgent":
+      if (
+        urgent.style.backgroundColor == "white" ||
+        urgent.style.backgroundColor == ""
+      ) {
+        priority = "urgent";
+        urgent.style.color = "white";
+        urgent.style.backgroundColor = "orangered";
+        urgentImg.classList.add("white-image");
+        medium.style.backgroundColor = "white";
+        low.style.backgroundColor = "white";
+        medium.style.color = "black";
+        low.style.color = "black";
+        mediumImg.classList.remove("white-image");
+        lowImg.classList.remove("white-image");
+        break;
+      } else {
+        urgent.style.backgroundColor = "white";
+        urgent.style.color = "black";
+        urgentImg.classList.remove("white-image");
+        priority = "";
+        break;
+      }
+  }
+}
 
-console.log(subtasks)
-subtaskSection.innerHTML+=/*html*/`
+function addSubtask() {
+  const subtask = document.getElementById("subtasks");
+  const subtaskSection = document.getElementById("subtask-section");
+  subtasks.push(subtask.value);
+
+  console.log(subtasks);
+  subtaskSection.innerHTML += /*html*/ `
 <div>${subtask.value} </div>
-`
-subtask.value=""
+`;
+  subtask.value = "";
 }
 /////////////////////////////////////////Ahmed//////////////////////////////////
 
@@ -111,15 +192,6 @@ async function createTask() {
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
-
-  // Überprüfen, ob ein Radio-Button ausgewählt ist
-  const selectedRadioButton = document.querySelector(
-    'input[name="options-outlined"]:checked'
-  );
-  let taskPriority = "";
-  if (selectedRadioButton) {
-    taskPriority = selectedRadioButton.nextElementSibling.textContent;
-  }
 
   //const assignedTo = document.querySelector(".assigned-select").value;
   //Ahmed:hallo chihad hier brauchst du assigned to nicht zu speichern es sind in der Variable
@@ -133,25 +205,25 @@ async function createTask() {
       <p><strong>Title:</strong> ${taskTitle}</p>
       <p><strong>Description:</strong> ${taskDescription}</p>
       <p><strong>Due Date:</strong> ${taskDate}</p>
-      <p><strong>Priority:</strong> ${taskPriority}</p>
+
       
       <p><strong>Category:</strong> ${category}</p>
       <
       </div>
     `;
-//Ahmed: hier können wir direkt speichern
-tasks.push({
-  title:taskTitle,
-  description: taskDescription,
-  date: taskDate,
-  priority:taskPriority,
-  assigned:checkecdContacts,
-  category:category,
-  subtasks:subtasks,
-});
-await setItem('tasks', JSON.stringify(tasks));
+  //Ahmed: hier können wir direkt speichern
+  tasks.push({
+    title: taskTitle,
+    description: taskDescription,
+    date: taskDate,
+    priority: priority,
+    assigned: checkecdContacts,
+    category: category,
+    subtasks: subtasks,
+  });
+  await setItem("tasks", JSON.stringify(tasks));
 
-//Ahmed: hier direkt zu board kannsk deine animation anpassen
+  //Ahmed: hier direkt zu board kannsk deine animation anpassen
 
   document.getElementById("output").innerHTML = outputHTML;
 

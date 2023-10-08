@@ -25,7 +25,8 @@
 
     <!-- <h3>Add Task</h3> -->
 <body>
-        <form id="task-form">
+
+    <form id="task-form" onsubmit="forLater(); return false;">
         <label for="task-title"></label>
         <input type="text" id="task-title" name="task-title" required placeholder="Enter a title">
         <br>
@@ -38,25 +39,9 @@
 
         <p>Priority(optional) <br></p>
         <div class="radio-group">
-            <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined-urgent"
-                autocomplete="off">
-            <label class="btn btn-outline-danger urgent" for="danger-outlined-urgent" tabindex="1">Urgent
-                <img src="/grafiken/Capa 2-prio.png">
-            </label>
-
-            <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined-medium"
-                autocomplete="off">
-            <label class="btn btn-outline-danger medium" for="danger-outlined-medium" tabindex="2">Medium
-                <img src="/grafiken/Capa 2-medium.png">
-
-
-            </label>
-
-            <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined-low"
-                autocomplete="off">
-            <label class="btn btn-outline-danger low" for="danger-outlined-low" tabindex="3">Low
-                <img src="/grafiken/Capa 2-low.png">
-            </label>
+            <button type="button" id="urgent" class="radioBtn"  onclick="getPriority('urgent')">Urgent <img id="imgUrgent" src="../grafiken/Capa2-prio.png" alt=""></button>
+            <button type="button" id="medium" class="radioBtn" onclick="getPriority('medium')">Medium <img id="imgMedium" src="../grafiken/Capa2-medium.png" alt=""></button>
+            <button type="button" id="low" class="radioBtn" onclick="getPriority('low')">Low <img id="imgLow" src="../grafiken/Capa2-low.png" alt=""></button>
             <br>
             <label for="assigned" class="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
 
