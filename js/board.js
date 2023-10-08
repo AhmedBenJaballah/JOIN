@@ -38,7 +38,9 @@ async function loadtasks() {
             <div class="taskTitle">${title}</div>
             <div class="descTask">${description}</div>
             <div>
-                <div>Progress</div>
+                <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
                 <div>Subtasks</div>
             </div>
             <div class="namePriority">
