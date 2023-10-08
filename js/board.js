@@ -169,7 +169,7 @@ function selectPath(priority) {
 
 function renderTask(idInitials, i, category, title, description, subtasks, id) {
   return /*html*/ `
-  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${i})" id="showTask">
+  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${i})" id="showTask()">
    <div class="${
      category === "Technical Task" ? "blueStyle" : "orangeStyle"
    }">${category}</div>
@@ -273,7 +273,7 @@ function showTask(index) {
       }">${category} </div> 
       <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
     </div>
-    <div class="descTask">${description}</div>
+    
     <div class="taskTitle">${title} </div>
     <div class="descTask">${description}</div>
     <div>
@@ -310,23 +310,32 @@ function deleteTask(index) {
   const overlayDiv = document.querySelector(".overlay");
 
   if (popupDiv && overlayDiv) {
-    // Lösche das Popup-Fenster
+ 
     popupDiv.classList.remove("show");
     setTimeout(() => {
       popupDiv.remove();
     }, 300);
 
-   
+    
     overlayDiv.style.display = "none";
 
-    
+   
     const taskTitle = tasks[index].title;
 
-   
+    
+    const taskContainer = document.getElementById(`showTask-${index}`);
+    if (taskContainer) {
+      taskContainer.remove();
+    }
+
+    
     tasks.splice(index, 1);
 
-    saveTasks(tasks);
-
+   
     renderHTML();
+
+    
+    saveTasks(tasks);
   }
 }
+
