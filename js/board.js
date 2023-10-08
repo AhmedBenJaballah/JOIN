@@ -198,10 +198,12 @@ function showTask(index) {
 
   const popupDiv = document.createElement("div");
   popupDiv.className = "popup-div";
-  popupDiv.innerHTML = /*html*/ `
+  popupDiv.innerHTML = /*html*/ `<div class="task-container">
       <div class="${
         category === "Technical Task" ? "blueStyle" : "orangeStyle"
-      }">${category} </div>  <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button>
+      }">${category} </div> 
+      <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
+      </div>
       <div class="descTask">${description}</div>
       <div class="taskTitle">${title} </div>
       <div class="descTask">${description}</div>
@@ -212,6 +214,11 @@ function showTask(index) {
       <div class="namePriority">
           <div class="names">${priority}</div>
       </div>
+      <div class="popup-buttons">
+      <img src="/grafiken/delete-popup.png">
+   <button class="delete-button" onclick="deleteTask()">Delete</button>
+   <button class="edit-button" onclick="editTask()">Edit</button>
+  </div>
      
     `;
 
