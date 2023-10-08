@@ -263,3 +263,30 @@ function closePopup() {
     popupDiv.remove();
   }, 300);
 }
+function deleteTask() {
+  const popupDiv = document.querySelector(".popup-div");
+  const overlayDiv = document.querySelector(".overlay");
+
+  if (popupDiv && overlayDiv) {
+    // Lösche das Popup-Fenster
+    popupDiv.classList.remove("show");
+    setTimeout(() => {
+      popupDiv.remove();
+    }, 300);
+
+    // Lösche den Overlay-Hintergrund
+    overlayDiv.remove();
+
+    // Hier kannst du den Code für das Löschen der Aufgabe einfügen
+    const taskTitle = popupDiv.querySelector(".taskTitle").textContent; // Titel der Aufgabe
+    const taskIndex = tasks.findIndex((task) => task.title === taskTitle);
+
+    if (taskIndex !== -1) {
+      // Aufgabe gefunden, lösche sie
+      tasks.splice(taskIndex, 1);
+
+      // Speichern der aktualisierten Aufgabenliste, z.B. mit localStorage
+      saveTasks(tasks);
+    }
+  }
+}
