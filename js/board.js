@@ -1,8 +1,6 @@
 loadtasks();
-
 let currentDraggedElement
 let path="";
-
 
 setTimeout(() => {
   getInitials();
@@ -12,22 +10,22 @@ async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
     contacts = JSON.parse(await getItem("contacts"));
+    idCounter=tasks.length
     renderHTML();
   } catch (e) {
     console.error("Loading error:", e);
   }
 }
 
-
-function renderHTML(){  
+function renderHTML(){
     let toDo = tasks.filter(t => t['taskCategory'] == 'toDo');
     const task = document.getElementById("newTask");
     task.classList.remove("createdTask");
     task.classList.add("newCreatedTask");
     task.innerHTML = "";
     for (let i = 0; i < toDo.length; i++) {
-      console.log(i)
-    renderAllTasks(i,toDo,task);
+      console.log(toDo[i]['id'])
+    renderAllTasks('todo',i,toDo,task);
     }
 
     let inProgress = tasks.filter(t => t['taskCategory'] == 'inProgress');
@@ -36,13 +34,12 @@ function renderHTML(){
     task2.classList.add("newCreatedTask");
     task2.innerHTML = "";
     for (let i = 0; i < inProgress.length; i++) {
-      console.log(i)
-    renderAllTasks(i,inProgress,task2);
+      console.log(inProgress[i]['id'])
+    renderAllTasks('inProgress',i,inProgress,task2);
     }
 }
 
-
-function renderAllTasks(i,tasks,task){
+function renderAllTasks(idInitials,i,tasks,task){
   
     const title = tasks[i]["title"];
     const description = tasks[i]["description"];
@@ -52,9 +49,10 @@ function renderAllTasks(i,tasks,task){
     const category = tasks[i]["category"];
     const subtask = tasks[i]["subtasks"];
     const subtasks=subtask.length
+    const id= tasks[i]["id"]
     selectPath(priority)
-    task.innerHTML +=renderTask(i,category,title,description,subtasks); 
-    assignedInitials = document.getElementById(`optionInitials${i}`);
+    task.innerHTML +=renderTask(idInitials,i,category,title,description,subtasks,id); 
+    assignedInitials = document.getElementById(`${idInitials}${i}`);
     for (let j = 0; j < assigned.length; j++) {
       const optionInitials = contacts[assigned[j]].name
         .split(" ")
@@ -70,8 +68,8 @@ function renderAllTasks(i,tasks,task){
   
 }
 
-function startDragging(i){
-  currentDraggedElement=i
+function startDragging(id){
+  currentDraggedElement=id-1
 
   console.log(currentDraggedElement)
 }
@@ -105,9 +103,9 @@ switch (priority) {
 }
 }
 
-function renderTask(i,category,title,description,subtasks){
+function renderTask(idInitials,i,category,title,description,subtasks,id){
   return /*html*/ `
-  <div class="newTask" draggable="true" ondragstart="startDragging(${i})" onclick="showTask(${i})" id="showTask">
+  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${i})" id="showTask">
    <div class="${
      category === "Technical Task" ? "blueStyle" : "orangeStyle"
    }">${category}</div>
@@ -120,7 +118,7 @@ function renderTask(i,category,title,description,subtasks){
        <div>0/${subtasks}Subtasks</div>
    </div>
    <div class="namePriority">
-       <div id="optionInitials${i}" class="names"></div>
+       <div id="${idInitials}${i}" class="names"></div>
        <img src=${path}>
    </div>
    </div>
@@ -156,11 +154,12 @@ function doNotClose(event) {
 }
 
 async function createTask2(){
+
     const taskTitle = document.getElementById("task-title").value;
     const taskDescription = document.getElementById("task-description").value;
     const taskDate = document.getElementById("task-date").value;
     const category = document.querySelector(".category-select").value;
-
+    idCounter++
     tasks.push({
       title: taskTitle,
       description: taskDescription,
@@ -169,7 +168,8 @@ async function createTask2(){
       assigned: checkecdContacts,
       category: category,
       subtasks: subtasks,
-      taskCategory: 'inProgress'
+      taskCategory: 'inProgress',
+      id:idCounter
     });
     await setItem("tasks", JSON.stringify(tasks));
     
@@ -180,8 +180,10 @@ async function createTask2(){
     task.classList.add("newCreatedTask");
     //task.innerHTML = "";
     let i=tasks.length-1
-      console.log(i)
-    renderAllTasks(i,tasks,task);
+      
+  
+      renderAllTasks('inProgress',i,tasks,task);
+    
     
 }
 

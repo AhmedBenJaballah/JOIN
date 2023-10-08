@@ -4,6 +4,7 @@ let checkecdContacts = [];
 let tasks = [];
 let subtasks = [];
 let priority = "";
+let idCounter=0;
 loadtasks();
 
 async function loadtasks() {
@@ -192,7 +193,7 @@ async function createTask() {
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
-
+  idCounter++
   //const assignedTo = document.querySelector(".assigned-select").value;
   //Ahmed:hallo chihad hier brauchst du assigned to nicht zu speichern es sind in der Variable
   //Ahmed:checkecdContacts gespeichert
@@ -220,9 +221,11 @@ async function createTask() {
     assigned: checkecdContacts,
     category: category,
     subtasks: subtasks,
-    taskCategory:'toDo'
+    taskCategory:'toDo',
+    id:idCounter
   });
   await setItem("tasks", JSON.stringify(tasks));
+  
 
   //Ahmed: hier direkt zu board kannsk deine animation anpassen
 
