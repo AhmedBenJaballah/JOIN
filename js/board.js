@@ -1,7 +1,7 @@
 loadtasks();
-let currentDraggedElement;
-let path = "";
-
+let currentDraggedElement
+let path="";
+let selectedTaskCategory="";
 setTimeout(() => {
   getInitials();
 }, 1000);
@@ -17,26 +17,46 @@ async function loadtasks() {
   }
 }
 
-function renderHTML() {
-  let toDo = tasks.filter((t) => t["taskCategory"] == "toDo");
-  const task = document.getElementById("newTask");
-  task.classList.remove("createdTask");
-  task.classList.add("newCreatedTask");
-  task.innerHTML = "";
-  for (let i = 0; i < toDo.length; i++) {
-    console.log(toDo[i]["id"]);
-    renderAllTasks("todo", i, toDo, task);
-  }
+function renderHTML(){
+    let toDo = tasks.filter(t => t['taskCategory'] == 'toDo');
+    const task = document.getElementById("toDo");
+    task.classList.remove("createdTask");
+    task.classList.add("newCreatedTask");
+    task.innerHTML = "";
+    for (let i = 0; i < toDo.length; i++) {
+      console.log(toDo[i]['id'])
+    renderAllTasks('todo',i,toDo,task);
+    }
 
-  let inProgress = tasks.filter((t) => t["taskCategory"] == "inProgress");
-  const task2 = document.getElementById("inProgress");
-  task2.classList.remove("createdTask");
-  task2.classList.add("newCreatedTask");
-  task2.innerHTML = "";
-  for (let i = 0; i < inProgress.length; i++) {
-    console.log(inProgress[i]["id"]);
-    renderAllTasks("inProgress", i, inProgress, task2);
-  }
+    let inProgress = tasks.filter(t => t['taskCategory'] == 'inProgress');
+    const task2 = document.getElementById('inProgress');
+    task2.classList.remove("createdTask");
+    task2.classList.add("newCreatedTask");
+    task2.innerHTML = "";
+    for (let i = 0; i < inProgress.length; i++) {
+      console.log(inProgress[i]['id'])
+    renderAllTasks('inProgress',i,inProgress,task2);
+    }
+
+    let awaitFeedback = tasks.filter(t => t['taskCategory'] == 'awaitFeedback');
+    const task3 = document.getElementById('awaitFeedback');
+    task3.classList.remove("createdTask");
+    task3.classList.add("newCreatedTask");
+    task3.innerHTML = "";
+    for (let i = 0; i < awaitFeedback.length; i++) {
+      console.log(awaitFeedback[i]['id'])
+    renderAllTasks('awaitFeedback',i,awaitFeedback,task3);
+    }
+
+    let done = tasks.filter(t => t['taskCategory'] == 'done');
+    const task4 = document.getElementById('done');
+    task4.classList.remove("createdTask");
+    task4.classList.add("newCreatedTask");
+    task4.innerHTML = "";
+    for (let i = 0; i < done.length; i++) {
+      console.log(done[i]['id'])
+    renderAllTasks('dones',i,done,task4);
+    }
 }
 
 function renderAllTasks(idInitials, i, tasks, task) {
@@ -129,9 +149,9 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
    `;
 }
 
-function addSidebar() {
+function addSidebar(aTaskCategory) {
   const dialog = document.getElementById("dialog");
-
+  selectedTaskCategory=aTaskCategory
   dialog.classList.remove("displayNone");
   dialog.classList.add("addSidebar");
   dialog.style.justifyContent = "flex-end";
@@ -157,34 +177,38 @@ function doNotClose(event) {
   event.stopPropagation();
 }
 
-async function createTask2() {
-  const taskTitle = document.getElementById("task-title").value;
-  const taskDescription = document.getElementById("task-description").value;
-  const taskDate = document.getElementById("task-date").value;
-  const category = document.querySelector(".category-select").value;
-  idCounter++;
-  tasks.push({
-    title: taskTitle,
-    description: taskDescription,
-    date: taskDate,
-    priority: priority,
-    assigned: checkecdContacts,
-    category: category,
-    subtasks: subtasks,
-    taskCategory: "inProgress",
-    id: idCounter,
-  });
-  await setItem("tasks", JSON.stringify(tasks));
+async function createTask2(selectedTaskCategory){
 
-  tasks = JSON.parse(await getItem("tasks"));
-  contacts = JSON.parse(await getItem("contacts"));
-  const task = document.getElementById("inProgress");
-  task.classList.remove("createdTask");
-  task.classList.add("newCreatedTask");
-  //task.innerHTML = "";
-  let i = tasks.length - 1;
-
-  renderAllTasks("inProgress", i, tasks, task);
+    const taskTitle = document.getElementById("task-title").value;
+    const taskDescription = document.getElementById("task-description").value;
+    const taskDate = document.getElementById("task-date").value;
+    const category = document.querySelector(".category-select").value;
+    idCounter++
+    tasks.push({
+      title: taskTitle,
+      description: taskDescription,
+      date: taskDate,
+      priority: priority,
+      assigned: checkecdContacts,
+      category: category,
+      subtasks: subtasks,
+      taskCategory: selectedTaskCategory,
+      id:idCounter
+    });
+    await setItem("tasks", JSON.stringify(tasks));
+    
+    tasks = JSON.parse(await getItem("tasks"));
+    contacts = JSON.parse(await getItem("contacts"));
+    const task = document.getElementById(selectedTaskCategory);
+    task.classList.remove("createdTask");
+    task.classList.add("newCreatedTask");
+    //task.innerHTML = "";
+    let i=tasks.length-1
+      
+  
+      renderAllTasks(selectedTaskCategory,i,tasks,task);
+    
+    
 }
 
 function showTask(index) {

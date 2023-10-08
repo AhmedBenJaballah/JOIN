@@ -35,7 +35,7 @@
             </span>
           </div>
 
-          <div id="add" onclick="addSidebar()" class="btn btn-primary">
+          <div id="add" onclick="addSidebar('toDo')" class="btn btn-primary">
             add Tasks <i  class="bi bi-plus-lg"></i>
           </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="buttons" id="btnsAddTask">
               <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false"
                   autocomplete="off">Clear <img src="/grafiken/VectorX.png"></button>
-              <button type="button" class="btn btn-primary" onclick="createTask2()"> Create Task <img
+              <button type="button" class="btn btn-primary" onclick="createTask2(`${selectedTaskCategory}`)"> Create Task <img
                       src="/grafiken/check.png" class="primary"></button>
           </div>
         </div>
@@ -63,31 +63,31 @@
           <div class="aTaskAreaBoard">
             <div class="aTaskArea">
               <div class="boardTitle">To do</div>
-              <i class="plus bi bi-plus-lg" onclick="addSidebar()" ></i>
+              <i class="plus bi bi-plus-lg" onclick="addSidebar('toDo')" ></i>
             </div>
-            <div class="createdTask"  ondrop="moveTo('toDo')" ondragover="allowDrop(event)" id="newTask">No Tasks To Do</div>
+            <div class="createdTask"  draggable="true" ondrop="moveTo('toDo')" ondragover="allowDrop(event)" id="toDo">No Tasks To Do</div>
           </div>
 
           <div class="aTaskAreaBoard">
             <div class="aTaskArea">
               <div class="boardTitle">In progree</div>
-              <i class="plus bi bi-plus-lg" onclick="addSidebar()" ></i>
+              <i class="plus bi bi-plus-lg" onclick="addSidebar('inProgress')" ></i>
             </div>
             <div class="createdTask" draggable="true" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)">No Tasks To Do</div>
           </div>
           <div class="aTaskAreaBoard">
             <div class="aTaskArea">
               <div class="boardTitle">Await feedback</div>
-              <i class="plus bi bi-plus-lg" onclick="addSidebar()" ></i>
+              <i class="plus bi bi-plus-lg" onclick="addSidebar('awaitFeedback')" ></i>
             </div>
-            <div class="createdTask">No Tasks To Do</div>
+            <div class="createdTask" draggable="true" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)" id="awaitFeedback" >No Tasks To Do</div>
           </div>
           <div class="aTaskAreaBoard">
             <div class="aTaskArea">
               <div class="boardTitle">Done</div>
-              <i class="plus bi bi-plus-lg" onclick="addSidebar()" ></i>
+              <i class="plus bi bi-plus-lg" onclick="addSidebar('done')" ></i>
             </div>
-            <div class="createdTask">No Tasks To Do</div>
+            <div class="createdTask" draggable="true" ondrop="moveTo('done')" ondragover="allowDrop(event)" id="done">No Tasks To Do</div>
           </div>
         </div>
 
