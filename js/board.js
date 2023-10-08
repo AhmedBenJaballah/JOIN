@@ -2,10 +2,32 @@ loadtasks();
 let currentDraggedElement
 let path="";
 let selectedTaskCategory="";
+let amountToDo=0
+let amountInProgress=0
+let amountAawaitFeedback=0
+let amountDone=0
+let totalTasks=0
+let amount=[{'totalTasks':totalTasks,
+  'amountToDo':amountToDo,
+  'amountInProgress':amountInProgress,
+  'amountAawaitFeedback':amountAawaitFeedback,
+  'amountDone':amountDone}];
+loadAmount();
+
 setTimeout(() => {
   getInitials();
 }, 1000);
 
+
+
+
+async function loadAmount(){
+    try {
+        amount = JSON.parse(await getItem('amount'));
+    } catch(e){
+        console.error('Loading error:', e);
+    }
+}
 async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
@@ -23,6 +45,7 @@ function renderHTML(){
     task.classList.remove("createdTask");
     task.classList.add("newCreatedTask");
     task.innerHTML = "";
+    amountToDo=toDo.length
     for (let i = 0; i < toDo.length; i++) {
       console.log(toDo[i]['id'])
     renderAllTasks('todo',i,toDo,task);
@@ -33,6 +56,7 @@ function renderHTML(){
     task2.classList.remove("createdTask");
     task2.classList.add("newCreatedTask");
     task2.innerHTML = "";
+    amountInProgress=inProgress.length
     for (let i = 0; i < inProgress.length; i++) {
       console.log(inProgress[i]['id'])
     renderAllTasks('inProgress',i,inProgress,task2);
@@ -43,6 +67,7 @@ function renderHTML(){
     task3.classList.remove("createdTask");
     task3.classList.add("newCreatedTask");
     task3.innerHTML = "";
+    amountAawaitFeedback=awaitFeedback.length
     for (let i = 0; i < awaitFeedback.length; i++) {
       console.log(awaitFeedback[i]['id'])
     renderAllTasks('awaitFeedback',i,awaitFeedback,task3);
@@ -53,6 +78,7 @@ function renderHTML(){
     task4.classList.remove("createdTask");
     task4.classList.add("newCreatedTask");
     task4.innerHTML = "";
+    amountDone=done.length;
     for (let i = 0; i < done.length; i++) {
       console.log(done[i]['id'])
     renderAllTasks('dones',i,done,task4);
@@ -108,6 +134,14 @@ async function moveTo(category) {
   console.log(currentDraggedElement);
   tasks[currentDraggedElement]["taskCategory"] = category;
   renderHTML();
+  await setItem("tasks", JSON.stringify(tasks));
+  totalTasks=amountToDo+amountInProgress+amountAawaitFeedback+amountDone;
+  amount=[{'totalTasks':totalTasks,
+  'amountToDo':amountToDo,
+  'amountInProgress':amountInProgress,
+  'amountAawaitFeedback':amountAawaitFeedback,
+  'amountDone':amountDone}];
+  await setItem("amount", JSON.stringify(amount));
 }
 
 function selectPath(priority) {
@@ -208,7 +242,13 @@ async function createTask2(selectedTaskCategory){
   
       renderAllTasks(selectedTaskCategory,i,tasks,task);
     
-    
+      const popup = document.getElementById("popup");
+      popup.classList.add("show");
+     
+      setTimeout(function () {
+        popup.classList.remove("show");
+        closeSidebar();
+      }, 1000);
 }
 
 function showTask(index) {

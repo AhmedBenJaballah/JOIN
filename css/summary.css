@@ -179,3 +179,9 @@ body {
 .special:hover span, .special:hover p {
     color: rgb(0,93,255);
 }
+
+.renderNumber{
+    font-size: 40px;
+    color: black;
+    font-weight: bold;
+}
