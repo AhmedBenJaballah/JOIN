@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/summary.css">
+    <script src="js/storage.js"></script>
+    
+    
     <script src="js/policy.js"></script>
     <script src="js/initials.js"></script>
 </head>
@@ -39,35 +42,35 @@
             <div class="tasks">
                 <div class="img-num">
                     <img src="/grafiken/Board.png">
-                    <span>5</span>
+                    <div  class="renderNumber" id="tasksInBoard">5</div>
                 </div>
                 <p>Tasks in Board</p>
             </div>
             <div class="tasks special">
                 <div class="img-num">
                     <img src="/grafiken/Urgent (1).png">
-                    <span>1</span>
+                    <div class="renderNumber" id="tasksToDo">1</div>
                 </div>
                 <p>Tasks To-do</p>
             </div>
             <div class="tasks">
                 <div class="img-num">
                     <img src="/grafiken/In Progress.png">
-                    <span>2</span>
+                    <div class="renderNumber" id="tasksInProgress">2</div>
                 </div>
                 <p>in Progress</p>
             </div>
             <div class="tasks">
                 <div class="img-num">
                     <img src="/grafiken/icons png.png">
-                    <span>2</span>
+                    <div class="renderNumber" id="tasksAwaitFeedback">2</div>
                 </div>
                 <p>Awaiting Feedback</p>
             </div>
             <div class="tasks">
                 <div class="img-num">
                     <img src="/grafiken/Done.png">
-                    <span>1</span>
+                    <div class="renderNumber" id="tasksDone">1</div>
                 </div>
                 <p>Tasks Done</p>
             </div>
@@ -75,6 +78,7 @@
     </div>
 
     <script src="js/includes.js"></script>
+    <script src="js/summary.js"></script>
 </body>
 
 </html>
