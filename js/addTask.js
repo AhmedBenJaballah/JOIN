@@ -5,7 +5,7 @@ let tasks = [];
 let subtasks = [];
 let priority = "";
 let idCounter=0;
-loadtasks();
+//loadtasks();
 
 async function loadtasks() {
   try {
