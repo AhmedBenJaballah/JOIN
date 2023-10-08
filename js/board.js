@@ -214,11 +214,12 @@ function showTask(index) {
       <div class="namePriority">
           <div class="names">${priority}</div>
       </div>
-      <div class="popup-buttons">
-      <img src="/grafiken/delete-popup.png">
-   <button class="delete-button" onclick="deleteTask()">Delete</button>
-   <button class="edit-button" onclick="editTask()">Edit</button>
-  </div>
+      <div class="popup-buttons"> 
+        
+          <button class="delete-button" onclick="deleteTask()"><img src="/grafiken/delete-popup.png"> Delete</button> 
+        
+      <button class="edit-button" onclick="editTask()">Edit</button>
+    </div>
      
     `;
 
