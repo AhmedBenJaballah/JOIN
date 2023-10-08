@@ -20,6 +20,7 @@ async function loadtasks() {
       const assigned = tasks[i]["assigned"];
       const category = tasks[i]["category"];
       const subtask = tasks[i]["subtasks"];
+      const subtasks=subtask.length
       console.log(
         title,
         date,
@@ -41,7 +42,7 @@ async function loadtasks() {
                 <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <div>Subtasks</div>
+                <div>0/${subtasks}Subtasks</div>
             </div>
             <div class="namePriority">
                 <div id="optionInitials${i}" class="names"></div>

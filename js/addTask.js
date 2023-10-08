@@ -2,6 +2,7 @@
 
 let checkecdContacts = [];
 let tasks = [];
+let subtasks=[];
 loadtasks();
 
 async function loadtasks(){
@@ -91,6 +92,19 @@ async function getcha(i) {
     }
   }
 }
+
+
+function addSubtask(){
+const subtask=document.getElementById('subtasks');
+const subtaskSection=document.getElementById('subtask-section');
+subtasks.push(subtask.value)
+
+console.log(subtasks)
+subtaskSection.innerHTML+=/*html*/`
+<div>${subtask.value} </div>
+`
+subtask.value=""
+}
 /////////////////////////////////////////Ahmed//////////////////////////////////
 
 async function createTask() {
@@ -111,7 +125,7 @@ async function createTask() {
   //Ahmed:hallo chihad hier brauchst du assigned to nicht zu speichern es sind in der Variable
   //Ahmed:checkecdContacts gespeichert
   const category = document.querySelector(".category-select").value;
-  const subtasks = document.getElementById("subtasks").value;
+  //const subtasks = document.getElementById("subtasks").value;
 
   // Erstelle eine HTML-Ausgabe mit den erfassten Daten
   const outputHTML = `<div class="createdTask">
@@ -122,7 +136,7 @@ async function createTask() {
       <p><strong>Priority:</strong> ${taskPriority}</p>
       
       <p><strong>Category:</strong> ${category}</p>
-      <p><strong>Subtasks:</strong> ${subtasks}</p>
+      <
       </div>
     `;
 //Ahmed: hier können wir direkt speichern
