@@ -275,7 +275,7 @@ function showTask(id) {
   const task = tasks[index];
   const title = task["title"];
   const category = task["category"];
- 
+ const taskId=task["id"];
   const description = task["description"];
   const priority = task["priority"];
   const date = task["date"];
@@ -300,10 +300,10 @@ function showTask(id) {
     <div> Priority: ${priority}<img src=${path}></div>
 
     <div> Assigned to : <div> 
-    <div id="popup${index}"> <div> 
+    <div id="popup${taskId}"></div> 
     
     <div>
-        <div id="subtasks${index}">Subtasks:</div>
+        <div id="subtasks${taskId}">Subtasks:</div>
     </div>
 
     <div class="popup-buttons"> 
@@ -313,17 +313,20 @@ function showTask(id) {
   `;
 
     setTimeout(() => {
-      assignedInitials = document.getElementById(`popup${index}`);
+      assignedInitials = document.getElementById(`popup${taskId}`);
       for (let j = 0; j < assigned.length; j++) {
         const optionInitials = contacts[assigned[j]].name
           .split(" ")
           .map((word) => word[0].toUpperCase())
           .join("");
         assignedInitials.innerHTML += /*html*/ `
+        <div class="alignContact">
                   <div class="roundNameDropdownTask" style="background-color:${
                     contacts[assigned[j]].color
                   }">
-                    ${optionInitials}
+                    ${optionInitials} 
+                  </div>
+                  <div>${contacts[assigned[j]].name}</div>
                   </div>`;
       }
 
@@ -351,39 +354,26 @@ function closePopup() {
 }
 
 async function deleteTask(index) {
-  console.log("del index"+index)
+
   const popupDiv = document.querySelector(".popup-div");
   const overlayDiv = document.querySelector(".overlay");
 
   if (popupDiv && overlayDiv) {
- 
     popupDiv.classList.remove("show");
     setTimeout(() => {
       popupDiv.remove();
     }, 300);
-
-    
     overlayDiv.style.display = "none";
 
-   
-    const taskTitle = tasks[index].title;
-    const todelte = tasks[index]["id"];
-    
-    const taskContainer = document.getElementById(`showTask-${todelte}`);
+    const todelete = tasks[index]["id"];
+    const taskContainer = document.getElementById(`showTask-${todelete}`);
     if (taskContainer) {
       taskContainer.remove();
     }
 
-   
-    
-    tasks.splice(index, 1);
-    console.log(tasks)
+    tasks.splice(index, 1);    
     await setItem("tasks", JSON.stringify(tasks));
-   
     renderHTML();
-
-    
-   
   }
 }
 
