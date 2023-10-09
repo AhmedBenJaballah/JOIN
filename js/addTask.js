@@ -5,11 +5,12 @@ let tasks = [];
 let subtasks = [];
 let priority = "";
 let idCounter=0;
-//loadtasks();
+loadtasks();
 
 async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
+    idCounter = tasks.length;
   } catch (e) {
     console.error("Loading error:", e);
   }

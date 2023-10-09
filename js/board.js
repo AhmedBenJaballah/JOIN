@@ -1,4 +1,4 @@
-loadtasks();
+
 let currentDraggedElement;
 let path = "";
 let selectedTaskCategory = "";
@@ -16,6 +16,7 @@ let amount = [
     amountDone: amountDone,
   },
 ];
+loadtasks();
 loadAmount();
 
 setTimeout(() => {
@@ -169,13 +170,13 @@ function selectPath(priority) {
 
 function renderTask(idInitials, i, category, title, description, subtasks, id) {
   return /*html*/ `
-  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${i})" id="showTask()">
+  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask()">
    <div class="${
      category === "Technical Task" ? "blueStyle" : "orangeStyle"
    }">${category}</div>
    <div class="taskTitle">${title}</div>
    <div class="descTask">${description}</div>
-   <div>
+   <div class="subtaskProgress">
        <div class="progress">
        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
        </div>
@@ -255,7 +256,8 @@ async function createTask2(selectedTaskCategory) {
   }, 1000);
 }
 
-function showTask(index) {
+function showTask(id) {
+  index=id-1
   const overlay = document.getElementById("overlay");
   overlay.style.display = "block";
   const task = tasks[index];
@@ -305,7 +307,8 @@ function closePopup() {
     popupDiv.remove();
   }, 300);
 }
-function deleteTask(index) {
+
+async function deleteTask(index) {
   const popupDiv = document.querySelector(".popup-div");
   const overlayDiv = document.querySelector(".overlay");
 
@@ -330,12 +333,12 @@ function deleteTask(index) {
 
     
     tasks.splice(index, 1);
-
+    await setItem("tasks", JSON.stringify(tasks));
    
     renderHTML();
 
     
-    saveTasks(tasks);
+   
   }
 }
 
