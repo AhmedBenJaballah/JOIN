@@ -18,6 +18,7 @@ let amount = [
 ];
 loadtasks();
 loadAmount();
+loadid();
 
 setTimeout(() => {
   getInitials();
@@ -34,8 +35,16 @@ async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
     contacts = JSON.parse(await getItem("contacts"));
-    idCounter = tasks.length;
+
     renderHTML();
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
+}
+
+async function loadid() {
+  try {
+    idCounter = JSON.parse(await getItem("idCounter"));
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -170,7 +179,7 @@ function selectPath(priority) {
 
 function renderTask(idInitials, i, category, title, description, subtasks, id) {
   return /*html*/ `
-  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask()">
+  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask(${id})">
    <div class="${
      category === "Technical Task" ? "blueStyle" : "orangeStyle"
    }">${category}</div>
@@ -223,6 +232,8 @@ async function createTask2(selectedTaskCategory) {
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
   const category = document.querySelector(".category-select").value;
+
+  
   idCounter++;
   tasks.push({
     title: taskTitle,
@@ -236,7 +247,7 @@ async function createTask2(selectedTaskCategory) {
     id: idCounter,
   });
   await setItem("tasks", JSON.stringify(tasks));
-
+  await setItem("idCounter", JSON.stringify(idCounter));
   tasks = JSON.parse(await getItem("tasks"));
   contacts = JSON.parse(await getItem("contacts"));
   const task = document.getElementById(selectedTaskCategory);
@@ -257,45 +268,76 @@ async function createTask2(selectedTaskCategory) {
 }
 
 function showTask(id) {
-  index=id-1
+  console.log(id)
+  index=tasks.findIndex(c => c.id == id);
   const overlay = document.getElementById("overlay");
   overlay.style.display = "block";
   const task = tasks[index];
-  const category = task["category"];
   const title = task["title"];
+  const category = task["category"];
+ 
   const description = task["description"];
   const priority = task["priority"];
-
+  const date = task["date"];
+  const assigned = task["assigned"];
+  const subtasks = task["subtasks"];
+  selectPath(priority);
+  
   const popupDiv = document.createElement("div");
   popupDiv.className = "popup-div";
   popupDiv.innerHTML = /*html*/ `
     <div class="task-container">
       <div class="${
         category === "Technical Task" ? "blueStyle" : "orangeStyle"
-      }">${category} </div> 
+      }">${category} 
+      </div> 
       <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
     </div>
     
     <div class="taskTitle">${title} </div>
     <div class="descTask">${description}</div>
+    <div> Due date:${date}</div>
+    <div> Priority: ${priority}<img src=${path}></div>
+
+    <div> Assigned to : <div> 
+    <div id="popup${index}"> <div> 
+    
     <div>
-        <div>Progress</div>
-        <div>Subtasks</div>
+        <div id="subtasks${index}">Subtasks:</div>
     </div>
-    <div class="namePriority">
-        <div class="names">${priority}</div>
-    </div>
+
     <div class="popup-buttons"> 
         <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
         <button class="edit-button" onclick="editTask(${index})">Edit</button>
     </div>
   `;
 
-  document.body.appendChild(popupDiv);
-  setTimeout(() => {
-    popupDiv.classList.add("show");
-  }, 50);
+    setTimeout(() => {
+      assignedInitials = document.getElementById(`popup${index}`);
+      for (let j = 0; j < assigned.length; j++) {
+        const optionInitials = contacts[assigned[j]].name
+          .split(" ")
+          .map((word) => word[0].toUpperCase())
+          .join("");
+        assignedInitials.innerHTML += /*html*/ `
+                  <div class="roundNameDropdownTask" style="background-color:${
+                    contacts[assigned[j]].color
+                  }">
+                    ${optionInitials}
+                  </div>`;
+      }
+
+    }, 200);
+
+
+    console.log(subtasks)
+      document.body.appendChild(popupDiv);
+      setTimeout(() => {
+        popupDiv.classList.add("show");
+      }, 50);
+
 }
+
 overlay.addEventListener("click", closePopup);
 
 function closePopup() {
@@ -309,6 +351,7 @@ function closePopup() {
 }
 
 async function deleteTask(index) {
+  console.log("del index"+index)
   const popupDiv = document.querySelector(".popup-div");
   const overlayDiv = document.querySelector(".overlay");
 
@@ -324,15 +367,17 @@ async function deleteTask(index) {
 
    
     const taskTitle = tasks[index].title;
-
+    const todelte = tasks[index]["id"];
     
-    const taskContainer = document.getElementById(`showTask-${index}`);
+    const taskContainer = document.getElementById(`showTask-${todelte}`);
     if (taskContainer) {
       taskContainer.remove();
     }
 
+   
     
     tasks.splice(index, 1);
+    console.log(tasks)
     await setItem("tasks", JSON.stringify(tasks));
    
     renderHTML();

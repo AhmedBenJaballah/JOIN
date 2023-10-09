@@ -6,11 +6,20 @@ let subtasks = [];
 let priority = "";
 let idCounter=0;
 loadtasks();
+loadid();
 
 async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
-    idCounter = tasks.length;
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
+}
+
+
+async function loadid() {
+  try {
+    idCounter = JSON.parse(await getItem("idCounter"));
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -226,6 +235,7 @@ async function createTask() {
     id:idCounter
   });
   await setItem("tasks", JSON.stringify(tasks));
+  await setItem("idCounter", JSON.stringify(idCounter));
   
 
   //Ahmed: hier direkt zu board kannsk deine animation anpassen
