@@ -302,9 +302,9 @@ function showTask(id) {
     <div> Assigned to : <div> 
     <div id="popup${taskId}"></div> 
     
-    <div>
-        <div id="subtasks${taskId}">Subtasks:</div>
-    </div>
+    <div>Subtasks:</div>
+    <div id="subtasks${taskId}"></div>
+    
 
     <div class="popup-buttons"> 
         <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
@@ -328,6 +328,14 @@ function showTask(id) {
                   </div>
                   <div>${contacts[assigned[j]].name}</div>
                   </div>`;
+      }
+      subs=document.getElementById(`subtasks${taskId}`);
+      for (let k = 0; k < subtasks.length; k++) {
+        subs.innerHTML+=/*html*/`
+        <div>
+         <input type="checkbox">${subtasks[k]} 
+        </div>
+      `
       }
 
     }, 200);
