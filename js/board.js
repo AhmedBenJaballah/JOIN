@@ -282,6 +282,13 @@ function showTask(id) {
   const assigned = task["assigned"];
   const subtasks = task["subtasks"];
   selectPath(priority);
+
+  const editButton = document.createElement("button");
+  editButton.className = "edit-button";
+  editButton.innerHTML = '<img src="/grafiken/edit.png"> Edit';
+  editButton.onclick = function () {
+    editTask(index); // Rufen Sie die editTask-Funktion auf, wenn der "Edit" -Button geklickt wird.
+  };
   
   const popupDiv = document.createElement("div");
   popupDiv.className = "popup-div";
@@ -296,13 +303,12 @@ function showTask(id) {
     
     <div class="taskTitle">${title} </div>
     <div class="descTask">${description}</div>
-    <div> Due date:${date}</div>
-    <div> Priority: ${priority}<img src=${path}></div>
-
-    <div> Assigned to : <div> 
+    <div class="task-date"> Due date:${date}</div>
+    <div class="task-priority"> Priority:  ${priority}<img src=${path}></div>
+    <div class="task-assigned"> Assigned to : <div> 
     <div id="popup${taskId}"></div> 
     
-    <div>Subtasks:</div>
+    <div class="popup-subtasks">Subtasks:</div>
     <div id="subtasks${taskId}"></div>
     
 
@@ -382,6 +388,45 @@ async function deleteTask(index) {
     tasks.splice(index, 1);    
     await setItem("tasks", JSON.stringify(tasks));
     renderHTML();
+  }
+}
+
+function editTask(index) {
+  const popupDiv = document.querySelector(".popup-div");
+
+  // Überprüfen, ob das Popup vorhanden ist.
+  if (popupDiv) {
+    // Machen Sie die Felder bearbeitbar und wenden Sie den Stil von createTask an.
+    const taskTitle = popupDiv.querySelector(".taskTitle");
+    const descTask = popupDiv.querySelector(".descTask");
+    const dueDate = popupDiv.querySelector(".dueDate");
+    const priority = popupDiv.querySelector(".priority");
+    const assignedTo = popupDiv.querySelector(".assignedTo");
+    const subtasks = popupDiv.querySelector(".subtasks");
+
+    taskTitle.contentEditable = true;
+    descTask.contentEditable = true;
+    dueDate.contentEditable = true;
+    priority.contentEditable = true;
+    assignedTo.contentEditable = true;
+    subtasks.contentEditable = true;
+
+    // Entfernen Sie den "Edit" und "Delete" Button.
+    const editButton = popupDiv.querySelector(".edit-button");
+    const deleteButton = popupDiv.querySelector(".delete-button");
+    editButton.style.display = "none";
+    deleteButton.style.display = "none";
+
+    // Hinzufügen eines "OK"-Buttons.
+    const okButton = document.createElement("button");
+    okButton.className = "ok-button btn btn-primary";
+    okButton.innerHTML = '<img src="grafiken/check.png"> OK';
+    okButton.onclick = function () {
+      saveEditedTask(index);
+    };
+
+    // Hinzufügen des "OK"-Buttons ans Ende des Popups.
+    popupDiv.appendChild(okButton);
   }
 }
 

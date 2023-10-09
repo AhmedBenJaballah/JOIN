@@ -317,7 +317,7 @@
   /* Weitere Styles nach Bedarf hinzufügen */
 }
 .popup-div .taskTitle {
-  font-size: 50px;
+  font-size: 68px;
   color: black;
   font-weight: bold;
   margin-right: 30px;
@@ -327,8 +327,38 @@
   font-size: 29px;
   margin-right: 30px;
   margin-left: 30px;
+  color: black;
 }
-
+.popup-div .task-date {
+  color: rgb(66,82,110);
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 29px;
+}
+.popup-div .task-priority {
+  color: rgb(66,82,110);
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 29px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.popup-div .task-assigned {
+  color: rgb(66,82,110);
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 29px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.popup-div .popup-subtasks {
+  color: rgb(66,82,110);
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 29px;
+ 
+  margin-top: 20px;
+}
 
 
 
