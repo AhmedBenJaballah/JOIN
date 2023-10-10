@@ -187,9 +187,9 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
    <div class="descTask">${description}</div>
    <div class="subtaskProgress">
        <div class="progress">
-       <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+       <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progressBar${id}"></div>
        </div>
-       <div>0/${subtasks}Subtasks</div>
+       <div id="displaysubs${id}">0/${subtasks}Subtasks</div>
    </div>
    <div class="namePriority">
        <div id="${idInitials}${i}" class="names"></div>
@@ -336,14 +336,18 @@ function showTask(id) {
                   </div>`;
       }
       subs=document.getElementById(`subtasks${taskId}`);
+     
       for (let k = 0; k < subtasks.length; k++) {
+        let isCheckedS = checkecdContacts.includes(k);
         subs.innerHTML+=/*html*/`
         <div>
-         <input type="checkbox">${subtasks[k]} 
+         <input type="checkbox" onclick="updateProgress(${subtasks.length},${taskId},${k})" class="check${taskId}"
+         ${isCheckedS ? "checked" : ""} id="checkbox${taskId}${k}">
+         ${subtasks[k]} 
+        
         </div>
       `
       }
-
     }, 200);
 
 
@@ -353,6 +357,51 @@ function showTask(id) {
         popupDiv.classList.add("show");
       }, 50);
 
+}
+
+
+function updateProgress(subtasks,taskId,k) {
+
+
+  let checkbox = document.getElementById(`checkbox${taskId}${k}`);
+
+  if (checkbox.checked) {
+    checkecdContacts.push(k);
+    console.log(checkecdContacts);
+  } else {
+    const index = checkecdContacts.indexOf(k);
+    if (index > -1) {
+      checkecdContacts.splice(index, 1);
+      console.log(checkecdContacts);
+    }
+  }
+
+  const checkboxes = document.querySelectorAll(`.check${taskId}`);
+  let progressBar =document.getElementById(`progressBar${taskId}`)
+  
+  let completedSubtasks = 0;
+
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.checked) {
+      completedSubtasks++;
+    }
+  });
+console.log(taskId);
+console.log((subtasks ));
+console.log((completedSubtasks/subtasks ));
+console.log(progressBar);
+
+
+  const progressPercentage = (completedSubtasks /subtasks) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+  progressBar.setAttribute('aria-valuenow', completedSubtasks);
+  progressBar.setAttribute('aria-valuemax', subtasks);
+
+  let displayNumber =document.getElementById(`displaysubs${taskId}`);
+  displayNumber.innerHTML=`
+  ${completedSubtasks}/${subtasks}Subtasks
+  `
+  
 }
 
 overlay.addEventListener("click", closePopup);
