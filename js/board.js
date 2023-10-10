@@ -1,4 +1,3 @@
-
 let currentDraggedElement;
 let path = "";
 let selectedTaskCategory = "";
@@ -233,7 +232,6 @@ async function createTask2(selectedTaskCategory) {
   const taskDate = document.getElementById("task-date").value;
   const category = document.querySelector(".category-select").value;
 
-  
   idCounter++;
   tasks.push({
     title: taskTitle,
@@ -268,14 +266,14 @@ async function createTask2(selectedTaskCategory) {
 }
 
 function showTask(id) {
-  console.log(id)
-  index=tasks.findIndex(c => c.id == id);
+  console.log(id);
+  const index = tasks.findIndex((c) => c.id == id);
   const overlay = document.getElementById("overlay");
   overlay.style.display = "block";
   const task = tasks[index];
   const title = task["title"];
   const category = task["category"];
- const taskId=task["id"];
+  const taskId = task["id"];
   const description = task["description"];
   const priority = task["priority"];
   const date = task["date"];
@@ -289,11 +287,11 @@ function showTask(id) {
   editButton.onclick = function () {
     editTask(index); // Rufen Sie die editTask-Funktion auf, wenn der "Edit" -Button geklickt wird.
   };
-  
+
   const popupDiv = document.createElement("div");
   popupDiv.className = "popup-div";
   popupDiv.innerHTML = /*html*/ `
-    <div class="task-container">
+    <div class="task-container" id="taskContainer-id">
       <div class="${
         category === "Technical Task" ? "blueStyle" : "orangeStyle"
       }">${category} 
@@ -301,31 +299,32 @@ function showTask(id) {
       <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
     </div>
     
-    <div class="taskTitle">${title} </div>
-    <div class="descTask">${description}</div>
-    <div class="task-date"> Due date:${date}</div>
-    <div class="task-priority"> Priority:  ${priority}<img src=${path}></div>
-    <div class="task-assigned"> Assigned to : <div> 
+    <div class="taskTitle" id="taskTitle">${title} </div>
+    <div class="descTask" id="taskDesc">${description}</div>
+    <div class="task-date" id="taskDate"> Due date:${date}</div>
+    <div class="task-priority" id="taskPriority"> Priority:  ${priority}<img src=${path}></div>
+    <div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
     <div id="popup${taskId}"></div> 
     
-    <div class="popup-subtasks">Subtasks:</div>
+    <div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
     <div id="subtasks${taskId}"></div>
     
 
     <div class="popup-buttons"> 
         <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
-        <button class="edit-button" onclick="editTask(${index})">Edit</button>
+        <button class="edit-button"  id="edit_button" onclick="editTask(${index})">Edit</button>
+        
     </div>
   `;
 
-    setTimeout(() => {
-      assignedInitials = document.getElementById(`popup${taskId}`);
-      for (let j = 0; j < assigned.length; j++) {
-        const optionInitials = contacts[assigned[j]].name
-          .split(" ")
-          .map((word) => word[0].toUpperCase())
-          .join("");
-        assignedInitials.innerHTML += /*html*/ `
+  setTimeout(() => {
+    assignedInitials = document.getElementById(`popup${taskId}`);
+    for (let j = 0; j < assigned.length; j++) {
+      const optionInitials = contacts[assigned[j]].name
+        .split(" ")
+        .map((word) => word[0].toUpperCase())
+        .join("");
+      assignedInitials.innerHTML += /*html*/ `
         <div class="alignContact">
                   <div class="roundNameDropdownTask" style="background-color:${
                     contacts[assigned[j]].color
@@ -334,25 +333,22 @@ function showTask(id) {
                   </div>
                   <div>${contacts[assigned[j]].name}</div>
                   </div>`;
-      }
-      subs=document.getElementById(`subtasks${taskId}`);
-      for (let k = 0; k < subtasks.length; k++) {
-        subs.innerHTML+=/*html*/`
+    }
+    subs = document.getElementById(`subtasks${taskId}`);
+    for (let k = 0; k < subtasks.length; k++) {
+      subs.innerHTML += /*html*/ `
         <div>
          <input type="checkbox">${subtasks[k]} 
         </div>
-      `
-      }
+      `;
+    }
+  }, 200);
 
-    }, 200);
-
-
-    console.log(subtasks)
-      document.body.appendChild(popupDiv);
-      setTimeout(() => {
-        popupDiv.classList.add("show");
-      }, 50);
-
+  console.log(subtasks);
+  document.body.appendChild(popupDiv);
+  setTimeout(() => {
+    popupDiv.classList.add("show");
+  }, 50);
 }
 
 overlay.addEventListener("click", closePopup);
@@ -368,7 +364,6 @@ function closePopup() {
 }
 
 async function deleteTask(index) {
-
   const popupDiv = document.querySelector(".popup-div");
   const overlayDiv = document.querySelector(".overlay");
 
@@ -385,48 +380,102 @@ async function deleteTask(index) {
       taskContainer.remove();
     }
 
-    tasks.splice(index, 1);    
+    tasks.splice(index, 1);
     await setItem("tasks", JSON.stringify(tasks));
     renderHTML();
   }
 }
+function editTask() {
+  const title = document.getElementById('taskTitle');
+  const description = document.getElementById('taskDesc');
+  const date = document.getElementById('taskDate');
+  const priority = document.getElementById('taskPriority');
+  const assigned = document.getElementById('taskAssigned');
+  const subtasks = document.getElementById('taskSubtasks');
+  const edit_button = document.getElementById('edit_button');
 
-function editTask(index) {
-  const popupDiv = document.querySelector(".popup-div");
+  // Speichern Sie die ursprünglichen Werte in temporären Variablen
+  const originalTitle = title.textContent;
+  const originalDescription = description.textContent;
+  const originalDate = date.textContent;
+  const originalPriority = priority.textContent;
+  const originalAssigned = assigned.textContent;
+  const originalSubtasks = subtasks.textContent;
 
-  // Überprüfen, ob das Popup vorhanden ist.
-  if (popupDiv) {
-    // Machen Sie die Felder bearbeitbar und wenden Sie den Stil von createTask an.
-    const taskTitle = popupDiv.querySelector(".taskTitle");
-    const descTask = popupDiv.querySelector(".descTask");
-    const dueDate = popupDiv.querySelector(".dueDate");
-    const priority = popupDiv.querySelector(".priority");
-    const assignedTo = popupDiv.querySelector(".assignedTo");
-    const subtasks = popupDiv.querySelector(".subtasks");
+  // Bearbeitbare Felder aktivieren
+  title.contentEditable = true;
+  description.contentEditable = true;
+  date.contentEditable = true;
+  priority.contentEditable = true;
+  assigned.contentEditable = true;
+  subtasks.contentEditable = true;
+  title.style.backgroundColor = "lightblue";
 
-    taskTitle.contentEditable = true;
-    descTask.contentEditable = true;
-    dueDate.contentEditable = true;
-    priority.contentEditable = true;
-    assignedTo.contentEditable = true;
-    subtasks.contentEditable = true;
-
-    // Entfernen Sie den "Edit" und "Delete" Button.
-    const editButton = popupDiv.querySelector(".edit-button");
-    const deleteButton = popupDiv.querySelector(".delete-button");
-    editButton.style.display = "none";
-    deleteButton.style.display = "none";
-
-    // Hinzufügen eines "OK"-Buttons.
-    const okButton = document.createElement("button");
-    okButton.className = "ok-button btn btn-primary";
-    okButton.innerHTML = '<img src="grafiken/check.png"> OK';
-    okButton.onclick = function () {
-      saveEditedTask(index);
-    };
-
-    // Hinzufügen des "OK"-Buttons ans Ende des Popups.
-    popupDiv.appendChild(okButton);
-  }
+  // Das AddTask-Template aufrufen und mit den ursprünglichen Werten füllen
+  const addTaskSection = document.querySelector('.add-task-section');
+  addTaskSection.innerHTML = `
+    <div w3-include-html="includes/add-task-template.html">
+      <input type="text" id="task-title" value="${originalTitle}">
+      <input type="text" id="task-description" value="${originalDescription}">
+      <input type="text" id="task-date" value="${originalDate}">
+      <input type="text" id="task-priority" value="${originalPriority}">
+      <input type="text" id="task-assigned" value="${originalAssigned}">
+      <!-- Weitere Felder hier einfügen und die kopierten Werte einsetzen -->
+    </div>
+  `;
+  
+  // Hier können Sie weitere Anpassungen an den Inhalten des Templates vornehmen, falls erforderlich.
 }
 
+
+/*function editTask(index) {
+  // Holen Sie sich das Popup-Fenster und die Werte aus dem Popup
+  const popupDiv = document.querySelector(".popup-div");
+  const taskTitle = popupDiv.querySelector(".taskTitle").textContent;
+  const descTask = popupDiv.querySelector(".descTask").textContent;
+  const dueDate = popupDiv.querySelector(".dueDate").textContent;
+  const priority = popupDiv.querySelector(".priority").textContent;
+  const assignedTo = popupDiv.querySelector(".assignedTo").textContent;
+  const subtasks = popupDiv.querySelector(".subtasks").textContent;
+  if (popupDiv) {
+    // Das Popup existiert, jetzt kannst du auf die Eigenschaften zugreifen.
+    const taskTitle = popupDiv.querySelector(".taskTitle");
+    if (taskTitle) {
+      // Überprüfen, ob das taskTitle-Element vorhanden ist, bevor du auf textContent zugreifst.
+      const titleText = taskTitle.textContent;
+      // Jetzt kannst du titleText verwenden.
+    }
+  }
+
+  // Entfernen Sie den "Edit" und "Delete" Button.
+  const editButton = popupDiv.querySelector(".edit-button");
+  const deleteButton = popupDiv.querySelector(".delete-button");
+  editButton.style.display = "none";
+  deleteButton.style.display = "none";
+
+  // Hinzufügen eines "OK"-Buttons.
+  const okButton = document.createElement("button");
+  okButton.className = "ok-button";
+  okButton.innerHTML = '<img src="/grafiken/check.png"> OK';
+  okButton.onclick = function () {
+    saveEditedTask(index);
+  };
+
+  // Hinzufügen des "OK"-Buttons ans Ende des Popups.
+ // popupDiv.appendChild(okButton);
+
+  // Hier das Template einfügen und die kopierten Werte in den Eingabefeldern anzeigen
+  const addTaskSection = document.querySelector(".add-task-section");
+  addTaskSection.innerHTML = `
+    <div w3-include-html="includes/add-task-template.html">
+      <input type="text" id="task-title" value="${taskTitle}">
+      <input type="text" id="task-description" value="${descTask}">
+      <input type="text" id="task-date" value="${dueDate}">
+      <input type="text" id="task-priority" value="${priority}">
+      <input type="text" id="task-assigned" value="${assignedTo}">
+      <input type="text" id="subtasks" value="${subtasks}">
+    </div>
+  `;
+
+  // Stelle sicher, dass nach dem Bearbeiten die Werte im Template aktualisiert werden.
+}*/
