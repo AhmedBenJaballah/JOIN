@@ -249,6 +249,8 @@
   position: absolute;
   bottom: 10px;
   right: 10px;
+  font-size: 20px;
+  font-weight: bold;
 }
 .popup-buttons img {
   width: 19px;
@@ -298,7 +300,7 @@
 .popup-close-button {
   cursor: pointer;
   padding: 5px;
-  font-size: 24px;
+  font-size: 24px ;
 }
 
 .popup-close-button:hover {
@@ -356,11 +358,11 @@
   margin-top: 10px;
   font-weight: bold;
   font-size: 29px;
- 
-  margin-top: 20px;
+  
 }
-
-
+input[type="checkbox"] {
+  margin-right: 10px;
+}
 
 
 .clickable-container {
