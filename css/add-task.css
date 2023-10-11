@@ -1,4 +1,6 @@
+
 body {
+  
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -14,6 +16,8 @@ body {
   margin: 32px;
   font-size: 32px;
   outline: none;
+  cursor: pointer;
+  
 }
 #task-title:focus {
   border-bottom: 2px solid rgb(69, 137, 255);
@@ -26,6 +30,8 @@ body {
   font-size: 24px;
   border-color: rgba(0, 0, 0, 0.2);
   outline-color: rgb(69, 137, 255);
+  cursor: pointer;
+
 }
 .task-description {
   font-size: 24px;
@@ -37,6 +43,8 @@ body {
   outline: none;
   border: none;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+
 }
 .task-date {
   font-size: 24px;
@@ -99,6 +107,8 @@ label > img {
   margin-top: 10px;
   font-size: 24px;
   border: none;
+  cursor: pointer;
+
 }
 .assigned-select {
   margin-top: 10px;
@@ -124,6 +134,8 @@ label > img {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   outline: none;
+  cursor: pointer;
+
 }
 .category {
   font-size: 24px;

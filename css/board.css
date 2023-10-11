@@ -225,7 +225,26 @@
   width: 100%;
   margin-right: 10px;
 }
-
+.add-task-section {
+  margin :0 !important;
+}
+.ok-button {
+  width: 70px;
+  height: 60px;
+  background-color: rgb(69,137,255);
+  color: white;
+  font-size: 24px;
+  border-radius: 8px;
+  transition: 0.3s ease-in-out;
+  position: relative;
+  bottom: -40px;
+  left: 400px;
+  cursor: pointer;
+}
+.ok-button:hover {
+  background-color: rgb(0,93,255);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+}
 
 
 .popup-div {

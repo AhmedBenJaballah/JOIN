@@ -386,12 +386,49 @@ async function deleteTask(index) {
   }
 }
 
-function editTask(index){
-  init();
-  const addTaskSection = document.querySelector('.popup-div');
-  addTaskSection.innerHTML = `<div class="add-task-section">
-    <div w3-include-html="includes/add-task-template.html"></div>
-    </div>`;
+async function editTask() {
+  const addTaskSection = document.querySelector(".popup-div");
+  addTaskSection.innerHTML = `
+  <div w3-include-html="includes/add-task-template.html"></div>
+  <button class="ok-button" onclick="safeEdit()">Ok <img src="/grafiken/check.png"></button>
+  
+  `;
+  await init();
+  
+}
+async function safeEdit() {
+  const taskTitle = document.getElementById("taskTitle").textContent;
+  const taskDescription = document.getElementById("taskDesc").textContent;
+  const taskDate = document.getElementById("taskDate").textContent;
+  const taskPriority = document.getElementById("taskPriority").textContent;
+  const taskAssigned = document.getElementById("taskAssigned").textContent;
+
+  // Hier kannst du auch weitere Daten hinzufügen, falls benötigt.
+
+  // Daten in den Local Storage speichern
+  const editedData = {
+    title: taskTitle,
+    description: taskDescription,
+    date: taskDate,
+    priority: taskPriority,
+    assigned: taskAssigned,
+    // Weitere Daten hier einfügen, wenn vorhanden.
+  };
+
+  localStorage.setItem('editedTaskData', JSON.stringify(editedData));
+}
+function loadSavedData() {
+  const savedData = JSON.parse(localStorage.getItem('editedTaskData'));
+
+  if (savedData) {
+    // Daten in die entsprechenden HTML-Elemente einfügen
+    document.getElementById("taskTitle").textContent = savedData.title;
+    document.getElementById("taskDesc").textContent = savedData.description;
+    document.getElementById("taskDate").textContent = savedData.date;
+    document.getElementById("taskPriority").textContent = savedData.priority;
+    document.getElementById("taskAssigned").textContent = savedData.assigned;
+    // Weitere Daten hier einfügen, wenn vorhanden.
+  }
 }
 
 
