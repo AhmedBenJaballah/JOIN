@@ -385,7 +385,18 @@ async function deleteTask(index) {
     renderHTML();
   }
 }
-function editTask() {
+
+function editTask(index){
+  init();
+  const addTaskSection = document.querySelector('.popup-div');
+  addTaskSection.innerHTML = `<div class="add-task-section">
+    <div w3-include-html="includes/add-task-template.html"></div>
+    </div>`;
+}
+
+
+
+/*unction editTask() {
   const title = document.getElementById('taskTitle');
   const description = document.getElementById('taskDesc');
   const date = document.getElementById('taskDate');
@@ -425,8 +436,7 @@ function editTask() {
   `;
   
   // Hier können Sie weitere Anpassungen an den Inhalten des Templates vornehmen, falls erforderlich.
-}
-
+}*/
 
 /*function editTask(index) {
   // Holen Sie sich das Popup-Fenster und die Werte aus dem Popup
