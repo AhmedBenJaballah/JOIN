@@ -142,6 +142,8 @@ function allowDrop(ev) {
 
 async function moveTo(category) {
   console.log(currentDraggedElement);
+  console.log(category);
+  console.log(tasks[currentDraggedElement]["taskCategory"]);
   tasks[currentDraggedElement]["taskCategory"] = category;
   renderHTML();
   await setItem("tasks", JSON.stringify(tasks));
@@ -333,14 +335,16 @@ function showTask(id) {
                   </div>
                   <div>${contacts[assigned[j]].name}</div>
                   </div>`;
-      }
-      subs=document.getElementById(`subtasks${taskId}`);
-     
-      for (let k = 0; k < subtasks.length; k++) {
-        let isCheckedS = checkecdContacts.includes(k);
-        subs.innerHTML+=/*html*/`
+    }
+    subs = document.getElementById(`subtasks${taskId}`);
+
+    for (let k = 0; k < subtasks.length; k++) {
+      let isCheckedS = checkecdContacts.includes(k);
+      subs.innerHTML += /*html*/ `
         <div>
-         <input type="checkbox" onclick="updateProgress(${subtasks.length},${taskId},${k})" class="check${taskId}"
+         <input type="checkbox" onclick="updateProgress(${
+           subtasks.length
+         },${taskId},${k})" class="check${taskId}"
          ${isCheckedS ? "checked" : ""} id="checkbox${taskId}${k}">
          ${subtasks[k]} 
         
@@ -356,10 +360,7 @@ function showTask(id) {
   }, 50);
 }
 
-
-function updateProgress(subtasks,taskId,k) {
-
-
+function updateProgress(subtasks, taskId, k) {
   let checkbox = document.getElementById(`checkbox${taskId}${k}`);
 
   if (checkbox.checked) {
@@ -374,8 +375,8 @@ function updateProgress(subtasks,taskId,k) {
   }
 
   const checkboxes = document.querySelectorAll(`.check${taskId}`);
-  let progressBar =document.getElementById(`progressBar${taskId}`)
-  
+  let progressBar = document.getElementById(`progressBar${taskId}`);
+
   let completedSubtasks = 0;
 
   checkboxes.forEach((checkbox) => {
@@ -383,22 +384,20 @@ function updateProgress(subtasks,taskId,k) {
       completedSubtasks++;
     }
   });
-console.log(taskId);
-console.log((subtasks ));
-console.log((completedSubtasks/subtasks ));
-console.log(progressBar);
+  console.log(taskId);
+  console.log(subtasks);
+  console.log(completedSubtasks / subtasks);
+  console.log(progressBar);
 
-
-  const progressPercentage = (completedSubtasks /subtasks) * 100;
+  const progressPercentage = (completedSubtasks / subtasks) * 100;
   progressBar.style.width = `${progressPercentage}%`;
-  progressBar.setAttribute('aria-valuenow', completedSubtasks);
-  progressBar.setAttribute('aria-valuemax', subtasks);
+  progressBar.setAttribute("aria-valuenow", completedSubtasks);
+  progressBar.setAttribute("aria-valuemax", subtasks);
 
-  let displayNumber =document.getElementById(`displaysubs${taskId}`);
-  displayNumber.innerHTML=`
+  let displayNumber = document.getElementById(`displaysubs${taskId}`);
+  displayNumber.innerHTML = `
   ${completedSubtasks}/${subtasks}Subtasks
-  `
-  
+  `;
 }
 
 overlay.addEventListener("click", closePopup);
@@ -436,10 +435,8 @@ async function deleteTask(index) {
   }
 }
 async function editTask() {
-
-
   // Das AddTask-Template aufrufen und mit den ursprünglichen Werten füllen
-  const addTaskSection = document.querySelector('.popup-div');
+  const addTaskSection = document.querySelector(".popup-div");
   addTaskSection.innerHTML = `
     <div w3-include-html="includes/add-task-template.html"></div>
     <script src="js/storage.js"></script>
@@ -452,7 +449,6 @@ async function editTask() {
   await init();
   // Hier können Sie weitere Anpassungen an den Inhalten des Templates vornehmen, falls erforderlich.
 }
-
 
 /*function editTask(index) {
   // Holen Sie sich das Popup-Fenster und die Werte aus dem Popup
