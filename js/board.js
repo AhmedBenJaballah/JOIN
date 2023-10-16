@@ -435,45 +435,21 @@ async function deleteTask(index) {
     renderHTML();
   }
 }
-function editTask() {
-  const title = document.getElementById('taskTitle');
-  const description = document.getElementById('taskDesc');
-  const date = document.getElementById('taskDate');
-  const priority = document.getElementById('taskPriority');
-  const assigned = document.getElementById('taskAssigned');
-  const subtasks = document.getElementById('taskSubtasks');
-  const edit_button = document.getElementById('edit_button');
+async function editTask() {
 
-  // Speichern Sie die ursprünglichen Werte in temporären Variablen
-  const originalTitle = title.textContent;
-  const originalDescription = description.textContent;
-  const originalDate = date.textContent;
-  const originalPriority = priority.textContent;
-  const originalAssigned = assigned.textContent;
-  const originalSubtasks = subtasks.textContent;
-
-  // Bearbeitbare Felder aktivieren
-  title.contentEditable = true;
-  description.contentEditable = true;
-  date.contentEditable = true;
-  priority.contentEditable = true;
-  assigned.contentEditable = true;
-  subtasks.contentEditable = true;
-  title.style.backgroundColor = "lightblue";
 
   // Das AddTask-Template aufrufen und mit den ursprünglichen Werten füllen
-  const addTaskSection = document.querySelector('.add-task-section');
+  const addTaskSection = document.querySelector('.popup-div');
   addTaskSection.innerHTML = `
-    <div w3-include-html="includes/add-task-template.html">
-      <input type="text" id="task-title" value="${originalTitle}">
-      <input type="text" id="task-description" value="${originalDescription}">
-      <input type="text" id="task-date" value="${originalDate}">
-      <input type="text" id="task-priority" value="${originalPriority}">
-      <input type="text" id="task-assigned" value="${originalAssigned}">
-      <!-- Weitere Felder hier einfügen und die kopierten Werte einsetzen -->
-    </div>
+    <div w3-include-html="includes/add-task-template.html"></div>
+    <script src="js/storage.js"></script>
+    <script src="js/includes.js"></script>
+    <script src="js/initials.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/addTask.js"></script>
+    <script src="js/policy.js"></script>
   `;
-  
+  await init();
   // Hier können Sie weitere Anpassungen an den Inhalten des Templates vornehmen, falls erforderlich.
 }
 
