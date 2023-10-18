@@ -1,15 +1,37 @@
 body {
-    overflow-x: hidden;
+    
     
 }
 .main-container { 
-    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    width: 50%;
+    flex-direction: column;
+    width: calc(100% - 200px);
+    height: calc(100vh - 80px);
 }
+
+.goodMorning{
+width: 100%;
+font-size: 48px;
+display: flex;
+justify-content: center;
+align-items: center;
+
+}
+
+.dateTask{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.taskStatus{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .summary-box {
     border: 1px solid #ccc;
     padding: 15px 35px;
@@ -58,10 +80,7 @@ body {
 
 .ober-container {
     display: flex;
-    justify-content: center;
-    align-items: center;  
-      
-    flex-wrap: wrap;
+
 }
 .tasks{
     width: 150px;
@@ -111,7 +130,7 @@ body {
     color: rgb(69,137,255);
     text-align: center;
     font-weight: bold;
-    font-size: 18px
+    font-size: 16px
 }
 .summary-box:hover {
     transform: scale(1.1,1.1);
@@ -129,12 +148,13 @@ body {
 }
 .tasks:hover {
     background-color: rgb(0,93,255);
-    transform: scale(1.3,1.1);
+    transform: scale(1.3);
     border-top-left-radius: 0;
     
 }
 .tasks:hover span,
-.tasks:hover p{
+.tasks:hover p,
+.tasks:hover .renderNumber{
     color: white;
 }
 .tasks:hover .img-num img {
@@ -176,7 +196,7 @@ body {
 .special:hover {
     background-color: white;
 }
-.special:hover span, .special:hover p {
+.special:hover span, .special:hover p, .special:hover .renderNumber{
     color: rgb(0,93,255);
 }
 
@@ -185,3 +205,4 @@ body {
     color: black;
     font-weight: bold;
 }
+

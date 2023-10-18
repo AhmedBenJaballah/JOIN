@@ -142,6 +142,8 @@ function allowDrop(ev) {
 
 async function moveTo(category) {
   console.log(currentDraggedElement);
+  console.log(category);
+  console.log(tasks[currentDraggedElement]["taskCategory"]);
   tasks[currentDraggedElement]["taskCategory"] = category;
   renderHTML();
   await setItem("tasks", JSON.stringify(tasks));
@@ -432,153 +434,21 @@ async function deleteTask(index) {
     renderHTML();
   }
 }
-
 async function editTask() {
-  const addTaskSection = document.querySelector(".popup-div");
-  addTaskSection.innerHTML = "";
-
-  // Lade das Template mit fetch
-  const templateResponse = await fetch("includes/add-task-template.html");
-  const templateText = await templateResponse.text();
-
-  // Füge das Template zum Popup-Fenster hinzu
-  addTaskSection.innerHTML = templateText;
-
-  // Lies die aktuellen Werte aus dem Popup-Fenster
-  const title = document.getElementById("taskTitle");
-  const description = document.getElementById("taskDesc");
-  const date = document.getElementById("taskDate");
-  const priority = document.getElementById("taskPriority");
-
-  // Aktiviere contentEditable für die Eingabefelder, um sie bearbeitbar zu machen
-  title.contentEditable = true;
-  description.contentEditable = true;
-  date.contentEditable = true;
-  priority.contentEditable = true;
-
-  // Füge den "Close"-Button hinzu
-  const closeButton = document.createElement("button");
-  closeButton.className = "close-button";
-  closeButton.innerHTML = '<img src="/grafiken/close.png"> Close';
-  closeButton.onclick = function () {
-    closePopup();
-  };
-
-  // Füge den "Close"-Button zum Popup-Fenster hinzu
-  addTaskSection.appendChild(closeButton);
-
-  // Füge den "Ok"-Button hinzu
-  const okButton = document.createElement("button");
-  okButton.className = "ok-button";
-  okButton.innerHTML = "Ok";
-  okButton.onclick = function () {
-    // Rufe die Funktion safeEdit auf, um die bearbeiteten Werte zu speichern
-    safeEdit(
-      title.textContent,
-      description.textContent,
-      date.textContent,
-      priority.textContent
-    );
-  };
-
-  // Füge den "Ok"-Button zum Popup-Fenster hinzu
-  addTaskSection.appendChild(okButton);
-
-  // Füge die Prioritätslogik hinzu
-  const low = document.getElementById("low");
-  const medium = document.getElementById("medium");
-  const urgent = document.getElementById("urgent");
-  const lowImg = document.getElementById("imgLow");
-  const mediumImg = document.getElementById("imgMedium");
-  const urgentImg = document.getElementById("imgUrgent");
-
-  [low, medium, urgent].forEach((button) => {
-    button.addEventListener("click", function () {
-      getPriority(button.id);
-    });
-  });
-
-  await init();
-}
-
-
-
-function safeEdit(title, description, date, priority) {
-  const taskTitle = document.getElementById("taskTitle").textContent;
-  const taskDescription = document.getElementById("taskDesc").textContent;
-  const taskDate = document.getElementById("taskDate").textContent;
-  const taskPriority = document.getElementById("taskPriority").textContent;
-  const taskAssigned = document.getElementById("taskAssigned").textContent;
-
-  // Hier kannst du auch weitere Daten hinzufügen, falls benötigt.
-
-  // Daten in den Local Storage speichern
-  const editedData = {
-    title: taskTitle,
-    description: taskDescription,
-    date: taskDate,
-    priority: taskPriority,
-    assigned: taskAssigned,
-    // Weitere Daten hier einfügen, wenn vorhanden.
-  };
-
-  localStorage.setItem("editedTaskData", JSON.stringify(editedData));
-}
-function loadSavedData() {
-  const savedData = JSON.parse(localStorage.getItem("editedTaskData"));
-
-  if (savedData) {
-    // Daten in die entsprechenden HTML-Elemente einfügen
-    document.getElementById("taskTitle").textContent = savedData.title;
-    document.getElementById("taskDesc").textContent = savedData.description;
-    document.getElementById("taskDate").textContent = savedData.date;
-    document.getElementById("taskPriority").textContent = savedData.priority;
-    document.getElementById("taskAssigned").textContent = savedData.assigned;
-    // Weitere Daten hier einfügen, wenn vorhanden.
-  }
-}
-
-/*unction editTask() {
-  const title = document.getElementById('taskTitle');
-  const description = document.getElementById('taskDesc');
-  const date = document.getElementById('taskDate');
-  const priority = document.getElementById('taskPriority');
-  const assigned = document.getElementById('taskAssigned');
-  const subtasks = document.getElementById('taskSubtasks');
-  const edit_button = document.getElementById('edit_button');
-
-  // Speichern Sie die ursprünglichen Werte in temporären Variablen
-  const originalTitle = title.textContent;
-  const originalDescription = description.textContent;
-  const originalDate = date.textContent;
-  const originalPriority = priority.textContent;
-  const originalAssigned = assigned.textContent;
-  const originalSubtasks = subtasks.textContent;
-
-  // Bearbeitbare Felder aktivieren
-  title.contentEditable = true;
-  description.contentEditable = true;
-  date.contentEditable = true;
-  priority.contentEditable = true;
-  assigned.contentEditable = true;
-  subtasks.contentEditable = true;
-  title.style.backgroundColor = "lightblue";
-
   // Das AddTask-Template aufrufen und mit den ursprünglichen Werten füllen
-  const addTaskSection = document.querySelector('.add-task-section');
+  const addTaskSection = document.querySelector(".popup-div");
   addTaskSection.innerHTML = `
-    <div w3-include-html="includes/add-task-template.html">
-      <input type="text" id="task-title" value="${originalTitle}">
-      <input type="text" id="task-description" value="${originalDescription}">
-      <input type="text" id="task-date" value="${originalDate}">
-      <input type="text" id="task-priority" value="${originalPriority}">
-      <input type="text" id="task-assigned" value="${originalAssigned}">
-      <!-- Weitere Felder hier einfügen und die kopierten Werte einsetzen -->
-    </div>
+    <div w3-include-html="includes/add-task-template.html"></div>
+    <script src="js/storage.js"></script>
+    <script src="js/includes.js"></script>
+    <script src="js/initials.js"></script>
+    <script src="js/board.js"></script>
+    <script src="js/addTask.js"></script>
+    <script src="js/policy.js"></script>
   `;
-  
+  await init();
   // Hier können Sie weitere Anpassungen an den Inhalten des Templates vornehmen, falls erforderlich.
-}*/
+}
 
 /*function editTask(index) {
   // Holen Sie sich das Popup-Fenster und die Werte aus dem Popup

@@ -1,5 +1,7 @@
 loadAmount();
-
+setTimeout(() => {
+    getInitials();
+}, 1000);
 
 async function loadAmount() {
     try {
@@ -15,8 +17,14 @@ async function loadAmount() {
         tasksAwaitFeedback.innerHTML = amount[0]['amountAawaitFeedback'];
         tasksDone.innerHTML = amount[0]['amountDone'];
         tasksInBoard.innerHTML = amount[0]['totalTasks'];
+        userName= (await getItem('userName'));
+        const goodMornig=document.getElementById('goodMornig')
+        goodMornig.innerHTML+=`, ${userName}`
     } catch (e) {
         console.error('Loading error:', e);
     }
 }
 
+function goToBoard(){
+    window.location.href = 'board.html';
+}

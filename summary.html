@@ -1,84 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/summary.css">
+    <link rel="stylesheet" href="/css/summary.css" />
     <script src="js/storage.js"></script>
-    
-    
-    <script src="js/policy.js"></script>
+    <script src="js/includes.js"></script>
     <script src="js/initials.js"></script>
-</head>
+    <script src="js/summary.js"></script>
+    <script src="js/policy.js"></script>
 
-<body onload="init()">
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+  </head>
+
+  <body onload="init()">
     <div w3-include-html="includes/header.html"></div>
     <div class="ober-container">
-        <div w3-include-html="includes/sidebar.html"></div>
+      <div w3-include-html="includes/sidebar.html"></div>
 
-        <div class="main-container">
+      <div class="main-container">
+        <div class="goodMorning" id="goodMornig">Good Morning</div>
 
+        <div class="dateTask">
+          <div class="summary-box" onclick="goToBoard()">
+            <div class="urgent-box">
+              <div class="img-num urgent-num">
+                <img src="/grafiken/Urgent.png" />
+                <span class="urgent-span">1</span>
+              </div>
 
-            <div class="summary-box">
-                <div class="urgent-box">
-                    
-                    <div class="img-num urgent-num">
-                        <img src="/grafiken/Urgent.png">
-                        <span class="urgent-span">1</span>
-                        
-                    </div>
-                    
-                    <span class="vertical-line"></span>
-                    <div class="urgent-right">
-                        <div class="date">
-                            <span class="date">October 16, 2023</span>
-                            <span class="deadline">Upcoming Deadline</span>
-                        </div>
-                    </div>
+              <span class="vertical-line"></span>
+              <div class="urgent-right">
+                <div class="date">
+                  <span class="date">October 16, 2023</span>
+                  <span class="deadline">Upcoming Deadline</span>
                 </div>
+              </div>
             </div>
-            <div class="tasks">
-                <div class="img-num">
-                    <img src="/grafiken/Board.png">
-                    <div  class="renderNumber" id="tasksInBoard">5</div>
-                </div>
-                <p>Tasks in Board</p>
+          </div>
+          <div class="tasks" onclick="goToBoard()">
+            <div class="img-num">
+              <img src="/grafiken/Board.png" />
+              <div class="renderNumber" id="tasksInBoard">5</div>
             </div>
-            <div class="tasks special">
-                <div class="img-num">
-                    <img src="/grafiken/Urgent (1).png">
-                    <div class="renderNumber" id="tasksToDo">1</div>
-                </div>
-                <p>Tasks To-do</p>
-            </div>
-            <div class="tasks">
-                <div class="img-num">
-                    <img src="/grafiken/In Progress.png">
-                    <div class="renderNumber" id="tasksInProgress">2</div>
-                </div>
-                <p>in Progress</p>
-            </div>
-            <div class="tasks">
-                <div class="img-num">
-                    <img src="/grafiken/icons png.png">
-                    <div class="renderNumber" id="tasksAwaitFeedback">2</div>
-                </div>
-                <p>Awaiting Feedback</p>
-            </div>
-            <div class="tasks">
-                <div class="img-num">
-                    <img src="/grafiken/Done.png">
-                    <div class="renderNumber" id="tasksDone">1</div>
-                </div>
-                <p>Tasks Done</p>
-            </div>
+            <p>Tasks in Board</p>
+          </div>
         </div>
+
+        <div class="taskStatus" onclick="goToBoard()">
+          <div class="tasks special">
+            <div class="img-num">
+              <img src="/grafiken/Urgent (1).png" />
+              <div class="renderNumber" id="tasksToDo">1</div>
+            </div>
+            <p>Tasks To-do</p>
+          </div>
+          <div class="tasks" onclick="goToBoard()">
+            <div class="img-num">
+              <img src="/grafiken/In Progress.png" />
+              <div class="renderNumber" id="tasksInProgress">2</div>
+            </div>
+            <p>in Progress</p>
+          </div>
+          <div class="tasks" onclick="goToBoard()">
+            <div class="img-num">
+              <img src="/grafiken/icons png.png" />
+              <div class="renderNumber" id="tasksAwaitFeedback">2</div>
+            </div>
+            <p>Awaiting Feedback</p>
+          </div>
+          <div class="tasks" onclick="goToBoard()">
+            <div class="img-num">
+              <img src="/grafiken/Done.png" />
+              <div class="renderNumber" id="tasksDone">1</div>
+            </div>
+            <p>Tasks Done</p>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <script src="js/includes.js"></script>
-    <script src="js/summary.js"></script>
-</body>
-
+  </body>
 </html>

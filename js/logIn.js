@@ -93,9 +93,11 @@ async function logIn(){
         console.log(users)
         user = users.find(u =>u.email==email.value && u.password== password.value)
         if(user){
-            window.location.href = 'summary.html';
+            
             userInitial= user.name.split(' ').map(word => word[0].toUpperCase()).join('')
             await setItem('userInitial', userInitial);
+            await setItem('userName', user.name);
+            window.location.href = 'summary.html';
         }
         else{
             email.style.borderBottom="1px solid red";
