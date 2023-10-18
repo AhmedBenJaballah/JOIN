@@ -1,5 +1,5 @@
 //tryContact();
-
+export function tryContact() {}
 let checkecdContacts = [];
 let tasks = [];
 let subtasks = [];

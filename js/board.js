@@ -1,3 +1,4 @@
+import {tryContact} from 'js/addTask.js';
 let currentDraggedElement;
 let path = "";
 let selectedTaskCategory = "";
@@ -445,7 +446,9 @@ async function editTask() {
     <script src="js/board.js"></script>
     <script src="js/addTask.js"></script>
     <script src="js/policy.js"></script>
+    <script src="js/contacts.js"></script>
   `;
+  
   await init();
   // Hier können Sie weitere Anpassungen an den Inhalten des Templates vornehmen, falls erforderlich.
 }
