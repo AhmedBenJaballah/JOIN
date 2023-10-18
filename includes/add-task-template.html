@@ -11,6 +11,7 @@
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
+    
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -43,16 +44,16 @@
             <button type="button" id="medium" class="radioBtn" onclick="getPriority('medium')">Medium <img id="imgMedium" src="../grafiken/Capa2-medium.png" alt=""></button>
             <button type="button" id="low" class="radioBtn" onclick="getPriority('low')">Low <img id="imgLow" src="../grafiken/Capa2-low.png" alt=""></button>
             <br>
-            <label for="assigned" class="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
+            <label for="assigned" class="assigned" id="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
 
 
-                <div id="inputDropdown" onclick="tryContact()"> <i id="dropIcon" class="bi bi-caret-down-fill"></i></div>
-                <div id="dropdown"></div>
+                <div id="inputDropdown" onclick="tryContact()" class="dropdown"> <i id="dropIcon" class="bi bi-caret-down-fill"></i></div>
+                <div id="dropdown" class="dropdown"></div>
 
 
             </label><br>
             <label for="category" class="category">Category<br>
-                <select class="category-select" select>
+                <select class="category-select">
                     <option disabled selected>Select task category</option>
                     <option>Technical Task</option>
                     <option>User Story</option>

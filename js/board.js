@@ -333,14 +333,16 @@ function showTask(id) {
                   </div>
                   <div>${contacts[assigned[j]].name}</div>
                   </div>`;
-      }
-      subs=document.getElementById(`subtasks${taskId}`);
-     
-      for (let k = 0; k < subtasks.length; k++) {
-        let isCheckedS = checkecdContacts.includes(k);
-        subs.innerHTML+=/*html*/`
+    }
+    subs = document.getElementById(`subtasks${taskId}`);
+
+    for (let k = 0; k < subtasks.length; k++) {
+      let isCheckedS = checkecdContacts.includes(k);
+      subs.innerHTML += /*html*/ `
         <div>
-         <input type="checkbox" onclick="updateProgress(${subtasks.length},${taskId},${k})" class="check${taskId}"
+         <input type="checkbox" onclick="updateProgress(${
+           subtasks.length
+         },${taskId},${k})" class="check${taskId}"
          ${isCheckedS ? "checked" : ""} id="checkbox${taskId}${k}">
          ${subtasks[k]} 
         
@@ -356,10 +358,7 @@ function showTask(id) {
   }, 50);
 }
 
-
-function updateProgress(subtasks,taskId,k) {
-
-
+function updateProgress(subtasks, taskId, k) {
   let checkbox = document.getElementById(`checkbox${taskId}${k}`);
 
   if (checkbox.checked) {
@@ -374,8 +373,8 @@ function updateProgress(subtasks,taskId,k) {
   }
 
   const checkboxes = document.querySelectorAll(`.check${taskId}`);
-  let progressBar =document.getElementById(`progressBar${taskId}`)
-  
+  let progressBar = document.getElementById(`progressBar${taskId}`);
+
   let completedSubtasks = 0;
 
   checkboxes.forEach((checkbox) => {
@@ -383,25 +382,23 @@ function updateProgress(subtasks,taskId,k) {
       completedSubtasks++;
     }
   });
-console.log(taskId);
-console.log((subtasks ));
-console.log((completedSubtasks/subtasks ));
-console.log(progressBar);
+  console.log(taskId);
+  console.log(subtasks);
+  console.log(completedSubtasks / subtasks);
+  console.log(progressBar);
 
-
-  const progressPercentage = (completedSubtasks /subtasks) * 100;
+  const progressPercentage = (completedSubtasks / subtasks) * 100;
   progressBar.style.width = `${progressPercentage}%`;
-  progressBar.setAttribute('aria-valuenow', completedSubtasks);
-  progressBar.setAttribute('aria-valuemax', subtasks);
+  progressBar.setAttribute("aria-valuenow", completedSubtasks);
+  progressBar.setAttribute("aria-valuemax", subtasks);
 
-  let displayNumber =document.getElementById(`displaysubs${taskId}`);
-  displayNumber.innerHTML=`
+  let displayNumber = document.getElementById(`displaysubs${taskId}`);
+  displayNumber.innerHTML = `
   ${completedSubtasks}/${subtasks}Subtasks
-  `
-  
+  `;
+  overlay.addEventListener("click", closePopup);
 }
 
-overlay.addEventListener("click", closePopup);
 
 function closePopup() {
   const overlay = document.getElementById("overlay");
@@ -438,15 +435,75 @@ async function deleteTask(index) {
 
 async function editTask() {
   const addTaskSection = document.querySelector(".popup-div");
-  addTaskSection.innerHTML = `
-  <div w3-include-html="includes/add-task-template.html"></div>
-  <button class="ok-button" onclick="safeEdit()">Ok <img src="/grafiken/check.png"></button>
-  
-  `;
+  addTaskSection.innerHTML = "";
+
+  // Lade das Template mit fetch
+  const templateResponse = await fetch("includes/add-task-template.html");
+  const templateText = await templateResponse.text();
+
+  // Füge das Template zum Popup-Fenster hinzu
+  addTaskSection.innerHTML = templateText;
+
+  // Lies die aktuellen Werte aus dem Popup-Fenster
+  const title = document.getElementById("taskTitle");
+  const description = document.getElementById("taskDesc");
+  const date = document.getElementById("taskDate");
+  const priority = document.getElementById("taskPriority");
+
+  // Aktiviere contentEditable für die Eingabefelder, um sie bearbeitbar zu machen
+  title.contentEditable = true;
+  description.contentEditable = true;
+  date.contentEditable = true;
+  priority.contentEditable = true;
+
+  // Füge den "Close"-Button hinzu
+  const closeButton = document.createElement("button");
+  closeButton.className = "close-button";
+  closeButton.innerHTML = '<img src="/grafiken/close.png"> Close';
+  closeButton.onclick = function () {
+    closePopup();
+  };
+
+  // Füge den "Close"-Button zum Popup-Fenster hinzu
+  addTaskSection.appendChild(closeButton);
+
+  // Füge den "Ok"-Button hinzu
+  const okButton = document.createElement("button");
+  okButton.className = "ok-button";
+  okButton.innerHTML = "Ok";
+  okButton.onclick = function () {
+    // Rufe die Funktion safeEdit auf, um die bearbeiteten Werte zu speichern
+    safeEdit(
+      title.textContent,
+      description.textContent,
+      date.textContent,
+      priority.textContent
+    );
+  };
+
+  // Füge den "Ok"-Button zum Popup-Fenster hinzu
+  addTaskSection.appendChild(okButton);
+
+  // Füge die Prioritätslogik hinzu
+  const low = document.getElementById("low");
+  const medium = document.getElementById("medium");
+  const urgent = document.getElementById("urgent");
+  const lowImg = document.getElementById("imgLow");
+  const mediumImg = document.getElementById("imgMedium");
+  const urgentImg = document.getElementById("imgUrgent");
+
+  [low, medium, urgent].forEach((button) => {
+    button.addEventListener("click", function () {
+      getPriority(button.id);
+    });
+  });
+
   await init();
-  
 }
-async function safeEdit() {
+
+
+
+function safeEdit(title, description, date, priority) {
   const taskTitle = document.getElementById("taskTitle").textContent;
   const taskDescription = document.getElementById("taskDesc").textContent;
   const taskDate = document.getElementById("taskDate").textContent;
@@ -465,10 +522,10 @@ async function safeEdit() {
     // Weitere Daten hier einfügen, wenn vorhanden.
   };
 
-  localStorage.setItem('editedTaskData', JSON.stringify(editedData));
+  localStorage.setItem("editedTaskData", JSON.stringify(editedData));
 }
 function loadSavedData() {
-  const savedData = JSON.parse(localStorage.getItem('editedTaskData'));
+  const savedData = JSON.parse(localStorage.getItem("editedTaskData"));
 
   if (savedData) {
     // Daten in die entsprechenden HTML-Elemente einfügen
@@ -480,8 +537,6 @@ function loadSavedData() {
     // Weitere Daten hier einfügen, wenn vorhanden.
   }
 }
-
-
 
 /*unction editTask() {
   const title = document.getElementById('taskTitle');

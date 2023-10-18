@@ -4,7 +4,7 @@ let checkecdContacts = [];
 let tasks = [];
 let subtasks = [];
 let priority = "";
-let idCounter=0;
+let idCounter = 0;
 loadtasks();
 loadid();
 
@@ -15,7 +15,6 @@ async function loadtasks() {
     console.error("Loading error:", e);
   }
 }
-
 
 async function loadid() {
   try {
@@ -203,7 +202,7 @@ async function createTask() {
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
-  idCounter++
+  idCounter++;
   //const assignedTo = document.querySelector(".assigned-select").value;
   //Ahmed:hallo chihad hier brauchst du assigned to nicht zu speichern es sind in der Variable
   //Ahmed:checkecdContacts gespeichert
@@ -231,12 +230,11 @@ async function createTask() {
     assigned: checkecdContacts,
     category: category,
     subtasks: subtasks,
-    taskCategory:'toDo',
-    id:idCounter
+    taskCategory: "toDo",
+    id: idCounter,
   });
   await setItem("tasks", JSON.stringify(tasks));
   await setItem("idCounter", JSON.stringify(idCounter));
-  
 
   //Ahmed: hier direkt zu board kannsk deine animation anpassen
 
@@ -250,29 +248,99 @@ async function createTask() {
   }, 1000);
 }
 
+// Definieren Sie die Funktion clearTask, aber fügen Sie den Eventlistener erst hinzu, nachdem das Dokument vollständig geladen wurde.
 function clearTask() {
-  document.getElementById("task-title").value = "";
+  // Eingabefeld "task-title" zurücksetzen
+  const taskTitle = document.getElementById("task-title");
+  taskTitle.value = "";
 
-  document.getElementById("task-description").value = "";
+  // Eingabefeld "task-description" zurücksetzen
+  const taskDescription = document.getElementById("task-description");
+  taskDescription.value = "";
 
-  document.getElementById("task-date").value = "";
+  // Eingabefeld "task-date" zurücksetzen
+  const taskDate = document.getElementById("task-date");
+  taskDate.value = "";
 
-  const radioButtons = document.querySelectorAll(
-    'input[name="options-outlined"]'
-  );
+  // Radio-Buttons zurücksetzen
+  const radioButtons = document.querySelectorAll('.radioBtn');
   radioButtons.forEach((radioButton) => {
-    radioButton.checked = false;
+    // Überprüfen, ob das Radio-Button ausgewählt ist, und es abwählen
+    if (radioButton.style.backgroundColor !== "white" && radioButton.style.backgroundColor !== "") {
+      radioButton.style.backgroundColor = "white";
+      radioButton.style.color = "black";
+      // Hier können Sie auch die Bilder zurücksetzen, falls erforderlich
+    }
   });
 
-  const assignedSelect = document.querySelector(".assigned-select");
-  assignedSelect.selectedIndex = 0;
+  // Select-Feld "assigned" zurücksetzen
+  const dropdown = document.getElementById("dropdown");
+  while (dropdown.firstChild) {
+    dropdown.removeChild(dropdown.firstChild);
+    clearSelection();
+  }
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
 
+  // Select-Feld "category-select" zurücksetzen
   const categorySelect = document.querySelector(".category-select");
   categorySelect.selectedIndex = 0;
 
-  document.getElementById("subtasks").value = "";
+  // Eingabefeld "subtasks" zurücksetzen
+  const subtasks = document.getElementById("subtasks");
+  subtasks.value = "";
 }
 
-const clearButton = document.querySelector(".btn-outline-secondary");
-clearButton.addEventListener("click", clearTask);
+// Fügen Sie den Eventlistener erst hinzu, wenn das Dokument vollständig geladen ist
+document.addEventListener("DOMContentLoaded", function () {
+  const clearButton = document.querySelector(".btn-outline-secondary");
+  clearButton.addEventListener("click", clearTask);
+});
 
+let checkboxStatus = {}; // Objekt zur Speicherung des Checkbox-Status
+
+// Funktion zum Speichern des Checkbox-Status
+function saveCheckboxStatus() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    checkboxStatus[checkbox.id] = checkbox.checked;
+  });
+}
+
+// Funktion zum Wiederherstellen des Checkbox-Status
+function restoreCheckboxStatus() {
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach((checkbox) => {
+    if (checkbox.id in checkboxStatus) {
+      checkbox.checked = checkboxStatus[checkbox.id];
+    } else {
+      checkbox.checked = false; // Standardmäßig auf nicht ausgewählt setzen
+    }
+  });
+}
+
+// Funktion, die aufgerufen wird, wenn das Dropdown-Menü geöffnet wird
+function openDropdown() {
+  saveCheckboxStatus();
+  // Hier öffnen Sie das Dropdown-Menü
+}
+
+// Funktion, die aufgerufen wird, wenn das Dropdown-Menü geschlossen wird
+function closeDropdown() {
+  restoreCheckboxStatus();
+  // Hier schließen Sie das Dropdown-Menü
+}
+
+function clearSelection() {
+  const dropdown = document.getElementById("dropdown");
+
+  // Dropdown-Liste zurücksetzen
+  while (dropdown.firstChild) {
+    dropdown.removeChild(dropdown.firstChild);
+  }
+
+  // Auswahl zurücksetzen
+  selectedContact = null;
+}
