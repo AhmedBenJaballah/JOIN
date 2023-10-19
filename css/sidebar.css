@@ -42,3 +42,15 @@
     gap: 20px;
     color: #42526E;
 }
+a {
+    color: black;
+    text-decoration: none;
+}
+#policy a:hover {
+    color: rgb(69,137,255);
+    outline: none;
+    background-color: white !important;
+}
+#policy a:active {
+    background-color: rgb(69,137,255);
+}

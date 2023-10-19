@@ -1,4 +1,3 @@
-import {tryContact} from 'js/addTask.js';
 let currentDraggedElement;
 let path = "";
 let selectedTaskCategory = "";
