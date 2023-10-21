@@ -532,3 +532,21 @@ async function editTask() {
 
   // Stelle sicher, dass nach dem Bearbeiten die Werte im Template aktualisiert werden.
 }*/
+
+function findTask(){
+  findTaskInput=document.getElementById('findTaskInput');
+  const search = findTaskInput.value.toUpperCase();
+
+  for (let i = 0; i < tasks.length; i++) {  
+    const id= tasks[i]["id"];
+    const taskElement = document.getElementById(`showTask(${id})`);  
+    if(tasks[i]['title'].toUpperCase().includes(search)){
+      console.log(tasks[i]['title']) 
+      taskElement.style.display = 'block';
+    }
+    else{
+      taskElement.style.display = 'none';
+    }
+  }
+
+}
