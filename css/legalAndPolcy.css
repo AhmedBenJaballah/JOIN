@@ -1,0 +1,11 @@
+.privacyPolicy {
+    padding: 16px;
+    height: calc(100vh - 80px);
+    overflow-y: scroll;
+}
+
+.impressum{
+    padding: 16px;
+    height: calc(100vh - 80px);
+    overflow-y: scroll;   
+}
