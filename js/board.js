@@ -188,7 +188,7 @@ function selectPath(priority) {
       path = "grafiken/Capa2-prio.png";
       break;
     //default:
-      //path = "grafiken/Capa2-prio.png";
+      //path = "";
       //break;
   }
 }
@@ -219,7 +219,6 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
    </div>
    `;
 
-   ///// here change path for default  if else////////
 }
 
 function addSidebar(aTaskCategory) {
@@ -476,7 +475,7 @@ async function editTask(id) {
   dialog.remove();
   addTaskSection.innerHTML = `
   <div onclick="closePopup2()"> CLOSE </div>
-  <div onclick="applyModifications(${id})"> mod </div>
+  <div onclick="applyModifications(${id})"> apply modifications </div>
     <div w3-include-html="includes/add-task-template.html"></div>
 
   `;
