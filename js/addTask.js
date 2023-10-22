@@ -203,15 +203,7 @@ async function createTask() {
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
   idCounter++;
-  //const assignedTo = document.querySelector(".assigned-select").value;
-  //Ahmed:hallo chihad hier brauchst du assigned to nicht zu speichern es sind in der Variable
-  //Ahmed:checkecdContacts gespeichert
   const category = document.querySelector(".category-select").value;
-  //const subtasks = document.getElementById("subtasks").value;
-
-  // Erstelle eine HTML-Ausgabe mit den erfassten Daten
- 
-  //Ahmed: hier können wir direkt speichern
   tasks.push({
     title: taskTitle,
     description: taskDescription,
@@ -226,16 +218,13 @@ async function createTask() {
   await setItem("tasks", JSON.stringify(tasks));
   await setItem("idCounter", JSON.stringify(idCounter));
 
-  //Ahmed: hier direkt zu board kannsk deine animation anpassen
-
-  //document.getElementById("output").innerHTML = outputHTML;
-
   const popup = document.getElementById("popup");
   popup.classList.add("show");
   setTimeout(function () {
     popup.classList.remove("show");
     window.location.href = "board.html";
   }, 1000);
+  
 }
 
 // Definieren Sie die Funktion clearTask, aber fügen Sie den Eventlistener erst hinzu, nachdem das Dokument vollständig geladen wurde.

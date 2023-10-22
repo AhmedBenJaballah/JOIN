@@ -16,12 +16,14 @@ let amount = [
   },
 ];
 let checkecdSubtasks=[];
-let completedSubtasks = 0;
 
+
+loadcheckecdSubtasks();
 loadtasks();
 loadAmount();
 loadid();
-loadcheckecdSubtasks();
+
+//loadcheckecdSubtasks();
 
 
 setTimeout(() => {
@@ -147,8 +149,6 @@ function renderAllTasks(idInitials, i, tasks, task) {
 
 function startDragging(id) {
   currentDraggedElement = id - 1;
-
-  console.log(currentDraggedElement);
 }
 
 function allowDrop(ev) {
@@ -200,7 +200,7 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
 
  
   return /*html*/ `
-  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask(${id})">
+  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask-${id}">
    <div class="${
      category === "Technical Task" ? "blueStyle" : "orangeStyle"
    }">${category}</div>
@@ -218,6 +218,8 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
    </div>
    </div>
    `;
+
+   ///// here change path for default  if else////////
 }
 
 function addSidebar(aTaskCategory) {
@@ -287,6 +289,7 @@ async function createTask2() {
     popup.classList.remove("show");
     closeSidebar();
   }, 1000);
+  subtasks=[];
 }
 
 async function showTask(id) {
@@ -401,12 +404,12 @@ async function updateProgress(subtasks, taskId, k) {
       console.log(checkecdSubtasks);
     }
 }
-
+//checkecdSubtasks=[]
 await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
 
 
 
-  const checkboxes = document.querySelectorAll(`.check${taskId}`);
+  //const checkboxes = document.querySelectorAll(`.check${taskId}`);
   let progressBar = document.getElementById(`progressBar${taskId}`);
 
 
@@ -473,7 +476,9 @@ async function editTask(id) {
   dialog.remove();
   addTaskSection.innerHTML = `
   <div onclick="closePopup2()"> CLOSE </div>
+  <div onclick="applyModifications(${id})"> mod </div>
     <div w3-include-html="includes/add-task-template.html"></div>
+
   `;
   
   await init();
@@ -492,12 +497,8 @@ async function editTask(id) {
   const category =document.getElementById('catSel')
   category.value=tasks[id]["category"]
 
-
-
   const assigned = tasks[id]["assigned"];
   console.log(assigned);
-
-
   const assignedInitials = document.getElementById(`dropdown`);
   
   for (let j = 0; j < assigned.length; j++) {
@@ -522,7 +523,7 @@ async function editTask(id) {
 
   assignedInitials.style.flexDirection='row'
   
- 
+  subtasks=[];
   const subtaskSection = document.getElementById("subtask-section");
   const subtask = tasks[id]["subtasks"];
   for (let i = 0; i < subtask.length; i++) {
@@ -531,13 +532,41 @@ async function editTask(id) {
     `;
   }
 
-
  
-
-
-  
 }
 
+async function applyModifications(id){
+  console.log('mod')
+  const title= document.getElementById('task-title');  
+ tasks[id]["title"]=title.value
+
+  const description= document.getElementById('task-description');  
+  tasks[id]["description"]=description.value
+
+  const date=document.getElementById('task-date');
+  tasks[id]["date"]=date.value;
+
+  const category =document.getElementById('catSel');
+  tasks[id]["category"]=category.value;
+  tasks[id]["priority"]=priority;
+  tasks[id]["assigned"]=checkecdContacts;
+  
+  //tasks[id]['subtasks']=subtasks,
+  for(let i = 0; i < subtasks.length; i++) {
+    tasks[id]['subtasks'].push(subtasks[i])
+  }
+
+
+  await setItem("tasks", JSON.stringify(tasks));
+  await loadtasks();
+  await loadAmount();
+  await loadid();
+  await loadcheckecdSubtasks();
+  await closePopup2();
+ setTimeout(() => {
+  renderHTML();
+ }, 500);
+}
 
 async function closePopup2(){
  
@@ -571,67 +600,13 @@ async function closePopup2(){
 await init();
 }
 
-
-
-/*function editTask(index) {
-  // Holen Sie sich das Popup-Fenster und die Werte aus dem Popup
-  const popupDiv = document.querySelector(".popup-div");
-  const taskTitle = popupDiv.querySelector(".taskTitle").textContent;
-  const descTask = popupDiv.querySelector(".descTask").textContent;
-  const dueDate = popupDiv.querySelector(".dueDate").textContent;
-  const priority = popupDiv.querySelector(".priority").textContent;
-  const assignedTo = popupDiv.querySelector(".assignedTo").textContent;
-  const subtasks = popupDiv.querySelector(".subtasks").textContent;
-  if (popupDiv) {
-    // Das Popup existiert, jetzt kannst du auf die Eigenschaften zugreifen.
-    const taskTitle = popupDiv.querySelector(".taskTitle");
-    if (taskTitle) {
-      // Überprüfen, ob das taskTitle-Element vorhanden ist, bevor du auf textContent zugreifst.
-      const titleText = taskTitle.textContent;
-      // Jetzt kannst du titleText verwenden.
-    }
-  }
-
-  // Entfernen Sie den "Edit" und "Delete" Button.
-  const editButton = popupDiv.querySelector(".edit-button");
-  const deleteButton = popupDiv.querySelector(".delete-button");
-  editButton.style.display = "none";
-  deleteButton.style.display = "none";
-
-  // Hinzufügen eines "OK"-Buttons.
-  const okButton = document.createElement("button");
-  okButton.className = "ok-button";
-  okButton.innerHTML = '<img src="/grafiken/check.png"> OK';
-  okButton.onclick = function () {
-    saveEditedTask(index);
-  };
-
-  // Hinzufügen des "OK"-Buttons ans Ende des Popups.
- // popupDiv.appendChild(okButton);
-
-  // Hier das Template einfügen und die kopierten Werte in den Eingabefeldern anzeigen
-  const addTaskSection = document.querySelector(".add-task-section");
-  addTaskSection.innerHTML = `
-    <div w3-include-html="includes/add-task-template.html">
-      <input type="text" id="task-title" value="${taskTitle}">
-      <input type="text" id="task-description" value="${descTask}">
-      <input type="text" id="task-date" value="${dueDate}">
-      <input type="text" id="task-priority" value="${priority}">
-      <input type="text" id="task-assigned" value="${assignedTo}">
-      <input type="text" id="subtasks" value="${subtasks}">
-    </div>
-  `;
-
-  // Stelle sicher, dass nach dem Bearbeiten die Werte im Template aktualisiert werden.
-}*/
-
 function findTask(){
   findTaskInput=document.getElementById('findTaskInput');
   const search = findTaskInput.value.toUpperCase();
 
   for (let i = 0; i < tasks.length; i++) {  
     const id= tasks[i]["id"];
-    const taskElement = document.getElementById(`showTask(${id})`);  
+    const taskElement = document.getElementById(`showTask-${id}`);  
     if(tasks[i]['title'].toUpperCase().includes(search)){
       console.log(tasks[i]['title']) 
       taskElement.style.display = 'block';
