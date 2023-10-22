@@ -463,18 +463,15 @@ async function deleteTask(index) {
     renderHTML();
   }
 }
+
 async function editTask() {
   // Das AddTask-Template aufrufen und mit den ursprünglichen Werten füllen
   const addTaskSection = document.querySelector(".popup-div");
+  let dialog=document.getElementById('dialog')
+  dialog.remove();
   addTaskSection.innerHTML = `
+  <div onclick="closePopup()"> CLOSE </div>
     <div w3-include-html="includes/add-task-template.html"></div>
-    <script src="js/storage.js"></script>
-    <script src="js/includes.js"></script>
-    <script src="js/initials.js"></script>
-    <script src="js/board.js"></script>
-    <script src="js/addTask.js"></script>
-    <script src="js/policy.js"></script>
-    <script src="js/contacts.js"></script>
   `;
   
   await init();
