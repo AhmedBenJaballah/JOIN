@@ -17,12 +17,12 @@ let amount = [
 ];
 let checkecdSubtasks=[];
 let completedSubtasks = 0;
-loadcheckecdSubtasks();
+
 loadtasks();
 loadAmount();
 loadid();
 loadcheckecdSubtasks();
-//loadcompletedSubtasks();
+
 
 setTimeout(() => {
   getInitials();
@@ -187,9 +187,9 @@ function selectPath(priority) {
     case "urgent":
       path = "grafiken/Capa2-prio.png";
       break;
-    default:
-      path = "grafiken/Capa2-prio.png";
-      break;
+    //default:
+      //path = "grafiken/Capa2-prio.png";
+      //break;
   }
 }
 
@@ -223,6 +223,7 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
 function addSidebar(aTaskCategory) {
   const dialog = document.getElementById("dialog");
   selectedTaskCategory = aTaskCategory;
+  console.log(selectedTaskCategory)
   dialog.classList.remove("displayNone");
   dialog.classList.add("addSidebar");
   dialog.style.justifyContent = "flex-end";
@@ -248,7 +249,7 @@ function doNotClose(event) {
   event.stopPropagation();
 }
 
-async function createTask2(selectedTaskCategory) {
+async function createTask2() {
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
@@ -270,6 +271,7 @@ async function createTask2(selectedTaskCategory) {
   await setItem("idCounter", JSON.stringify(idCounter));
   tasks = JSON.parse(await getItem("tasks"));
   contacts = JSON.parse(await getItem("contacts"));
+  
   const task = document.getElementById(selectedTaskCategory);
   task.classList.remove("createdTask");
   task.classList.add("newCreatedTask");
@@ -464,19 +466,112 @@ async function deleteTask(index) {
   }
 }
 
-async function editTask() {
+async function editTask(id) {
   // Das AddTask-Template aufrufen und mit den ursprünglichen Werten füllen
   const addTaskSection = document.querySelector(".popup-div");
   let dialog=document.getElementById('dialog')
   dialog.remove();
   addTaskSection.innerHTML = `
-  <div onclick="closePopup()"> CLOSE </div>
+  <div onclick="closePopup2()"> CLOSE </div>
     <div w3-include-html="includes/add-task-template.html"></div>
   `;
   
   await init();
-  // Hier können Sie weitere Anpassungen an den Inhalten des Templates vornehmen, falls erforderlich.
+  const title= document.getElementById('task-title');  
+  title.value=tasks[id]["title"]
+
+  const description= document.getElementById('task-description');  
+  description.value=tasks[id]["description"];
+
+  const date=document.getElementById('task-date');
+  date.value=tasks[id]["date"];
+
+  const priority = tasks[id]["priority"];
+  getPriority(priority);
+
+  const category =document.getElementById('catSel')
+  category.value=tasks[id]["category"]
+
+
+
+  const assigned = tasks[id]["assigned"];
+  console.log(assigned);
+
+
+  const assignedInitials = document.getElementById(`dropdown`);
+  
+  for (let j = 0; j < assigned.length; j++) {
+    const optionInitials = contacts[assigned[j]].name
+      .split(" ")
+      .map((word) => word[0].toUpperCase())
+      .join("");
+    assignedInitials.innerHTML += /*html*/ `
+      
+                <div class="roundNameDropdownTask2" style="background-color:${
+                  contacts[assigned[j]].color
+                }">
+                  ${optionInitials} 
+                </div>
+                
+                `;
+  }
+  checkecdContacts=[];
+  for (let i = 0; i < assigned.length; i++) {
+    checkecdContacts.push(assigned[i]); 
+  }
+
+  assignedInitials.style.flexDirection='row'
+  
+ 
+  const subtaskSection = document.getElementById("subtask-section");
+  const subtask = tasks[id]["subtasks"];
+  for (let i = 0; i < subtask.length; i++) {
+    subtaskSection.innerHTML += /*html*/ `
+    <div>${subtask[i]} </div>
+    `;
+  }
+
+
+ 
+
+
+  
 }
+
+
+async function closePopup2(){
+ 
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "none";
+  const popupDiv = document.querySelector(".popup-div");
+  popupDiv.classList.remove("show");
+  setTimeout(() => {
+    popupDiv.remove();
+  }, 300);
+
+  board=document.getElementById('board');
+  board.innerHTML+=`
+  <div id="dialog" class="displayNone" onclick="closeSidebar()">
+  <div
+  id="sidebarRight"
+  class="contentsidebarRight"
+  onclick="doNotClose(event)"
+  >
+  <div class="add-task-section">
+    <div w3-include-html="includes/add-task-template.html"></div>
+    <div class="buttons" id="btnsAddTask">
+      <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false"
+          autocomplete="off">Clear <img src="/grafiken/VectorX.png"></button>
+      <button type="button" class="btn btn-primary" onclick="createTask2()"> Create Task <img
+              src="/grafiken/check.png" class="primary"></button>
+  </div>
+</div>
+</div>`
+
+await init();
+}
+
+
 
 /*function editTask(index) {
   // Holen Sie sich das Popup-Fenster und die Werte aus dem Popup
