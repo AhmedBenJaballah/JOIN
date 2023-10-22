@@ -15,13 +15,28 @@ let amount = [
     amountDone: amountDone,
   },
 ];
+let checkecdSubtasks=[];
+let completedSubtasks = 0;
+loadcheckecdSubtasks();
 loadtasks();
 loadAmount();
 loadid();
+loadcheckecdSubtasks();
+//loadcompletedSubtasks();
 
 setTimeout(() => {
   getInitials();
 }, 1000);
+
+
+
+async function loadcheckecdSubtasks() {
+  try {
+    checkecdSubtasks = JSON.parse(await getItem("checkecdSubtasks"));
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
+}
 
 async function loadAmount() {
   try {
@@ -179,18 +194,23 @@ function selectPath(priority) {
 }
 
 function renderTask(idInitials, i, category, title, description, subtasks, id) {
+  const taskIdVierElemente = checkecdSubtasks.filter(subtask => subtask.taskId == id);
+  const  anzahlDerElementeMitTaskIdVier= taskIdVierElemente.length;
+  const progressPercentage = (anzahlDerElementeMitTaskIdVier / subtasks) * 100;
+
+ 
   return /*html*/ `
   <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask(${id})">
    <div class="${
      category === "Technical Task" ? "blueStyle" : "orangeStyle"
    }">${category}</div>
    <div class="taskTitle">${title}</div>
-   <div class="descTask">${description}</div>
+   <div class="descTask"anzahlDerElementeMitTaskIdVier>${description}</div>
    <div class="subtaskProgress">
        <div class="progress">
-       <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="progressBar${id}"></div>
+       <div class="progress-bar" role="progressbar" aria-valuenow="${anzahlDerElementeMitTaskIdVier}" aria-valuemin="0" aria-valuemax="${subtasks}" id="progressBar${id}" style="width:${progressPercentage}%"></div>
        </div>
-       <div id="displaysubs${id}">0/${subtasks}Subtasks</div>
+       <div id="displaysubs${id}">${anzahlDerElementeMitTaskIdVier}/${subtasks}Subtasks</div>
    </div>
    <div class="namePriority">
        <div id="${idInitials}${i}" class="names"></div>
@@ -267,7 +287,7 @@ async function createTask2(selectedTaskCategory) {
   }, 1000);
 }
 
-function showTask(id) {
+async function showTask(id) {
   console.log(id);
   const index = tasks.findIndex((c) => c.id == id);
   const overlay = document.getElementById("overlay");
@@ -319,7 +339,7 @@ function showTask(id) {
     </div>
   `;
 
-  setTimeout(() => {
+  setTimeout(async () => {
     assignedInitials = document.getElementById(`popup${taskId}`);
     for (let j = 0; j < assigned.length; j++) {
       const optionInitials = contacts[assigned[j]].name
@@ -338,8 +358,11 @@ function showTask(id) {
     }
     subs = document.getElementById(`subtasks${taskId}`);
 
+
+   
+
     for (let k = 0; k < subtasks.length; k++) {
-      let isCheckedS = checkecdContacts.includes(k);
+      let isCheckedS = checkecdSubtasks.some(subtask => subtask.k === k && subtask.taskId === taskId);
       subs.innerHTML += /*html*/ `
         <div>
          <input type="checkbox" onclick="updateProgress(${
@@ -360,44 +383,50 @@ function showTask(id) {
   }, 50);
 }
 
-function updateProgress(subtasks, taskId, k) {
+async function updateProgress(subtasks, taskId, k) {
   let checkbox = document.getElementById(`checkbox${taskId}${k}`);
 
   if (checkbox.checked) {
-    checkecdContacts.push(k);
-    console.log(checkecdContacts);
-  } else {
-    const index = checkecdContacts.indexOf(k);
+    checkecdSubtasks.push({
+      taskId: taskId,
+      k: k
+    });
+    console.log(checkecdSubtasks);
+} else {
+    const index = checkecdSubtasks.findIndex(subtask => subtask.taskId === taskId && subtask.k === k);
     if (index > -1) {
-      checkecdContacts.splice(index, 1);
-      console.log(checkecdContacts);
+      checkecdSubtasks.splice(index, 1);
+      console.log(checkecdSubtasks);
     }
-  }
+}
+
+await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
+
+
 
   const checkboxes = document.querySelectorAll(`.check${taskId}`);
   let progressBar = document.getElementById(`progressBar${taskId}`);
 
-  let completedSubtasks = 0;
 
-  checkboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
-      completedSubtasks++;
-    }
-  });
+  const taskIdVierElemente = checkecdSubtasks.filter(subtask => subtask.taskId == taskId);
+  const anzahlDerElementeMitTaskIdVier = taskIdVierElemente.length;
+
+ 
   console.log(taskId);
   console.log(subtasks);
-  console.log(completedSubtasks / subtasks);
+  console.log(anzahlDerElementeMitTaskIdVier / subtasks);
   console.log(progressBar);
 
-  const progressPercentage = (completedSubtasks / subtasks) * 100;
+  const progressPercentage = (anzahlDerElementeMitTaskIdVier / subtasks) * 100;
   progressBar.style.width = `${progressPercentage}%`;
-  progressBar.setAttribute("aria-valuenow", completedSubtasks);
+  progressBar.setAttribute("aria-valuenow", anzahlDerElementeMitTaskIdVier);
   progressBar.setAttribute("aria-valuemax", subtasks);
 
   let displayNumber = document.getElementById(`displaysubs${taskId}`);
   displayNumber.innerHTML = `
-  ${completedSubtasks}/${subtasks}Subtasks
+  ${anzahlDerElementeMitTaskIdVier}/${subtasks}Subtasks
   `;
+
   overlay.addEventListener("click", closePopup);
 }
 
@@ -503,3 +532,21 @@ async function editTask() {
 
   // Stelle sicher, dass nach dem Bearbeiten die Werte im Template aktualisiert werden.
 }*/
+
+function findTask(){
+  findTaskInput=document.getElementById('findTaskInput');
+  const search = findTaskInput.value.toUpperCase();
+
+  for (let i = 0; i < tasks.length; i++) {  
+    const id= tasks[i]["id"];
+    const taskElement = document.getElementById(`showTask(${id})`);  
+    if(tasks[i]['title'].toUpperCase().includes(search)){
+      console.log(tasks[i]['title']) 
+      taskElement.style.display = 'block';
+    }
+    else{
+      taskElement.style.display = 'none';
+    }
+  }
+
+}
