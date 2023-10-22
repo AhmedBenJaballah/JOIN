@@ -1,4 +1,4 @@
-//tryContact();
+
  
 let checkecdContacts = [];
 let tasks = [];
@@ -210,17 +210,7 @@ async function createTask() {
   //const subtasks = document.getElementById("subtasks").value;
 
   // Erstelle eine HTML-Ausgabe mit den erfassten Daten
-  const outputHTML = `<div class="createdTask">
-      <h2>Task Details</h2>
-      <p><strong>Title:</strong> ${taskTitle}</p>
-      <p><strong>Description:</strong> ${taskDescription}</p>
-      <p><strong>Due Date:</strong> ${taskDate}</p>
-
-      
-      <p><strong>Category:</strong> ${category}</p>
-      <
-      </div>
-    `;
+ 
   //Ahmed: hier können wir direkt speichern
   tasks.push({
     title: taskTitle,
