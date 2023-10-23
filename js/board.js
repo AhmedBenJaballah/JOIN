@@ -15,8 +15,7 @@ let amount = [
     amountDone: amountDone,
   },
 ];
-let checkecdSubtasks=[];
-
+let checkecdSubtasks = [];
 
 loadcheckecdSubtasks();
 loadtasks();
@@ -25,12 +24,9 @@ loadid();
 
 //loadcheckecdSubtasks();
 
-
 setTimeout(() => {
   getInitials();
 }, 1000);
-
-
 
 async function loadcheckecdSubtasks() {
   try {
@@ -188,17 +184,18 @@ function selectPath(priority) {
       path = "grafiken/Capa2-prio.png";
       break;
     //default:
-      //path = "";
-      //break;
+    //path = "";
+    //break;
   }
 }
 
 function renderTask(idInitials, i, category, title, description, subtasks, id) {
-  const taskIdVierElemente = checkecdSubtasks.filter(subtask => subtask.taskId == id);
-  const  anzahlDerElementeMitTaskIdVier= taskIdVierElemente.length;
+  const taskIdVierElemente = checkecdSubtasks.filter(
+    (subtask) => subtask.taskId == id
+  );
+  const anzahlDerElementeMitTaskIdVier = taskIdVierElemente.length;
   const progressPercentage = (anzahlDerElementeMitTaskIdVier / subtasks) * 100;
 
- 
   return /*html*/ `
   <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask-${id}">
    <div class="${
@@ -218,13 +215,12 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
    </div>
    </div>
    `;
-
 }
 
 function addSidebar(aTaskCategory) {
   const dialog = document.getElementById("dialog");
   selectedTaskCategory = aTaskCategory;
-  console.log(selectedTaskCategory)
+  console.log(selectedTaskCategory);
   dialog.classList.remove("displayNone");
   dialog.classList.add("addSidebar");
   dialog.style.justifyContent = "flex-end";
@@ -272,7 +268,7 @@ async function createTask2() {
   await setItem("idCounter", JSON.stringify(idCounter));
   tasks = JSON.parse(await getItem("tasks"));
   contacts = JSON.parse(await getItem("contacts"));
-  
+
   const task = document.getElementById(selectedTaskCategory);
   task.classList.remove("createdTask");
   task.classList.add("newCreatedTask");
@@ -288,7 +284,7 @@ async function createTask2() {
     popup.classList.remove("show");
     closeSidebar();
   }, 1000);
-  subtasks=[];
+  subtasks = [];
 }
 
 async function showTask(id) {
@@ -362,11 +358,10 @@ async function showTask(id) {
     }
     subs = document.getElementById(`subtasks${taskId}`);
 
-
-   
-
     for (let k = 0; k < subtasks.length; k++) {
-      let isCheckedS = checkecdSubtasks.some(subtask => subtask.k === k && subtask.taskId === taskId);
+      let isCheckedS = checkecdSubtasks.some(
+        (subtask) => subtask.k === k && subtask.taskId === taskId
+      );
       subs.innerHTML += /*html*/ `
         <div>
          <input type="checkbox" onclick="updateProgress(${
@@ -393,29 +388,29 @@ async function updateProgress(subtasks, taskId, k) {
   if (checkbox.checked) {
     checkecdSubtasks.push({
       taskId: taskId,
-      k: k
+      k: k,
     });
     console.log(checkecdSubtasks);
-} else {
-    const index = checkecdSubtasks.findIndex(subtask => subtask.taskId === taskId && subtask.k === k);
+  } else {
+    const index = checkecdSubtasks.findIndex(
+      (subtask) => subtask.taskId === taskId && subtask.k === k
+    );
     if (index > -1) {
       checkecdSubtasks.splice(index, 1);
       console.log(checkecdSubtasks);
     }
-}
-//checkecdSubtasks=[]
-await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
-
-
+  }
+  //checkecdSubtasks=[]
+  await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
 
   //const checkboxes = document.querySelectorAll(`.check${taskId}`);
   let progressBar = document.getElementById(`progressBar${taskId}`);
 
-
-  const taskIdVierElemente = checkecdSubtasks.filter(subtask => subtask.taskId == taskId);
+  const taskIdVierElemente = checkecdSubtasks.filter(
+    (subtask) => subtask.taskId == taskId
+  );
   const anzahlDerElementeMitTaskIdVier = taskIdVierElemente.length;
 
- 
   console.log(taskId);
   console.log(subtasks);
   console.log(anzahlDerElementeMitTaskIdVier / subtasks);
@@ -433,7 +428,6 @@ await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
 
   overlay.addEventListener("click", closePopup);
 }
-
 
 function closePopup() {
   const overlay = document.getElementById("overlay");
@@ -471,35 +465,37 @@ async function deleteTask(index) {
 async function editTask(id) {
   // Das AddTask-Template aufrufen und mit den ursprünglichen Werten füllen
   const addTaskSection = document.querySelector(".popup-div");
-  let dialog=document.getElementById('dialog')
+  let dialog = document.getElementById("dialog");
   dialog.remove();
   addTaskSection.innerHTML = `
-  <div onclick="closePopup2()"> CLOSE </div>
-  <div onclick="applyModifications(${id})"> apply modifications </div>
+  <div class="close-ok-buttons> 
+      <button class="close-button" onclick="closePopup2()"> <img src="/grafiken/close.png"> </button>
+      <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
+    </div>
     <div w3-include-html="includes/add-task-template.html"></div>
 
   `;
-  
+
   await init();
-  const title= document.getElementById('task-title');  
-  title.value=tasks[id]["title"]
+  const title = document.getElementById("task-title");
+  title.value = tasks[id]["title"];
 
-  const description= document.getElementById('task-description');  
-  description.value=tasks[id]["description"];
+  const description = document.getElementById("task-description");
+  description.value = tasks[id]["description"];
 
-  const date=document.getElementById('task-date');
-  date.value=tasks[id]["date"];
+  const date = document.getElementById("task-date");
+  date.value = tasks[id]["date"];
 
   const priority = tasks[id]["priority"];
   getPriority(priority);
 
-  const category =document.getElementById('catSel')
-  category.value=tasks[id]["category"]
+  const category = document.getElementById("catSel");
+  category.value = tasks[id]["category"];
 
   const assigned = tasks[id]["assigned"];
   console.log(assigned);
   const assignedInitials = document.getElementById(`dropdown`);
-  
+
   for (let j = 0; j < assigned.length; j++) {
     const optionInitials = contacts[assigned[j]].name
       .split(" ")
@@ -515,14 +511,14 @@ async function editTask(id) {
                 
                 `;
   }
-  checkecdContacts=[];
+  checkecdContacts = [];
   for (let i = 0; i < assigned.length; i++) {
-    checkecdContacts.push(assigned[i]); 
+    checkecdContacts.push(assigned[i]);
   }
 
-  assignedInitials.style.flexDirection='row'
-  
-  subtasks=[];
+  assignedInitials.style.flexDirection = "row";
+
+  subtasks = [];
   const subtaskSection = document.getElementById("subtask-section");
   const subtask = tasks[id]["subtasks"];
   for (let i = 0; i < subtask.length; i++) {
@@ -530,31 +526,28 @@ async function editTask(id) {
     <div>${subtask[i]} </div>
     `;
   }
-
- 
 }
 
-async function applyModifications(id){
-  console.log('mod')
-  const title= document.getElementById('task-title');  
- tasks[id]["title"]=title.value
+async function applyModifications(id) {
+  console.log("mod");
+  const title = document.getElementById("task-title");
+  tasks[id]["title"] = title.value;
 
-  const description= document.getElementById('task-description');  
-  tasks[id]["description"]=description.value
+  const description = document.getElementById("task-description");
+  tasks[id]["description"] = description.value;
 
-  const date=document.getElementById('task-date');
-  tasks[id]["date"]=date.value;
+  const date = document.getElementById("task-date");
+  tasks[id]["date"] = date.value;
 
-  const category =document.getElementById('catSel');
-  tasks[id]["category"]=category.value;
-  tasks[id]["priority"]=priority;
-  tasks[id]["assigned"]=checkecdContacts;
-  
+  const category = document.getElementById("catSel");
+  tasks[id]["category"] = category.value;
+  tasks[id]["priority"] = priority;
+  tasks[id]["assigned"] = checkecdContacts;
+
   //tasks[id]['subtasks']=subtasks,
-  for(let i = 0; i < subtasks.length; i++) {
-    tasks[id]['subtasks'].push(subtasks[i])
+  for (let i = 0; i < subtasks.length; i++) {
+    tasks[id]["subtasks"].push(subtasks[i]);
   }
-
 
   await setItem("tasks", JSON.stringify(tasks));
   await loadtasks();
@@ -562,13 +555,12 @@ async function applyModifications(id){
   await loadid();
   await loadcheckecdSubtasks();
   await closePopup2();
- setTimeout(() => {
-  renderHTML();
- }, 500);
+  setTimeout(() => {
+    renderHTML();
+  }, 500);
 }
 
-async function closePopup2(){
- 
+async function closePopup2() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none";
   const popupDiv = document.querySelector(".popup-div");
@@ -577,8 +569,8 @@ async function closePopup2(){
     popupDiv.remove();
   }, 300);
 
-  board=document.getElementById('board');
-  board.innerHTML+=`
+  board = document.getElementById("board");
+  board.innerHTML += `
   <div id="dialog" class="displayNone" onclick="closeSidebar()">
   <div
   id="sidebarRight"
@@ -594,25 +586,23 @@ async function closePopup2(){
               src="/grafiken/check.png" class="primary"></button>
   </div>
 </div>
-</div>`
+</div>`;
 
-await init();
+  await init();
 }
 
-function findTask(){
-  findTaskInput=document.getElementById('findTaskInput');
+function findTask() {
+  findTaskInput = document.getElementById("findTaskInput");
   const search = findTaskInput.value.toUpperCase();
 
-  for (let i = 0; i < tasks.length; i++) {  
-    const id= tasks[i]["id"];
-    const taskElement = document.getElementById(`showTask-${id}`);  
-    if(tasks[i]['title'].toUpperCase().includes(search)){
-      console.log(tasks[i]['title']) 
-      taskElement.style.display = 'block';
-    }
-    else{
-      taskElement.style.display = 'none';
+  for (let i = 0; i < tasks.length; i++) {
+    const id = tasks[i]["id"];
+    const taskElement = document.getElementById(`showTask-${id}`);
+    if (tasks[i]["title"].toUpperCase().includes(search)) {
+      console.log(tasks[i]["title"]);
+      taskElement.style.display = "block";
+    } else {
+      taskElement.style.display = "none";
     }
   }
-
 }
