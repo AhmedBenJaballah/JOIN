@@ -469,7 +469,7 @@ async function editTask(id) {
   dialog.remove();
   addTaskSection.innerHTML = `
   <div class="close-ok-buttons> 
-      <button class="close-button" onclick="closePopup2()"> <img src="/grafiken/close.png"> </button>
+      <button  onclick="closePopup2()"> <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> </button>
       <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
     </div>
     <div w3-include-html="includes/add-task-template.html"></div>
@@ -560,7 +560,7 @@ async function applyModifications(id) {
   }, 500);
 }
 
-async function closePopup2() {
+  async function closePopup2() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none";
   const popupDiv = document.querySelector(".popup-div");
