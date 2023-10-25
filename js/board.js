@@ -429,7 +429,7 @@ async function updateProgress(subtasks, taskId, k) {
   overlay.addEventListener("click", closePopup);
 }
 
-function closePopup() {
+  function closePopup() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none";
   const popupDiv = document.querySelector(".popup-div");
