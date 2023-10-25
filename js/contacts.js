@@ -1,5 +1,11 @@
 let contacts=[];
 loadContacts();
+if (window.location.href.includes('contacts'))
+{setTimeout(() => {
+    let summarySiebar=document.getElementById('contactsSidebar');
+    summarySiebar.style.backgroundColor='#D2E3FF';
+    summarySiebar.style.borderRadius='8px';
+  }, 200);}
 setTimeout(() => {
     getInitials();
 }, 1000);

@@ -24,10 +24,10 @@
                     <input type="password" id="signUpPassword" placeholder="Password" class="inputSignUp" required>
                     <input type="password" id="signUpPasswordConfirmation" placeholder="Confirm Password" class="inputSignUp" required>
                     <div id="rememberMeContainerSignUp">
-                    <input type="checkbox" id="acceptSignUp">
+                    <input type="checkbox" id="acceptSignUp" onclick="handleCheckboxChange()">
                     <label for="acceptSignUp">I accept the Privacy policy</label>
                 </div>
-                <button id="registerBtn" class="btn btn-primary">Sign Up</button>
+                <button id="registerBtn" class="btn btn-primary" disabled >Sign Up</button>
                 </form>
         </div>
         <div id="footerContainerSignup">

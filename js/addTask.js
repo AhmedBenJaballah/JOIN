@@ -8,6 +8,14 @@ let idCounter = 0;
 loadtasks();
 loadid();
 
+if (window.location.href.includes('addTask')) {
+  setTimeout(() => {
+    let summarySie = document.getElementById('addTaskSidebar');
+    summarySie.style.backgroundColor = '#D2E3FF';
+    summarySie.style.borderRadius = '8px';
+  }, 200);
+}
+
 async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
