@@ -70,10 +70,16 @@ async function loadid() {
 function renderHTML() {
   let toDo = tasks.filter((t) => t["taskCategory"] == "toDo");
   const task = document.getElementById("toDo");
-  task.classList.remove("createdTask");
+  task.classList.remove("createdTask3");
   task.classList.add("newCreatedTask");
   task.innerHTML = "";
   amountToDo = toDo.length;
+  if(amountToDo==0){
+    task.innerHTML = /*html */
+    `
+    <div class="createdTask2"> No Tasks 'To Do'</div>
+    `;
+  } 
   for (let i = 0; i < toDo.length; i++) {
     console.log(toDo[i]["id"]);
     renderAllTasks("todo", i, toDo, task);
@@ -81,10 +87,16 @@ function renderHTML() {
 
   let inProgress = tasks.filter((t) => t["taskCategory"] == "inProgress");
   const task2 = document.getElementById("inProgress");
-  task2.classList.remove("createdTask");
+  task2.classList.remove("createdTask3");
   task2.classList.add("newCreatedTask");
   task2.innerHTML = "";
   amountInProgress = inProgress.length;
+  if(amountInProgress==0){
+    task2.innerHTML = /*html */
+    `
+    <div class="createdTask2"> No Tasks 'in Progress'</div>
+    `;
+  } 
   for (let i = 0; i < inProgress.length; i++) {
     console.log(inProgress[i]["id"]);
     renderAllTasks("inProgress", i, inProgress, task2);
@@ -92,10 +104,16 @@ function renderHTML() {
 
   let awaitFeedback = tasks.filter((t) => t["taskCategory"] == "awaitFeedback");
   const task3 = document.getElementById("awaitFeedback");
-  task3.classList.remove("createdTask");
+  task3.classList.remove("createdTask3");
   task3.classList.add("newCreatedTask");
   task3.innerHTML = "";
   amountAawaitFeedback = awaitFeedback.length;
+  if(amountAawaitFeedback==0){
+    task3.innerHTML = /*html */
+    `
+    <div class="createdTask2"> No Tasks 'await feedback'</div>
+    `;
+  } 
   for (let i = 0; i < awaitFeedback.length; i++) {
     console.log(awaitFeedback[i]["id"]);
     renderAllTasks("awaitFeedback", i, awaitFeedback, task3);
@@ -103,10 +121,16 @@ function renderHTML() {
 
   let done = tasks.filter((t) => t["taskCategory"] == "done");
   const task4 = document.getElementById("done");
-  task4.classList.remove("createdTask");
+  task4.classList.remove("createdTask3");
   task4.classList.add("newCreatedTask");
   task4.innerHTML = "";
   amountDone = done.length;
+  if(amountDone==0){
+    task4.innerHTML = /*html */
+    `
+    <div class="createdTask2"> No Tasks 'Done'</div>
+    `;
+  } 
   for (let i = 0; i < done.length; i++) {
     console.log(done[i]["id"]);
     renderAllTasks("dones", i, done, task4);
@@ -149,7 +173,7 @@ function renderAllTasks(idInitials, i, tasks, task) {
 }
 
 function startDragging(id) {
-  currentDraggedElement = id - 1;
+  currentDraggedElement = id ;
 }
 
 function allowDrop(ev) {
@@ -157,10 +181,11 @@ function allowDrop(ev) {
 }
 
 async function moveTo(category) {
-  console.log(currentDraggedElement);
-  console.log(category);
-  console.log(tasks[currentDraggedElement]["taskCategory"]);
-  tasks[currentDraggedElement]["taskCategory"] = category;
+
+  //const tasksWithId = tasks.filter(task => task.id == currentDraggedElement);
+  const index = tasks.findIndex((c) => c.id == currentDraggedElement);
+  //console.log(tasksWithId)
+  tasks[index]["taskCategory"] = category;
   renderHTML();
   await setItem("tasks", JSON.stringify(tasks));
   totalTasks =
@@ -275,7 +300,7 @@ async function createTask2() {
   contacts = JSON.parse(await getItem("contacts"));
 
   const task = document.getElementById(selectedTaskCategory);
-  task.classList.remove("createdTask");
+  task.classList.remove("createdTask3");
   task.classList.add("newCreatedTask");
   //task.innerHTML = "";
   let i = tasks.length - 1;
@@ -290,6 +315,7 @@ async function createTask2() {
     closeSidebar();
   }, 1000);
   subtasks = [];
+  renderHTML();
 }
 
 async function showTask(id) {
@@ -605,7 +631,7 @@ function findTask() {
     const taskElement = document.getElementById(`showTask-${id}`);
     if (tasks[i]["title"].toUpperCase().includes(search)) {
       console.log(tasks[i]["title"]);
-      taskElement.style.display = "block";
+      taskElement.style.display = "flex";
     } else {
       taskElement.style.display = "none";
     }

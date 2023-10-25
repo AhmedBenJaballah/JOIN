@@ -27,7 +27,8 @@
 
   #tasks{
     width: 100%;
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -47,21 +48,23 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    justify-content: center;
   }
 
-  .createdTask{
-    border: 1px dashed gray;
+  .createdTask2 {
+    border: 1px dashed #c0c0c0;
     border-radius: 15px;
-    background-color: #ccc;
-    color: gainsboro;
-    height: 35px;
+    background-color: #e2e2e2;
+    color: #c0c0c0;
+    height: 55px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 20px; 
     overflow-y: scroll;
-  }
+}
+
 
   .boardTitle{
     font-weight: bold;
@@ -76,6 +79,12 @@
     justify-content: center;
     align-items: center;
     border-radius: 4px;
+  }
+
+  .plus:hover{
+   color: rgb(6, 6, 146);
+   border: 1px solid (6, 6, 146);
+    cursor: pointer;
   }
   .addSidebar {
     background-color: rgba(255, 255, 255, 0.6);
@@ -143,8 +152,7 @@
   width: 100%;
   margin-top: 20px;
   height: calc(100vh - 270px);
-  display: grid;
-  place-items: center;
+  display: contents;
  overflow-y: scroll;
 }
 
