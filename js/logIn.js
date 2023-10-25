@@ -44,7 +44,7 @@ function createLogInContainer() {
                 </div>
                 <div id="logInBtns">
                     <button type="submit" class="btn btn-primary">Log In</button>
-                    <button class="btn btn-outline-primary" onclick="goToSummary()"> Guest Log In</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="goToSummary()"> Guest Log In</button>
                 </div>
             </form>
 
@@ -53,7 +53,9 @@ function createLogInContainer() {
   }, 800);
 }
 
-function goToSummary() {
+async function goToSummary() {
+  await setItem('userInitial', 'G');
+  await setItem('userName', 'Guest');
   window.location.href = "/summary.html";
 }
 

@@ -220,6 +220,7 @@ label > img {
   display: flex;
   overflow-y: scroll;
   margin-right: calc(100vw - 700px);
+  box-shadow: 2px 0px 6px 0px rgba(0, 0, 0, 0.2);
 }
 
 /* width */

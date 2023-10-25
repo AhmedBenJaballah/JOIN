@@ -23,6 +23,11 @@ loadAmount();
 loadid();
 
 //loadcheckecdSubtasks();
+setTimeout(() => {
+  let summarySiebar=document.getElementById('boardSidebar');
+  summarySiebar.style.backgroundColor='#D2E3FF';
+  summarySiebar.style.borderRadius='8px';
+}, 200);
 
 setTimeout(() => {
   getInitials();

@@ -27,6 +27,7 @@ async function register() {
     });
     await setItem('users', JSON.stringify(users));
     resetForm();
+    window.location.href = "/logIn.html";
 }
 
 function resetForm() {
@@ -36,4 +37,16 @@ function resetForm() {
     signUpPassword.value = '';
     signUpPasswordConfirmation.value='';
     registerBtn.disabled = false;
+}
+
+function handleCheckboxChange() {
+    const acceptCheckbox = document.getElementById('acceptSignUp');
+    const registerButton = document.getElementById('registerBtn');
+
+    
+    if (acceptCheckbox.checked) {
+        registerButton.disabled = false; 
+    } else {
+        registerButton.disabled = true;
+    }
 }
