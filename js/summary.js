@@ -27,8 +27,25 @@ async function loadAmount() {
         tasksDone.innerHTML = amount[0]['amountDone'];
         tasksInBoard.innerHTML = amount[0]['totalTasks'];
         userName= (await getItem('userName'));
-        const goodMornig = document.getElementById('goodMornig');
-        goodMornig.innerHTML += `, <span style="color: #4589FF; font-weight: bold;font-size: 60px;">${userName}</span>`;
+
+        const goodMorning = document.getElementById('goodMornig');
+        const currentTime = new Date();
+        const currentHour = currentTime.getHours();
+
+        let greeting;
+
+        if (currentHour >= 5 && currentHour < 12) {
+            greeting = "Guten Morgen";
+        } else if (currentHour >= 12 && currentHour < 18) {
+            greeting = "Guten Tag";
+        } else if (currentHour >= 18 && currentHour < 22) {
+            greeting = "Guten Abend";
+        } else {
+            greeting = "Gute Nacht";
+        }
+
+        goodMorning.innerHTML = `${greeting}, <span style="color: #4589FF; font-weight: bold; font-size: 60px;">${userName}</span>`;
+
 
     } catch (e) {
         console.error('Loading error:', e);

@@ -7,6 +7,16 @@ let priority = "";
 let idCounter = 0;
 loadtasks();
 loadid();
+setTimeout(() => {
+  setDate();
+}, 1000);
+
+function setDate(){
+  const taskDateInput = document.getElementById("task-date");
+  const today = new Date();
+  const formattedDate = today.toISOString().split("T")[0];
+  taskDateInput.setAttribute("min", formattedDate);
+}
 
 if (window.location.href.includes('addTask')) {
   setTimeout(() => {
@@ -207,11 +217,41 @@ function addSubtask() {
 /////////////////////////////////////////Ahmed//////////////////////////////////
 
 async function createTask() {
+
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
-  idCounter++;
+ 
   const category = document.querySelector(".category-select").value;
+
+  if (taskTitle === "" || taskDate === "" || category === "Select task category") {
+    if (taskTitle === "") {
+        document.getElementById("task-title").style.borderBottom = "2px solid red";
+        document.getElementById("task-title").style.color = "red";
+    } else {
+        document.getElementById("task-title").style.borderBottom = "1px solid black";
+        document.getElementById("task-title").style.color = "black";
+    }
+
+    if (taskDate === "") {
+        document.getElementById("task-date").style.borderBottom = "2px solid red";
+        document.getElementById("task-date").style.color = "red";
+    } else {
+        document.getElementById("task-date").style.borderBottom = "1px solid black";
+        document.getElementById("task-date").style.color = "black";
+    }
+
+    if (category === "Select task category") {
+        document.querySelector(".category-select").style.borderBottom = "2px solid red";
+        document.querySelector(".category-select").style.color = "red";
+    } else {
+        document.querySelector(".category-select").style.borderBottom = "1px solid black";
+        document.querySelector(".category-select").style.color = "black";
+    }
+} else{
+
+  
+  idCounter++;
   tasks.push({
     title: taskTitle,
     description: taskDescription,
@@ -232,6 +272,7 @@ async function createTask() {
     popup.classList.remove("show");
     window.location.href = "board.html";
   }, 1000);
+}
   
 }
 

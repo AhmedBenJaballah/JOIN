@@ -27,6 +27,7 @@
 
   #tasks{
     width: 100%;
+    height: calc(100vh - 230px);
     padding-left: 30px;
     padding-right: 30px;
     display: flex;
@@ -41,14 +42,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 30px;
   }
 
   .aTaskAreaBoard{
     width: 24%;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .createdTask2 {
@@ -135,12 +137,12 @@
 
 .newTask{
   width:98%;
-  height: 300px !important;
+
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 10px;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  gap:20px;
   align-items: flex-start;
   flex-direction: column;
   border-radius: 15px;
@@ -148,14 +150,24 @@
   
 }
 
+
 .newCreatedTask{
   
   width: 100%;
-  margin-top: 20px;
-  height: calc(100vh - 270px);
-  display: contents;
- overflow-y: scroll;
+  padding-bottom: 20px;
+  height: calc(100vh - 260px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
  
+}
+
+
+.renderedTaskTitle{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .blueStyle{
@@ -185,13 +197,18 @@
 }
 .taskTitle{
   color: #4589FF;
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
 }
 
 .descTask{
   color: #ccc;
   font-size: 16px;
+  
+    width: 100%; /* Die gewünschte Breite des Containers */
+    height: auto; /* Lassen Sie die Höhe automatisch anpassen */
+    word-wrap: break-word;
+  
 }
 
 .namePriority{
@@ -227,12 +244,17 @@
 
 .subtaskProgress{
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
 }
+
+.progressSubtasksInfo{
+font-size: 15px;
+}
+
 .progress{
-  width: 100%;
+  width: 50%;
   margin-right: 10px;
 }
 .add-task-section {

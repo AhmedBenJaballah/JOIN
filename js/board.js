@@ -139,7 +139,8 @@ function renderHTML() {
 
 function renderAllTasks(idInitials, i, tasks, task) {
   const title = tasks[i]["title"];
-  const description = tasks[i]["description"];
+  const description = tasks[i]["description"].replace(/\n/g, '<br>');
+
   const date = tasks[i]["date"];
   const priority = tasks[i]["priority"];
   const assigned = tasks[i]["assigned"];
@@ -181,7 +182,7 @@ function allowDrop(ev) {
 }
 
 async function moveTo(category) {
-
+  removeHighlight(category);
   //const tasksWithId = tasks.filter(task => task.id == currentDraggedElement);
   const index = tasks.findIndex((c) => c.id == currentDraggedElement);
   //console.log(tasksWithId)
@@ -200,6 +201,7 @@ async function moveTo(category) {
     },
   ];
   await setItem("amount", JSON.stringify(amount));
+  
 }
 
 function selectPath(priority) {
@@ -231,13 +233,15 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
    <div class="${
      category === "Technical Task" ? "blueStyle" : "orangeStyle"
    }">${category}</div>
-   <div class="taskTitle">${title}</div>
-   <div class="descTask"anzahlDerElementeMitTaskIdVier>${description}</div>
+   <div class="renderedTaskTitle">
+    <div class="taskTitle">${title}</div>
+    <div class="descTask"anzahlDerElementeMitTaskIdVier >${description}</div>
+   </div>
    <div class="subtaskProgress">
        <div class="progress">
        <div class="progress-bar" role="progressbar" aria-valuenow="${anzahlDerElementeMitTaskIdVier}" aria-valuemin="0" aria-valuemax="${subtasks}" id="progressBar${id}" style="width:${progressPercentage}%"></div>
        </div>
-       <div id="displaysubs${id}">${anzahlDerElementeMitTaskIdVier}/${subtasks}Subtasks</div>
+       <div id="displaysubs${id}" class="progressSubtasksInfo">${anzahlDerElementeMitTaskIdVier}/${subtasks} Subtasks</div>
    </div>
    <div class="namePriority">
        <div id="${idInitials}${i}" class="names"></div>
@@ -282,6 +286,32 @@ async function createTask2() {
   const taskDate = document.getElementById("task-date").value;
   const category = document.querySelector(".category-select").value;
 
+  if (taskTitle === "" || taskDate === "" || category === "Select task category") {
+    if (taskTitle === "") {
+        document.getElementById("task-title").style.borderBottom = "2px solid red";
+        document.getElementById("task-title").style.color = "red";
+    } else {
+        document.getElementById("task-title").style.borderBottom = "1px solid black";
+        document.getElementById("task-title").style.color = "black";
+    }
+
+    if (taskDate === "") {
+        document.getElementById("task-date").style.borderBottom = "2px solid red";
+        document.getElementById("task-date").style.color = "red";
+    } else {
+        document.getElementById("task-date").style.borderBottom = "1px solid black";
+        document.getElementById("task-date").style.color = "black";
+    }
+
+    if (category === "Select task category") {
+        document.querySelector(".category-select").style.borderBottom = "2px solid red";
+        document.querySelector(".category-select").style.color = "red";
+    } else {
+        document.querySelector(".category-select").style.borderBottom = "1px solid black";
+        document.querySelector(".category-select").style.color = "black";
+    }
+} else{
+
   idCounter++;
   tasks.push({
     title: taskTitle,
@@ -316,6 +346,7 @@ async function createTask2() {
   }, 1000);
   subtasks = [];
   renderHTML();
+}
 }
 
 async function showTask(id) {
