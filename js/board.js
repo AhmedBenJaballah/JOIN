@@ -139,7 +139,13 @@ function renderHTML() {
 
 function renderAllTasks(idInitials, i, tasks, task) {
   const title = tasks[i]["title"];
-  const description = tasks[i]["description"].replace(/\n/g, '<br>');
+  let description = tasks[i]["description"].replace(/\n/g, '<br>');
+  const descriptionLines = description.split('<br>');
+
+
+if (descriptionLines.length > 2) {
+    description = descriptionLines.slice(0, 2).join('<br>') + '...';
+}
 
   const date = tasks[i]["date"];
   const priority = tasks[i]["priority"];
@@ -215,9 +221,9 @@ function selectPath(priority) {
     case "urgent":
       path = "grafiken/Capa2-prio.png";
       break;
-    //default:
-    //path = "";
-    //break;
+    default:
+      path = "grafiken/Capa2-low.png";
+      break;
   }
 }
 

@@ -200,6 +200,9 @@ function getPriority(selected) {
         priority = "";
         break;
       }
+      default:
+     
+        priority = "low";
   }
 }
 
