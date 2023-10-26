@@ -1,7 +1,4 @@
-body {
-    
-    
-}
+
 .main-container { 
     display: flex;
     justify-content: center;
@@ -40,7 +37,7 @@ align-items: center;
     border-radius: 25px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     color: white;
-    width: 500px;   
+    width: 580px;   
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -112,6 +109,11 @@ align-items: center;
 }
 .deadline {
     font-size: 24px !important;
+    font-weight: 300 !important;
+    
+}
+.urgent {
+    font-size: 24px;
     
 }
 .img-num {

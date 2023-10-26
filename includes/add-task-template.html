@@ -47,7 +47,7 @@
             <label for="assigned" class="assigned" id="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
 
 
-                <div id="inputDropdown" onclick="tryContact()" class="dropdown"> <i id="dropIcon" class="bi bi-caret-down-fill"></i></div>
+                <div id="inputDropdown" onclick="tryContact()" class="dropdown"> <i id="dropIcon" class="bi bi-caret-down-fill" placeholder="Select contacts to assign"></i></div>
                 <div id="dropdown" class="dropdown"></div>
 
 
@@ -59,10 +59,11 @@
                     <option>User Story</option>
                 </select>
             </label><br>
-            <label for="subtasks" class="subtasks">subtasks(optional)<br>
+            <br>
+            <label for="subtasks" class="subtasks">Subtasks(optional)<br>
                 <div id="subtask-section">
-                    <input type="text" id="subtasks">
-                <img src="/grafiken/add.png" onclick="addSubtask()">
+                    <input type="text" id="subtasks" placeholder="Add new subtask" aria-hidden="true">
+                    <img src="/grafiken/add.png" onclick="addSubtask()" class="subtask-plus">
                 </div>
 
             </label>
