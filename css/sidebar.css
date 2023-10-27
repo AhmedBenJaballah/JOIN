@@ -42,16 +42,13 @@
     margin-bottom: 40px;
     gap: 20px;
     color: #42526E;
+    
 }
-a {
-    color: black;
-    text-decoration: none;
+ a {
+    color: black !important;
+    text-decoration: none !important;
 }
-#policy a:hover {
-    color: rgb(69,137,255);
-    outline: none;
-    background-color: white !important;
+.policy a:hover {
+    color: rgb(69,137,255) !important ;
 }
-#policy a:active {
-    background-color: rgb(69,137,255);
-}
+

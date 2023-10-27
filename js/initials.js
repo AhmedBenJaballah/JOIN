@@ -15,8 +15,8 @@ function displayOptions(){
         options.classList.remove("dNone")
        
         options.innerHTML = `
-    <div class="option">Privacy Policy</div>
-    <div class="option">Legal Notice</div>
+    <div class="option"><a href="/privacyPolicy.html">Privacy Policy</a></div>
+    <div class="option"><a href="/legalNotice.html">Legal Notice</a></div>
     <div class="option" onclick="goToLogIn()">Log out</div>
     `
     }
