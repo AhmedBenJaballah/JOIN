@@ -2,10 +2,19 @@
     padding: 16px;
     height: calc(100vh - 80px);
     overflow-y: scroll;
+    width: 80%;
 }
 
 .impressum{
     padding: 16px;
     height: calc(100vh - 80px);
-    overflow-y: scroll;   
+    overflow-y: scroll; 
+    
+    width: 80%
+ 
+}
+.header-arrow-container {
+   
+    display: flex;
+    justify-content: space-between;
 }
