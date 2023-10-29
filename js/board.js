@@ -381,31 +381,33 @@ async function showTask(id) {
   const popupDiv = document.createElement("div");
   popupDiv.className = "popup-div";
   popupDiv.innerHTML = /*html*/ `
-    <div class="task-container" id="taskContainer-id">
-      <div class="${
-        category === "Technical Task" ? "blueStyle" : "orangeStyle"
-      }">${category} 
-      </div> 
-      <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
-    </div>
-    
-    <div class="taskTitle" id="taskTitle">${title} </div>
-    <div class="descTask" id="taskDesc">${description}</div>
-    <div class="task-date" id="taskDate"> Due date:${date}</div>
-    <div class="task-priority" id="taskPriority"> Priority:  ${priority}<img src=${path}></div>
-    <div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
-    <div id="popup${taskId}"></div> 
-    
-    <div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
-    <div id="subtasks${taskId}"></div>
-    
+<div id='popCon'>
+<div class="task-container" id="taskContainer-id">
+<div class="${
+  category === "Technical Task" ? "blueStyle" : "orangeStyle"
+}">${category} 
+</div> 
+<button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
+</div>
 
-    <div class="popup-buttons"> 
-        <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
-        <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
-        <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
-        
-    </div>
+<div class="taskTitle" id="taskTitle">${title} </div>
+<div class="descTask" id="taskDesc">${description}</div>
+<div class="task-date" id="taskDate"> Due date:${date}</div>
+<div class="task-priority" id="taskPriority"> Priority:  ${priority}<img src=${path}></div>
+<div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
+<div id="popup${taskId}"></div> 
+
+<div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
+<div id="subtasks${taskId}"></div>
+
+
+<div class="popup-buttons"> 
+  <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
+  <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
+  <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
+  
+</div>
+</div>
   `;
 
   setTimeout(async () => {
