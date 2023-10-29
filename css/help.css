@@ -1,0 +1,31 @@
+.header-arrow-container {
+   
+    display: flex;
+    justify-content: space-between;
+}
+.header-arrow-container h1 {
+    font-size: 52px;
+}
+.content {
+    width: 80%;
+    
+    margin: 10px;
+    
+}
+.main-container {
+    display: flex;
+    justify-content: center;
+}
+.join {
+    color: rgb(116,167,255);
+}
+.dark-blue {
+   color:  rgb(0,93,255);
+   font-size: 32px;
+   font-weight: bold;
+}
+.help-how {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
