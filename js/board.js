@@ -379,6 +379,7 @@ async function showTask(id) {
   };
 
   const popupDiv = document.createElement("div");
+  
   popupDiv.className = "popup-div";
   popupDiv.innerHTML = /*html*/ `
     <div class="task-container" id="taskContainer-id">

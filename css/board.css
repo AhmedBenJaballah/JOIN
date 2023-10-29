@@ -292,6 +292,7 @@ font-size: 15px;
   border-radius: 40px;
   opacity: 0; 
   overflow-y: scroll;
+  
 }
 .popup-buttons {
   display: flex;
