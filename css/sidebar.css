@@ -52,3 +52,11 @@
     color: rgb(69,137,255) !important ;
 }
 
+.privacyLegalSignUp.active {
+    background-color: rgb(69,137,255);
+
+}
+.privacyLegalSignUp:active {
+  background-color:   rgb(210, 227, 255);
+}   
+
