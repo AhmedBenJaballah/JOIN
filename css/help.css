@@ -9,7 +9,7 @@
 .content {
     width: 80%;
     
-    margin: 10px;
+    overflow-y: scroll;
     
 }
 .main-container {
@@ -28,4 +28,9 @@
     display: flex;
     flex-direction: row;
     gap: 40px;
+}
+.main-container{
+    overflow-y: scroll;
+   
+    height: calc(100vh - 80px);
 }

@@ -61,3 +61,7 @@ align-items: center;
   .dNone{
     display: none;
   }
+  .help-icon:hover {
+    transform: scale(1.1);
+  }
+  
