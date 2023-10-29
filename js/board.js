@@ -381,33 +381,31 @@ async function showTask(id) {
   const popupDiv = document.createElement("div");
   popupDiv.className = "popup-div";
   popupDiv.innerHTML = /*html*/ `
-<div id='popCon'>
-<div class="task-container" id="taskContainer-id">
-<div class="${
-  category === "Technical Task" ? "blueStyle" : "orangeStyle"
-}">${category} 
-</div> 
-<button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
-</div>
+    <div class="task-container" id="taskContainer-id">
+      <div class="${
+        category === "Technical Task" ? "blueStyle" : "orangeStyle"
+      }">${category} 
+      </div> 
+      <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
+    </div>
+    
+    <div class="taskTitle" id="taskTitle">${title} </div>
+    <div class="descTask" id="taskDesc">${description}</div>
+    <div class="task-date" id="taskDate"> Due date:${date}</div>
+    <div class="task-priority" id="taskPriority"> Priority:  ${priority}<img src=${path}></div>
+    <div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
+    <div id="popup${taskId}"></div> 
+    
+    <div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
+    <div id="subtasks${taskId}"></div>
+    
 
-<div class="taskTitle" id="taskTitle">${title} </div>
-<div class="descTask" id="taskDesc">${description}</div>
-<div class="task-date" id="taskDate"> Due date:${date}</div>
-<div class="task-priority" id="taskPriority"> Priority:  ${priority}<img src=${path}></div>
-<div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
-<div id="popup${taskId}"></div> 
-
-<div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
-<div id="subtasks${taskId}"></div>
-
-
-<div class="popup-buttons"> 
-  <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
-  <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
-  <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
-  
-  </div>
-</div>
+    <div class="popup-buttons"> 
+        <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
+        <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
+        <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
+        
+    </div>
   `;
 
   setTimeout(async () => {
@@ -539,12 +537,10 @@ async function editTask(id) {
   let dialog = document.getElementById("dialog");
   dialog.remove();
   addTaskSection.innerHTML = `
-  <div id='popCon2'>
-  <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
-  <div w3-include-html="includes/add-task-template.html"></div>
-  <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
-  </div>
-  </div>
+    <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
+    <div w3-include-html="includes/add-task-template.html"></div>
+    <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
+    </div>
 
   `;
 
