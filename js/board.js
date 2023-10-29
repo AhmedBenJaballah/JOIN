@@ -417,7 +417,7 @@ async function showTask(id) {
   <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
   <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
   
-</div>
+  </div>
 </div>
 </div
   `;
@@ -551,10 +551,12 @@ async function editTask(id) {
   let dialog = document.getElementById("dialog");
   dialog.remove();
   addTaskSection.innerHTML = `
-    <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
-    <div w3-include-html="includes/add-task-template.html"></div>
-    <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
-    </div>
+  <div id='popCon2'>
+  <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
+  <div w3-include-html="includes/add-task-template.html"></div>
+  <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
+  </div>
+  </div>
 
   `;
 
