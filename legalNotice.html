@@ -16,6 +16,11 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="./css/legalAndPolcy.css">
+    <script>
+        function goBack(){
+            window.history.back();
+        }
+    </script>
 </head>
 
 <body onload="init()">
@@ -25,8 +30,8 @@
         <div class='impressum'>
             <div class="header-arrow-container">
                 <h1>Impressum</h1>
-                <a class="btn-icon-32x32" href="./privacyPolicy.html">
-                    <img src="../grafiken/arrow-left-line.png" alt="arrow left">
+                <a class="btn-icon-32x32">
+                    <img src="../grafiken/arrow-left-line.png" alt="arrow left" onclick="goBack()" style="cursor: pointer;">
                 </a>
             </div>
             <p>Angaben gemäß § 5 TMG</p>
