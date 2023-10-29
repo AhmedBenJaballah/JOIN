@@ -24,9 +24,9 @@ loadid();
 
 //loadcheckecdSubtasks();
 setTimeout(() => {
-  let summarySiebar = document.getElementById("boardSidebar");
-  summarySiebar.style.backgroundColor = "#D2E3FF";
-  summarySiebar.style.borderRadius = "8px";
+  let summarySiebar=document.getElementById('boardSidebar');
+  summarySiebar.style.backgroundColor='#D2E3FF';
+  summarySiebar.style.borderRadius='8px';
 }, 200);
 
 setTimeout(() => {
@@ -74,13 +74,12 @@ function renderHTML() {
   task.classList.add("newCreatedTask");
   task.innerHTML = "";
   amountToDo = toDo.length;
-  if (amountToDo == 0) {
-    task.innerHTML =
-      /*html */
-      `
+  if(amountToDo==0){
+    task.innerHTML = /*html */
+    `
     <div class="createdTask2"> No Tasks 'To Do'</div>
     `;
-  }
+  } 
   for (let i = 0; i < toDo.length; i++) {
     console.log(toDo[i]["id"]);
     renderAllTasks("todo", i, toDo, task);
@@ -92,13 +91,12 @@ function renderHTML() {
   task2.classList.add("newCreatedTask");
   task2.innerHTML = "";
   amountInProgress = inProgress.length;
-  if (amountInProgress == 0) {
-    task2.innerHTML =
-      /*html */
-      `
+  if(amountInProgress==0){
+    task2.innerHTML = /*html */
+    `
     <div class="createdTask2"> No Tasks 'in Progress'</div>
     `;
-  }
+  } 
   for (let i = 0; i < inProgress.length; i++) {
     console.log(inProgress[i]["id"]);
     renderAllTasks("inProgress", i, inProgress, task2);
@@ -110,13 +108,12 @@ function renderHTML() {
   task3.classList.add("newCreatedTask");
   task3.innerHTML = "";
   amountAawaitFeedback = awaitFeedback.length;
-  if (amountAawaitFeedback == 0) {
-    task3.innerHTML =
-      /*html */
-      `
+  if(amountAawaitFeedback==0){
+    task3.innerHTML = /*html */
+    `
     <div class="createdTask2"> No Tasks 'await feedback'</div>
     `;
-  }
+  } 
   for (let i = 0; i < awaitFeedback.length; i++) {
     console.log(awaitFeedback[i]["id"]);
     renderAllTasks("awaitFeedback", i, awaitFeedback, task3);
@@ -128,13 +125,12 @@ function renderHTML() {
   task4.classList.add("newCreatedTask");
   task4.innerHTML = "";
   amountDone = done.length;
-  if (amountDone == 0) {
-    task4.innerHTML =
-      /*html */
-      `
+  if(amountDone==0){
+    task4.innerHTML = /*html */
+    `
     <div class="createdTask2"> No Tasks 'Done'</div>
     `;
-  }
+  } 
   for (let i = 0; i < done.length; i++) {
     console.log(done[i]["id"]);
     renderAllTasks("dones", i, done, task4);
@@ -143,12 +139,13 @@ function renderHTML() {
 
 function renderAllTasks(idInitials, i, tasks, task) {
   const title = tasks[i]["title"];
-  let description = tasks[i]["description"].replace(/\n/g, "<br>");
-  const descriptionLines = description.split("<br>");
+  let description = tasks[i]["description"].replace(/\n/g, '<br>');
+  const descriptionLines = description.split('<br>');
 
-  if (descriptionLines.length > 2) {
-    description = descriptionLines.slice(0, 2).join("<br>") + "...";
-  }
+
+if (descriptionLines.length > 2) {
+    description = descriptionLines.slice(0, 2).join('<br>') + '...';
+}
 
   const date = tasks[i]["date"];
   const priority = tasks[i]["priority"];
@@ -183,7 +180,7 @@ function renderAllTasks(idInitials, i, tasks, task) {
 }
 
 function startDragging(id) {
-  currentDraggedElement = id;
+  currentDraggedElement = id ;
 }
 
 function allowDrop(ev) {
@@ -210,6 +207,7 @@ async function moveTo(category) {
     },
   ];
   await setItem("amount", JSON.stringify(amount));
+  
 }
 
 function selectPath(priority) {
@@ -294,75 +292,67 @@ async function createTask2() {
   const taskDate = document.getElementById("task-date").value;
   const category = document.querySelector(".category-select").value;
 
-  if (
-    taskTitle === "" ||
-    taskDate === "" ||
-    category === "Select task category"
-  ) {
+  if (taskTitle === "" || taskDate === "" || category === "Select task category") {
     if (taskTitle === "") {
-      document.getElementById("task-title").style.borderBottom =
-        "2px solid red";
-      document.getElementById("task-title").style.color = "red";
+        document.getElementById("task-title").style.borderBottom = "2px solid red";
+        document.getElementById("task-title").style.color = "red";
     } else {
-      document.getElementById("task-title").style.borderBottom =
-        "1px solid black";
-      document.getElementById("task-title").style.color = "black";
+        document.getElementById("task-title").style.borderBottom = "1px solid black";
+        document.getElementById("task-title").style.color = "black";
     }
 
     if (taskDate === "") {
-      document.getElementById("task-date").style.borderBottom = "2px solid red";
-      document.getElementById("task-date").style.color = "red";
+        document.getElementById("task-date").style.borderBottom = "2px solid red";
+        document.getElementById("task-date").style.color = "red";
     } else {
-      document.getElementById("task-date").style.borderBottom =
-        "1px solid black";
-      document.getElementById("task-date").style.color = "black";
+        document.getElementById("task-date").style.borderBottom = "1px solid black";
+        document.getElementById("task-date").style.color = "black";
     }
 
     if (category === "Select task category") {
-      document.querySelector(".category-select").style.borderBottom =
-        "2px solid red";
-      document.querySelector(".category-select").style.color = "red";
+        document.querySelector(".category-select").style.borderBottom = "2px solid red";
+        document.querySelector(".category-select").style.color = "red";
     } else {
-      document.querySelector(".category-select").style.borderBottom =
-        "1px solid black";
-      document.querySelector(".category-select").style.color = "black";
+        document.querySelector(".category-select").style.borderBottom = "1px solid black";
+        document.querySelector(".category-select").style.color = "black";
     }
-  } else {
-    idCounter++;
-    tasks.push({
-      title: taskTitle,
-      description: taskDescription,
-      date: taskDate,
-      priority: priority,
-      assigned: checkecdContacts,
-      category: category,
-      subtasks: subtasks,
-      taskCategory: selectedTaskCategory,
-      id: idCounter,
-    });
-    await setItem("tasks", JSON.stringify(tasks));
-    await setItem("idCounter", JSON.stringify(idCounter));
-    tasks = JSON.parse(await getItem("tasks"));
-    contacts = JSON.parse(await getItem("contacts"));
+} else{
 
-    const task = document.getElementById(selectedTaskCategory);
-    task.classList.remove("createdTask3");
-    task.classList.add("newCreatedTask");
-    //task.innerHTML = "";
-    let i = tasks.length - 1;
+  idCounter++;
+  tasks.push({
+    title: taskTitle,
+    description: taskDescription,
+    date: taskDate,
+    priority: priority,
+    assigned: checkecdContacts,
+    category: category,
+    subtasks: subtasks,
+    taskCategory: selectedTaskCategory,
+    id: idCounter,
+  });
+  await setItem("tasks", JSON.stringify(tasks));
+  await setItem("idCounter", JSON.stringify(idCounter));
+  tasks = JSON.parse(await getItem("tasks"));
+  contacts = JSON.parse(await getItem("contacts"));
 
-    renderAllTasks(selectedTaskCategory, i, tasks, task);
+  const task = document.getElementById(selectedTaskCategory);
+  task.classList.remove("createdTask3");
+  task.classList.add("newCreatedTask");
+  //task.innerHTML = "";
+  let i = tasks.length - 1;
 
-    const popup = document.getElementById("popup");
-    popup.classList.add("show");
+  renderAllTasks(selectedTaskCategory, i, tasks, task);
 
-    setTimeout(function () {
-      popup.classList.remove("show");
-      closeSidebar();
-    }, 1000);
-    subtasks = [];
-    renderHTML();
-  }
+  const popup = document.getElementById("popup");
+  popup.classList.add("show");
+
+  setTimeout(function () {
+    popup.classList.remove("show");
+    closeSidebar();
+  }, 1000);
+  subtasks = [];
+  renderHTML();
+}
 }
 
 async function showTask(id) {
@@ -389,37 +379,33 @@ async function showTask(id) {
   };
 
   const popupDiv = document.createElement("div");
-
   popupDiv.className = "popup-div";
   popupDiv.innerHTML = /*html*/ `
-<div id='popCon'>
-<div class="task-container" id="taskContainer-id">
-<div class="${
-    category === "Technical Task" ? "blueStyle" : "orangeStyle"
-  }">${category} 
-</div> 
-<button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
-</div>
+    <div class="task-container" id="taskContainer-id">
+      <div class="${
+        category === "Technical Task" ? "blueStyle" : "orangeStyle"
+      }">${category} 
+      </div> 
+      <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
+    </div>
+    
+    <div class="taskTitle" id="taskTitle">${title} </div>
+    <div class="descTask" id="taskDesc">${description}</div>
+    <div class="task-date" id="taskDate"> Due date:${date}</div>
+    <div class="task-priority" id="taskPriority"> Priority:  ${priority}<img src=${path}></div>
+    <div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
+    <div id="popup${taskId}"></div> 
+    
+    <div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
+    <div id="subtasks${taskId}"></div>
+    
 
-<div class="taskTitle" id="taskTitle">${title} </div>
-<div class="descTask" id="taskDesc">${description}</div>
-<div class="task-date" id="taskDate"> Due date:${date}</div>
-<div class="task-priority" id="taskPriority"> Priority:  ${priority}<img src=${path}></div>
-<div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
-<div id="popup${taskId}"></div> 
-
-<div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
-<div id="subtasks${taskId}"></div>
-
-
-<div class="popup-buttons"> 
-  <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
-  <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
-  <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
-  
-  </div>
-</div>
-</div
+    <div class="popup-buttons"> 
+        <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
+        <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
+        <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
+        
+    </div>
   `;
 
   setTimeout(async () => {
@@ -512,7 +498,7 @@ async function updateProgress(subtasks, taskId, k) {
   overlay.addEventListener("click", closePopup);
 }
 
-function closePopup() {
+  function closePopup() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none";
   const popupDiv = document.querySelector(".popup-div");
@@ -551,12 +537,10 @@ async function editTask(id) {
   let dialog = document.getElementById("dialog");
   dialog.remove();
   addTaskSection.innerHTML = `
-  <div id='popCon2'>
-  <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
-  <div w3-include-html="includes/add-task-template.html"></div>
-  <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
-  </div>
-  </div>
+    <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
+    <div w3-include-html="includes/add-task-template.html"></div>
+    <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
+    </div>
 
   `;
 
@@ -644,7 +628,7 @@ async function applyModifications(id) {
   }, 500);
 }
 
-async function closePopup2() {
+  async function closePopup2() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none";
   const popupDiv = document.querySelector(".popup-div");
@@ -692,9 +676,9 @@ function findTask() {
 }
 
 function highlight(id) {
-  document.getElementById(id).classList.add("drag-area-highlight");
+  document.getElementById(id).classList.add('drag-area-highlight');
 }
 
 function removeHighlight(id) {
-  document.getElementById(id).classList.remove("drag-area-highlight");
+  document.getElementById(id).classList.remove('drag-area-highlight');
 }
