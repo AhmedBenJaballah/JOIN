@@ -48,14 +48,26 @@ align-items: center;
     right:4px;
     padding-top: 4px;
     padding-bottom: 4px;
+    padding-left: 4px;
     
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+
+  }
+  #options a {
+    text-decoration: none;
+    color: black;
+  }
+  #options a:hover {
+    background-color:rgb(210,227,255); 
   }
 
   .option{
     cursor: pointer;
+  }
+  .option:hover {
+    background-color: rgb(210,227,255);
   }
 
   .dNone{
