@@ -1,5 +1,3 @@
-
- 
 let checkecdContacts = [];
 let tasks = [];
 let subtasks = [];
@@ -11,18 +9,18 @@ setTimeout(() => {
   setDate();
 }, 1000);
 
-function setDate(){
+function setDate() {
   const taskDateInput = document.getElementById("task-date");
   const today = new Date();
   const formattedDate = today.toISOString().split("T")[0];
   taskDateInput.setAttribute("min", formattedDate);
 }
 
-if (window.location.href.includes('addTask')) {
+if (window.location.href.includes("addTask")) {
   setTimeout(() => {
-    let summarySie = document.getElementById('addTaskSidebar');
-    summarySie.style.backgroundColor = '#D2E3FF';
-    summarySie.style.borderRadius = '8px';
+    let summarySie = document.getElementById("addTaskSidebar");
+    summarySie.style.backgroundColor = "#D2E3FF";
+    summarySie.style.borderRadius = "8px";
   }, 200);
 }
 
@@ -200,9 +198,8 @@ function getPriority(selected) {
         priority = "";
         break;
       }
-      default:
-     
-        priority = "low";
+    default:
+      priority = "low";
   }
 }
 
@@ -220,63 +217,68 @@ function addSubtask() {
 /////////////////////////////////////////Ahmed//////////////////////////////////
 
 async function createTask() {
-
   const taskTitle = document.getElementById("task-title").value;
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date").value;
- 
+
   const category = document.querySelector(".category-select").value;
 
-  if (taskTitle === "" || taskDate === "" || category === "Select task category") {
+  if (
+    taskTitle === "" ||
+    taskDate === "" ||
+    category === "Select task category"
+  ) {
     if (taskTitle === "") {
-        document.getElementById("task-title").style.borderBottom = "2px solid red";
-        document.getElementById("task-title").style.color = "red";
+      document.getElementById("task-title").style.borderBottom =
+        "2px solid red";
+      document.getElementById("task-title").style.color = "red";
     } else {
-        document.getElementById("task-title").style.borderBottom = "1px solid black";
-        document.getElementById("task-title").style.color = "black";
+      document.getElementById("task-title").style.borderBottom =
+        "1px solid black";
+      document.getElementById("task-title").style.color = "black";
     }
 
     if (taskDate === "") {
-        document.getElementById("task-date").style.borderBottom = "2px solid red";
-        document.getElementById("task-date").style.color = "red";
+      document.getElementById("task-date").style.borderBottom = "2px solid red";
+      document.getElementById("task-date").style.color = "red";
     } else {
-        document.getElementById("task-date").style.borderBottom = "1px solid black";
-        document.getElementById("task-date").style.color = "black";
+      document.getElementById("task-date").style.borderBottom =
+        "1px solid black";
+      document.getElementById("task-date").style.color = "black";
     }
 
     if (category === "Select task category") {
-        document.querySelector(".category-select").style.borderBottom = "2px solid red";
-        document.querySelector(".category-select").style.color = "red";
+      document.querySelector(".category-select").style.borderBottom =
+        "2px solid red";
+      document.querySelector(".category-select").style.color = "red";
     } else {
-        document.querySelector(".category-select").style.borderBottom = "1px solid black";
-        document.querySelector(".category-select").style.color = "black";
+      document.querySelector(".category-select").style.borderBottom =
+        "1px solid black";
+      document.querySelector(".category-select").style.color = "black";
     }
-} else{
+  } else {
+    idCounter++;
+    tasks.push({
+      title: taskTitle,
+      description: taskDescription,
+      date: taskDate,
+      priority: priority,
+      assigned: checkecdContacts,
+      category: category,
+      subtasks: subtasks,
+      taskCategory: "toDo",
+      id: idCounter,
+    });
+    await setItem("tasks", JSON.stringify(tasks));
+    await setItem("idCounter", JSON.stringify(idCounter));
 
-  
-  idCounter++;
-  tasks.push({
-    title: taskTitle,
-    description: taskDescription,
-    date: taskDate,
-    priority: priority,
-    assigned: checkecdContacts,
-    category: category,
-    subtasks: subtasks,
-    taskCategory: "toDo",
-    id: idCounter,
-  });
-  await setItem("tasks", JSON.stringify(tasks));
-  await setItem("idCounter", JSON.stringify(idCounter));
-
-  const popup = document.getElementById("popup");
-  popup.classList.add("show");
-  setTimeout(function () {
-    popup.classList.remove("show");
-    window.location.href = "board.html";
-  }, 1000);
-}
-  
+    const popup = document.getElementById("popup");
+    popup.classList.add("show");
+    setTimeout(function () {
+      popup.classList.remove("show");
+      window.location.href = "board.html";
+    }, 1000);
+  }
 }
 
 // Definieren Sie die Funktion clearTask, aber fügen Sie den Eventlistener erst hinzu, nachdem das Dokument vollständig geladen wurde.
@@ -294,10 +296,13 @@ function clearTask() {
   taskDate.value = "";
 
   // Radio-Buttons zurücksetzen
-  const radioButtons = document.querySelectorAll('.radioBtn');
+  const radioButtons = document.querySelectorAll(".radioBtn");
   radioButtons.forEach((radioButton) => {
     // Überprüfen, ob das Radio-Button ausgewählt ist, und es abwählen
-    if (radioButton.style.backgroundColor !== "white" && radioButton.style.backgroundColor !== "") {
+    if (
+      radioButton.style.backgroundColor !== "white" &&
+      radioButton.style.backgroundColor !== ""
+    ) {
       radioButton.style.backgroundColor = "white";
       radioButton.style.color = "black";
       // Hier können Sie auch die Bilder zurücksetzen, falls erforderlich
@@ -375,3 +380,7 @@ function clearSelection() {
   // Auswahl zurücksetzen
   selectedContact = null;
 }
+
+
+
+

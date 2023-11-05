@@ -6,73 +6,81 @@
 <script src="../js/addTask.js"></script>
 
 
-<script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-  />
+    </script>
+    <script>
+        const inputDropdown = document.getElementById("inputDropdown");
+        const dropdownAssign = document.getElementById("dropdown-assign");
+
+        inputDropdown.addEventListener("click", () => {
+            dropdownAssign.classList.add("hidden");
+        });
+
+        inputDropdown.addEventListener("mouseout", () => {
+            dropdownAssign.classList.remove("hidden");
+        });
+    </script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
 
 
-    <!-- <h3>Add Task</h3> -->
+<!-- <h3>Add Task</h3> -->
 
 
-    <form id="task-form"  >
-        <label for="task-title"></label>
-        <input type="text" id="task-title" name="task-title" required placeholder="Enter a title">
+<form id="task-form">
+    <label for="task-title"></label>
+    <input type="text" id="task-title" name="task-title" required placeholder="Enter a title">
+    <br>
+    <label class="task-description" for="task-description">Description(optional)</label><br>
+    <textarea id="task-description" name="task-description" rows="3" cols="34"
+        placeholder="Enter a Description"></textarea>
+    <br>
+    <label class="task-date" for="task-date">Due date</label><br>
+    <input type="date" name="task-date" id="task-date" required placeholder="/mm/yyyy">
+
+    <p>Priority(optional) <br></p>
+    <div class="radio-group">
+        <button type="button" id="urgent" class="radioBtn" onclick="getPriority('urgent')">Urgent <img id="imgUrgent"
+                src="../grafiken/Capa2-prio.png" alt=""></button>
+        <button type="button" id="medium" class="radioBtn" onclick="getPriority('medium')">Medium <img id="imgMedium"
+                src="../grafiken/Capa2-medium.png" alt=""></button>
+        <button type="button" id="low" class="radioBtn" onclick="getPriority('low')">Low <img id="imgLow"
+                src="../grafiken/Capa2-low.png" alt=""></button>
         <br>
-        <label class="task-description" for="task-description">Description(optional)</label><br>
-        <textarea id="task-description" name="task-description" rows="3" cols="34"
-            placeholder="Enter a Description"></textarea>
+        <label for="assigned" class="assigned" id="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
+
+
+            <div id="inputDropdown" onclick="tryContact()" class="dropdown"> <span id="dropdown-assign"
+                    class="dropdown-assign">Select contacts to assign</span><i id="dropIcon"
+                    class="bi bi-caret-down-fill"></i></div>
+            <div id="dropdown" class="dropdown"></div>
+
+
+        </label><br>
+        <label for="category" class="category">Category<br>
+            <select class="category-select" id="catSel">
+                <option disabled selected>Select task category</option>
+                <option>Technical Task</option>
+                <option>User Story</option>
+            </select>
+        </label><br>
         <br>
-        <label class="task-date" for="task-date">Due date</label><br>
-        <input type="date" name="task-date" id="task-date" required placeholder="/mm/yyyy">
+        <label for="subtasks" class="subtasks">Subtasks(optional)<br>
+            <div id="subtask-section">
+                <input type="text" id="subtasks" placeholder="Add new subtask" aria-hidden="true">
+                <img src="/grafiken/add.png" onclick="addSubtask()" class="subtask-plus">
+            </div>
 
-        <p>Priority(optional) <br></p>
-        <div class="radio-group">
-            <button type="button" id="urgent" class="radioBtn"  onclick="getPriority('urgent')">Urgent <img id="imgUrgent" src="../grafiken/Capa2-prio.png" alt=""></button>
-            <button type="button" id="medium" class="radioBtn" onclick="getPriority('medium')">Medium <img id="imgMedium" src="../grafiken/Capa2-medium.png" alt=""></button>
-            <button type="button" id="low" class="radioBtn" onclick="getPriority('low')">Low <img id="imgLow" src="../grafiken/Capa2-low.png" alt=""></button>
-            <br>
-            <label for="assigned" class="assigned" id="assigned">Assigned to(optional) <br> <!--einbinden von contacts-->
+        </label>
 
-
-                <div id="inputDropdown" onclick="tryContact()" class="dropdown"> <i id="dropIcon" class="bi bi-caret-down-fill" placeholder="Select contacts to assign"></i></div>
-                <div id="dropdown" class="dropdown"></div>
-
-
-            </label><br>
-            <label for="category" class="category">Category<br>
-                <select class="category-select" id="catSel">
-                    <option disabled selected>Select task category</option>
-                    <option>Technical Task</option>
-                    <option>User Story</option>
-                </select>
-            </label><br>
-            <br>
-            <label for="subtasks" class="subtasks">Subtasks(optional)<br>
-                <div id="subtask-section">
-                    <input type="text" id="subtasks" placeholder="Add new subtask" aria-hidden="true">
-                    <img src="/grafiken/add.png" onclick="addSubtask()" class="subtask-plus">
-                </div>
-
-            </label>
-
-        </div>
-
-    </form>
-
-    <div class="popup" id="popup">
-        <p>Task added to board <img src="/grafiken/addedboard.png" ></p>
     </div>
 
+</form>
+
+<div class="popup" id="popup">
+    <p>Task added to board <img src="/grafiken/addedboard.png"></p>
+</div>

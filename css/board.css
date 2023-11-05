@@ -67,7 +67,6 @@
   overflow-y: scroll;
 }
 
-
 .boardTitle{
   font-weight: bold;
 }
@@ -88,6 +87,7 @@
  border: 1px solid (6, 6, 146);
   cursor: pointer;
 }
+
 .addSidebar {
   background-color: rgba(255, 255, 255, 0.6);
   z-index: 999;
@@ -125,8 +125,6 @@ background: white !important;
 border-radius: 10px;
 }
 
-
-
 .add-task-section{
 width: calc(100vw - 200px);
 height: calc(100vh - 80px);
@@ -137,7 +135,7 @@ margin-right: calc(100vw - 700px);
 
 .newTask{
 width:98%;
-
+cursor: pointer;
 box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
 padding: 10px;
 display: flex;
@@ -147,12 +145,13 @@ align-items: flex-start;
 flex-direction: column;
 border-radius: 15px;
 margin-top: 20px;
-
 }
 
+.newTask:active {
+  transform: rotate(1deg);
+}
 
 .newCreatedTask{
-
 width: 100%;
 padding-bottom: 20px;
 height: calc(100vh - 260px);
@@ -162,8 +161,6 @@ align-items: center;
 overflow-y: scroll;
 
 }
-
-
 .renderedTaskTitle{
 display: flex;
 flex-direction: column;
@@ -182,19 +179,20 @@ background-color: rgb(228, 127, 69);
 color: white;
 padding: 4px;
 border-radius: 10px;
-
-
 }
+
 .popup-div .orangeStyle{
 font-size: 25px;
 width: 250px;
 margin: 28px 30px;
 }
+
 .popup-div .blueStyle{
 font-size: 25px;
 width: 250px;
 margin: 28px 30px;
 }
+
 .taskTitle{
 color: #4589FF;
 font-size: 30px;
@@ -204,11 +202,9 @@ font-weight: bold;
 .descTask{
 color: #ccc;
 font-size: 16px;
-
-  width: 100%; /* Die gewünschte Breite des Containers */
-  height: auto; /* Lassen Sie die Höhe automatisch anpassen */
-  word-wrap: break-word;
-
+width: 100%; 
+height: auto; 
+word-wrap: break-word;
 }
 
 .namePriority{
@@ -229,6 +225,7 @@ height: 40px;
 width: 40px;
 margin-left: -10px;
 }
+
 .names{
 display: flex;
 justify-content: center;
@@ -257,9 +254,11 @@ font-size: 15px;
 width: 50%;
 margin-right: 10px;
 }
+
 .add-task-section {
 margin :0 !important;
 }
+
 .ok-button {
 width: 70px;
 height: 60px;
@@ -273,11 +272,11 @@ bottom: -40px;
 left: 400px;
 cursor: pointer;
 }
+
 .ok-button:hover {
 background-color: rgb(0,93,255);
 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
 }
-
 
 .popup-div {
 position: fixed;
@@ -293,42 +292,45 @@ border-radius: 40px;
 opacity: 0; 
 overflow-y: scroll;
 }
+
 .popup-buttons {
 display: flex;
 justify-content:flex-end;
 padding: 10px;
 position: absolute;
-
 right: 10px;
 font-size: 20px;
 font-weight: bold;
 }
+
 .popup-buttons img {
 width: 19px;
 height: 20px;
 margin-right: 10px;
 vertical-align:middle ;
-
 }
+
 .delete-button {
 background: none;
 border: none;
 cursor: pointer;
 }
+
 .delete-button:hover {
 font-weight: bold;
 color: rgb(0,93,255);
 }
+
 .edit-button {
 background: none;
 border: none;
 cursor: pointer;
 }
+
 .edit-button:hover {
 color:rgb(0,93,255);
 font-weight: bold;
 }
-
 
 .popup-div.show {
 transform: translateX(-50%) translateY(-100%); 
@@ -344,9 +346,11 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 }
+
 .none {
 display: none;
 }
+
 .apply-button {
 background-color: rgb(69,137,255);
 color: white;
@@ -358,12 +362,12 @@ font-size: 20px;
 margin: 20px;
 margin-left: 400px;
 }
+
 .divider img {
 width: 10%;
 height: 20px;
 background-color: rgb(209,209,209);
 }
-
 
 .popup-close-button  {
 cursor: pointer;
@@ -373,6 +377,7 @@ position: relative;
 top: 35px;
 left: 435px;
 }
+
 .apply-button:hover {
 background-color: rgb(69, 69, 228);
 transition: 0.3s ease-in-out;
@@ -383,37 +388,42 @@ outline:none;
 .popup-close-button:hover {
 color: #f00;
 }
+
 .close-button {
 background: none;
 border: none;
 cursor: pointer;
 margin-right: 30px;
 }
+
 .task-container {
 display: flex;
 justify-content: space-between;
 align-items: center;
-/* Weitere Styles nach Bedarf hinzufügen */
 }
+
 .popup-div .taskTitle {
-font-size: 68px;
+font-size: 50px;
 color: black;
 font-weight: bold;
 margin-right: 30px;
 margin-left: 30px;
 }
+
 .popup-div .descTask {
 font-size: 29px;
 margin-right: 30px;
 margin-left: 30px;
 color: black;
 }
+
 .popup-div .task-date {
 color: rgb(66,82,110);
 margin-top: 10px;
 font-weight: bold;
 font-size: 29px;
 }
+
 .popup-div .task-priority {
 color: rgb(66,82,110);
 margin-top: 10px;
@@ -422,6 +432,7 @@ font-size: 29px;
 margin-left: 30px;
 margin-top: 20px;
 }
+
 .popup-div .task-assigned {
 color: rgb(66,82,110);
 margin-top: 10px;
@@ -430,6 +441,7 @@ font-size: 29px;
 margin-left: 30px;
 margin-top: 20px;
 }
+
 .popup-div .popup-subtasks {
 color: rgb(66,82,110);
 margin-top: 10px;

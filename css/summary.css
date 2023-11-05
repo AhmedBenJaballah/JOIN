@@ -32,7 +32,7 @@ align-items: center;
 .summary-box {
     border: 1px solid #ccc;
     padding: 15px 35px;
-    margin:30px;
+    margin: 10px;
     background-color: rgb(69,137,255);
     border-radius: 25px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -82,7 +82,7 @@ align-items: center;
 }
 .tasks{
     width: 150px;
-    height: 150px;
+    height: 160px;
     margin: 30px;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);

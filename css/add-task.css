@@ -9,6 +9,7 @@ body {
   display: flex;
 }
 
+
 #task-title {
   border: none;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
@@ -155,6 +156,9 @@ label > img {
   color: rgb(66,82,110);
   font-weight: bold;
 }
+.category-select:hover {
+  border-color: rgb(0,93,255);
+}
 .category-select:focus {
   border-bottom: 2px solid rgb(69, 137, 255);
 }
@@ -169,6 +173,10 @@ label > img {
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
   width: 400px;
+}
+#subtasks:hover {
+  border-color: rgb(0,93,255);
+
 }
 .subtask-plus {
   position: relative;
@@ -289,6 +297,18 @@ label > img {
   display: flex;
   justify-content: flex-end;
 }
+#inputDropdown:hover {
+  border-color: rgb(0,93,255);
+}
+.dropdown-assign {
+  font-weight: 400;
+  position: relative;
+  right: 110px;
+  color: black;
+}
+.hidden {
+  display: none;
+}
 
 #dropdown {
   overflow-y: scroll;
@@ -351,4 +371,17 @@ label > img {
 }
 .white-image{
   filter: brightness(0%) invert(100%);
+}
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+input[type="date"] {
+    background-image: url('/grafiken/event.png');
+    background-size: 16px 16px; 
+    background-position: 98% center; 
+    background-repeat: no-repeat;
+}
+#task-form {
+  font-size: -2px !important;
 }
