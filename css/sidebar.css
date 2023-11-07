@@ -30,7 +30,7 @@
     border-radius: 8px !important;
 }
 #sidebar a:hover:not(#policy a) {
-    background-color: #D2E3FF !important;
+    background-color: #D2E3FF;
     border-radius: 8px !important;
 }
 
@@ -65,7 +65,7 @@
     color: #fff; 
 }
 
-@media(max-width:950px){
+@media(max-width:1040px){
 
 
     #sidebar{
@@ -84,7 +84,9 @@
         display: none 
     }
 
-
+    #menu img{
+        margin-right: 0px;
+    }
     
     #menu {
         text-decoration: none;
@@ -95,4 +97,24 @@
         justify-content: center;  
         margin-top: 0px;
     }
+
+    #menu a{
+        text-decoration: none;
+        color: #42526E; 
+        width: 160px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        flex-direction: column;
+        padding-left: 0px;
+       
+    }
+    #sidebar a:hover:not(#policy a){
+        background-color: transparent;
+        color: #337aec;
+        border-radius: 0px 
+    }
+
+
 }

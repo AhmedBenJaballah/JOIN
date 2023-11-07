@@ -77,3 +77,18 @@ align-items: center;
     transform: scale(1.1);
   }
   
+
+  @media(max-width:1040px){
+    header{
+      height: 60px;
+    }
+
+    #joinStartImage{
+      margin-left: 40px;
+      height: 30px;
+     }
+
+     #kanban span{
+      display: none;
+     }
+  }

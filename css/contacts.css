@@ -310,3 +310,46 @@
   display: none;
 }
 
+
+@media(max-width:950px){
+
+
+
+#scrollContacts {
+  box-shadow: none;
+  border-right: none;
+  width: 350px;
+}
+
+#contacts{
+  width: 350px;
+}
+
+/* #dialog{
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.joinHeader{
+height: 30vh;
+border-top-right-radius: 15px;
+border-top-left-radius: 15px;
+}
+.contentsidebarRight{
+  height: 90vh;
+}
+.addContactSidebarContainer{
+  height: 60vh;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+} */
+
+#imgRight{
+  display: none;
+}
+#cancelBtn{
+  display: none;
+}
+}
+

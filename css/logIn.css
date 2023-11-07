@@ -187,3 +187,19 @@
     left: 8px;
 }
 
+@media(max-width:1040px){
+
+#logInContainer{
+    width: 300px;
+}
+#joinStartImage{
+    width: 40px !important;
+}
+#signUpBtnContainer{
+    position: absolute;
+    bottom: 80px;
+    top: auto;
+    right: auto;
+}
+}
+

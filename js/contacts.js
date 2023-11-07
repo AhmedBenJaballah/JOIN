@@ -1,14 +1,36 @@
 let contacts=[];
 loadContacts();
-if (window.location.href.includes('contacts'))
-{setTimeout(() => {
-    let summarySiebar=document.getElementById('contactsSidebar');
-    summarySiebar.style.backgroundColor='#D2E3FF';
-    summarySiebar.style.borderRadius='8px';
-  }, 200);}
+
+setSidebarStyles();
+window.addEventListener('resize', setSidebarStyles);
+
+
+
+
+  
 setTimeout(() => {
     getInitials();
 }, 1000);
+
+function setSidebarStyles(){
+    if (window.location.href.includes('contacts')) {
+        setTimeout(() => {
+          let summarySidebar = document.getElementById('contactsSidebar');
+          const windowWidth = window.innerWidth; 
+      
+          if (windowWidth < 950) {
+            summarySidebar.style.backgroundColor = 'transparent';
+            summarySidebar.style.color = '#337aec';
+    
+          } else {
+            summarySidebar.style.backgroundColor = '#D2E3FF';
+            summarySidebar.style.borderRadius = '8px';
+            summarySidebar.style.color = '#42526E';
+          }
+        }, 200);
+      }
+}
+
 
 
 
@@ -37,11 +59,27 @@ function addContact(){
     sidebarLeft.classList.add("displayNone");
     let sidebar = document.getElementById("sidebarRight");
     sidebar.classList.remove("displayNone");
-    
-    setTimeout(() => {
+
+    updateSidebarWidth();
+
+    window.addEventListener("resize", updateSidebarWidth);
+
+  
+}
+
+function updateSidebarWidth() {
+    const winWidth = window.innerWidth;
+    const sidebar = document.getElementById("sidebarRight");
+
+    // Wenn die Fensterbreite größer als 950 ist
+    if (winWidth > 950) {
         sidebar.style.transition = "width 0.1s ease";
         sidebar.style.width = "45vw";
-    }, 50);   
+    } else {
+        // Wenn die Fensterbreite kleiner oder gleich 950 ist, ändern Sie die Breite auf 350px
+        sidebar.style.transition = "width 0.1s ease";
+        sidebar.style.width = "350px";
+    }
 }
 
 function closeSidebar(){

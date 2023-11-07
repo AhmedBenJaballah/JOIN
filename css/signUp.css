@@ -113,3 +113,12 @@
     left: 8px;
 }
 
+@media(max-width:1040px){
+    #signUpContainer{
+        width: 330px !important;
+    }
+
+    #joinImage{
+        width: 40px;
+    }
+}
