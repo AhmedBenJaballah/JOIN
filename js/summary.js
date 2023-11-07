@@ -1,9 +1,29 @@
 loadAmount();
-setTimeout(() => {
-    let summarySiebar=document.getElementById('summarySiebar');
-    summarySiebar.style.backgroundColor='#D2E3FF';
-    summarySiebar.style.borderRadius='8px';
-}, 200);
+
+setSidebarStyles();
+window.addEventListener('resize', setSidebarStyles);
+
+function setSidebarStyles(){
+  if (window.location.href.includes('summary')) {
+      setTimeout(() => {
+        let summarySidebar = document.getElementById('summarySiebar');
+        const windowWidth = window.innerWidth; 
+
+
+    
+        if (windowWidth < 1040) {
+          summarySidebar.style.backgroundColor = 'transparent';
+          summarySidebar.style.color = '#337aec';
+  
+        } else {
+          summarySidebar.style.backgroundColor = '#D2E3FF';
+          summarySidebar.style.borderRadius = '8px';
+          summarySidebar.style.color = '#42526E';
+        }
+      }, 200);
+    }
+}
+
 setTimeout(() => {
     getInitials();
 }, 1000);

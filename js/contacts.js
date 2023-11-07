@@ -18,7 +18,7 @@ function setSidebarStyles(){
           let summarySidebar = document.getElementById('contactsSidebar');
           const windowWidth = window.innerWidth; 
       
-          if (windowWidth < 950) {
+          if (windowWidth < 1040) {
             summarySidebar.style.backgroundColor = 'transparent';
             summarySidebar.style.color = '#337aec';
     

@@ -5,6 +5,30 @@ let priority = "";
 let idCounter = 0;
 loadtasks();
 loadid();
+
+setSidebarStyles();
+window.addEventListener('resize', setSidebarStyles);
+
+function setSidebarStyles(){
+  if (window.location.href.includes('addTask')) {
+      setTimeout(() => {
+        let summarySidebar = document.getElementById('addTaskSidebar');
+        const windowWidth = window.innerWidth; 
+
+
+    
+        if (windowWidth < 1040) {
+          summarySidebar.style.backgroundColor = 'transparent';
+          summarySidebar.style.color = '#337aec';
+  
+        } else {
+          summarySidebar.style.backgroundColor = '#D2E3FF';
+          summarySidebar.style.borderRadius = '8px';
+          summarySidebar.style.color = '#42526E';
+        }
+      }, 200);
+    }
+}
 setTimeout(() => {
   setDate();
 }, 1000);
@@ -16,13 +40,7 @@ function setDate() {
   taskDateInput.setAttribute("min", formattedDate);
 }
 
-if (window.location.href.includes("addTask")) {
-  setTimeout(() => {
-    let summarySie = document.getElementById("addTaskSidebar");
-    summarySie.style.backgroundColor = "#D2E3FF";
-    summarySie.style.borderRadius = "8px";
-  }, 200);
-}
+
 
 async function loadtasks() {
   try {
