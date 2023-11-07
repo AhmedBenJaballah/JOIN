@@ -63,8 +63,8 @@ async function tryContact() {
           <div class="nameAndInitiales">
             <div class="roundNameDropdown" style="background-color:${
               contacts[i].color
-            }">${optionInitials}</div>
-            <div>${contacts[i].name}</div>
+            };border: 1px solid white;font-weight:400; font-size:18px">${optionInitials}</div>
+            <div style='font-weight:400;color:black'>${contacts[i].name}</div>
           </div>
           <input type="checkbox" onclick="getcha(${i})" id="${i}" ${
         isChecked ? "checked" : ""
@@ -98,7 +98,7 @@ async function tryContact() {
       select.innerHTML += /*html*/ `
       <div class="roundNameDropdown" style="background-color:${
         contacts[checkecdContacts[j]].color
-      }">
+      };border: 1px solid white;font-weight:400; font-size:18px"">
         ${optionInitials}
       </div>`;
     }

@@ -121,7 +121,7 @@ margin-right: 8px;
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-background: white !important;
+background: transparent !important;
 border-radius: 10px;
 }
 
@@ -440,6 +440,13 @@ font-weight: bold;
 font-size: 29px;
 margin-left: 30px;
 margin-top: 20px;
+}
+
+
+
+.noEffect{
+font-size: 18px;
+font-weight: 400;
 }
 
 .popup-div .popup-subtasks {

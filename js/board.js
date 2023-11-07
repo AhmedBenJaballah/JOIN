@@ -391,13 +391,13 @@ async function showTask(id) {
     
     <div class="taskTitle" id="taskTitle">${title} </div>
     <div class="descTask" id="taskDesc">${description}</div>
-    <div class="task-date" id="taskDate"> Due date:${date}</div>
-    <div class="task-priority" id="taskPriority"> Priority:  ${priority}<img src=${path}></div>
+    <div class="task-date" id="taskDate"> Due date:<span style="color:black;font-weight:400; margin-left:10px">${date}</span></div>
+    <div class="task-priority" id="taskPriority"> Priority:  <span style="color:black ;font-weight:400;margin-left:10px">${priority}</span><img src=${path} style='margin-left:10px'></div>
     <div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
-    <div id="popup${taskId}"></div> 
+    <div class="noEffect" id="popup${taskId}"></div> 
     
     <div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
-    <div id="subtasks${taskId}"></div>
+    <div class="noEffect" id="subtasks${taskId}"></div>
     
 
     <div class="popup-buttons"> 
@@ -422,7 +422,7 @@ async function showTask(id) {
                   }">
                     ${optionInitials} 
                   </div>
-                  <div>${contacts[assigned[j]].name}</div>
+                  <div style="color:black">${contacts[assigned[j]].name}</div>
                   </div>`;
     }
     subs = document.getElementById(`subtasks${taskId}`);
@@ -432,7 +432,7 @@ async function showTask(id) {
         (subtask) => subtask.k === k && subtask.taskId === taskId
       );
       subs.innerHTML += /*html*/ `
-        <div>
+        <div style='color:black'>
          <input type="checkbox" onclick="updateProgress(${
            subtasks.length
          },${taskId},${k})" class="check${taskId}"
