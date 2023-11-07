@@ -385,3 +385,13 @@ input[type="date"] {
 #task-form {
   font-size: -2px !important;
 }
+
+#dropIcon{
+  transform: scale(0.5);
+}
+
+
+
+/* Füge das Bootstrap-Icon für den Pfeil hinzu */
+
+
