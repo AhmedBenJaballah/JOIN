@@ -342,7 +342,7 @@ label > img {
 #btnsAddTask{
     position: fixed;
     bottom: 50px;
-    right:200px;
+    right:20px;
 }
 
 .radioBtn{
@@ -390,4 +390,119 @@ input[type="date"] {
   transform: scale(0.5);
 }
 
+@media(max-width:1040px){
 
+  #btnsAddTask{
+    background-color: white;
+    position: absolute;
+    bottom: 50px;
+    left:10px;
+    width: 420px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    
+  }
+
+  #clearFormAdTask{
+    display: none;
+  }
+
+  #task-form{
+    position: relative;
+    padding-bottom: 200px; 
+  }
+
+  .add-task-section{
+    width: 450px;
+  }
+
+  @media(max-width:470px){
+
+    .add-task-section{
+      width: 330px;
+      box-shadow: none;
+
+    }
+
+    #task-title{
+      width: 300px;
+      margin: 20px;
+      margin-left: 12px;
+    }
+
+    #task-description{
+      width: 300px;
+      margin: 20px;
+      margin-left: 12px;
+    }
+
+    .task-title{
+      margin-left: 12px;
+    }
+
+    .task-description{
+      margin-left: 12px;
+    }
+    #task-date{
+      width: 300px;
+      margin: 20px;
+      margin-left: 12px;
+    }
+
+    #btnsAddTask{
+      width: 330px;
+      left:0px;
+    }
+
+    #subtasks{
+      width: 298px;
+    }
+
+    #catSel{
+      width: 300px;
+    }
+
+    .radio-group {
+      margin-left: 12px;
+    }
+    p{
+      margin-left: 12px;
+    }
+
+  #task-form{
+    padding-bottom: 100px; 
+    box-shadow: none;
+  }
+
+  #assigned{
+    width: 300px;
+  }
+
+  #inputDropdown{
+    width: 300px;
+  }
+
+  .dropdown-assign {
+    width: 300px;
+    position: static;
+  }
+
+  .radioBtn{
+    width:98px ;
+    margin-right: 4px;
+  }
+
+
+  .dropdownItem {
+    width: 290px;
+}
+
+#addContactTask{
+  width: 290px;
+}
+
+
+  }
+}
