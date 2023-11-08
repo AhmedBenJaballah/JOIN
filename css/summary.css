@@ -209,3 +209,60 @@ align-items: center;
     font-weight: bold;
 }
 
+@media(max-width:1040px){
+#goodMornig{
+    display: none;
+}
+
+.main-container{
+    width: 100vw
+}
+.dateTask{
+    flex-direction: column;
+}
+.summary-box{
+    width: 320px;
+    height: 150px;
+}
+
+.date span {
+    font-size: 16px;
+}
+
+.urgent-right {
+    margin-left: 10px;
+}
+
+.urgent-box {
+    padding: 0;
+}
+
+.tasks{
+    margin: 10px;
+    height: 90px;
+    padding-top: 0;
+}
+
+#tasksInBord{
+    width: 310px;
+}
+
+.imgForBoard{
+    height: 40px;
+}
+
+.taskStatus{
+    flex-wrap: wrap;
+}
+
+.tasks:hover {
+    transform: scale(1.1);    
+}
+
+.summary-box:hover {
+    transform: scale(1,1);
+    background-color: white;
+}
+
+}
+

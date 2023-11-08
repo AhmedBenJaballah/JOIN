@@ -70,7 +70,7 @@
 
     #sidebar{
         height:50px;
-        width: 100vw;
+        width: 100vw !important;
         border: none;
         border-top: 1px solid #ccc;
         flex-direction: row;
