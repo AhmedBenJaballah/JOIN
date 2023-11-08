@@ -502,3 +502,51 @@ gap: 8px;
 .drag-area-highlight {
 background-color: rgba(0, 0, 0, 0.2);
 }
+
+@media(max-width: 1040px){
+  #board{
+    width: 100vw;
+  }
+}
+
+@media(max-width: 640px){
+  #features{
+    height: 100px;
+    position: fixed;
+    top:60px;
+    background-color: white;
+  }
+
+  #add{
+    display: none;
+  }
+
+  #tasks{
+    width: 90vw;
+    display: block;
+    height: auto;
+    padding-bottom: 40px;
+    padding-top:100px ;
+  }
+
+  #board{
+    width: 100vw;
+  }
+
+  .newCreatedTask {
+    height: auto;
+    padding: 10px;
+    flex-direction: row;
+    gap:40px
+  }
+
+  .aTaskAreaBoard {
+    width: 450px;
+  }
+
+  @media(max-width: 520px){
+    .aTaskAreaBoard {
+      width: 300px;
+    }
+  }
+}

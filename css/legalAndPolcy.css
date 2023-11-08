@@ -18,3 +18,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media(max-width : 1040px){
+    .privacyPolicy{
+        width: 95% ;
+    }
+}
