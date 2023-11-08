@@ -29,6 +29,24 @@ function setSidebarStyles(){
           }
         }, 200);
       }
+
+      const winWidth=window.innerWidth
+      const scroll= document.getElementById('scrollContacts');
+      const displayContact= document.getElementById('displayContact');
+      const arrow= document.getElementById('backToCon')
+
+          
+if(scroll&& displayContact && arrow){
+    if(winWidth <= 1040 &&  displayContact.style.display=='flex' && scroll.style.display=='flex'){
+        scroll.style.display='none';
+        arrow.style.display='flex';
+    }
+    else if(winWidth > 1040 &&  displayContact.style.display=='flex'&&  scroll.style.display=='none')
+    {scroll.style.display='flex'
+    arrow.style.display='none'
+    }
+}
+
 }
 
 
@@ -60,23 +78,38 @@ function addContact(){
     let sidebar = document.getElementById("sidebarRight");
     sidebar.classList.remove("displayNone");
 
-    updateSidebarWidth();
+    updateSidebarWidthRight();
 
-    window.addEventListener("resize", updateSidebarWidth);
+    window.addEventListener("resize", updateSidebarWidthRight);
 
   
 }
 
-function updateSidebarWidth() {
+function updateSidebarWidthRight() {
     const winWidth = window.innerWidth;
     const sidebar = document.getElementById("sidebarRight");
 
-    // Wenn die Fensterbreite größer als 950 ist
+    
     if (winWidth > 950) {
         sidebar.style.transition = "width 0.1s ease";
         sidebar.style.width = "45vw";
     } else {
-        // Wenn die Fensterbreite kleiner oder gleich 950 ist, ändern Sie die Breite auf 350px
+
+        sidebar.style.transition = "width 0.1s ease";
+        sidebar.style.width = "350px";
+    }
+}
+
+function updateSidebarWidthLeft() {
+    const winWidth = window.innerWidth;
+    const sidebar = document.getElementById("sidebarLeft");
+
+    
+    if (winWidth > 950) {
+        sidebar.style.transition = "width 0.1s ease";
+        sidebar.style.width = "45vw";
+    } else {
+
         sidebar.style.transition = "width 0.1s ease";
         sidebar.style.width = "350px";
     }
@@ -219,6 +252,7 @@ function renderInfo(name,email,color,phone){
     //     event.target.style.borderRadius="15px"
     // });
     const display= document.getElementById("displayContact")
+    display.style.display='flex';
     display.innerHTML=/*html*/`
     <div class="renderContacts">
         <div class="displayRoundName" style="background-color:${color}">${initials(name)}</div>
@@ -231,14 +265,35 @@ function renderInfo(name,email,color,phone){
         </div>
     </div>
     <div class="renderEmailAndPhone">
-        <h4>Contact Information</h4>
+        <h4 id='contactInformation'>Contact Information</h4>
         <h5>Email</h5>
         <div style="color:#4589ff">${email}</div>
         <h5>Phone</h5>
         <div>${phone}</div>
     </div>
+    <div id="backToCon"  style="display:none" onclick='backToCon()'> <img src='grafiken/arrow-left-line.png'> </div>
       `
+
+    const winWidth=window.innerWidth
+    const scroll= document.getElementById('scrollContacts');
+    const arrow= document.getElementById('backToCon')
+    if(winWidth < 1040){
+        arrow.style.display='flex'
+        scroll.style.display='none'
+    }
+
 }
+
+function backToCon(){
+    const winWidth=window.innerWidth
+    const scroll= document.getElementById('scrollContacts')
+    const displayContact= document.getElementById('displayContact')
+    if(winWidth < 1040){
+        scroll.style.display='flex';
+        displayContact.style.display='none';
+    }
+}
+
 function modification(name,email,color,phone){
     const dialog = document.getElementById("dialog");
     const sidebarLeft = document.getElementById("sidebarLeft");
@@ -253,6 +308,11 @@ function modification(name,email,color,phone){
     setTimeout(() => {
         sidebarLeft.style.transition = "width 0.1s ease";
         sidebarLeft.style.width = "45vw";
+
+        
+    updateSidebarWidthLeft();
+
+    window.addEventListener("resize", updateSidebarWidthLeft);
     }, 50);
     editForm.innerHTML= templatEdit(name,color,email,phone);
     const nameEdit = document.getElementById("nameEdit");
@@ -293,6 +353,12 @@ async function editPerson(name,email,color,phone){
     contactList.innerHTML = "";
     const display= document.getElementById("displayContact")
     display.innerHTML="";
+
+    
+    display.style.display='none'
+    const scroll= document.getElementById('scrollContacts');
+    scroll.style.display='flex'
+
     closeSidebar2();
     await loadContacts();
     
@@ -306,8 +372,12 @@ async function deleteContact(name,email,color,phone){
     contactList.innerHTML = "";
     const display= document.getElementById("displayContact")
     display.innerHTML="";
+    display.style.display='none'
+    const scroll= document.getElementById('scrollContacts');
+    scroll.style.display='flex'
     closeSidebar2();
     await loadContacts();
+
     
 }
 

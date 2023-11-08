@@ -32,7 +32,7 @@
     <div id="content">
       <div w3-include-html="includes/sidebar.html"></div>
       <div id="contacts">
-        <div id="scrollContacts">
+        <div id="scrollContacts" style="display: flex;">
           <button
             id="addContact"
             class="btn btn-primary"
@@ -42,7 +42,9 @@
           </button>
           <div id="contactList"></div>
         </div>
-        <div id="displayContact"></div>
+        <div id="displayContact" style="position: relative; display: none;">
+          
+        </div>
       </div>
     </div>
 

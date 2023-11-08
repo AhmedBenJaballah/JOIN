@@ -19,6 +19,11 @@
   padding-right: 6px;
 }
 
+#displayContact{
+  display: flex;
+  flex-direction: column;
+}
+
 #addContact {
   width: 80%;
   margin: 15px;
@@ -150,7 +155,7 @@
   background-color: white;
   height: 65vh;
   box-shadow: -2px 0px 6px 0px rgba(0, 0, 0, 0.2);
-  border-bottom-left-radius: 25px;
+  /* border-bottom-left-radius: 25px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -311,7 +316,14 @@
 }
 
 
-@media(max-width:950px){
+
+#backToCon{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+@media(max-width:1040px){
 
 
 
@@ -322,7 +334,7 @@
 }
 
 #contacts{
-  width: 350px;
+  width: 100vw;
 }
 
 /* #dialog{
@@ -351,5 +363,25 @@ border-top-left-radius: 15px;
 #cancelBtn{
   display: none;
 }
+.renderContacts {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.renderEmailAndPhone{
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+.renderOnlyName {
+  font-size: 20px;
+}
+
+#displayContact{
+  width: 100vw;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 }
 

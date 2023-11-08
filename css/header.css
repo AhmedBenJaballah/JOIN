@@ -54,6 +54,9 @@ align-items: center;
     align-items: flex-start;
     flex-direction: column;
 
+    background-color: white;
+    z-index: 100;
+
   }
   #options a {
     text-decoration: none;
