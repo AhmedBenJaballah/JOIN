@@ -549,4 +549,38 @@ background-color: rgba(0, 0, 0, 0.2);
       width: 300px;
     }
   }
+  .popup-div {
+   width: 350px;
+   height: 80%;
+   position: fixed;
+   bottom: -650px;
+   overflow-x: hidden;
+  }
+  .popup-div .blueStyle{
+    font-size: 16px;
+  }
+  .popup-div .taskTitle{
+    font-size: 40px;
+  }
+  .popup-div .descTask {
+    font-size: 20px;
+    width: 300px;
+  }
+  .popup-div .task-date {
+    font-size: 20px;
+  }
+  .popup-div .task-priority{
+    font-size: 20px;
+  }
+  .popup-div .task-assigned{
+    font-size: 20px;
+  }
+  .popup-div .popup-subtasks{
+    font-size: 20px;
+  }
+  .popup-div .popup-buttons{
+    font-size: 20px;
+  }
+  
+  
 }
