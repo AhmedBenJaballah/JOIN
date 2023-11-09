@@ -551,10 +551,10 @@ background-color: rgba(0, 0, 0, 0.2);
   }
   .popup-div {
    width: 350px;
-   height: 80%;
+   height: 85%;
    position: fixed;
-   bottom: -650px;
-   overflow-x: hidden;
+   bottom: -700px;
+   
   }
   .popup-div .blueStyle{
     font-size: 16px;
@@ -582,8 +582,11 @@ background-color: rgba(0, 0, 0, 0.2);
     font-size: 20px;
   }
   .apply-button {
-    position: absolute;
-    bottom: 100px;
+    margin-left: 250px ;
+    position: fixed;  
+    bottom: -250px;
   }
-  
+  .popup-close-button {
+    margin: 0;
+  }
 }
