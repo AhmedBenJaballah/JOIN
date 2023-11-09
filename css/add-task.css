@@ -372,16 +372,7 @@ label > img {
 .white-image{
   filter: brightness(0%) invert(100%);
 }
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    display: none;
-}
-
-input[type="date"] {
-    background-image: url('/grafiken/event.png');
-    background-size: 16px 16px; 
-    background-position: 98% center; 
-    background-repeat: no-repeat;
-}
+ 
 #task-form {
   font-size: -2px !important;
 }
