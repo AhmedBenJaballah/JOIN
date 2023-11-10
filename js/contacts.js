@@ -1,16 +1,11 @@
 let contacts=[];
 loadContacts();
-
 setSidebarStyles();
 window.addEventListener('resize', setSidebarStyles);
-
-
-
-
-  
 setTimeout(() => {
     getInitials();
 }, 1000);
+
 
 function setSidebarStyles(){
     if (window.location.href.includes('contacts')) {

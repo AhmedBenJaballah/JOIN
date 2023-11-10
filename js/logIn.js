@@ -1,4 +1,8 @@
-let userInitial="" ;
+let userInitial = "";
+
+/**
+ * this function is used for activating the animation
+ */
 function startJoin() {
   const logIn = document.getElementById("logIn");
   logIn.innerHTML = /*html*/ `
@@ -12,6 +16,9 @@ function startJoin() {
   }, 200);
 }
 
+/**
+ * this function is used to positionate the "Join" image in the top left corner
+ */
 function putImageAside() {
   const joinStartImage = document.getElementById("joinStartImage");
   const logIn = document.getElementById("logIn");
@@ -29,36 +36,51 @@ function putImageAside() {
   logIn.style.backgroundColor = "white";
 }
 
+/**
+ * this function is used to create the log in box
+ */
 function createLogInContainer() {
   const logIn = document.getElementById("logIn");
   setTimeout(() => {
-    logIn.innerHTML += /*html*/ `
-        <div id="logInContainer">
-            <div id="logInTitle">Log in</div>
-            <form id="formLogIn" onsubmit="logIn(); return false;">
-                <input type="email" id="logInEmail" placeholder="Email" class="inputLogIn" required>
-                <input type="password" id="logInPassword" placeholder="Password" class="inputLogIn" required>
-                <div id="rememberMeContainer">
-                    <input type="checkbox" id="rememberMe">
-                    <label for="rememberMe">Remember me</label>
-                </div>
-                <div id="logInBtns">
-                    <button type="submit" class="btn btn-primary">Log In</button>
-                    <button type="button" class="btn btn-outline-primary" onclick="goToSummary()"> Guest Log In</button>
-                </div>
-            </form>
-
-        </div>
-        `;
+    logIn.innerHTML += templateLogIn();
   }, 800);
 }
 
+/**
+ * this function is used to create the log in HTML template
+ */
+function templateLogIn() {
+  return /*html*/ `
+<div id="logInContainer">
+<div id="logInTitle">Log in</div>
+<form id="formLogIn" onsubmit="logIn(); return false;">
+    <input type="email" id="logInEmail" placeholder="Email" class="inputLogIn" required>
+    <input type="password" id="logInPassword" placeholder="Password" class="inputLogIn" required>
+    <div id="rememberMeContainer">
+        <input type="checkbox" id="rememberMe">
+        <label for="rememberMe">Remember me</label>
+    </div>
+    <div id="logInBtns">
+        <button type="submit" class="btn btn-primary">Log In</button>
+        <button type="button" class="btn btn-outline-primary" onclick="goToSummary()"> Guest Log In</button>
+    </div>
+</form>
+</div>
+`;
+}
+
+/**
+ * this function is used to navigte to summary
+ */
 async function goToSummary() {
-  await setItem('userInitial', 'G');
-  await setItem('userName', 'Guest');
+  await setItem("userInitial", "G");
+  await setItem("userName", "Guest");
   window.location.href = "/summary.html";
 }
 
+/**
+ * this function is used to show the button connecting log in tosign up
+ */
 function signUpBtns() {
   const logIn = document.getElementById("logIn");
   setTimeout(() => {
@@ -71,10 +93,16 @@ function signUpBtns() {
   }, 800);
 }
 
+/**
+ * this function is used to navigte to signUp
+ */
 function signUpPage() {
   window.location.href = "/signUp.html";
 }
 
+/**
+ * this function is used to create the footer  of the page logIn.html
+ */
 function footer() {
   const logIn = document.getElementById("logIn");
   setTimeout(() => {
@@ -87,27 +115,33 @@ function footer() {
   }, 800);
 }
 
-async function logIn(){
-    const email= document.getElementById("logInEmail");
-    const password = document.getElementById("logInPassword");
-    try {
-        users = JSON.parse(await getItem('users'));
-        console.log(users)
-        user = users.find(u =>u.email==email.value && u.password== password.value)
-        if(user){
-            
-            userInitial= user.name.split(' ').map(word => word[0].toUpperCase()).join('')
-            await setItem('userInitial', userInitial);
-            await setItem('userName', user.name);
-            window.location.href = 'summary.html';
-        }
-        else{
-            email.style.borderBottom="1px solid red";
-            email.style.color="red";
-            password.style.borderBottom="1px solid red";
-            password.style.color="red";
-        }
-    } catch(e){
-        console.error('Loading error:', e);
+/**
+ * this function is used to log In
+ */
+async function logIn() {
+  const email = document.getElementById("logInEmail");
+  const password = document.getElementById("logInPassword");
+  try {
+    users = JSON.parse(await getItem("users"));
+    console.log(users);
+    user = users.find(
+      (u) => u.email == email.value && u.password == password.value
+    );
+    if (user) {
+      userInitial = user.name
+        .split(" ")
+        .map((word) => word[0].toUpperCase())
+        .join("");
+      await setItem("userInitial", userInitial);
+      await setItem("userName", user.name);
+      window.location.href = "summary.html";
+    } else {
+      email.style.borderBottom = "1px solid red";
+      email.style.color = "red";
+      password.style.borderBottom = "1px solid red";
+      password.style.color = "red";
     }
+  } catch (e) {
+    console.error("Loading error:", e);
+  }
 }

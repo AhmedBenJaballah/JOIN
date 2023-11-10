@@ -5,6 +5,10 @@ setTimeout(() => {
   getInitials();
 }, 1000);
 
+/**
+ * this function is used to style the Sidebar based on the screen resolution
+ *
+ */
 function setSidebarStyles() {
   if (window.location.href.includes("summary")) {
     setTimeout(() => {
@@ -23,6 +27,9 @@ function setSidebarStyles() {
   }
 }
 
+/**
+ * this function is used to gethe the number of tasks in bord
+ */
 async function loadAmount() {
   try {
     const amount = JSON.parse(await getItem("amount"));
@@ -44,10 +51,16 @@ async function loadAmount() {
   }
 }
 
+/**
+ * this function is used to navigate to board
+ */
 function goToBoard() {
   window.location.href = "board.html";
 }
 
+/**
+ * this function is used to greet the user based on the day time
+ */
 function greeting() {
   const goodMorning = document.getElementById("goodMornig");
   const currentTime = new Date();
