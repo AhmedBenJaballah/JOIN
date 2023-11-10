@@ -7,7 +7,6 @@ setTimeout(() => {
 
 /**
  * this function is used to style the Sidebar based on the screen resolution
- *
  */
 function setSidebarStyles() {
   if (window.location.href.includes("summary")) {
