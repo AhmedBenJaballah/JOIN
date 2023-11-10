@@ -5,34 +5,35 @@ let priority = "";
 let idCounter = 0;
 loadtasks();
 loadid();
-
 setSidebarStyles();
-window.addEventListener('resize', setSidebarStyles);
-
-function setSidebarStyles(){
-  if (window.location.href.includes('addTask')) {
-      setTimeout(() => {
-        let summarySidebar = document.getElementById('addTaskSidebar');
-        const windowWidth = window.innerWidth; 
-
-
-    
-        if (windowWidth < 1040) {
-          summarySidebar.style.backgroundColor = 'transparent';
-          summarySidebar.style.color = '#337aec';
-  
-        } else {
-          summarySidebar.style.backgroundColor = '#D2E3FF';
-          summarySidebar.style.borderRadius = '8px';
-          summarySidebar.style.color = '#42526E';
-        }
-      }, 200);
-    }
-}
+window.addEventListener("resize", setSidebarStyles);
 setTimeout(() => {
   setDate();
 }, 1000);
 
+/**
+ * this function is used to style the Sidebar based on the screen resolution
+ */
+function setSidebarStyles() {
+  if (window.location.href.includes("addTask")) {
+    setTimeout(() => {
+      let summarySidebar = document.getElementById("addTaskSidebar");
+      const windowWidth = window.innerWidth;
+      if (windowWidth < 1040) {
+        summarySidebar.style.backgroundColor = "transparent";
+        summarySidebar.style.color = "#337aec";
+      } else {
+        summarySidebar.style.backgroundColor = "#D2E3FF";
+        summarySidebar.style.borderRadius = "8px";
+        summarySidebar.style.color = "#42526E";
+      }
+    }, 200);
+  }
+}
+
+/**
+ * this function is used to prevent selecting a past date
+ */
 function setDate() {
   const taskDateInput = document.getElementById("task-date");
   const today = new Date();
@@ -40,8 +41,9 @@ function setDate() {
   taskDateInput.setAttribute("min", formattedDate);
 }
 
-
-
+/**
+ * this function is used to load tasks
+ */
 async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
@@ -50,6 +52,9 @@ async function loadtasks() {
   }
 }
 
+/**
+ * this function is used to load the task's id
+ */
 async function loadid() {
   try {
     idCounter = JSON.parse(await getItem("idCounter"));
@@ -58,74 +63,134 @@ async function loadid() {
   }
 }
 
+/**
+ * this function is used to render the contacts in the dropdown menu
+ * @param {div} icon arrow of the dropdown menu
+ * @param {div} select the box of the dropdown menu
+ * @param {JSON} contacts the list of contacts
+ */
+function dropdownShown(icon, select, contacts) {
+  icon.classList.remove("bi-caret-down-fill");
+  icon.classList.add("bi-caret-up-fill");
+  select.style.maxHeight = "300px";
+  select.style.flexDirection = "column";
+
+  for (let i = 0; i < contacts.length; i++) {
+    const optionInitials = contacts[i].name
+      .split(" ")
+      .map((word) => word[0].toUpperCase())
+      .join("");
+    let isChecked = checkecdContacts.includes(i);
+    select.innerHTML += showTheDropdownMenu(
+      contacts,
+      optionInitials,
+      isChecked,
+      i
+    );
+  }
+  select.innerHTML += addContactButton();
+}
+
+/**
+ * this function is used to render every contacst with its initial and checkbox
+ * @param {JSON} contacts list of contacts
+ * @param {string} optionInitials initials of the contact
+ * @param {boolean} isChecked checks if the contact's checkbox has been checked
+ * @param {number} i the contact's index
+ * @returns
+ */
+function showTheDropdownMenu(contacts, optionInitials, isChecked, i) {
+  return /*html*/ `
+  <div class="dropdownItem">
+    <div class="nameAndInitiales">
+      <div class="roundNameDropdown" style="background-color:${
+        contacts[i].color
+      };border: 1px solid white;font-weight:400; font-size:18px">${optionInitials}</div>
+      <div style='font-weight:400;color:black'>${contacts[i].name}</div>
+    </div>
+    <input type="checkbox" onclick="getcha(${i})" id="${i}" ${
+    isChecked ? "checked" : ""
+  }>
+  </div>
+`;
+}
+
+/**
+ * this function is used to render the 'add contact' button
+ * @returns
+ */
+function addContactButton() {
+  return /*html*/ `
+  <button
+  id="addContactTask"
+  class="btn btn-primary"
+  onclick="addContact()"
+>
+  Add new contact <img src="grafiken/person_add.png" />
+</button>
+  `;
+}
+
+/**
+ * this function is used to render the initials after checking the box
+ * @param {div} icon arrow of the dropdown menu
+ * @param {div} select the box of the dropdown menu
+ * @param {JSON} contacts the list of contacts
+ */
+function dropdownNotShown(icon, select, contacts) {
+  icon.classList.remove("bi-caret-up-fill");
+  icon.classList.add("bi-caret-down-fill");
+  select.innerHTML = "";
+  select.style.height = "auto";
+  select.style.flexDirection = "initial";
+  for (let j = 0; j < checkecdContacts.length; j++) {
+    console.log(checkecdContacts[j]);
+    console.log(contacts[checkecdContacts[j]]);
+    const optionInitials = contacts[checkecdContacts[j]].name
+      .split(" ")
+      .map((word) => word[0].toUpperCase())
+      .join("");
+    select.innerHTML += templateInitials(contacts, optionInitials, j);
+  }
+}
+
+/**
+ * this function is used to  generate the html foe the initials
+ * @param {JSON} contacts list of contacts
+ * @param {string} optionInitials initials of the contact
+ * @param {number} j the contact's index
+ * @returns
+ */
+function templateInitials(contacts, optionInitials, j) {
+  return /*html*/ `
+  <div class="roundNameDropdown" style="background-color:${
+    contacts[checkecdContacts[j]].color
+  };border: 1px solid white;font-weight:400; font-size:18px"">
+    ${optionInitials}
+  </div>`;
+}
+
+/**
+ * this function is used to render the dropdown menu
+ */
 async function tryContact() {
   const contacts = JSON.parse(await getItem("contacts"));
   const icon = document.getElementById("dropIcon");
   let select = document.getElementById("dropdown");
   select.innerHTML = "";
   if (icon.classList.contains("bi-caret-down-fill")) {
-    icon.classList.remove("bi-caret-down-fill");
-    icon.classList.add("bi-caret-up-fill");
-    select.style.maxHeight = "300px";
-    select.style.flexDirection = "column";
-
-    for (let i = 0; i < contacts.length; i++) {
-      const optionInitials = contacts[i].name
-        .split(" ")
-        .map((word) => word[0].toUpperCase())
-        .join("");
-      let isChecked = checkecdContacts.includes(i); // Überprüfen, ob der Kontakt ausgewählt ist
-
-      select.innerHTML += /*html*/ `
-        <div class="dropdownItem">
-          <div class="nameAndInitiales">
-            <div class="roundNameDropdown" style="background-color:${
-              contacts[i].color
-            };border: 1px solid white;font-weight:400; font-size:18px">${optionInitials}</div>
-            <div style='font-weight:400;color:black'>${contacts[i].name}</div>
-          </div>
-          <input type="checkbox" onclick="getcha(${i})" id="${i}" ${
-        isChecked ? "checked" : ""
-      }>
-        </div>
-      `;
-    }
-    select.innerHTML += /*html*/ `
-    <button
-    id="addContactTask"
-    class="btn btn-primary"
-    onclick="addContact()"
-  >
-    Add new contact <img src="grafiken/person_add.png" />
-  </button>
-    `;
+    dropdownShown(icon, select, contacts);
   } else if (icon.classList.contains("bi-caret-up-fill")) {
-    icon.classList.remove("bi-caret-up-fill");
-    icon.classList.add("bi-caret-down-fill");
-    select.innerHTML = "";
-    select.style.height = "auto";
-    select.style.flexDirection = "initial";
-    for (let j = 0; j < checkecdContacts.length; j++) {
-      console.log(checkecdContacts[j]);
-      console.log(contacts[checkecdContacts[j]]);
-
-      const optionInitials = contacts[checkecdContacts[j]].name
-        .split(" ")
-        .map((word) => word[0].toUpperCase())
-        .join("");
-      select.innerHTML += /*html*/ `
-      <div class="roundNameDropdown" style="background-color:${
-        contacts[checkecdContacts[j]].color
-      };border: 1px solid white;font-weight:400; font-size:18px"">
-        ${optionInitials}
-      </div>`;
-    }
+    dropdownNotShown(icon, select, contacts);
   }
 }
 
+/**
+ * this function is used to verify is the checkbox is selected or not
+ * @param {number} i the contact's index
+ */
 async function getcha(i) {
   let checkbox = document.getElementById(`${i}`);
-
   if (checkbox.checked) {
     checkecdContacts.push(i);
     console.log(checkecdContacts);
@@ -398,7 +463,3 @@ function clearSelection() {
   // Auswahl zurücksetzen
   selectedContact = null;
 }
-
-
-
-

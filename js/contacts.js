@@ -31,28 +31,28 @@ function setSidebarStyles() {
 /**
  * this function is used to set the resolution while going throught 350px to 2000px
  */
-function setResolution(){
-    const winWidth = window.innerWidth;
-    const scroll = document.getElementById("scrollContacts");
-    const displayContact = document.getElementById("displayContact");
-    const arrow = document.getElementById("backToCon");
-    if (scroll && displayContact && arrow) {
-      if (
-        winWidth <= 1040 &&
-        displayContact.style.display == "flex" &&
-        scroll.style.display == "flex"
-      ) {
-        scroll.style.display = "none";
-        arrow.style.display = "flex";
-      } else if (
-        winWidth > 1040 &&
-        displayContact.style.display == "flex" &&
-        scroll.style.display == "none"
-      ) {
-        scroll.style.display = "flex";
-        arrow.style.display = "none";
-      }
+function setResolution() {
+  const winWidth = window.innerWidth;
+  const scroll = document.getElementById("scrollContacts");
+  const displayContact = document.getElementById("displayContact");
+  const arrow = document.getElementById("backToCon");
+  if (scroll && displayContact && arrow) {
+    if (
+      winWidth <= 1040 &&
+      displayContact.style.display == "flex" &&
+      scroll.style.display == "flex"
+    ) {
+      scroll.style.display = "none";
+      arrow.style.display = "flex";
+    } else if (
+      winWidth > 1040 &&
+      displayContact.style.display == "flex" &&
+      scroll.style.display == "none"
+    ) {
+      scroll.style.display = "flex";
+      arrow.style.display = "none";
     }
+  }
 }
 
 /**
@@ -91,54 +91,54 @@ function addContact() {
 }
 
 /**
- * this function is used to ajust the resulotion of the Sidebar 
+ * this function is used to ajust the resulotion of the Sidebar
  * @param {div} sidebar could be the right or left sidebar
  */
-function updateSidebarWidth(sidebar){
-    const winWidth = window.innerWidth;
-    if (winWidth > 950) {
-      sidebar.style.transition = "width 0.1s ease";
-      sidebar.style.width = "45vw";
-    } else {
-      sidebar.style.transition = "width 0.1s ease";
-      sidebar.style.width = "350px";
-    }
+function updateSidebarWidth(sidebar) {
+  const winWidth = window.innerWidth;
+  if (winWidth > 950) {
+    sidebar.style.transition = "width 0.1s ease";
+    sidebar.style.width = "45vw";
+  } else {
+    sidebar.style.transition = "width 0.1s ease";
+    sidebar.style.width = "350px";
+  }
 }
 
 /**
- * this function is used to ajust the resulotion of the Sidebar 
+ * this function is used to ajust the resulotion of the Sidebar
  */
 function updateSidebarWidthRight() {
-    const sidebar = document.getElementById("sidebarRight");
-    updateSidebarWidth(sidebar)
+  const sidebar = document.getElementById("sidebarRight");
+  updateSidebarWidth(sidebar);
 }
 
 /**
- * this function is used to ajust the resulotion of the Sidebar 
+ * this function is used to ajust the resulotion of the Sidebar
  */
 function updateSidebarWidthLeft() {
   const sidebar = document.getElementById("sidebarLeft");
-  updateSidebarWidth(sidebar)
+  updateSidebarWidth(sidebar);
 }
 
 /**
  * this function is used to close any sidebar
  * @param {div} sidebar could be the right or left sidebar
  */
-function closeAnySidebar(sidebar){
-    let dialog = document.getElementById("dialog");
-    sidebar.style.width = "0px";
-    setTimeout(() => {
-      dialog.classList.add("displayNone");
-    }, 50);
+function closeAnySidebar(sidebar) {
+  let dialog = document.getElementById("dialog");
+  sidebar.style.width = "0px";
+  setTimeout(() => {
+    dialog.classList.add("displayNone");
+  }, 50);
 }
 
 /**
  * this function is used to close the add contact sidebar
  */
 function closeSidebar() {
-    let sidebar = document.getElementById("sidebarRight");
-    closeAnySidebar(sidebar)
+  let sidebar = document.getElementById("sidebarRight");
+  closeAnySidebar(sidebar);
 }
 
 /**
@@ -243,7 +243,7 @@ function renderContactList(name, color, email, phone) {
 
 /**
  * this function is used to sort the contact list alphabeticlly
- * @param {div} contactlist 
+ * @param {div} contactlist
  */
 function sortAlpha(contactlist) {
   let divs = Array.from(document.querySelectorAll(".letter"));
@@ -263,7 +263,7 @@ function sortAlpha(contactlist) {
  * @param {string} color backgrund color of the newest contact's initial
  * @param {string} email email of the newest contact
  * @param {string} phone phone of the newest contact
- * @returns 
+ * @returns
  */
 function templatePersonWithLetter(name, color, email, phone) {
   return /*html*/ `                   
@@ -285,7 +285,7 @@ function templatePersonWithLetter(name, color, email, phone) {
  * @param {string} color backgrund color of the newest contact's initial
  * @param {string} email email of the newest contact
  * @param {string} phone phone of the newest contact
- * @returns 
+ * @returns
  */
 function templatePersonWithOutLetter(name, color, email, phone) {
   return /*html*/ `                   
@@ -306,7 +306,7 @@ function templatePersonWithOutLetter(name, color, email, phone) {
 /**
  * this function is used to get the contacts initials
  * @param {string} name name of the contact
- * @returns 
+ * @returns
  */
 function initials(name) {
   return name
@@ -317,7 +317,7 @@ function initials(name) {
 
 /**
  * this function is used the generate a random color for the initials background
- * @returns 
+ * @returns
  */
 function getRandomBrightColor() {
   const letters = "0123456789ABCDEF";
@@ -338,7 +338,7 @@ function getRandomBrightColor() {
 function renderInfo(name, email, color, phone) {
   const display = document.getElementById("displayContact");
   display.style.display = "flex";
-  display.innerHTML = renderInfoTemplate(name, email, color, phone)
+  display.innerHTML = renderInfoTemplate(name, email, color, phone);
   const winWidth = window.innerWidth;
   const scroll = document.getElementById("scrollContacts");
   const arrow = document.getElementById("backToCon");
@@ -349,15 +349,15 @@ function renderInfo(name, email, color, phone) {
 }
 
 /**
- * this function is used to create the html part of the information rendering 
+ * this function is used to create the html part of the information rendering
  * @param {string} name name of the newest contact
  * @param {string} color backgrund color of the newest contact's initial
  * @param {string} email email of the newest contact
  * @param {string} phone phone of the newest contact
- * @returns 
+ * @returns
  */
-function renderInfoTemplate(name, email, color, phone){
-    return /*html*/ `
+function renderInfoTemplate(name, email, color, phone) {
+  return /*html*/ `
     <div class="renderContacts">
         <div class="displayRoundName" style="background-color:${color}">${initials(
     name
@@ -417,7 +417,7 @@ function modification(name, email, color, phone) {
     updateSidebarWidthLeft();
     window.addEventListener("resize", updateSidebarWidthLeft);
   }, 50);
-  editTheSelected(name, email, color, phone,editForm)
+  editTheSelected(name, email, color, phone, editForm);
 }
 
 /**
@@ -428,14 +428,14 @@ function modification(name, email, color, phone) {
  * @param {string} phone phone of the newest contact
  * @param {div} editForm fields of the contact' s informations
  */
-function editTheSelected(name, email, color, phone,editForm){
-    editForm.innerHTML = templatEdit(name, color, email, phone);
-    const nameEdit = document.getElementById("nameEdit");
-    const emailEdit = document.getElementById("emailEdit");
-    const phoneEdit = document.getElementById("phoneEdit");
-    nameEdit.value = name;
-    emailEdit.value = email;
-    phoneEdit.value = phone;
+function editTheSelected(name, email, color, phone, editForm) {
+  editForm.innerHTML = templatEdit(name, color, email, phone);
+  const nameEdit = document.getElementById("nameEdit");
+  const emailEdit = document.getElementById("emailEdit");
+  const phoneEdit = document.getElementById("phoneEdit");
+  nameEdit.value = name;
+  emailEdit.value = email;
+  phoneEdit.value = phone;
 }
 
 /**
@@ -444,7 +444,7 @@ function editTheSelected(name, email, color, phone,editForm){
  * @param {string} color backgrund color of the newest contact's initial
  * @param {string} email email of the newest contact
  * @param {string} phone phone of the newest contact
- * @returns 
+ * @returns
  */
 function templatEdit(name, color, email, phone) {
   return /*html*/ `
@@ -488,15 +488,15 @@ async function editPerson(name, email, color, phone) {
 /**
  * this function is used to render after the contact has been editted
  */
-function rendeAfterEdit(){
-    const contactList = document.getElementById("contactList");
-    contactList.innerHTML = "";
-    const display = document.getElementById("displayContact");
-    display.innerHTML = "";
-    display.style.display = "none";
-    const scroll = document.getElementById("scrollContacts");
-    scroll.style.display = "flex";
-    closeSidebar2();
+function rendeAfterEdit() {
+  const contactList = document.getElementById("contactList");
+  contactList.innerHTML = "";
+  const display = document.getElementById("displayContact");
+  display.innerHTML = "";
+  display.style.display = "none";
+  const scroll = document.getElementById("scrollContacts");
+  scroll.style.display = "flex";
+  closeSidebar2();
 }
 
 /**
