@@ -537,10 +537,36 @@ async function showTask(id) {
   }, 50);
 }
 
+/**
+ * this function is used to update the progressbar fter using the checkbox
+ * @param {number} taskId task id
+ * @param {array} subtasks task subtasks
+ */
+function updateProgressAfterCheckbox(taskId,subtasks){
+  let progressBar = document.getElementById(`progressBar${taskId}`);
+  const taskIdVierElemente = checkecdSubtasks.filter(
+    (subtask) => subtask.taskId == taskId
+  );
+  const anzahlDerElementeMitTaskIdVier = taskIdVierElemente.length;
+  const progressPercentage = (anzahlDerElementeMitTaskIdVier / subtasks) * 100;
+  progressBar.style.width = `${progressPercentage}%`;
+  progressBar.setAttribute("aria-valuenow", anzahlDerElementeMitTaskIdVier);
+  progressBar.setAttribute("aria-valuemax", subtasks);
+  let displayNumber = document.getElementById(`displaysubs${taskId}`);
+  displayNumber.innerHTML = `
+  ${anzahlDerElementeMitTaskIdVier}/${subtasks}Subtasks
+  `;
+  overlay.addEventListener("click", closePopup);
+}
 
+/**
+ * this function is used  to update the checkbox and progressbar
+ * @param {array} subtasks task subtask
+ * @param {number} taskId task id
+ * @param {number} k subtask index
+ */
 async function updateProgress(subtasks, taskId, k) {
   let checkbox = document.getElementById(`checkbox${taskId}${k}`);
-
   if (checkbox.checked) {
     checkecdSubtasks.push({
       taskId: taskId,
@@ -558,23 +584,7 @@ async function updateProgress(subtasks, taskId, k) {
   }
   //checkecdSubtasks=[]
   await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
-  let progressBar = document.getElementById(`progressBar${taskId}`);
-  const taskIdVierElemente = checkecdSubtasks.filter(
-    (subtask) => subtask.taskId == taskId
-  );
-  const anzahlDerElementeMitTaskIdVier = taskIdVierElemente.length;
-
-  const progressPercentage = (anzahlDerElementeMitTaskIdVier / subtasks) * 100;
-  progressBar.style.width = `${progressPercentage}%`;
-  progressBar.setAttribute("aria-valuenow", anzahlDerElementeMitTaskIdVier);
-  progressBar.setAttribute("aria-valuemax", subtasks);
-
-  let displayNumber = document.getElementById(`displaysubs${taskId}`);
-  displayNumber.innerHTML = `
-  ${anzahlDerElementeMitTaskIdVier}/${subtasks}Subtasks
-  `;
-
-  overlay.addEventListener("click", closePopup);
+  updateProgressAfterCheckbox(taskId,subtasks);
 }
 
 /**
@@ -614,59 +624,51 @@ async function deleteTask(index) {
   }
 }
 
-async function editTask(id) {
-  const addTaskSection = document.querySelector(".popup-div");
-  let dialog = document.getElementById("dialog");
-  dialog.remove();
-  addTaskSection.innerHTML = /*html*/`
-    <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
-    <div w3-include-html="includes/add-task-template.html"></div>
-    <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
-    </div>
-  `;
+/**
+ * this function is used to render the task by clicking on edit
+ * @param {number} id task id
+ * @returns 
+ */
+function renderTaskByEdit(id) {
+  return /*html*/`
+  <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
+  <div w3-include-html="includes/add-task-template.html"></div>
+  <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
+  </div>
+`;
+}
 
-  await init();
-  const title = document.getElementById("task-title");
-  title.value = tasks[id]["title"];
-
-  const description = document.getElementById("task-description");
-  description.value = tasks[id]["description"];
-
-  const date = document.getElementById("task-date");
-  date.value = tasks[id]["date"];
-
-  const priority = tasks[id]["priority"];
-  getPriority(priority);
-
-  const category = document.getElementById("catSel");
-  category.value = tasks[id]["category"];
-
-  const assigned = tasks[id]["assigned"];
-  console.log(assigned);
+/**
+ * this function is used to render the assigned contacts after clicking on edit
+ * @param {array} assigned array that contains the assigned contacts
+ */
+function renderAssignedByEdit(assigned) {
   const assignedInitials = document.getElementById(`dropdown`);
-
   for (let j = 0; j < assigned.length; j++) {
     const optionInitials = contacts[assigned[j]].name
       .split(" ")
       .map((word) => word[0].toUpperCase())
       .join("");
     assignedInitials.innerHTML += /*html*/ `
-      
                 <div class="roundNameDropdownTask2" style="background-color:${
                   contacts[assigned[j]].color
                 }">
                   ${optionInitials} 
                 </div>
-                
                 `;
   }
   checkecdContacts = [];
   for (let i = 0; i < assigned.length; i++) {
     checkecdContacts.push(assigned[i]);
   }
-
   assignedInitials.style.flexDirection = "row";
+}
 
+/**
+ * this function is used to render the subtasks after clicking on edit 
+ * @param {number} id task id
+ */
+function renderSubtaskbyEdit(id) {
   subtasks = [];
   const subtaskSection = document.getElementById("subtask-section");
   const subtask = tasks[id]["subtasks"];
@@ -677,27 +679,51 @@ async function editTask(id) {
   }
 }
 
+/**
+ * this function is used to edit the selected task 
+ * @param {number} id task id 
+ */
+async function editTask(id) {
+  const addTaskSection = document.querySelector(".popup-div");
+  let dialog = document.getElementById("dialog");
+  dialog.remove();
+  addTaskSection.innerHTML = renderTaskByEdit(id);
+  await init();
+  const title = document.getElementById("task-title");
+  title.value = tasks[id]["title"];
+  const description = document.getElementById("task-description");
+  description.value = tasks[id]["description"];
+  const date = document.getElementById("task-date");
+  date.value = tasks[id]["date"];
+  const priority = tasks[id]["priority"];
+  getPriority(priority);
+  const category = document.getElementById("catSel");
+  category.value = tasks[id]["category"];
+  const assigned = tasks[id]["assigned"];
+  console.log(assigned);
+  renderAssignedByEdit(assigned);
+  renderSubtaskbyEdit(id);
+}
+
+/**
+ * this function is used to apply the modification after editting
+ * @param {number} id task id
+ */
 async function applyModifications(id) {
   console.log("mod");
   const title = document.getElementById("task-title");
   tasks[id]["title"] = title.value;
-
   const description = document.getElementById("task-description");
   tasks[id]["description"] = description.value;
-
   const date = document.getElementById("task-date");
   tasks[id]["date"] = date.value;
-
   const category = document.getElementById("catSel");
   tasks[id]["category"] = category.value;
   tasks[id]["priority"] = priority;
   tasks[id]["assigned"] = checkecdContacts;
-
-  //tasks[id]['subtasks']=subtasks,
   for (let i = 0; i < subtasks.length; i++) {
     tasks[id]["subtasks"].push(subtasks[i]);
   }
-
   await setItem("tasks", JSON.stringify(tasks));
   await loadtasks();
   await loadAmount();
@@ -709,17 +735,12 @@ async function applyModifications(id) {
   }, 500);
 }
 
-async function closePopup2() {
-  const overlay = document.getElementById("overlay");
-  overlay.style.display = "none";
-  const popupDiv = document.querySelector(".popup-div");
-  popupDiv.classList.remove("show");
-  setTimeout(() => {
-    popupDiv.remove();
-  }, 300);
-
-  board = document.getElementById("board");
-  board.innerHTML +=/*html*/ `
+/**
+ * this function is used to generate the HTML for the second popup
+ * @returns 
+ */
+function templateClosePopup() {
+  return /*html*/ `
   <div id="dialog" class="displayNone" onclick="closeSidebar()">
   <div
   id="sidebarRight"
@@ -735,8 +756,22 @@ async function closePopup2() {
               src="/grafiken/check.png" class="primary"></button>
   </div>
 </div>
-</div>`;
+</div>`
+}
 
+/**
+ * this function is used to close the second popup
+ */
+async function closePopup2() {
+  const overlay = document.getElementById("overlay");
+  overlay.style.display = "none";
+  const popupDiv = document.querySelector(".popup-div");
+  popupDiv.classList.remove("show");
+  setTimeout(() => {
+    popupDiv.remove();
+  }, 300);
+  board = document.getElementById("board");
+  board.innerHTML +=templateClosePopup();
   await init();
 }
 
