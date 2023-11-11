@@ -38,7 +38,8 @@ async function register() {
   });
   await setItem("users", JSON.stringify(users));
   resetForm();
-  window.location.href = "/logIn.html";
+  successfullySignedUp();
+  
 }
 
 /**
@@ -65,4 +66,25 @@ function handleCheckboxChange() {
   } else {
     registerButton.disabled = true;
   }
+}
+
+/**
+ * this function is used to animate a div to confirm the adding of a new contact
+ */
+function successfullySignedUp() {
+  const success = document.getElementById("signedUp");
+  success.style.display = "flex";
+  success.style.transition = "top 0.5s ease, transform 0.5s ease";
+  setTimeout(() => {
+    success.style.top = "50%";
+  }, 50);
+  setTimeout(() => {
+    success.style.top = "100%";
+  }, 1500);
+  setTimeout(() => {
+    success.style.display = "none";
+  }, 1800);
+  setTimeout(() => {
+    window.location.href = "/logIn.html";
+  }, 2000);
 }

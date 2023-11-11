@@ -113,6 +113,14 @@
     left: 8px;
 }
 
+#signedUp {
+    position: fixed;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
 @media(max-width:1040px){
     #signUpContainer{
         width: 330px !important;
