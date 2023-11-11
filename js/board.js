@@ -16,42 +16,39 @@ let amount = [
   },
 ];
 let checkecdSubtasks = [];
-
 loadcheckecdSubtasks();
 loadtasks();
 loadAmount();
 loadid();
-
 setSidebarStyles();
-window.addEventListener('resize', setSidebarStyles);
-
-function setSidebarStyles(){
-  if (window.location.href.includes('board')) {
-      setTimeout(() => {
-        let summarySidebar = document.getElementById('boardSidebar');
-        const windowWidth = window.innerWidth; 
-
-
-    
-        if (windowWidth < 1040) {
-          summarySidebar.style.backgroundColor = 'transparent';
-          summarySidebar.style.color = '#337aec';
-  
-        } else {
-          summarySidebar.style.backgroundColor = '#D2E3FF';
-          summarySidebar.style.borderRadius = '8px';
-          summarySidebar.style.color = '#42526E';
-        }
-      }, 200);
-    }
-}
-//loadcheckecdSubtasks();
-
-
+window.addEventListener("resize", setSidebarStyles);
 setTimeout(() => {
   getInitials();
 }, 1000);
 
+/**
+ * this function is used to style the Sidebar based on the screen resolution
+ */
+function setSidebarStyles() {
+  if (window.location.href.includes("board")) {
+    setTimeout(() => {
+      let summarySidebar = document.getElementById("boardSidebar");
+      const windowWidth = window.innerWidth;
+      if (windowWidth < 1040) {
+        summarySidebar.style.backgroundColor = "transparent";
+        summarySidebar.style.color = "#337aec";
+      } else {
+        summarySidebar.style.backgroundColor = "#D2E3FF";
+        summarySidebar.style.borderRadius = "8px";
+        summarySidebar.style.color = "#42526E";
+      }
+    }, 200);
+  }
+}
+
+/**
+ * this function is used to load the checked subtasks
+ */
 async function loadcheckecdSubtasks() {
   try {
     checkecdSubtasks = JSON.parse(await getItem("checkecdSubtasks"));
@@ -60,6 +57,9 @@ async function loadcheckecdSubtasks() {
   }
 }
 
+/**
+ * this function is used to load the number of tasks for summary
+ */
 async function loadAmount() {
   try {
     amount = JSON.parse(await getItem("amount"));
@@ -67,6 +67,10 @@ async function loadAmount() {
     console.error("Loading error:", e);
   }
 }
+
+/**
+ * this function is used to load the tasks
+ */
 async function loadtasks() {
   try {
     tasks = JSON.parse(await getItem("tasks"));
@@ -78,6 +82,9 @@ async function loadtasks() {
   }
 }
 
+/**
+ * this function is used to load the id
+ */
 async function loadid() {
   try {
     idCounter = JSON.parse(await getItem("idCounter"));
@@ -86,104 +93,64 @@ async function loadid() {
   }
 }
 
-function renderHTML() {
-  let toDo = tasks.filter((t) => t["taskCategory"] == "toDo");
-  const task = document.getElementById("toDo");
+/**
+ * this function is used to render all the tasks in a specific category
+ * @param {JSON} category filtered tasks tha share the same category
+ * @param {string} categorySting the category name
+ * @param {number} amount the number of tasks in that category
+ */
+function rendTaskCategory(category, categorySting, amount) {
+  const task = document.getElementById(categorySting);
   task.classList.remove("createdTask3");
   task.classList.add("newCreatedTask");
   task.innerHTML = "";
-  amountToDo = toDo.length;
-  if(amountToDo==0){
-    task.innerHTML = /*html */
-    `
-    <div class="createdTask2"> No Tasks 'To Do'</div>
-    `;
-  } 
-  for (let i = 0; i < toDo.length; i++) {
-    console.log(toDo[i]["id"]);
-    renderAllTasks("todo", i, toDo, task);
+  amount = category.length;
+  if (amount == 0) {
+    task.innerHTML = /*html */ `<div class="createdTask2"> No Tasks </div>`;
   }
+  for (let i = 0; i < category.length; i++) {
+    console.log(category[i]["id"]);
+    renderAllTasks(categorySting, i, category, task);
+  }
+}
 
+/**
+ * this function is used to render the container for the tasks
+ */
+function renderHTML() {
+  let toDo = tasks.filter((t) => t["taskCategory"] == "toDo");
+  rendTaskCategory(toDo, "toDo", amountToDo);
   let inProgress = tasks.filter((t) => t["taskCategory"] == "inProgress");
-  const task2 = document.getElementById("inProgress");
-  task2.classList.remove("createdTask3");
-  task2.classList.add("newCreatedTask");
-  task2.innerHTML = "";
-  amountInProgress = inProgress.length;
-  if(amountInProgress==0){
-    task2.innerHTML = /*html */
-    `
-    <div class="createdTask2"> No Tasks 'in Progress'</div>
-    `;
-  } 
-  for (let i = 0; i < inProgress.length; i++) {
-    console.log(inProgress[i]["id"]);
-    renderAllTasks("inProgress", i, inProgress, task2);
-  }
-
+  rendTaskCategory(inProgress, "inProgress", amountInProgress);
   let awaitFeedback = tasks.filter((t) => t["taskCategory"] == "awaitFeedback");
-  const task3 = document.getElementById("awaitFeedback");
-  task3.classList.remove("createdTask3");
-  task3.classList.add("newCreatedTask");
-  task3.innerHTML = "";
-  amountAawaitFeedback = awaitFeedback.length;
-  if(amountAawaitFeedback==0){
-    task3.innerHTML = /*html */
-    `
-    <div class="createdTask2"> No Tasks 'await feedback'</div>
-    `;
-  } 
-  for (let i = 0; i < awaitFeedback.length; i++) {
-    console.log(awaitFeedback[i]["id"]);
-    renderAllTasks("awaitFeedback", i, awaitFeedback, task3);
-  }
-
+  rendTaskCategory(awaitFeedback, "awaitFeedback", amountAawaitFeedback);
   let done = tasks.filter((t) => t["taskCategory"] == "done");
-  const task4 = document.getElementById("done");
-  task4.classList.remove("createdTask3");
-  task4.classList.add("newCreatedTask");
-  task4.innerHTML = "";
-  amountDone = done.length;
-  if(amountDone==0){
-    task4.innerHTML = /*html */
-    `
-    <div class="createdTask2"> No Tasks 'Done'</div>
-    `;
-  } 
-  for (let i = 0; i < done.length; i++) {
-    console.log(done[i]["id"]);
-    renderAllTasks("dones", i, done, task4);
+  rendTaskCategory(done, "done", amountDone);
+}
+
+/**
+ * this function is used to style the description in the rendered task
+ * @param {JSON} tasks the tasks 
+ * @param {number} i the task index 
+ * @returns 
+ */
+function styleDescription(tasks,i){
+  let description = tasks[i]["description"].replace(/\n/g, "<br>");
+  const descriptionLines = description.split("<br>");
+  if (descriptionLines.length > 2) {
+    description = descriptionLines.slice(0, 2).join("<br>") + "...";
   }
+  return description
 }
 
-function renderAllTasks(idInitials, i, tasks, task) {
-  const title = tasks[i]["title"];
-  let description = tasks[i]["description"].replace(/\n/g, '<br>');
-  const descriptionLines = description.split('<br>');
-
-
-if (descriptionLines.length > 2) {
-    description = descriptionLines.slice(0, 2).join('<br>') + '...';
-}
-
-  const date = tasks[i]["date"];
-  const priority = tasks[i]["priority"];
-  const assigned = tasks[i]["assigned"];
-  const category = tasks[i]["category"];
-  const subtask = tasks[i]["subtasks"];
-  const subtasks = subtask.length;
-  const id = tasks[i]["id"];
-  selectPath(priority);
-  task.innerHTML += renderTask(
-    idInitials,
-    i,
-    category,
-    title,
-    description,
-    subtasks,
-    id
-  );
-  assignedInitials = document.getElementById(`${idInitials}${i}`);
+/**
+ * this function is used to set the initials for every contact tha is involved on the current task
+ * @param {string} idInitials the initials of all contacts in that task
+ * @param {number} i the task index
+ * @param {Array} assigned array tha contains the assigned contacts
+ */
+function personInials(idInitials,i,assigned) {
+  let assignedInitials = document.getElementById(`${idInitials}${i}`);
   for (let j = 0; j < assigned.length; j++) {
     const optionInitials = contacts[assigned[j]].name
       .split(" ")
@@ -198,19 +165,58 @@ if (descriptionLines.length > 2) {
   }
 }
 
-function startDragging(id) {
-  currentDraggedElement = id ;
+/**
+ * this function is used to render all tasks
+ * @param {string} idInitials the initials of all contacts in that task 
+ * @param {number} i the task index
+ * @param {JSON} tasks  all tasks
+ * @param {JSON} task the taks of the same category
+ */
+function renderAllTasks(idInitials, i, tasks, task) {
+  const title = tasks[i]["title"];
+  const date = tasks[i]["date"];
+  const priority = tasks[i]["priority"];
+  const assigned = tasks[i]["assigned"];
+  const category = tasks[i]["category"];
+  const subtask = tasks[i]["subtasks"];
+  const subtasks = subtask.length;
+  const id = tasks[i]["id"];
+  selectPath(priority);
+  task.innerHTML += renderTask(
+    idInitials,
+    i,
+    category,
+    title,
+    styleDescription(tasks,i),
+    subtasks,
+    id
+  );
+  personInials(idInitials,i,assigned);
 }
 
+/**
+ * this function is used to drag a task
+ * @param {number} id the task id
+ */
+function startDragging(id) {
+  currentDraggedElement = id;
+}
+
+/**
+ * this task is used to drop the task
+ * @param {*} ev 
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
+/**
+ *  this task is used to change the category name
+ * @param {string} category the moved to task category
+ */
 async function moveTo(category) {
   removeHighlight(category);
-  //const tasksWithId = tasks.filter(task => task.id == currentDraggedElement);
   const index = tasks.findIndex((c) => c.id == currentDraggedElement);
-  //console.log(tasksWithId)
   tasks[index]["taskCategory"] = category;
   renderHTML();
   await setItem("tasks", JSON.stringify(tasks));
@@ -226,9 +232,13 @@ async function moveTo(category) {
     },
   ];
   await setItem("amount", JSON.stringify(amount));
-  
 }
 
+
+/**
+ * this task is used to set the priority image of the task
+ * @param {string} priority the priority case
+ */
 function selectPath(priority) {
   switch (priority) {
     case "low":
@@ -246,13 +256,40 @@ function selectPath(priority) {
   }
 }
 
+/**
+ * this function is used to render a single task
+ * @param {string} idInitials the initials of all contacts in that task 
+ * @param {number} i the task index
+ * @param {string} category the task category
+ * @param {string} title  the task title
+ * @param {string} description the task description
+ * @param {Array} subtasks the task subtasks
+ * @param {number} id the task id
+ * @returns 
+ */
 function renderTask(idInitials, i, category, title, description, subtasks, id) {
-  const taskIdVierElemente = checkecdSubtasks.filter(
+  const matchedSubtasks= checkecdSubtasks.filter(
     (subtask) => subtask.taskId == id
   );
-  const anzahlDerElementeMitTaskIdVier = taskIdVierElemente.length;
-  const progressPercentage = (anzahlDerElementeMitTaskIdVier / subtasks) * 100;
+  const matchedSubtasksNumber = matchedSubtasks.length;
+  const progressPercentage = (matchedSubtasksNumber / subtasks) * 100;
+  return templateRenderTask(idInitials, i, category, title, description, subtasks, id, progressPercentage,matchedSubtasksNumber);
+}
 
+/**
+ * this task is used to generate the HTML templae for renderTask
+ * @param {*} idInitials the initials of all contacts in that task 
+ * @param {number} i the task index
+ * @param {string} category the task category
+ * @param {string} title  the task title
+ * @param {string} description the task description
+ * @param {Array} subtasks the task subtasks
+ * @param {number} id the task id
+ * @param {number} progressPercentage the % of completed subtasks
+ * @param {number} matchedSubtasksNumber number of subtasks
+ * @returns 
+ */
+function templateRenderTask(idInitials, i, category, title, description, subtasks, id, progressPercentage,matchedSubtasksNumber) {
   return /*html*/ `
   <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask-${id}">
    <div class="${
@@ -264,9 +301,9 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
    </div>
    <div class="subtaskProgress">
        <div class="progress">
-       <div class="progress-bar" role="progressbar" aria-valuenow="${anzahlDerElementeMitTaskIdVier}" aria-valuemin="0" aria-valuemax="${subtasks}" id="progressBar${id}" style="width:${progressPercentage}%"></div>
+       <div class="progress-bar" role="progressbar" aria-valuenow="${matchedSubtasksNumber}" aria-valuemin="0" aria-valuemax="${subtasks}" id="progressBar${id}" style="width:${progressPercentage}%"></div>
        </div>
-       <div id="displaysubs${id}" class="progressSubtasksInfo">${anzahlDerElementeMitTaskIdVier}/${subtasks} Subtasks</div>
+       <div id="displaysubs${id}" class="progressSubtasksInfo">${matchedSubtasksNumber}/${subtasks} Subtasks</div>
    </div>
    <div class="namePriority">
        <div id="${idInitials}${i}" class="names"></div>
@@ -276,6 +313,10 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
    `;
 }
 
+/**
+ * this function is used to open the add task sidebar
+ * @param {string} aTaskCategory the task cateory of the new created task
+ */
 function addSidebar(aTaskCategory) {
   const dialog = document.getElementById("dialog");
   selectedTaskCategory = aTaskCategory;
@@ -283,16 +324,17 @@ function addSidebar(aTaskCategory) {
   dialog.classList.remove("displayNone");
   dialog.classList.add("addSidebar");
   dialog.style.justifyContent = "flex-end";
-
   let sidebar = document.getElementById("sidebarRight");
   sidebar.classList.remove("displayNone");
-
   setTimeout(() => {
     sidebar.style.transition = "width 0.1s ease";
     sidebar.style.width = "450px";
   }, 50);
 }
 
+/**
+ * this function is used to close the sidebar
+ */
 function closeSidebar() {
   let sidebar = document.getElementById("sidebarRight");
   sidebar.style.width = "0px";
@@ -301,67 +343,20 @@ function closeSidebar() {
   }, 50);
 }
 
+/**
+ * this function is used to not close the sidebar 
+ * @param {*} event 
+ */
 function doNotClose(event) {
   event.stopPropagation();
 }
 
-async function createTask2() {
-  const taskTitle = document.getElementById("task-title").value;
-  const taskDescription = document.getElementById("task-description").value;
-  const taskDate = document.getElementById("task-date").value;
-  const category = document.querySelector(".category-select").value;
 
-  if (taskTitle === "" || taskDate === "" || category === "Select task category") {
-    if (taskTitle === "") {
-        document.getElementById("task-title").style.borderBottom = "2px solid red";
-        document.getElementById("task-title").style.color = "red";
-    } else {
-        document.getElementById("task-title").style.borderBottom = "1px solid black";
-        document.getElementById("task-title").style.color = "black";
-    }
 
-    if (taskDate === "") {
-        document.getElementById("task-date").style.borderBottom = "2px solid red";
-        document.getElementById("task-date").style.color = "red";
-    } else {
-        document.getElementById("task-date").style.borderBottom = "1px solid black";
-        document.getElementById("task-date").style.color = "black";
-    }
-
-    if (category === "Select task category") {
-        document.querySelector(".category-select").style.borderBottom = "2px solid red";
-        document.querySelector(".category-select").style.color = "red";
-    } else {
-        document.querySelector(".category-select").style.borderBottom = "1px solid black";
-        document.querySelector(".category-select").style.color = "black";
-    }
-} else{
-
-  idCounter++;
-  tasks.push({
-    title: taskTitle,
-    description: taskDescription,
-    date: taskDate,
-    priority: priority,
-    assigned: checkecdContacts,
-    category: category,
-    subtasks: subtasks,
-    taskCategory: selectedTaskCategory,
-    id: idCounter,
-  });
-  await setItem("tasks", JSON.stringify(tasks));
-  await setItem("idCounter", JSON.stringify(idCounter));
-  tasks = JSON.parse(await getItem("tasks"));
-  contacts = JSON.parse(await getItem("contacts"));
-
-  const task = document.getElementById(selectedTaskCategory);
-  task.classList.remove("createdTask3");
-  task.classList.add("newCreatedTask");
-  //task.innerHTML = "";
-  let i = tasks.length - 1;
-
-  renderAllTasks(selectedTaskCategory, i, tasks, task);
-
+/**
+ * this function is used to confirm the creation of the new task
+ */
+function successfullyCreatedInBoar() {
   const popup = document.getElementById("popup");
   popup.classList.add("show");
 
@@ -369,11 +364,149 @@ async function createTask2() {
     popup.classList.remove("show");
     closeSidebar();
   }, 1000);
-  subtasks = [];
-  renderHTML();
 }
+/**
+ * this function is used to create a task in board.html
+ */
+async function createTask2() {
+  const taskTitle = document.getElementById("task-title");
+  const taskDescription = document.getElementById("task-description").value;
+  const taskDate = document.getElementById("task-date");
+  const category = document.querySelector(".category-select");
+  if (requiredNotFilled(taskTitle,taskDate,category)) {
+    isFilled(taskTitle.value,taskTitle);
+    isFilled(taskDate.value,taskDate);
+    isFilled(category.value,category);
+  } else {
+    idCounter++;
+    tasks.push({
+      title: taskTitle.value,
+      description: taskDescription,
+      date: taskDate.value,
+      priority: priority,
+      assigned: checkecdContacts,
+      category: category.value,
+      subtasks: subtasks,
+      taskCategory: selectedTaskCategory,
+      id: idCounter,
+    });
+    await setItem("tasks", JSON.stringify(tasks));
+    await setItem("idCounter", JSON.stringify(idCounter));
+    tasks = JSON.parse(await getItem("tasks"));
+    contacts = JSON.parse(await getItem("contacts"));
+    const task = document.getElementById(selectedTaskCategory);
+    task.classList.remove("createdTask3");
+    task.classList.add("newCreatedTask");
+    let i = tasks.length - 1;
+    renderAllTasks(selectedTaskCategory, i, tasks, task);
+    successfullyCreatedInBoar() ;
+    subtasks = [];
+    renderHTML();
+  }
 }
 
+/**
+ * this function is used to create the edit button
+ * @param {number} index task index 
+ */
+function creatEdit(index) {
+  const editButton = document.createElement("button");
+  editButton.className = "edit-button";
+  editButton.innerHTML = '<img src="/grafiken/edit.png"> Edit';
+  editButton.onclick = function () {
+    editTask(index); 
+  };
+}
+
+/**
+ * this function is used to create the HTML template for the popup
+ * @param {string} category the task category
+ * @param {string} title the task title
+ * @param {string} description the task description
+ * @param {string} date the task date
+ * @param {string} priority the task priority case
+ * @param {number} taskId the task id
+ * @param {number} index the task index
+ * @returns 
+ */
+function templatePopupDiv(category,title,description,date,priority,taskId,index){
+return /*html*/ `
+<div class="task-container" id="taskContainer-id">
+<div class="${
+  category === "Technical Task" ? "blueStyle" : "orangeStyle"
+}">${category} 
+</div> 
+<button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
+</div>
+
+<div class="taskTitle" id="taskTitle">${title} </div>
+<div class="descTask" id="taskDesc">${description}</div>
+<div class="task-date" id="taskDate"> Due date:<span style="color:black;font-weight:400; margin-left:10px">${date}</span></div>
+<div class="task-priority" id="taskPriority"> Priority:  <span style="color:black ;font-weight:400;margin-left:10px">${priority}</span><img src=${path} style='margin-left:10px'></div>
+<div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
+<div class="noEffect" id="popup${taskId}"></div> 
+
+<div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
+<div class="noEffect" id="subtasks${taskId}"></div>
+
+<div class="popup-buttons"> 
+  <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
+  <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
+  <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
+  
+</div>
+`}
+
+/**
+ * this function is used to show the initials in popup
+ * @param {number} taskId the task id
+ * @param {string} assigned the task assigned contacts
+ */
+function showInitial(taskId, assigned) {
+  let assignedInitials = document.getElementById(`popup${taskId}`);
+  for (let j = 0; j < assigned.length; j++) {
+    const optionInitials = contacts[assigned[j]].name
+      .split(" ")
+      .map((word) => word[0].toUpperCase())
+      .join("");
+    assignedInitials.innerHTML += /*html*/ `
+      <div class="alignContact">
+                <div class="roundNameDropdownTask" style="background-color:${
+                  contacts[assigned[j]].color
+                }">
+                  ${optionInitials} 
+                </div>
+                <div style="color:black">${contacts[assigned[j]].name}</div>
+                </div>`;
+  }
+}
+
+/**
+ * this function is used to show the subtasks im popup
+ * @param {number} taskId the task id
+ * @param {Array} subtasks the task subtasks
+ */
+function showSubtasks(taskId,subtasks) {
+  let subs = document.getElementById(`subtasks${taskId}`);
+  for (let k = 0; k < subtasks.length; k++) {
+    let isCheckedS = checkecdSubtasks.some(
+      (subtask) => subtask.k === k && subtask.taskId === taskId
+    );
+    subs.innerHTML += /*html*/ `
+      <div style='color:black'>
+       <input type="checkbox" onclick="updateProgress(${subtasks.length},${taskId},${k})" class="check${taskId}"
+       ${isCheckedS ? "checked" : ""} id="checkbox${taskId}${k}">
+       ${subtasks[k]} 
+      
+      </div>
+    `;
+  }
+}
+
+/**
+ * this function is used to show the seleted task
+ * @param {number} id the task id
+ */
 async function showTask(id) {
   console.log(id);
   const index = tasks.findIndex((c) => c.id == id);
@@ -389,86 +522,21 @@ async function showTask(id) {
   const assigned = task["assigned"];
   const subtasks = task["subtasks"];
   selectPath(priority);
-
-  const editButton = document.createElement("button");
-  editButton.className = "edit-button";
-  editButton.innerHTML = '<img src="/grafiken/edit.png"> Edit';
-  editButton.onclick = function () {
-    editTask(index); // Rufen Sie die editTask-Funktion auf, wenn der "Edit" -Button geklickt wird.
-  };
-
+  creatEdit(index);
   const popupDiv = document.createElement("div");
   popupDiv.className = "popup-div";
-  popupDiv.innerHTML = /*html*/ `
-    <div class="task-container" id="taskContainer-id">
-      <div class="${
-        category === "Technical Task" ? "blueStyle" : "orangeStyle"
-      }">${category} 
-      </div> 
-      <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
-    </div>
-    
-    <div class="taskTitle" id="taskTitle">${title} </div>
-    <div class="descTask" id="taskDesc">${description}</div>
-    <div class="task-date" id="taskDate"> Due date:<span style="color:black;font-weight:400; margin-left:10px">${date}</span></div>
-    <div class="task-priority" id="taskPriority"> Priority:  <span style="color:black ;font-weight:400;margin-left:10px">${priority}</span><img src=${path} style='margin-left:10px'></div>
-    <div class="task-assigned" id="taskAssigned"> Assigned to : <div> 
-    <div class="noEffect" id="popup${taskId}"></div> 
-    
-    <div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
-    <div class="noEffect" id="subtasks${taskId}"></div>
-    
-
-    <div class="popup-buttons"> 
-        <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
-        <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
-        <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
-        
-    </div>
-  `;
-
+  popupDiv.innerHTML = templatePopupDiv(category,title,description,date,priority,taskId,index);
   setTimeout(async () => {
-    assignedInitials = document.getElementById(`popup${taskId}`);
-    for (let j = 0; j < assigned.length; j++) {
-      const optionInitials = contacts[assigned[j]].name
-        .split(" ")
-        .map((word) => word[0].toUpperCase())
-        .join("");
-      assignedInitials.innerHTML += /*html*/ `
-        <div class="alignContact">
-                  <div class="roundNameDropdownTask" style="background-color:${
-                    contacts[assigned[j]].color
-                  }">
-                    ${optionInitials} 
-                  </div>
-                  <div style="color:black">${contacts[assigned[j]].name}</div>
-                  </div>`;
-    }
-    subs = document.getElementById(`subtasks${taskId}`);
-
-    for (let k = 0; k < subtasks.length; k++) {
-      let isCheckedS = checkecdSubtasks.some(
-        (subtask) => subtask.k === k && subtask.taskId === taskId
-      );
-      subs.innerHTML += /*html*/ `
-        <div style='color:black'>
-         <input type="checkbox" onclick="updateProgress(${
-           subtasks.length
-         },${taskId},${k})" class="check${taskId}"
-         ${isCheckedS ? "checked" : ""} id="checkbox${taskId}${k}">
-         ${subtasks[k]} 
-        
-        </div>
-      `;
-    }
+    showInitial(taskId, assigned);
+    showSubtasks(taskId,subtasks);
   }, 200);
-
   console.log(subtasks);
   document.body.appendChild(popupDiv);
   setTimeout(() => {
     popupDiv.classList.add("show");
   }, 50);
 }
+
 
 async function updateProgress(subtasks, taskId, k) {
   let checkbox = document.getElementById(`checkbox${taskId}${k}`);
@@ -490,19 +558,11 @@ async function updateProgress(subtasks, taskId, k) {
   }
   //checkecdSubtasks=[]
   await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
-
-  //const checkboxes = document.querySelectorAll(`.check${taskId}`);
   let progressBar = document.getElementById(`progressBar${taskId}`);
-
   const taskIdVierElemente = checkecdSubtasks.filter(
     (subtask) => subtask.taskId == taskId
   );
   const anzahlDerElementeMitTaskIdVier = taskIdVierElemente.length;
-
-  console.log(taskId);
-  console.log(subtasks);
-  console.log(anzahlDerElementeMitTaskIdVier / subtasks);
-  console.log(progressBar);
 
   const progressPercentage = (anzahlDerElementeMitTaskIdVier / subtasks) * 100;
   progressBar.style.width = `${progressPercentage}%`;
@@ -517,7 +577,10 @@ async function updateProgress(subtasks, taskId, k) {
   overlay.addEventListener("click", closePopup);
 }
 
-  function closePopup() {
+/**
+ * this function is used to close the popup
+ */
+function closePopup() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none";
   const popupDiv = document.querySelector(".popup-div");
@@ -527,23 +590,24 @@ async function updateProgress(subtasks, taskId, k) {
   }, 300);
 }
 
+/**
+ * this function is used to delete a task
+ * @param {number} index 
+ */
 async function deleteTask(index) {
   const popupDiv = document.querySelector(".popup-div");
   const overlayDiv = document.querySelector(".overlay");
-
   if (popupDiv && overlayDiv) {
     popupDiv.classList.remove("show");
     setTimeout(() => {
       popupDiv.remove();
     }, 300);
     overlayDiv.style.display = "none";
-
     const todelete = tasks[index]["id"];
     const taskContainer = document.getElementById(`showTask-${todelete}`);
     if (taskContainer) {
       taskContainer.remove();
     }
-
     tasks.splice(index, 1);
     await setItem("tasks", JSON.stringify(tasks));
     renderHTML();
@@ -551,16 +615,14 @@ async function deleteTask(index) {
 }
 
 async function editTask(id) {
-  // Das AddTask-Template aufrufen und mit den ursprünglichen Werten füllen
   const addTaskSection = document.querySelector(".popup-div");
   let dialog = document.getElementById("dialog");
   dialog.remove();
-  addTaskSection.innerHTML = `
+  addTaskSection.innerHTML = /*html*/`
     <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
     <div w3-include-html="includes/add-task-template.html"></div>
     <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
     </div>
-
   `;
 
   await init();
@@ -647,7 +709,7 @@ async function applyModifications(id) {
   }, 500);
 }
 
-  async function closePopup2() {
+async function closePopup2() {
   const overlay = document.getElementById("overlay");
   overlay.style.display = "none";
   const popupDiv = document.querySelector(".popup-div");
@@ -657,7 +719,7 @@ async function applyModifications(id) {
   }, 300);
 
   board = document.getElementById("board");
-  board.innerHTML += `
+  board.innerHTML +=/*html*/ `
   <div id="dialog" class="displayNone" onclick="closeSidebar()">
   <div
   id="sidebarRight"
@@ -678,6 +740,9 @@ async function applyModifications(id) {
   await init();
 }
 
+/**
+ * this function is used to find tasks
+ */
 function findTask() {
   findTaskInput = document.getElementById("findTaskInput");
   const search = findTaskInput.value.toUpperCase();
@@ -694,10 +759,18 @@ function findTask() {
   }
 }
 
+/**
+ * this function is used to highlight the task while dragging
+ * @param {number} id task id
+ */
 function highlight(id) {
-  document.getElementById(id).classList.add('drag-area-highlight');
+  document.getElementById(id).classList.add("drag-area-highlight");
 }
 
+/**
+ * this task is used to stop the highlight after dragging
+ * @param {number} id task id
+ */
 function removeHighlight(id) {
-  document.getElementById(id).classList.remove('drag-area-highlight');
+  document.getElementById(id).classList.remove("drag-area-highlight");
 }

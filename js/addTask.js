@@ -327,7 +327,7 @@ function isFilled(requiredFieldValue,requiredField){
  * this function is used to check if the required fields are filled
  * @returns
  */
-function requiredNotFilled(){
+function requiredNotFilled(taskTitle,taskDate,category){
   return(    taskTitle.value === "" ||
               taskDate.value === "" ||
               category.value === "Select task category"
@@ -354,7 +354,7 @@ async function createTask() {
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date");
   const category = document.querySelector(".category-select");
-  if (requiredNotFilled()) {
+  if (requiredNotFilled(taskTitle,taskDate,category)) {
     isFilled(taskTitle.value,taskTitle);
     isFilled(taskDate.value,taskDate);
     isFilled(category.value,category);
