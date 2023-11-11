@@ -507,6 +507,9 @@ background-color: rgba(0, 0, 0, 0.2);
   #board{
     width: 100vw;
   }
+  #tasks{
+margin-bottom: 20px;
+  }
 }
 
 @media(max-width: 640px){
