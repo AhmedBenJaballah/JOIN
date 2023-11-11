@@ -230,7 +230,7 @@ function renderContactList(name, color, email, phone) {
   const letter = document.getElementById(`${name[0].toUpperCase()}`);
   if (letter) {
     letter.innerHTML += templatePersonWithLetter(name, color, email, phone);
-  } else {
+  } else if(contactlist){
     contactlist.innerHTML += templatePersonWithOutLetter(
       name,
       color,
