@@ -20,6 +20,7 @@ body {
   cursor: pointer;
   color: rgb(66,82,110);
   font-weight: bold;
+  margin-bottom: 50px;
   
 }
 #task-title:focus {
@@ -34,6 +35,7 @@ body {
   border-color: rgba(0, 0, 0, 0.2);
   outline-color: rgb(69, 137, 255);
   cursor: pointer;
+  margin-bottom: 50px;
 
 }
 .task-description {
@@ -49,6 +51,7 @@ body {
   border: none;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  margin-bottom: 50px;
 
 }
 .task-date {
@@ -113,7 +116,7 @@ label > img {
   background-color: rgb(122, 226, 41) !important ;
 }
 .assigned {
-  margin-top: 10px;
+  margin-top: 50px;
   font-size: 24px;
   border: none;
   cursor: pointer;
@@ -152,7 +155,7 @@ label > img {
 }
 .category {
   font-size: 24px;
-  margin-top: 10px;
+  margin-top: 50px;
   color: rgb(66,82,110);
   font-weight: bold;
 }
@@ -163,7 +166,7 @@ label > img {
   border-bottom: 2px solid rgb(69, 137, 255);
 }
 .subtasks {
-  margin-top: 10px;
+  margin-top: 50px;
   font-size: 24px;
   color: rgb(66,82,110);
   font-weight: bold;
@@ -173,6 +176,7 @@ label > img {
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
   width: 400px;
+  margin-bottom: 50px;
 }
 #subtasks:hover {
   border-color: rgb(0,93,255);
