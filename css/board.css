@@ -290,6 +290,8 @@ left: 50%;
 transform: translate(-50%, -50%);
 width: 80%; /* Oder eine andere gewünschte Breite */
 max-width: 500px;
+max-height: 90vh;
+min-height: 90vh;
 background-color: #fff;
 transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
 box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
@@ -342,6 +344,7 @@ font-weight: bold;
 .popup-div.show {
 transform: translateX(-50%) translateY(-50%); 
 opacity: 1; 
+max-height: 90vh;
 }
 
 .popup-content {
