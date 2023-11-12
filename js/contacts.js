@@ -83,11 +83,16 @@ function addContact() {
   dialog.classList.add("addSidebar");
   dialog.style.justifyContent = "flex-end";
   sidebarLeft.classList.add("displayNone");
-  let sidebar = document.getElementById("sidebarRight");
+  const sidebar = document.getElementById("sidebarRight");
   sidebar.classList.remove("displayNone");
 
-  updateSidebarWidthRight();
-  window.addEventListener("resize", updateSidebarWidthRight);
+  setTimeout(() => {
+    sidebar.style.transition = "width 0.1s ease";
+    sidebar.style.width = "45vw";
+    updateSidebarWidthRight();
+    window.addEventListener("resize", updateSidebarWidthRight);
+  }, 50);
+
 }
 
 /**
@@ -172,6 +177,9 @@ async function createPerson() {
   renderContactList(nameC.value, color, emailC.value, phoneC.value);
   scrollAndChangeColor(nameC.value);
   successfullyCreated();
+  nameC.value='';
+  emailC.value='';
+  phoneC.value='';
 }
 
 /**
@@ -345,7 +353,7 @@ function renderInfo(name, email, color, phone) {
   selected.style.borderRadius = "15px";
   selected.classList.remove('person');
   selected.classList.add('personAlt');
-  
+
   const display = document.getElementById("displayContact");
   display.style.display = "flex";
   display.style.animation = "slideFromRight 0.5s ease-in-out";
@@ -394,7 +402,7 @@ function renderInfoTemplate(name, email, color, phone) {
     name
   )}</div>
         <div class="renderName">
-            <div class="renderOnlyName">${name}</div>
+            <div class="renderOnlyName" id='${name}${email}${color}${phone}EditTask1'>${name}</div>
             <div class="editAndDelete">
                 <div class="alignImg" onclick="modification('${name}','${email}','${color}','${phone}')"><img src="grafiken/edit.png">Edit</div>
                 <div class="alignImg" onclick="deleteContact('${name}','${email}','${color}','${phone}')" ><img src="grafiken/delete.png">Delete</div>
@@ -404,9 +412,9 @@ function renderInfoTemplate(name, email, color, phone) {
     <div class="renderEmailAndPhone">
         <h4 id='contactInformation'>Contact Information</h4>
         <h5>Email</h5>
-        <div style="color:#4589ff">${email}</div>
+        <div style="color:#4589ff" id='${name}${email}${color}${phone}EditTask2'>${email}</div>
         <h5>Phone</h5>
-        <div>${phone}</div>
+        <div id='${name}${email}${color}${phone}EditTask3'>${phone}</div>
     </div>
     <div id="backToCon"  style="display:none" onclick='backToCon()'> <img src='grafiken/arrow-left-line.png'> </div>
       `;
@@ -514,6 +522,14 @@ async function editPerson(name, email, color, phone) {
   await setItem("contacts", JSON.stringify(contacts));
   rendeAfterEdit();
   await loadContacts();
+
+  let editedName= document.getElementById(`${name}${email}${color}${phone}EditTask1`)
+  let editedEmail= document.getElementById(`${name}${email}${color}${phone}EditTask2`)
+  let editedPhone= document.getElementById(`${name}${email}${color}${phone}EditTask3`)
+  editedName.innerHTML=  nameEdit.value;
+  editedEmail.innerHTML= emailEdit.value;
+  editedPhone= phoneEdit.value;
+
 }
 
 /**
@@ -522,9 +538,9 @@ async function editPerson(name, email, color, phone) {
 function rendeAfterEdit() {
   const contactList = document.getElementById("contactList");
   contactList.innerHTML = "";
-  const display = document.getElementById("displayContact");
-  display.innerHTML = "";
-  display.style.display = "none";
+  // const display = document.getElementById("displayContact");
+  // display.innerHTML = "";
+  // display.style.display = "none";
   const scroll = document.getElementById("scrollContacts");
   scroll.style.display = "flex";
   closeSidebar2();
