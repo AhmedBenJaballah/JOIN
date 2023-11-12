@@ -23,6 +23,7 @@
 #displayContact{
   display: flex;
   flex-direction: column;
+  
 }
 
 #addContact {
