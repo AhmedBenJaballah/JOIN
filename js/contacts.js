@@ -15,14 +15,16 @@ function setSidebarStyles() {
       let contactSidebar = document.getElementById("contactsSidebar");
       const windowWidth = window.innerWidth;
 
-      if (windowWidth < 1040) {
+      if (contactSidebar)
+      {      
+        if (windowWidth < 1040) {
         contactSidebar.style.backgroundColor = "transparent";
         contactSidebar.style.color = "#337aec";
       } else {
         contactSidebar.style.backgroundColor = "#D2E3FF";
         contactSidebar.style.borderRadius = "8px";
         contactSidebar.style.color = "#42526E";
-      }
+      }}
     }, 200);
   }
   setResolution();
@@ -175,11 +177,13 @@ async function createPerson() {
   await setItem("contacts", JSON.stringify(contacts));
   closeSidebar();
   renderContactList(nameC.value, color, emailC.value, phoneC.value);
+  resetColor()
   scrollAndChangeColor(nameC.value);
   successfullyCreated();
   nameC.value='';
   emailC.value='';
   phoneC.value='';
+  
 }
 
 /**
@@ -196,12 +200,12 @@ function scrollAndChangeColor(name) {
   let allDivs = element.getElementsByTagName("div");
   let lastDiv = allDivs[allDivs.length - 1];
   setBackgrounColor(lastDiv);
-  document.addEventListener("click", function (event) {
-    var selectedElement = event.target;
-    if (selectedElement !== lastDiv) {
-      resetBackgrounColor(lastDiv);
-    }
-  });
+  // document.addEventListener("click", function (event) {
+  //   var selectedElement = event.target;
+  //   if (selectedElement !== lastDiv) {
+  //     resetBackgrounColor(lastDiv);
+  //   }
+  // });
 }
 
 /**
@@ -345,7 +349,9 @@ function getRandomBrightColor() {
  */
 function renderInfo(name, email, color, phone) {
   resetColor()
+  const display = document.getElementById("displayContact");
   const selected = document.getElementById(`${name}${email}${color}${phone}`);
+  console.log(selected)
   const selectedMail = document.getElementById(`${name}${email}${color}${phone}Email`);
   selected.style.backgroundColor = "#4589ff";
   selected.style.color = "white";
@@ -353,13 +359,43 @@ function renderInfo(name, email, color, phone) {
   selected.style.borderRadius = "15px";
   selected.classList.remove('person');
   selected.classList.add('personAlt');
-
-  const display = document.getElementById("displayContact");
-  display.style.display = "flex";
-  display.style.animation = "slideFromRight 0.5s ease-in-out";
-  display.innerHTML = renderInfoTemplate(name, email, color, phone);
-
   const winWidth = window.innerWidth;
+  if (winWidth > 1040)
+  { display.style.display = "none";
+  display.style.alignItems='flex-end'
+  
+ setTimeout(() => {
+  display.style.display = "flex";
+ }, 200);
+
+ setTimeout(() => {
+  display.style.alignItems='center'
+ }, 250);
+
+ setTimeout(() => {
+  display.style.alignItems='flex-start'
+ }, 300);}
+ else{
+  display.style.display = "flex";
+ }
+  
+ 
+ 
+ 
+    
+  
+
+
+ 
+ 
+  
+
+  display.innerHTML = renderInfoTemplate(name, email, color, phone);
+  
+  
+
+
+  
   const scroll = document.getElementById("scrollContacts");
   const arrow = document.getElementById("backToCon");
   if (winWidth < 1040) {
@@ -397,7 +433,7 @@ function resetColor() {
  */
 function renderInfoTemplate(name, email, color, phone) {
   return /*html*/ `
-    <div class="renderContacts">
+    <div id='rC' class="renderContacts">
         <div class="displayRoundName" style="background-color:${color}">${initials(
     name
   )}</div>
@@ -409,7 +445,7 @@ function renderInfoTemplate(name, email, color, phone) {
             </div>
         </div>
     </div>
-    <div class="renderEmailAndPhone">
+    <div id='rEP' class="renderEmailAndPhone">
         <h4 id='contactInformation'>Contact Information</h4>
         <h5>Email</h5>
         <div style="color:#4589ff" id='${name}${email}${color}${phone}EditTask2'>${email}</div>
@@ -475,6 +511,7 @@ function editTheSelected(name, email, color, phone, editForm) {
   nameEdit.value = name;
   emailEdit.value = email;
   phoneEdit.value = phone;
+ 
 }
 
 /**
@@ -493,7 +530,7 @@ function templatEdit(name, color, email, phone) {
     <form id="formContacts" onsubmit="editPerson('${name}','${email}','${color}','${phone}'); return false;">
         <input type="name" id="nameEdit" placeholder="Name" class="inputContact" required >
         <input type="email" id="emailEdit" placeholder="Email" class="inputContact" required>
-        <input type="phone" id="phoneEdit" placeholder="Phone" class="inputContact" required>
+        <input type="tel" id="phoneEdit" placeholder="Phone" class="inputContact" required >
         <div class="btns">
             <button type="button"  class="btn btn-outline-primary" onclick="deleteContact('${name}','${email}','${color}','${phone}')">Delete <i class="bi bi-x"></i></button>
             <button  type="submit" id="createBtn" class="btn btn-primary">Save <i class="bi bi-check-lg"></i></button>
@@ -528,7 +565,7 @@ async function editPerson(name, email, color, phone) {
   let editedPhone= document.getElementById(`${name}${email}${color}${phone}EditTask3`)
   editedName.innerHTML=  nameEdit.value;
   editedEmail.innerHTML= emailEdit.value;
-  editedPhone= phoneEdit.value;
+  editedPhone.innerHTML= phoneEdit.value;
 
 }
 

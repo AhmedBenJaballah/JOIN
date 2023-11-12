@@ -7,6 +7,7 @@
   width: calc(100vw - 200px);
   height: calc(100vh - 80px);
   display: flex;
+  
 }
 
 #scrollContacts {
@@ -23,7 +24,8 @@
 #displayContact{
   display: flex;
   flex-direction: column;
-  
+  width: 65%;
+  align-items: flex-end;
 }
 
 #addContact {
@@ -242,7 +244,10 @@
   margin-right: 80px;
   margin-left: 80px;
   margin-bottom: 40px;
+  
 }
+
+
 
 .displayRoundName {
   border: 3px solid white;
@@ -345,6 +350,7 @@
 
 #contacts{
   width: 100vw;
+  justify-content: center;
 }
 
 /* #dialog{
