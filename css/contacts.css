@@ -2,6 +2,7 @@
   display: flex;
 }
 
+
 #contacts {
   width: calc(100vw - 200px);
   height: calc(100vh - 80px);
@@ -72,9 +73,17 @@
   padding: 10px;
 }
 
+.personAlt {
+  margin-top: 10px;
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+}
+
 .person:hover {
-  background-color: #d2e3ff;
-  border-radius: 8px;
+  background-color: #d2e3ff !important;
+  border-radius: 8px !important;
   cursor: pointer;
 }
 

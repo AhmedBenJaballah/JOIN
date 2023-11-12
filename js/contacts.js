@@ -12,16 +12,16 @@ setTimeout(() => {
 function setSidebarStyles() {
   if (window.location.href.includes("contacts")) {
     setTimeout(() => {
-      let summarySidebar = document.getElementById("contactsSidebar");
+      let contactSidebar = document.getElementById("contactsSidebar");
       const windowWidth = window.innerWidth;
 
       if (windowWidth < 1040) {
-        summarySidebar.style.backgroundColor = "transparent";
-        summarySidebar.style.color = "#337aec";
+        contactSidebar.style.backgroundColor = "transparent";
+        contactSidebar.style.color = "#337aec";
       } else {
-        summarySidebar.style.backgroundColor = "#D2E3FF";
-        summarySidebar.style.borderRadius = "8px";
-        summarySidebar.style.color = "#42526E";
+        contactSidebar.style.backgroundColor = "#D2E3FF";
+        contactSidebar.style.borderRadius = "8px";
+        contactSidebar.style.color = "#42526E";
       }
     }, 200);
   }
@@ -267,13 +267,13 @@ function sortAlpha(contactlist) {
  */
 function templatePersonWithLetter(name, color, email, phone) {
   return /*html*/ `                   
-    <div class="person" onclick="renderInfo('${name}','${email}','${color}','${phone}')">
+    <div class="person" id="${name}${email}${color}${phone}" onclick="renderInfo('${name}','${email}','${color}','${phone}')">
         <div class="roundName" style="background-color:${color}">${initials(
     name
   )}</div>
         <div class="info">
             <div class="namePerson">${name}</div>
-            <div class="emailPerson">${email}</div>
+            <div  id="${name}${email}${color}${phone}Email" class="emailPerson">${email}</div>
         </div>
     </div>
 `;
@@ -291,13 +291,13 @@ function templatePersonWithOutLetter(name, color, email, phone) {
   return /*html*/ `                   
     <div class="letter" id="${name[0].toUpperCase()}">
         <div class="firstLetter">${name[0].toUpperCase()}</div>
-        <div class="person" onclick="renderInfo('${name}','${email}','${color}','${phone}')">
+        <div class="person" id="${name}${email}${color}${phone}" onclick="renderInfo('${name}','${email}','${color}','${phone}')">
             <div class="roundName" style="background-color:${color}">${initials(
     name
   )}</div>
             <div class="info">
                 <div class="namePerson">${name}</div>
-                <div class="emailPerson">${email}</div>
+                <div id="${name}${email}${color}${phone}Email" class="emailPerson">${email}</div>
             </div>
         </div>
     </div>`;
@@ -336,9 +336,21 @@ function getRandomBrightColor() {
  * @param {string} phone phone of the newest contact
  */
 function renderInfo(name, email, color, phone) {
+  resetColor()
+  const selected = document.getElementById(`${name}${email}${color}${phone}`);
+  const selectedMail = document.getElementById(`${name}${email}${color}${phone}Email`);
+  selected.style.backgroundColor = "#4589ff";
+  selected.style.color = "white";
+  selectedMail.style.color = "white";
+  selected.style.borderRadius = "15px";
+  selected.classList.remove('person');
+  selected.classList.add('personAlt');
+  
   const display = document.getElementById("displayContact");
   display.style.display = "flex";
+  display.style.animation = "slideFromRight 0.5s ease-in-out";
   display.innerHTML = renderInfoTemplate(name, email, color, phone);
+
   const winWidth = window.innerWidth;
   const scroll = document.getElementById("scrollContacts");
   const arrow = document.getElementById("backToCon");
@@ -346,6 +358,25 @@ function renderInfo(name, email, color, phone) {
     arrow.style.display = "flex";
     scroll.style.display = "none";
   }
+}
+
+function resetColor() {
+  const allElementsAlt = document.querySelectorAll('.personAlt');
+  allElementsAlt.forEach(element => {
+    element.classList.remove('personAlt');
+    element.classList.add('person');
+  });
+
+  const allElements = document.querySelectorAll('.person'); 
+  allElements.forEach(element => {
+    element.style.backgroundColor = 'white'; 
+    element.style.color = "black"; 
+  });
+
+  const allElementsEmail = document.querySelectorAll('.emailPerson'); 
+  allElementsEmail.forEach(element => {
+    element.style.color = "#4589ff"; 
+  });
 }
 
 /**

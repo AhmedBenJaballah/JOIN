@@ -1,4 +1,4 @@
-let userInitial = "";
+let userInitial="" ;
 
 /**
  * this function is used for activating the animation
@@ -49,8 +49,8 @@ function createLogInContainer() {
 /**
  * this function is used to create the log in HTML template
  */
-function templateLogIn() {
-  return /*html*/ `
+function templateLogIn(){
+return    /*html*/ `
 <div id="logInContainer">
 <div id="logInTitle">Log in</div>
 <form id="formLogIn" onsubmit="logIn(); return false;">
@@ -73,8 +73,8 @@ function templateLogIn() {
  * this function is used to navigte to summary
  */
 async function goToSummary() {
-  await setItem("userInitial", "G");
-  await setItem("userName", "Guest");
+  await setItem('userInitial', 'G');
+  await setItem('userName', 'Guest');
   window.location.href = "/summary.html";
 }
 
@@ -118,30 +118,31 @@ function footer() {
 /**
  * this function is used to log In
  */
-async function logIn() {
-  const email = document.getElementById("logInEmail");
-  const password = document.getElementById("logInPassword");
-  try {
-    users = JSON.parse(await getItem("users"));
-    console.log(users);
-    user = users.find(
-      (u) => u.email == email.value && u.password == password.value
-    );
-    if (user) {
-      userInitial = user.name
-        .split(" ")
-        .map((word) => word[0].toUpperCase())
-        .join("");
-      await setItem("userInitial", userInitial);
-      await setItem("userName", user.name);
-      window.location.href = "summary.html";
+async function logIn(){
+    const email= document.getElementById("logInEmail");
+    const password = document.getElementById("logInPassword");
+    try {
+        users = JSON.parse(await getItem('users'));
+        console.log(users)
+        user = users.find(u =>u.email==email.value && u.password== password.value)
+        if(user){
+            userInitial= user.name.split(' ').map(word => word[0].toUpperCase()).join('')
+            await setItem('userInitial', userInitial);
+            await setItem('userName', user.name);
+            window.location.href = 'summary.html';
+        }
+       else if (users.some(u => u.email === email.value)) {
+        // Email existiert, aber Passwort ist falsch
+        password.style.borderBottom = "1px solid red";
+        password.style.color = "red";
     } else {
-      email.style.borderBottom = "1px solid red";
-      email.style.color = "red";
-      password.style.borderBottom = "1px solid red";
-      password.style.color = "red";
+        // Benutzer nicht gefunden
+        email.style.borderBottom = "1px solid red";
+        email.style.color = "red";
+        password.style.borderBottom = "1px solid red";
+        password.style.color = "red";
     }
-  } catch (e) {
-    console.error("Loading error:", e);
-  }
+    } catch(e){
+        console.error('Loading error:', e);
+    }
 }

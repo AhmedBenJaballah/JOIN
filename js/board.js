@@ -32,16 +32,17 @@ setTimeout(() => {
 function setSidebarStyles() {
   if (window.location.href.includes("board")) {
     setTimeout(() => {
-      let summarySidebar = document.getElementById("boardSidebar");
+      let boardSidebar = document.getElementById("boardSidebar");
       const windowWidth = window.innerWidth;
-      if (windowWidth < 1040) {
-        summarySidebar.style.backgroundColor = "transparent";
-        summarySidebar.style.color = "#337aec";
+      if (boardSidebar)
+      {      if (windowWidth < 1040) {
+        boardSidebar.style.backgroundColor = "transparent";
+        boardSidebar.style.color = "#337aec";
       } else {
-        summarySidebar.style.backgroundColor = "#D2E3FF";
-        summarySidebar.style.borderRadius = "8px";
-        summarySidebar.style.color = "#42526E";
-      }
+        boardSidebar.style.backgroundColor = "#D2E3FF";
+        boardSidebar.style.borderRadius = "8px";
+        boardSidebar.style.color = "#42526E";
+      }}
     }, 200);
   }
 }
@@ -63,6 +64,7 @@ async function loadcheckecdSubtasks() {
 async function loadAmount() {
   try {
     amount = JSON.parse(await getItem("amount"));
+    console.log(amount)
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -97,19 +99,18 @@ async function loadid() {
  * this function is used to render all the tasks in a specific category
  * @param {JSON} category filtered tasks tha share the same category
  * @param {string} categorySting the category name
- * @param {number} amount the number of tasks in that category
  */
-function rendTaskCategory(category, categorySting, amount) {
+function rendTaskCategory(category, categorySting) {
   const task = document.getElementById(categorySting);
   task.classList.remove("createdTask3");
   task.classList.add("newCreatedTask");
   task.innerHTML = "";
-  amount = category.length;
-  if (amount == 0) {
+  
+  if (category.length == 0) {
     task.innerHTML = /*html */ `<div class="createdTask2"> No Tasks </div>`;
   }
   for (let i = 0; i < category.length; i++) {
-    console.log(category[i]["id"]);
+    //console.log(category[i]["id"]);
     renderAllTasks(categorySting, i, category, task);
   }
 }
@@ -119,13 +120,22 @@ function rendTaskCategory(category, categorySting, amount) {
  */
 function renderHTML() {
   let toDo = tasks.filter((t) => t["taskCategory"] == "toDo");
-  rendTaskCategory(toDo, "toDo", amountToDo);
+  rendTaskCategory(toDo, "toDo");
+  amountToDo=toDo.length
+
   let inProgress = tasks.filter((t) => t["taskCategory"] == "inProgress");
-  rendTaskCategory(inProgress, "inProgress", amountInProgress);
+  rendTaskCategory(inProgress, "inProgress");
+  amountInProgress=inProgress.length
+
   let awaitFeedback = tasks.filter((t) => t["taskCategory"] == "awaitFeedback");
-  rendTaskCategory(awaitFeedback, "awaitFeedback", amountAawaitFeedback);
+  rendTaskCategory(awaitFeedback, "awaitFeedback");
+  amountAawaitFeedback=awaitFeedback.length
+
   let done = tasks.filter((t) => t["taskCategory"] == "done");
-  rendTaskCategory(done, "done", amountDone);
+  rendTaskCategory(done, "done");
+  amountToDo=done.length
+  console.log(amountDone)
+  console.log(amount)
 }
 
 /**
@@ -231,6 +241,7 @@ async function moveTo(category) {
       amountDone: amountDone,
     },
   ];
+  console.log(amount)
   await setItem("amount", JSON.stringify(amount));
 }
 

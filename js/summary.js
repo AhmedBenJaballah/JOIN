@@ -13,7 +13,8 @@ function setSidebarStyles() {
     setTimeout(() => {
       let summarySidebar = document.getElementById("summarySiebar");
       const windowWidth = window.innerWidth;
-
+      if (summarySidebar)
+      {
       if (windowWidth < 1040) {
         summarySidebar.style.backgroundColor = "transparent";
         summarySidebar.style.color = "#337aec";
@@ -21,7 +22,7 @@ function setSidebarStyles() {
         summarySidebar.style.backgroundColor = "#D2E3FF";
         summarySidebar.style.borderRadius = "8px";
         summarySidebar.style.color = "#42526E";
-      }
+      }}
     }, 200);
   }
 }
@@ -37,14 +38,17 @@ async function loadAmount() {
     const tasksAwaitFeedback = document.getElementById("tasksAwaitFeedback");
     const tasksDone = document.getElementById("tasksDone");
     const tasksInBoard = document.getElementById("tasksInBoard");
-
+    const totalTasks= document.getElementById("totalTasks");
+console.log(amount)
     tasksToDo.innerHTML = amount[0]["amountToDo"];
     tasksInProgress.innerHTML = amount[0]["amountInProgress"];
     tasksAwaitFeedback.innerHTML = amount[0]["amountAawaitFeedback"];
     tasksDone.innerHTML = amount[0]["amountDone"];
     tasksInBoard.innerHTML = amount[0]["totalTasks"];
+    totalTasks.innerHTML = amount[0]["totalTasks"];
     userName = await getItem("userName");
     greeting();
+    getCurrentDtae();
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -77,4 +81,12 @@ function greeting() {
   }
 
   goodMorning.innerHTML = `${greeting}, <span style="color: #4589FF; font-weight: bold; font-size: 60px;">${userName}</span>`;
+}
+
+
+function getCurrentDtae() {
+  var currentDateElement = document.getElementById("currentDate");
+    var currentDate = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    currentDateElement.textContent = currentDate.toLocaleDateString('de-DE', options);
 }

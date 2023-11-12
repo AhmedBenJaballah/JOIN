@@ -3,6 +3,10 @@
   overflow-y: scroll;
 }
 
+.popup-close-button {
+z-index: 1000;
+}
+
 #board {
   width: calc(100vw - 200px);
   height: calc(100vh - 80px);
