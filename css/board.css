@@ -206,7 +206,7 @@ font-weight: bold;
 .descTask{
 color: #ccc;
 font-size: 16px;
-width: 100%; 
+/*width: 100%;*/ 
 height: auto; 
 word-wrap: break-word;
 }
@@ -287,10 +287,11 @@ position: fixed;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-width: 80%; /* Oder eine andere gewünschte Breite */
+width: 80%;
+height: auto;
 max-width: 500px;
-max-height: 90vh;
-min-height: 10vh;
+max-height: 75vh;
+min-height: 50vh;
 background-color: #fff;
 transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
 box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
@@ -301,10 +302,11 @@ z-index: 999;
 }
 
 .popup-div.show {
-  transform: translateX(-50%) translateY(-50%); 
-  opacity: 1; 
-  max-height: 90%;
-  }
+transform: translateX(-50%) translateY(-50%); 
+opacity: 1; 
+max-height: 90%;
+min-height: 200px;
+}
 
 
 .popup-buttons {
@@ -339,6 +341,7 @@ color: rgb(0,93,255);
 background: none;
 border: none;
 cursor: pointer;
+margin-right: 30px;
 }
 
 .edit-button:hover {
@@ -420,6 +423,7 @@ color: black;
 font-weight: bold;
 margin-right: 30px;
 margin-left: 30px;
+width: auto;
 }
 
 .popup-div .descTask {
@@ -427,6 +431,7 @@ font-size: 29px;
 margin-right: 30px;
 margin-left: 30px;
 color: black;
+width: 80%;
 }
 
 .popup-div .task-date {
