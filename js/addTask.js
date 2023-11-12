@@ -312,10 +312,12 @@ function addSubtask() {
  * @param {div} requiredField the required field
  */
 function isFilled(requiredFieldValue,requiredField){
-  if (requiredFieldValue === "" || requiredFieldValue ==="Select task category") {
+  
+  if (requiredFieldValue === "" || requiredFieldValue ==="Select task category" || placeholder === "Enter a title") {
     requiredField.style.borderBottom =
       "2px solid red";
       requiredField.style.color = "red";
+     
   } else {
     requiredField.style.borderBottom =
       "1px solid black";
@@ -323,12 +325,13 @@ function isFilled(requiredFieldValue,requiredField){
   }
 }
 
+
 /**
  * this function is used to check if the required fields are filled
  * @returns
  */
 function requiredNotFilled(taskTitle,taskDate,category){
-  return(    taskTitle.value === "" ||
+  return(    taskTitle.value === "Enter a title" ||
               taskDate.value === "" ||
               category.value === "Select task category"
 )
