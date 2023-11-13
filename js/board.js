@@ -724,12 +724,14 @@ function renderSubtaskbyEdit(id) {
   for (let i = 0; i < subtask.length; i++) {
     subtaskSection.innerHTML += /*html*/ `
     <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
-    <div  class="hoverToEdit"> ${subtask[i]}</div>  
-    <div class="popupToEdit"><img onclick="tryE()" src="../grafiken/edit.png">|<img src="../grafiken/delete.png"></div>
+    <input id='inputSubtask${i}' class="hoverToEdit" value='${subtask[i]} ' disabled>  
+    <div class="popupToEdit"><img onclick="tryEditSubtask(${i},${id})" src="../grafiken/edit.png">|<img src="../grafiken/delete.png"></div>
     </div>
     `;
   }
 }
+
+
 
 function displayPopup(element) {
   const popup = element.querySelector(".popupToEdit");
@@ -742,8 +744,11 @@ function hidePopup(element) {
 }
 
 
-function tryE(){
+function tryEditSubtask(i,id){
+const te= document.getElementById(`inputSubtask${i}`);
+te.disabled = false;
   console.log('yes')
+ 
 }
 /**
  * this function is used to edit the selected task
@@ -769,6 +774,9 @@ async function editTask(id) {
   console.log(assigned);
   renderAssignedByEdit(assigned);
   renderSubtaskbyEdit(id);
+
+
+  
 }
 
 /**
@@ -787,9 +795,15 @@ async function applyModifications(id) {
   tasks[id]["category"] = category.value;
   tasks[id]["priority"] = priority;
   tasks[id]["assigned"] = checkecdContacts;
-  for (let i = 0; i < subtasks.length; i++) {
-    tasks[id]["subtasks"].push(subtasks[i]);
+
+  
+
+  for (let i = 0; i < tasks[id]["subtasks"].length; i++) {
+    const te= document.getElementById(`inputSubtask${i}`);
+    tasks[id]["subtasks"][i]=te.value
+    
   }
+  console.log(subtasks)
   await setItem("tasks", JSON.stringify(tasks));
   await loadtasks();
   await loadAmount();

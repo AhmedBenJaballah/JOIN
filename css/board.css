@@ -540,16 +540,17 @@ background-color: rgba(0, 0, 0, 0.2);
   color: black;
   font-weight: 400; 
   width: 100%;
- 
+  background-color: transparent;
+  border: none;
 }
 
 .popupToEdit {
   display: none;
   position: absolute;
   right:40px;
-  
-  cursor: pointer;
 
+  cursor: pointer;
+  z-index: 1000;
 }
 
 
