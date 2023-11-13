@@ -550,6 +550,11 @@ background-color: rgba(0, 0, 0, 0.2);
   border: none;
 }
 
+.hoverToEdit:focus{
+  outline:none;
+  border-bottom:1px solid skyblue;
+}
+
 .popupToEdit {
   display: none;
   position: absolute;

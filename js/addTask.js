@@ -297,6 +297,7 @@ function getPriority(selected) {
  *  this function is used to render the new subtasks
  */
 function addSubtask() {
+if(!isClickedEdit){
   const subtask = document.getElementById("subtasks");
   const subtaskSection = document.getElementById("subtask-section");
 
@@ -311,6 +312,7 @@ function addSubtask() {
     `;
   }
   subtask.value = "";
+}
 }
 
 /**

@@ -16,6 +16,8 @@ let amount = [
   },
 ];
 let checkecdSubtasks = [];
+let isClickedEdit=false;
+let idForEditSubtask;
 loadcheckecdSubtasks();
 loadtasks();
 loadAmount();
@@ -717,17 +719,49 @@ function renderAssignedByEdit(assigned) {
  * this function is used to render the subtasks after clicking on edit
  * @param {number} id task id
  */
+
+
+
 function renderSubtaskbyEdit(id) {
   subtasks = [];
+  idForEditSubtask=id;
   const subtaskSection = document.getElementById("subtask-section");
   const subtask = tasks[id]["subtasks"];
   for (let i = 0; i < subtask.length; i++) {
     subtaskSection.innerHTML += /*html*/ `
     <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
-    <input id='inputSubtask${i}' class="hoverToEdit" value='${subtask[i]} ' disabled>  
-    <div class="popupToEdit"><img onclick="tryEditSubtask(${i},${id})" src="../grafiken/edit.png">|<img src="../grafiken/delete.png"></div>
+    <input id='inputSubtask${i}' class="hoverToEdit" value='${subtask[i]}' disabled>  
+    <div class="popupToEdit"><img onclick="editSubtask(${i})" src="../grafiken/edit.png">|<img onclick="deleteSubtask(${i})" src="../grafiken/delete.png"></div>
     </div>
     `;
+  }
+}
+
+function createdInEdit() {
+  if(isClickedEdit){
+    const subtaskCreated = document.getElementById("subtasks").value;
+    const subtask = tasks[idForEditSubtask]["subtasks"];
+    const subtaskSection = document.getElementById("subtask-section");
+    let counterForEditSubtask= subtask.length ;
+  if (subtask.value==''){
+    subtask.style.borderBottom='1px solid red'
+  }
+  else{
+    subtask.push(subtaskCreated);
+    console.log(counterForEditSubtask);
+    console.log(subtaskCreated);
+    subtaskSection.innerHTML += /*html*/ `
+    <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
+    <input id='inputSubtask${counterForEditSubtask}' class="hoverToEdit" value='${subtask[counterForEditSubtask]}' disabled>  
+    <div class="popupToEdit">
+      <img onclick="editSubtask(${counterForEditSubtask})" src="../grafiken/edit.png">
+      | 
+      <img onclick="deleteSubtask(${counterForEditSubtask})" src="../grafiken/delete.png">
+    </div>
+
+    </div>
+    `;
+  }
   }
 }
 
@@ -741,16 +775,33 @@ function hidePopup(element) {
   popup.style.display = "none";
 }
 
-function tryEditSubtask(subtaskIndex, taskId) {
+function editSubtask(subtaskIndex) {
+  const allHoverToEditElements = document.querySelectorAll('.hoverToEdit');
+
+  allHoverToEditElements.forEach((element) => {
+    if (element.id !== `inputSubtask${subtaskIndex}`) {
+      element.style.backgroundColor = 'transparent';
+      element.style.borderBottom = 'none';
+      element.disabled = true;
+    }
+  });
   const te = document.getElementById(`inputSubtask${subtaskIndex}`);
   te.disabled = false;
-  console.log("yes");
+  te.style.backgroundColor='white'
+  te.style.borderBottom='1px solid skyblue'
 }
+
+function deleteSubtask(subtaskIndex) {
+  const te = document.getElementById(`inputSubtask${subtaskIndex}`);
+  te.remove();
+}
+
 /**
  * this function is used to edit the selected task
  * @param {number} id task id
  */
 async function editTask(id) {
+  isClickedEdit=true;
   const addTaskSection = document.querySelector(".popup-div");
   let dialog = document.getElementById("dialog");
   dialog.remove();
@@ -778,6 +829,7 @@ async function editTask(id) {
  */
 async function applyModifications(id) {
   console.log("mod");
+  isClickedEdit=false;
   const title = document.getElementById("task-title");
   tasks[id]["title"] = title.value;
   const description = document.getElementById("task-description");
@@ -788,14 +840,29 @@ async function applyModifications(id) {
   tasks[id]["category"] = category.value;
   tasks[id]["priority"] = priority;
   tasks[id]["assigned"] = checkecdContacts;
+  let toDeleteSubtasks = [];
 
-  for (let i = 0; i < subtasks.length; i++) {
+  // for (let j = 0; j < subtasks.length; j++) {
+  //   tasks[id]["subtasks"].push(subtasks[j]);
+  // }
+  let lengthSubtasks = tasks[id]["subtasks"].length;
+
+  for (let i = 0; i < lengthSubtasks; i++) {
+    console.log(lengthSubtasks);
     const te = document.getElementById(`inputSubtask${i}`);
+    console.log(te);
     if (te) {
       tasks[id]["subtasks"][i] = te.value;
+    } else{
+      toDeleteSubtasks.push(i);
+      //tasks[id]["subtasks"].splice(i, 1);
     }
-    tasks[id]["subtasks"].push(subtasks[i]);
   }
+
+  for (let i = toDeleteSubtasks.length - 1; i >= 0; i--) {
+    tasks[id]["subtasks"].splice(toDeleteSubtasks[i], 1);
+  }
+
   // subtasks sind die neuen tasks
   console.log(subtasks);
   await setItem("tasks", JSON.stringify(tasks));
