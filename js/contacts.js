@@ -13,6 +13,7 @@ function setSidebarStyles() {
   if (window.location.href.includes("contacts")) {
     setTimeout(() => {
       let contactSidebar = document.getElementById("contactsSidebar");
+      const display = document.getElementById("displayContact");
       const windowWidth = window.innerWidth;
 
       if (contactSidebar)
@@ -24,6 +25,8 @@ function setSidebarStyles() {
         contactSidebar.style.backgroundColor = "#D2E3FF";
         contactSidebar.style.borderRadius = "8px";
         contactSidebar.style.color = "#42526E";
+        
+        display.style.alignItems='center';
       }}
     }, 200);
   }
@@ -377,6 +380,7 @@ function renderInfo(name, email, color, phone) {
  }, 300);}
  else{
   display.style.display = "flex";
+  display.style.alignItems='center';
  }
   
  
@@ -530,7 +534,7 @@ function templatEdit(name, color, email, phone) {
     <form id="formContacts" onsubmit="editPerson('${name}','${email}','${color}','${phone}'); return false;">
         <input type="name" id="nameEdit" placeholder="Name" class="inputContact" required >
         <input type="email" id="emailEdit" placeholder="Email" class="inputContact" required>
-        <input type="tel" id="phoneEdit" placeholder="Phone" class="inputContact" required >
+        <input type="tel" id="phoneEdit" placeholder="Phone" class="inputContact" required pattern="[0-9]+">
         <div class="btns">
             <button type="button"  class="btn btn-outline-primary" onclick="deleteContact('${name}','${email}','${color}','${phone}')">Delete <i class="bi bi-x"></i></button>
             <button  type="submit" id="createBtn" class="btn btn-primary">Save <i class="bi bi-check-lg"></i></button>
@@ -560,12 +564,8 @@ async function editPerson(name, email, color, phone) {
   rendeAfterEdit();
   await loadContacts();
 
-  let editedName= document.getElementById(`${name}${email}${color}${phone}EditTask1`)
-  let editedEmail= document.getElementById(`${name}${email}${color}${phone}EditTask2`)
-  let editedPhone= document.getElementById(`${name}${email}${color}${phone}EditTask3`)
-  editedName.innerHTML=  nameEdit.value;
-  editedEmail.innerHTML= emailEdit.value;
-  editedPhone.innerHTML= phoneEdit.value;
+  const display = document.getElementById("displayContact");
+  display.innerHTML = renderInfoTemplate(nameEdit.value,emailEdit.value, color, phoneEdit.value);
 
 }
 
