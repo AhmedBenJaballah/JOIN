@@ -4,17 +4,19 @@
     overflow-y: scroll;
     width: 80%;
 }
+.btn-icon-32x32:hover {
+    cursor: pointer;
+
+}
 
 .impressum{
     padding: 16px;
     height: calc(100vh - 80px);
-    overflow-y: scroll; 
-    
+    overflow-y: scroll;     
     width: 80%
  
 }
 .header-arrow-container {
-   
     display: flex;
     justify-content: space-between;
 }
