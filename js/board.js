@@ -798,10 +798,12 @@ async function applyModifications(id) {
 
   
 
-  for (let i = 0; i < tasks[id]["subtasks"].length; i++) {
+  for (let i = 0; i < subtasks.length; i++) {
     const te= document.getElementById(`inputSubtask${i}`);
-    tasks[id]["subtasks"][i]=te.value
-    
+    if(te){
+      tasks[id]["subtasks"][i]=te.value
+    }
+    tasks[id]["subtasks"].push(subtasks[i]);
   }
   console.log(subtasks)
   await setItem("tasks", JSON.stringify(tasks));
