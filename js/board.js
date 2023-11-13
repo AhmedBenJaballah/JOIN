@@ -400,6 +400,7 @@ function successfullyCreatedInBoar() {
  * this function is used to create a task in board.html
  */
 async function createTask2() {
+  setDate();
   const taskTitle = document.getElementById("task-title");
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date");
@@ -802,6 +803,7 @@ function deleteSubtask(subtaskIndex) {
  */
 async function editTask(id) {
   isClickedEdit=true;
+  
   const addTaskSection = document.querySelector(".popup-div");
   let dialog = document.getElementById("dialog");
   dialog.remove();
@@ -821,6 +823,7 @@ async function editTask(id) {
   console.log(assigned);
   renderAssignedByEdit(assigned);
   renderSubtaskbyEdit(id);
+  setDate();
 }
 
 /**
@@ -914,6 +917,7 @@ async function closePopup2() {
   board = document.getElementById("board");
   board.innerHTML += templateClosePopup();
   await init();
+  isClickedEdit=false;
 }
 
 /**

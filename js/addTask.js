@@ -5,18 +5,21 @@ let priority = "";
 let idCounter = 0;
 loadtasks();
 loadid();
+isClickedEdit= false;
 setSidebarStyles();
 window.addEventListener("resize", setSidebarStyles);
 setTimeout(() => {
   setDate();
 }, 1000);
 let checkboxStatus = {}; 
-
 /**
  * this function is used to style the Sidebar based on the screen resolution
  */
 function setSidebarStyles() {
   if (window.location.href.includes("addTask")) {
+    if(isClickedEdit){
+      createdInEdit();
+    }
     setTimeout(() => {
       let addTaskSidebar = document.getElementById("addTaskSidebar");
       const windowWidth = window.innerWidth;
@@ -31,6 +34,34 @@ function setSidebarStyles() {
       }}
     }, 200);
   }
+}
+
+function createdInEdit(){
+  if(isClickedEdit){
+    const subtaskCreated = document.getElementById("subtasks").value;
+    const subtask = tasks[idForEditSubtask]["subtasks"];
+    const subtaskSection = document.getElementById("subtask-section");
+    let counterForEditSubtask= subtask.length ;
+  if (subtask.value==''){
+    subtask.style.borderBottom='1px solid red'
+  }
+  else{
+    subtask.push(subtaskCreated);
+    console.log(counterForEditSubtask);
+    console.log(subtaskCreated);
+    subtaskSection.innerHTML += /*html*/ `
+    <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
+    <input id='inputSubtask${counterForEditSubtask}' class="hoverToEdit" value='${subtask[counterForEditSubtask]}' disabled>  
+    <div class="popupToEdit">
+      <img onclick="editSubtask(${counterForEditSubtask})" src="../grafiken/edit.png">
+      | 
+      <img onclick="deleteSubtask(${counterForEditSubtask})" src="../grafiken/delete.png">
+    </div>
+
+    </div>
+    `;
+  }
+  } 
 }
 
 /**
