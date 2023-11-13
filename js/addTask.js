@@ -18,16 +18,17 @@ let checkboxStatus = {};
 function setSidebarStyles() {
   if (window.location.href.includes("addTask")) {
     setTimeout(() => {
-      let summarySidebar = document.getElementById("addTaskSidebar");
+      let addTaskSidebar = document.getElementById("addTaskSidebar");
       const windowWidth = window.innerWidth;
-      if (windowWidth < 1040) {
-        summarySidebar.style.backgroundColor = "transparent";
-        summarySidebar.style.color = "#337aec";
+      if (addTaskSidebar)
+      {if (windowWidth < 1040) {
+        addTaskSidebar.style.backgroundColor = "transparent";
+        addTaskSidebar.style.color = "#337aec";
       } else {
-        summarySidebar.style.backgroundColor = "#D2E3FF";
-        summarySidebar.style.borderRadius = "8px";
-        summarySidebar.style.color = "#42526E";
-      }
+        addTaskSidebar.style.backgroundColor = "#D2E3FF";
+        addTaskSidebar.style.borderRadius = "8px";
+        addTaskSidebar.style.color = "#42526E";
+      }}
     }, 200);
   }
 }

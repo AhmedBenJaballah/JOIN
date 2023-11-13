@@ -410,14 +410,15 @@ label > img {
   }
 
   .add-task-section{
-    width: 450px;
+    width: 100vw;
+    justify-content: center;
   }
 
   @media(max-width:470px){
    
 
     .add-task-section{
-      width: 330px;
+      
       box-shadow: none;
 
     }
