@@ -22,7 +22,9 @@ loadcheckecdSubtasks();
 loadtasks();
 loadAmount();
 loadid();
-setSidebarStyles();
+setTimeout(() => {
+  setSidebarStyles()
+}, 2000);
 window.addEventListener("resize", setSidebarStyles);
 setTimeout(() => {
   getInitials();
@@ -48,6 +50,8 @@ function setSidebarStyles() {
       }
     }, 200);
   }
+  let taskSection = document.querySelector('.add-task-section');
+  taskSection.style.justifyContent = 'flex-start';
 }
 
 /**

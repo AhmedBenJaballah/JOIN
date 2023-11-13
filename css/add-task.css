@@ -391,13 +391,13 @@ label > img {
     background-color: white;
     position: absolute;
     bottom: 50px;
-    left:130px;
+    
     width: 420px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px;
-    
+    width: 100%;
   }
 
   #clearFormAdTask{
@@ -412,6 +412,7 @@ label > img {
   .add-task-section{
     width: 100vw;
     justify-content: center;
+    margin-right: 0;
   }
 
   @media(max-width:470px){
@@ -452,7 +453,7 @@ label > img {
     }
 
     #btnsAddTask{
-      width: 330px;
+      width: 100%;
       left:0px;
     }
 
