@@ -34,15 +34,16 @@ function setSidebarStyles() {
     setTimeout(() => {
       let boardSidebar = document.getElementById("boardSidebar");
       const windowWidth = window.innerWidth;
-      if (boardSidebar)
-      {      if (windowWidth < 1040) {
-        boardSidebar.style.backgroundColor = "transparent";
-        boardSidebar.style.color = "#337aec";
-      } else {
-        boardSidebar.style.backgroundColor = "#D2E3FF";
-        boardSidebar.style.borderRadius = "8px";
-        boardSidebar.style.color = "#42526E";
-      }}
+      if (boardSidebar) {
+        if (windowWidth < 1040) {
+          boardSidebar.style.backgroundColor = "transparent";
+          boardSidebar.style.color = "#337aec";
+        } else {
+          boardSidebar.style.backgroundColor = "#D2E3FF";
+          boardSidebar.style.borderRadius = "8px";
+          boardSidebar.style.color = "#42526E";
+        }
+      }
     }, 200);
   }
 }
@@ -64,7 +65,7 @@ async function loadcheckecdSubtasks() {
 async function loadAmount() {
   try {
     amount = JSON.parse(await getItem("amount"));
-    console.log(amount)
+    console.log(amount);
   } catch (e) {
     console.error("Loading error:", e);
   }
@@ -105,7 +106,7 @@ function rendTaskCategory(category, categorySting) {
   task.classList.remove("createdTask3");
   task.classList.add("newCreatedTask");
   task.innerHTML = "";
-  
+
   if (category.length == 0) {
     task.innerHTML = /*html */ `<div class="createdTask2"> No Tasks </div>`;
   }
@@ -121,36 +122,36 @@ function rendTaskCategory(category, categorySting) {
 function renderHTML() {
   let toDo = tasks.filter((t) => t["taskCategory"] == "toDo");
   rendTaskCategory(toDo, "toDo");
-  amountToDo=toDo.length
+  amountToDo = toDo.length;
 
   let inProgress = tasks.filter((t) => t["taskCategory"] == "inProgress");
   rendTaskCategory(inProgress, "inProgress");
-  amountInProgress=inProgress.length
+  amountInProgress = inProgress.length;
 
   let awaitFeedback = tasks.filter((t) => t["taskCategory"] == "awaitFeedback");
   rendTaskCategory(awaitFeedback, "awaitFeedback");
-  amountAawaitFeedback=awaitFeedback.length
+  amountAawaitFeedback = awaitFeedback.length;
 
   let done = tasks.filter((t) => t["taskCategory"] == "done");
   rendTaskCategory(done, "done");
-  amountToDo=done.length
-  console.log(amountDone)
-  console.log(amount)
+  amountToDo = done.length;
+  console.log(amountDone);
+  console.log(amount);
 }
 
 /**
  * this function is used to style the description in the rendered task
- * @param {JSON} tasks the tasks 
- * @param {number} i the task index 
- * @returns 
+ * @param {JSON} tasks the tasks
+ * @param {number} i the task index
+ * @returns
  */
-function styleDescription(tasks,i){
+function styleDescription(tasks, i) {
   let description = tasks[i]["description"].replace(/\n/g, "<br>");
   const descriptionLines = description.split("<br>");
   if (descriptionLines.length > 2) {
     description = descriptionLines.slice(0, 2).join("<br>") + "...";
   }
-  return description
+  return description;
 }
 
 /**
@@ -159,7 +160,7 @@ function styleDescription(tasks,i){
  * @param {number} i the task index
  * @param {Array} assigned array tha contains the assigned contacts
  */
-function personInials(idInitials,i,assigned) {
+function personInials(idInitials, i, assigned) {
   let assignedInitials = document.getElementById(`${idInitials}${i}`);
   for (let j = 0; j < assigned.length; j++) {
     const optionInitials = contacts[assigned[j]].name
@@ -177,7 +178,7 @@ function personInials(idInitials,i,assigned) {
 
 /**
  * this function is used to render all tasks
- * @param {string} idInitials the initials of all contacts in that task 
+ * @param {string} idInitials the initials of all contacts in that task
  * @param {number} i the task index
  * @param {JSON} tasks  all tasks
  * @param {JSON} task the taks of the same category
@@ -197,11 +198,11 @@ function renderAllTasks(idInitials, i, tasks, task) {
     i,
     category,
     title,
-    styleDescription(tasks,i),
+    styleDescription(tasks, i),
     subtasks,
     id
   );
-  personInials(idInitials,i,assigned);
+  personInials(idInitials, i, assigned);
 }
 
 /**
@@ -214,7 +215,7 @@ function startDragging(id) {
 
 /**
  * this task is used to drop the task
- * @param {*} ev 
+ * @param {*} ev
  */
 function allowDrop(ev) {
   ev.preventDefault();
@@ -241,7 +242,7 @@ async function moveTo(category) {
       amountDone: amountDone,
     },
   ];
-  console.log(amount)
+  console.log(amount);
   await setItem("amount", JSON.stringify(amount));
 }
 
@@ -268,27 +269,37 @@ function selectPath(priority) {
 
 /**
  * this function is used to render a single task
- * @param {string} idInitials the initials of all contacts in that task 
+ * @param {string} idInitials the initials of all contacts in that task
  * @param {number} i the task index
  * @param {string} category the task category
  * @param {string} title  the task title
  * @param {string} description the task description
  * @param {Array} subtasks the task subtasks
  * @param {number} id the task id
- * @returns 
+ * @returns
  */
 function renderTask(idInitials, i, category, title, description, subtasks, id) {
-  const matchedSubtasks= checkecdSubtasks.filter(
+  const matchedSubtasks = checkecdSubtasks.filter(
     (subtask) => subtask.taskId == id
   );
   const matchedSubtasksNumber = matchedSubtasks.length;
   const progressPercentage = (matchedSubtasksNumber / subtasks) * 100;
-  return templateRenderTask(idInitials, i, category, title, description, subtasks, id, progressPercentage,matchedSubtasksNumber);
+  return templateRenderTask(
+    idInitials,
+    i,
+    category,
+    title,
+    description,
+    subtasks,
+    id,
+    progressPercentage,
+    matchedSubtasksNumber
+  );
 }
 
 /**
  * this task is used to generate the HTML templae for renderTask
- * @param {*} idInitials the initials of all contacts in that task 
+ * @param {*} idInitials the initials of all contacts in that task
  * @param {number} i the task index
  * @param {string} category the task category
  * @param {string} title  the task title
@@ -297,9 +308,19 @@ function renderTask(idInitials, i, category, title, description, subtasks, id) {
  * @param {number} id the task id
  * @param {number} progressPercentage the % of completed subtasks
  * @param {number} matchedSubtasksNumber number of subtasks
- * @returns 
+ * @returns
  */
-function templateRenderTask(idInitials, i, category, title, description, subtasks, id, progressPercentage,matchedSubtasksNumber) {
+function templateRenderTask(
+  idInitials,
+  i,
+  category,
+  title,
+  description,
+  subtasks,
+  id,
+  progressPercentage,
+  matchedSubtasksNumber
+) {
   return /*html*/ `
   <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask-${id}">
    <div class="${
@@ -354,14 +375,12 @@ function closeSidebar() {
 }
 
 /**
- * this function is used to not close the sidebar 
- * @param {*} event 
+ * this function is used to not close the sidebar
+ * @param {*} event
  */
 function doNotClose(event) {
   event.stopPropagation();
 }
-
-
 
 /**
  * this function is used to confirm the creation of the new task
@@ -383,10 +402,10 @@ async function createTask2() {
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date");
   const category = document.querySelector(".category-select");
-  if (requiredNotFilled(taskTitle,taskDate,category)) {
-    isFilled(taskTitle.value,taskTitle);
-    isFilled(taskDate.value,taskDate);
-    isFilled(category.value,category);
+  if (requiredNotFilled(taskTitle, taskDate, category)) {
+    isFilled(taskTitle.value, taskTitle);
+    isFilled(taskDate.value, taskDate);
+    isFilled(category.value, category);
   } else {
     idCounter++;
     tasks.push({
@@ -409,7 +428,7 @@ async function createTask2() {
     task.classList.add("newCreatedTask");
     let i = tasks.length - 1;
     renderAllTasks(selectedTaskCategory, i, tasks, task);
-    successfullyCreatedInBoar() ;
+    successfullyCreatedInBoar();
     subtasks = [];
     renderHTML();
   }
@@ -417,14 +436,14 @@ async function createTask2() {
 
 /**
  * this function is used to create the edit button
- * @param {number} index task index 
+ * @param {number} index task index
  */
 function creatEdit(index) {
   const editButton = document.createElement("button");
   editButton.className = "edit-button";
   editButton.innerHTML = '<img src="/grafiken/edit.png"> Edit';
   editButton.onclick = function () {
-    editTask(index); 
+    editTask(index);
   };
 }
 
@@ -437,14 +456,22 @@ function creatEdit(index) {
  * @param {string} priority the task priority case
  * @param {number} taskId the task id
  * @param {number} index the task index
- * @returns 
+ * @returns
  */
-function templatePopupDiv(category,title,description,date,priority,taskId,index){
-return /*html*/ `
+function templatePopupDiv(
+  category,
+  title,
+  description,
+  date,
+  priority,
+  taskId,
+  index
+) {
+  return /*html*/ `
 <div class="task-container" id="taskContainer-id">
 <div class="${
-  category === "Technical Task" ? "blueStyle" : "orangeStyle"
-}">${category} 
+    category === "Technical Task" ? "blueStyle" : "orangeStyle"
+  }">${category} 
 </div> 
 <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
 </div>
@@ -457,7 +484,8 @@ return /*html*/ `
 <div class="noEffect" id="popup${taskId}"></div> 
 
 <div class="popup-subtasks" id="taskSubtasks">Subtasks:</div>
-<div class="noEffect" id="subtasks${taskId}"></div>
+<div class="noEffect" id="subtasks${taskId}">
+</div>
 
 <div class="popup-buttons"> 
   <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
@@ -465,7 +493,8 @@ return /*html*/ `
   <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
   
 </div>
-`}
+`;
+}
 
 /**
  * this function is used to show the initials in popup
@@ -496,7 +525,7 @@ function showInitial(taskId, assigned) {
  * @param {number} taskId the task id
  * @param {Array} subtasks the task subtasks
  */
-function showSubtasks(taskId,subtasks) {
+function showSubtasks(taskId, subtasks) {
   let subs = document.getElementById(`subtasks${taskId}`);
   for (let k = 0; k < subtasks.length; k++) {
     let isCheckedS = checkecdSubtasks.some(
@@ -504,7 +533,9 @@ function showSubtasks(taskId,subtasks) {
     );
     subs.innerHTML += /*html*/ `
       <div style='color:black'>
-       <input type="checkbox" onclick="updateProgress(${subtasks.length},${taskId},${k})" class="check${taskId}"
+       <input type="checkbox" onclick="updateProgress(${
+         subtasks.length
+       },${taskId},${k})" class="check${taskId}"
        ${isCheckedS ? "checked" : ""} id="checkbox${taskId}${k}">
        ${subtasks[k]} 
       
@@ -535,10 +566,18 @@ async function showTask(id) {
   creatEdit(index);
   const popupDiv = document.createElement("div");
   popupDiv.className = "popup-div";
-  popupDiv.innerHTML = templatePopupDiv(category,title,description,date,priority,taskId,index);
+  popupDiv.innerHTML = templatePopupDiv(
+    category,
+    title,
+    description,
+    date,
+    priority,
+    taskId,
+    index
+  );
   setTimeout(async () => {
     showInitial(taskId, assigned);
-    showSubtasks(taskId,subtasks);
+    showSubtasks(taskId, subtasks);
   }, 200);
   console.log(subtasks);
   document.body.appendChild(popupDiv);
@@ -552,7 +591,7 @@ async function showTask(id) {
  * @param {number} taskId task id
  * @param {array} subtasks task subtasks
  */
-function updateProgressAfterCheckbox(taskId,subtasks){
+function updateProgressAfterCheckbox(taskId, subtasks) {
   let progressBar = document.getElementById(`progressBar${taskId}`);
   const taskIdVierElemente = checkecdSubtasks.filter(
     (subtask) => subtask.taskId == taskId
@@ -594,7 +633,7 @@ async function updateProgress(subtasks, taskId, k) {
   }
   //checkecdSubtasks=[]
   await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
-  updateProgressAfterCheckbox(taskId,subtasks);
+  updateProgressAfterCheckbox(taskId, subtasks);
 }
 
 /**
@@ -612,7 +651,7 @@ function closePopup() {
 
 /**
  * this function is used to delete a task
- * @param {number} index 
+ * @param {number} index
  */
 async function deleteTask(index) {
   const popupDiv = document.querySelector(".popup-div");
@@ -637,10 +676,10 @@ async function deleteTask(index) {
 /**
  * this function is used to render the task by clicking on edit
  * @param {number} id task id
- * @returns 
+ * @returns
  */
 function renderTaskByEdit(id) {
-  return /*html*/`
+  return /*html*/ `
   <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
   <div w3-include-html="includes/add-task-template.html"></div>
   <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
@@ -675,7 +714,7 @@ function renderAssignedByEdit(assigned) {
 }
 
 /**
- * this function is used to render the subtasks after clicking on edit 
+ * this function is used to render the subtasks after clicking on edit
  * @param {number} id task id
  */
 function renderSubtaskbyEdit(id) {
@@ -690,8 +729,8 @@ function renderSubtaskbyEdit(id) {
 }
 
 /**
- * this function is used to edit the selected task 
- * @param {number} id task id 
+ * this function is used to edit the selected task
+ * @param {number} id task id
  */
 async function editTask(id) {
   const addTaskSection = document.querySelector(".popup-div");
@@ -747,7 +786,7 @@ async function applyModifications(id) {
 
 /**
  * this function is used to generate the HTML for the second popup
- * @returns 
+ * @returns
  */
 function templateClosePopup() {
   return /*html*/ `
@@ -766,7 +805,7 @@ function templateClosePopup() {
               src="/grafiken/check.png" class="primary"></button>
   </div>
 </div>
-</div>`
+</div>`;
 }
 
 /**
@@ -781,7 +820,7 @@ async function closePopup2() {
     popupDiv.remove();
   }, 300);
   board = document.getElementById("board");
-  board.innerHTML +=templateClosePopup();
+  board.innerHTML += templateClosePopup();
   await init();
 }
 

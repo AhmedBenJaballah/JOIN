@@ -313,7 +313,7 @@ function addSubtask() {
  */
 function isFilled(requiredFieldValue,requiredField){
   
-  if (requiredFieldValue === "" || requiredFieldValue ==="Select task category" || placeholder === "Enter a title") {
+  if (requiredFieldValue === "" || requiredFieldValue ==="Select task category" || requiredField.placeholder === "Enter a title") {
     requiredField.style.borderBottom =
       "2px solid red";
       requiredField.style.color = "red";

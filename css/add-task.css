@@ -414,6 +414,7 @@ label > img {
   }
 
   @media(max-width:470px){
+   
 
     .add-task-section{
       width: 330px;

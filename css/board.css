@@ -149,6 +149,8 @@ align-items: flex-start;
 flex-direction: column;
 border-radius: 15px;
 margin-top: 20px;
+max-height: 550px;
+min-height: 250px
 }
 
 .newTask:active {
@@ -169,6 +171,8 @@ overflow-y: scroll;
 display: flex;
 flex-direction: column;
 justify-content: flex-start;
+word-wrap: break-word;
+width: 80%;
 }
 
 .blueStyle{
@@ -423,7 +427,8 @@ color: black;
 font-weight: bold;
 margin-right: 30px;
 margin-left: 30px;
-width: auto;
+word-wrap: break-word;
+width: 80%;
 }
 
 .popup-div .descTask {
