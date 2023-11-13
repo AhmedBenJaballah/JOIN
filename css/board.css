@@ -525,6 +525,37 @@ gap: 8px;
 background-color: rgba(0, 0, 0, 0.2);
 }
 
+.subEditCon{
+  display:flex;
+  justify-content:space-between;
+  width: 100%;
+}
+.subEditCon:hover{
+  background-color: #4589ff36;
+  border-radius: 8px;
+  
+}
+
+.hoverToEdit{
+  color: black;
+  font-weight: 400; 
+  width: 100%;
+ 
+}
+
+.popupToEdit {
+  display: none;
+  position: absolute;
+  right:40px;
+  
+  cursor: pointer;
+
+}
+
+
+
+
+
 @media(max-width: 1040px){
   #board{
     width: 100vw;

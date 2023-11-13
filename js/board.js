@@ -723,11 +723,28 @@ function renderSubtaskbyEdit(id) {
   const subtask = tasks[id]["subtasks"];
   for (let i = 0; i < subtask.length; i++) {
     subtaskSection.innerHTML += /*html*/ `
-    <div>${subtask[i]} </div>
+    <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
+    <div  class="hoverToEdit"> ${subtask[i]}</div>  
+    <div class="popupToEdit"><img onclick="tryE()" src="../grafiken/edit.png">|<img src="../grafiken/delete.png"></div>
+    </div>
     `;
   }
 }
 
+function displayPopup(element) {
+  const popup = element.querySelector(".popupToEdit");
+  popup.style.display = "block";
+}
+
+function hidePopup(element) {
+  const popup = element.querySelector(".popupToEdit");
+  popup.style.display = "none";
+}
+
+
+function tryE(){
+  console.log('yes')
+}
 /**
  * this function is used to edit the selected task
  * @param {number} id task id
