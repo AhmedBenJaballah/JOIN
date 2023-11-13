@@ -805,6 +805,7 @@ async function applyModifications(id) {
     }
     tasks[id]["subtasks"].push(subtasks[i]);
   }
+  // subtasks sind die neuen tasks
   console.log(subtasks)
   await setItem("tasks", JSON.stringify(tasks));
   await loadtasks();

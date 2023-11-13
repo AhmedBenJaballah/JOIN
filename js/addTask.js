@@ -299,11 +299,17 @@ function getPriority(selected) {
 function addSubtask() {
   const subtask = document.getElementById("subtasks");
   const subtaskSection = document.getElementById("subtask-section");
-  subtasks.push(subtask.value);
-  console.log(subtasks);
+
+  if (subtask.value==''){
+    subtask.style.borderBottom='1px solid red'
+  }
+  else{
+    subtasks.push(subtask.value);
+    console.log(subtasks);
   subtaskSection.innerHTML += /*html*/ `
     <div>${subtask.value} </div>
     `;
+  }
   subtask.value = "";
 }
 
