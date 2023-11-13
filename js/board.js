@@ -731,8 +731,6 @@ function renderSubtaskbyEdit(id) {
   }
 }
 
-
-
 function displayPopup(element) {
   const popup = element.querySelector(".popupToEdit");
   popup.style.display = "block";
@@ -743,12 +741,10 @@ function hidePopup(element) {
   popup.style.display = "none";
 }
 
-
-function tryEditSubtask(i,id){
-const te= document.getElementById(`inputSubtask${i}`);
-te.disabled = false;
-  console.log('yes')
- 
+function tryEditSubtask(subtaskIndex, taskId) {
+  const te = document.getElementById(`inputSubtask${subtaskIndex}`);
+  te.disabled = false;
+  console.log("yes");
 }
 /**
  * this function is used to edit the selected task
@@ -774,9 +770,6 @@ async function editTask(id) {
   console.log(assigned);
   renderAssignedByEdit(assigned);
   renderSubtaskbyEdit(id);
-
-
-  
 }
 
 /**
@@ -796,17 +789,15 @@ async function applyModifications(id) {
   tasks[id]["priority"] = priority;
   tasks[id]["assigned"] = checkecdContacts;
 
-  
-
   for (let i = 0; i < subtasks.length; i++) {
-    const te= document.getElementById(`inputSubtask${i}`);
-    if(te){
-      tasks[id]["subtasks"][i]=te.value
+    const te = document.getElementById(`inputSubtask${i}`);
+    if (te) {
+      tasks[id]["subtasks"][i] = te.value;
     }
     tasks[id]["subtasks"].push(subtasks[i]);
   }
   // subtasks sind die neuen tasks
-  console.log(subtasks)
+  console.log(subtasks);
   await setItem("tasks", JSON.stringify(tasks));
   await loadtasks();
   await loadAmount();
