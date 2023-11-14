@@ -614,6 +614,7 @@ margin-bottom: 20px;
     top:60px;
     background-color: white;
   }
+  
   .newTask {
     min-height: auto;
     
@@ -692,4 +693,15 @@ margin-bottom: 20px;
     margin: 0;
     left: 310px;
   }
+  .apply-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  }
+}
+@media(min-width: 471px) and (max-width: 640px){
+ #task-title{
+   font-size: 20px;
+}  
+
 }
