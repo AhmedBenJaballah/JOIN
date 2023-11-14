@@ -302,7 +302,7 @@ transform: translate(-50%, -50%);
 width: 80%;
 height: auto;
 max-width: 500px;
-max-height: 85vh;
+max-height: 70vh;
 min-height: 70vh;
 background-color: #fff;
 transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
@@ -573,6 +573,12 @@ background-color: rgba(0, 0, 0, 0.2);
   }
 }
 
+@media(max-width: 1120px){
+  .pointsPerson{
+    display: none;
+  }
+}
+
 @media (max-width: 1200px), (max-width: 900px) {
   .newTask {
     min-height: auto;
@@ -662,6 +668,7 @@ background-color: rgba(0, 0, 0, 0.2);
 
   .newTask {
     min-height: auto;
+    min-width: 98%;
   }
 
   #add {
@@ -685,10 +692,15 @@ background-color: rgba(0, 0, 0, 0.2);
     padding: 10px;
     flex-direction: row;
     gap: 40px;
+    align-items: flex-start;
   }
 
   .aTaskAreaBoard {
     width: 450px;
+  }
+
+  .pointsPerson{
+    display: flex;
   }
 
   @media (max-width: 520px) {
@@ -741,5 +753,25 @@ background-color: rgba(0, 0, 0, 0.2);
 @media (min-width: 471px) and (max-width: 640px) {
   #task-title {
     font-size: 20px;
+  }
+
+}
+  @media (max-width: 517px){
+    .popup-close-button {
+      left: 385px;
+  }
+
+  .apply-button {
+    margin-left: 340px;
+  }
+
+  @media(max-width: 440px){
+    .popup-close-button {
+      left: 285px;
+  }
+
+  .apply-button {
+    margin-left: 250px;
+  }
   }
 }

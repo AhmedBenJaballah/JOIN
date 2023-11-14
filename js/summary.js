@@ -32,7 +32,7 @@ function setSidebarStyles() {
  */
 async function loadAmount() {
   try {
-    const amount = JSON.parse(await getItem("amount"));
+    let amount = JSON.parse(await getItem("amount"));
     const tasksToDo = document.getElementById("tasksToDo");
     const tasksInProgress = document.getElementById("tasksInProgress");
     const tasksAwaitFeedback = document.getElementById("tasksAwaitFeedback");
@@ -83,7 +83,9 @@ function greeting() {
   goodMorning.innerHTML = `${greeting}, <span style="color: #4589FF; font-weight: bold; font-size: 60px;">${userName}</span>`;
 }
 
-
+/**
+ * this function is used to get the current date
+ */
 function getCurrentDtae() {
   var currentDateElement = document.getElementById("currentDate");
     var currentDate = new Date();

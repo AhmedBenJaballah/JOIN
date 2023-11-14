@@ -51,7 +51,9 @@ function setSidebarStyles() {
     }, 200);
   }
   let taskSection = document.querySelector('.add-task-section');
-  taskSection.style.justifyContent = 'flex-start';
+  if(taskSection){
+    taskSection.style.justifyContent = 'flex-start';
+  }
 }
 
 /**
@@ -126,23 +128,18 @@ function rendTaskCategory(category, categorySting) {
  * this function is used to render the container for the tasks
  */
 function renderHTML() {
-  let toDo = tasks.filter((t) => t["taskCategory"] == "toDo");
+  let toDo = tasks.filter((t) => t["taskCategory"] === "toDo");
   rendTaskCategory(toDo, "toDo");
-  amountToDo = toDo.length;
-
-  let inProgress = tasks.filter((t) => t["taskCategory"] == "inProgress");
+  let inProgress = tasks.filter((t) => t["taskCategory"] === "inProgress");
   rendTaskCategory(inProgress, "inProgress");
-  amountInProgress = inProgress.length;
-
-  let awaitFeedback = tasks.filter((t) => t["taskCategory"] == "awaitFeedback");
+  let awaitFeedback = tasks.filter((t) => t["taskCategory"] === "awaitFeedback");
   rendTaskCategory(awaitFeedback, "awaitFeedback");
-  amountAawaitFeedback = awaitFeedback.length;
-
-  let done = tasks.filter((t) => t["taskCategory"] == "done");
+  let done = tasks.filter((t) => t["taskCategory"] === "done");
   rendTaskCategory(done, "done");
-  amountToDo = done.length;
-  console.log(amountDone);
-  console.log(amount);
+  amountAawaitFeedback = awaitFeedback.length;
+  amountInProgress = inProgress.length;
+  amountToDo = toDo.length;
+  amountDone = done.length;
 }
 
 /**
@@ -168,7 +165,7 @@ function styleDescription(tasks, i) {
  */
 function personInials(idInitials, i, assigned) {
   let assignedInitials = document.getElementById(`${idInitials}${i}`);
-  for (let j = 0; j < assigned.length; j++) {
+  for (let j = 0; j < Math.min(assigned.length, 3); j++) {
     const optionInitials = contacts[assigned[j]].name
       .split(" ")
       .map((word) => word[0].toUpperCase())
@@ -178,6 +175,12 @@ function personInials(idInitials, i, assigned) {
                 contacts[assigned[j]].color
               }">
                 ${optionInitials}
+              </div>`;
+  }
+  if (assigned.length > 3) {
+    assignedInitials.innerHTML += /*html*/ `
+              <div style="color:#ccc; margin-left:4px" class='pointsPerson'>
+                . . .
               </div>`;
   }
 }
@@ -355,6 +358,7 @@ function templateRenderTask(
  * @param {string} aTaskCategory the task cateory of the new created task
  */
 function addSidebar(aTaskCategory) {
+  clearTask();
   const dialog = document.getElementById("dialog");
   selectedTaskCategory = aTaskCategory;
   console.log(selectedTaskCategory);
@@ -405,6 +409,7 @@ function successfullyCreatedInBoar() {
  */
 async function createTask2() {
   setDate();
+  
   const taskTitle = document.getElementById("task-title");
   const taskDescription = document.getElementById("task-description").value;
   const taskDate = document.getElementById("task-date");
@@ -724,9 +729,6 @@ function renderAssignedByEdit(assigned) {
  * this function is used to render the subtasks after clicking on edit
  * @param {number} id task id
  */
-
-
-
 function renderSubtaskbyEdit(id) {
   subtasks = [];
   idForEditSubtask=id;
@@ -742,6 +744,9 @@ function renderSubtaskbyEdit(id) {
   }
 }
 
+/**
+ * this function is used to create a subtask in edit
+ */
 function createdInEdit() {
   if(isClickedEdit){
     const subtaskCreated = document.getElementById("subtasks").value;
@@ -770,16 +775,28 @@ function createdInEdit() {
   }
 }
 
+/**
+ * this function is used to display popup
+ * @param {div} element the selected element
+ */
 function displayPopup(element) {
   const popup = element.querySelector(".popupToEdit");
   popup.style.display = "block";
 }
 
+/**
+ * this function is used to hide the popup
+ * @param {div} element the selected element
+ */
 function hidePopup(element) {
   const popup = element.querySelector(".popupToEdit");
   popup.style.display = "none";
 }
 
+/**
+ * this function is used to edit the subtask
+ * @param {number} subtaskIndex the subtask index
+ */
 function editSubtask(subtaskIndex) {
   const allHoverToEditElements = document.querySelectorAll('.hoverToEdit');
 
@@ -796,6 +813,10 @@ function editSubtask(subtaskIndex) {
   te.style.borderBottom='1px solid skyblue'
 }
 
+/**
+ * this function is used to delete the subtask
+ * @param {number} subtaskIndex 
+ */
 function deleteSubtask(subtaskIndex) {
   const te = document.getElementById(`inputSubtask${subtaskIndex}`);
   te.remove();
@@ -807,7 +828,6 @@ function deleteSubtask(subtaskIndex) {
  */
 async function editTask(id) {
   isClickedEdit=true;
-  
   const addTaskSection = document.querySelector(".popup-div");
   let dialog = document.getElementById("dialog");
   dialog.remove();
@@ -848,10 +868,6 @@ async function applyModifications(id) {
   tasks[id]["priority"] = priority;
   tasks[id]["assigned"] = checkecdContacts;
   let toDeleteSubtasks = [];
-
-  // for (let j = 0; j < subtasks.length; j++) {
-  //   tasks[id]["subtasks"].push(subtasks[j]);
-  // }
   let lengthSubtasks = tasks[id]["subtasks"].length;
 
   for (let i = 0; i < lengthSubtasks; i++) {
@@ -862,16 +878,11 @@ async function applyModifications(id) {
       tasks[id]["subtasks"][i] = te.value;
     } else{
       toDeleteSubtasks.push(i);
-      //tasks[id]["subtasks"].splice(i, 1);
     }
   }
-
   for (let i = toDeleteSubtasks.length - 1; i >= 0; i--) {
     tasks[id]["subtasks"].splice(toDeleteSubtasks[i], 1);
   }
-
-  // subtasks sind die neuen tasks
-  console.log(subtasks);
   await setItem("tasks", JSON.stringify(tasks));
   await loadtasks();
   await loadAmount();

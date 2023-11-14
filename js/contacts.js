@@ -203,12 +203,6 @@ function scrollAndChangeColor(name) {
   let allDivs = element.getElementsByTagName("div");
   let lastDiv = allDivs[allDivs.length - 1];
   setBackgrounColor(lastDiv);
-  // document.addEventListener("click", function (event) {
-  //   var selectedElement = event.target;
-  //   if (selectedElement !== lastDiv) {
-  //     resetBackgrounColor(lastDiv);
-  //   }
-  // });
 }
 
 /**
@@ -382,24 +376,7 @@ function renderInfo(name, email, color, phone) {
   display.style.display = "flex";
   display.style.alignItems='center';
  }
-  
- 
- 
- 
-    
-  
-
-
- 
- 
-  
-
   display.innerHTML = renderInfoTemplate(name, email, color, phone);
-  
-  
-
-
-  
   const scroll = document.getElementById("scrollContacts");
   const arrow = document.getElementById("backToCon");
   if (winWidth < 1040) {
@@ -408,6 +385,9 @@ function renderInfo(name, email, color, phone) {
   }
 }
 
+/**
+ * this function is used to reset the color
+ */
 function resetColor() {
   const allElementsAlt = document.querySelectorAll('.personAlt');
   allElementsAlt.forEach(element => {
@@ -575,9 +555,6 @@ async function editPerson(name, email, color, phone) {
 function rendeAfterEdit() {
   const contactList = document.getElementById("contactList");
   contactList.innerHTML = "";
-  // const display = document.getElementById("displayContact");
-  // display.innerHTML = "";
-  // display.style.display = "none";
   const scroll = document.getElementById("scrollContacts");
   scroll.style.display = "flex";
   closeSidebar2();

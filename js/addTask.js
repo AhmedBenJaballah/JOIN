@@ -36,6 +36,10 @@ function setSidebarStyles() {
   }
 }
 
+
+/**
+ * this function is used to creat subtasks in edit 
+ */
 function createdInEdit(){
   if(isClickedEdit){
     const subtaskCreated = document.getElementById("subtasks").value;
