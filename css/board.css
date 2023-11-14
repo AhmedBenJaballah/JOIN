@@ -302,8 +302,8 @@ transform: translate(-50%, -50%);
 width: 80%;
 height: auto;
 max-width: 500px;
-max-height: 75vh;
-min-height: 50vh;
+max-height: 85vh;
+min-height: 70vh;
 background-color: #fff;
 transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
 box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.2);
@@ -316,8 +316,8 @@ z-index: 999;
 .popup-div.show {
 transform: translateX(-50%) translateY(-50%); 
 opacity: 1; 
-max-height: 90%;
-min-height: 200px;
+max-height: auto;
+min-height: auto;
 }
 
 
@@ -566,73 +566,117 @@ background-color: rgba(0, 0, 0, 0.2);
 }
 
 
-@media(max-width: 1650px){
+/* Media Queries für .newTask */
+@media (max-width: 1650px) {
   .newTask {
     min-height: auto;
   }
 }
 
-@media(max-width: 1200px){
-  .newTask {
-    min-height: auto;
-    max-height: auto;
-  }
-}
-
-
-@media(max-width: 900px){
+@media (max-width: 1200px), (max-width: 900px) {
   .newTask {
     min-height: auto;
     max-height: auto;
   }
 }
 
-@media (min-width: 640px) and (max-width:1695px ){
+@media (min-width: 640px) and (max-width: 1695px) {
   .newTask {
     min-height: auto !important;
-
   }
 }
 
-@media(max-width: 1040px){
-  #board{
+/* Media Query für #board und #tasks-form */
+@media (max-width: 1040px) {
+  #board {
     width: 100vw;
   }
-  #tasks{
-margin-bottom: 20px;
+
+  #tasks-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    margin-bottom: 20px;
   }
+
   .newTask {
     min-height: auto;
-   
   }
 }
 
-@media(max-width: 640px){
-  #features{
-    height: 100px;
-    position: fixed;
-    top:60px;
-    background-color: white;
-  }
-  
-  .newTask {
-    min-height: auto;
-    
+/* Media Query für .popup-div und andere Elemente */
+@media (max-width: 510px) {
+  .popup-div {
+    width: 90% !important;
+    max-width: none;
+    max-height: 70vh;
+    min-height: 50vh;
   }
 
-  #add{
+  .popup-close-button {
+    position: relative;
+    margin-top: 0;
+  }
+
+  #task-form {
+    width: 100%;
+  }
+
+  #subtasks {
+    width: 90%;
+  }
+}
+
+@media (min-width: 511px) and (max-width: 640px) {
+  .popup-div.show {
+    width: auto;
+    min-width: auto;
+  }
+}
+@media (max-width: 520px){
+  .popup-div.show {
+    width: auto;
+    min-width: auto;
+  }
+}
+
+
+/* Media Queries für Bildschirmgröße von maximal 640px */
+@media (max-width: 640px) {
+  #features {
+    height: 100px;
+    position: fixed;
+    top: 60px;
+    background-color: white;
+  }
+
+  .popup-div {
+    min-width: 300px;
+    width: 350px;
+    height: 85%;
+    position: fixed;
+    bottom: -700px;
+  }
+
+  .newTask {
+    min-height: auto;
+  }
+
+  #add {
     display: none;
   }
 
-  #tasks{
+  #tasks {
     width: 90vw;
     display: block;
     height: auto;
     padding-bottom: 40px;
-    padding-top:100px ;
+    padding-top: 100px;
   }
 
-  #board{
+  #board {
     width: 100vw;
   }
 
@@ -640,68 +684,62 @@ margin-bottom: 20px;
     height: auto;
     padding: 10px;
     flex-direction: row;
-    gap:40px
+    gap: 40px;
   }
 
   .aTaskAreaBoard {
     width: 450px;
   }
 
-  @media(max-width: 520px){
+  @media (max-width: 520px) {
     .aTaskAreaBoard {
       width: 300px;
     }
   }
-  .popup-div {
-   width: 350px;
-   height: 85%;
-   position: fixed;
-   bottom: -700px;
-   
-  }
-  .popup-div .blueStyle{
+
+  .popup-div .blueStyle {
     font-size: 16px;
   }
-  .popup-div .taskTitle{
+
+  .popup-div .taskTitle {
     font-size: 40px;
   }
+
   .popup-div .descTask {
     font-size: 20px;
     width: 300px;
   }
-  .popup-div .task-date {
+
+  .popup-div .task-date,
+  .popup-div .task-priority,
+  .popup-div .task-assigned,
+  .popup-div .popup-subtasks,
+  .popup-div .popup-buttons {
     font-size: 20px;
   }
-  .popup-div .task-priority{
-    font-size: 20px;
-  }
-  .popup-div .task-assigned{
-    font-size: 20px;
-  }
-  .popup-div .popup-subtasks{
-    font-size: 20px;
-  }
-  .popup-div .popup-buttons{
-    font-size: 20px;
-  }
+
   .apply-button {
-    margin-left: 250px ;
-    position: fixed;  
-    bottom: -250px;
+    /*margin-left: 250px;*/
+    position: fixed;
+    /*bottom: -250px;*/
+    margin-bottom: auto;
   }
+
   .popup-close-button {
     margin: 0;
-    left: 310px;
+    /*left: 310px;*/
   }
+
   .apply-button {
-  position: fixed;
-  bottom: 0;
-  right: 0;
+    position: relative;
+    right: 0;
+    margin-bottom: 10px;
   }
 }
-@media(min-width: 471px) and (max-width: 640px){
- #task-title{
-   font-size: 20px;
-}  
 
+/* Media Query für task-title */
+@media (min-width: 471px) and (max-width: 640px) {
+  #task-title {
+    font-size: 20px;
+  }
 }

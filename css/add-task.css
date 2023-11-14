@@ -176,7 +176,7 @@ label > img {
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
   width: 400px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 #subtasks:hover {
   border-color: rgb(0,93,255);
