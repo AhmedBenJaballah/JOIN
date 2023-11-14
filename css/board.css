@@ -152,6 +152,8 @@ border-radius: 15px;
 margin-top: 20px;
 max-height: auto;
 min-height: auto;
+min-width: auto;
+
 
 }
 
@@ -588,6 +590,7 @@ background-color: rgba(0, 0, 0, 0.2);
 @media (min-width: 640px) and (max-width:1695px ){
   .newTask {
     min-height: auto !important;
+
   }
 }
 
@@ -613,6 +616,7 @@ margin-bottom: 20px;
   }
   .newTask {
     min-height: auto;
+    
   }
 
   #add{
