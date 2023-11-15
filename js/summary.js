@@ -16,42 +16,81 @@ function setSidebarStyles() {
       if (summarySidebar)
       {
       if (windowWidth < 1040) {
-        summarySidebar.style.backgroundColor = "transparent";
-        summarySidebar.style.color = "#337aec";
+        sidebarUnder(summarySidebar);
       } else {
-        summarySidebar.style.backgroundColor = "#D2E3FF";
-        summarySidebar.style.borderRadius = "8px";
-        summarySidebar.style.color = "#42526E";
+        sidebarOver(summarySidebar);
       }}
     }, 200);
   }
 }
 
 /**
- * this function is used to gethe the number of tasks in bord
+ * this function is used to style the sidebar if over 1040px
+ * @param {div} summarySidebar sidebare in the summary.html
+ */
+function sidebarOver(summarySidebar) {
+  summarySidebar.style.backgroundColor = "#D2E3FF";
+  summarySidebar.style.borderRadius = "8px";
+  summarySidebar.style.color = "#42526E";
+}
+
+/**
+ * this function is used to style the sidebar if under 1040px
+ * @param {div} summarySidebar sidebare in the summary.html
+ */
+function sidebarUnder(summarySidebar) {
+  summarySidebar.style.backgroundColor = "transparent";
+  summarySidebar.style.color = "#337aec";
+}
+
+/**
+ * this function is used to get the the number of tasks in bord
  */
 async function loadAmount() {
   try {
     let amount = JSON.parse(await getItem("amount"));
-    const tasksToDo = document.getElementById("tasksToDo");
-    const tasksInProgress = document.getElementById("tasksInProgress");
-    const tasksAwaitFeedback = document.getElementById("tasksAwaitFeedback");
-    const tasksDone = document.getElementById("tasksDone");
-    const tasksInBoard = document.getElementById("tasksInBoard");
-    const totalTasks= document.getElementById("totalTasks");
-console.log(amount)
-    tasksToDo.innerHTML = amount[0]["amountToDo"];
-    tasksInProgress.innerHTML = amount[0]["amountInProgress"];
-    tasksAwaitFeedback.innerHTML = amount[0]["amountAawaitFeedback"];
-    tasksDone.innerHTML = amount[0]["amountDone"];
-    tasksInBoard.innerHTML = amount[0]["totalTasks"];
-    totalTasks.innerHTML = amount[0]["totalTasks"];
+    const taskElements = getTaskElements();
+    setSummary(amount, ...taskElements);
     userName = await getItem("userName");
     greeting();
-    getCurrentDtae();
+    getCurrentDate();
   } catch (e) {
     console.error("Loading error:", e);
   }
+}
+
+/**
+ * this function is used to get all the tasks element in summary.html
+ * @returns 
+ */
+function getTaskElements() {
+  return [
+    document.getElementById("tasksToDo"),
+    document.getElementById("tasksInProgress"),
+    document.getElementById("tasksAwaitFeedback"),
+    document.getElementById("tasksDone"),
+    document.getElementById("tasksInBoard"),
+    document.getElementById("totalTasks")
+  ];
+}
+
+/**
+ * this function is used to set the values of catagories
+ * @param {div} amount 
+ * @param {div} tasksToDo 
+ * @param {div} tasksInProgress 
+ * @param {div} tasksAwaitFeedback 
+ * @param {div} tasksDone 
+ * @param {div} tasksInBoard 
+ * @param {div} totalTasks 
+ */
+function setSummary(amount,tasksToDo,tasksInProgress,tasksAwaitFeedback,tasksDone,tasksInBoard,totalTasks){
+  tasksToDo.innerHTML = amount[0]["amountToDo"];
+  tasksInProgress.innerHTML = amount[0]["amountInProgress"];
+  tasksAwaitFeedback.innerHTML = amount[0]["amountAawaitFeedback"];
+  tasksDone.innerHTML = amount[0]["amountDone"];
+  tasksInBoard.innerHTML = amount[0]["totalTasks"];
+  totalTasks.innerHTML = amount[0]["totalTasks"];
 }
 
 /**
@@ -65,28 +104,28 @@ function goToBoard() {
  * this function is used to greet the user based on the day time
  */
 function greeting() {
-  const goodMorning = document.getElementById("goodMornig");
-  const currentTime = new Date();
-  const currentHour = currentTime.getHours();
-  let greeting;
+  const timeOfDay = getTimeOfDay();
+  const userNameSpan = `<span style="color: #4589FF; font-weight: bold; font-size: 60px;">${userName}</span>`;
+  const greetingMessage = `${timeOfDay}, ${userNameSpan}`;
+  document.getElementById("goodMornig").innerHTML = greetingMessage;
+}
 
-  if (currentHour >= 5 && currentHour < 12) {
-    greeting = "Guten Morgen";
-  } else if (currentHour >= 12 && currentHour < 18) {
-    greeting = "Guten Tag";
-  } else if (currentHour >= 18 && currentHour < 22) {
-    greeting = "Guten Abend";
-  } else {
-    greeting = "Gute Nacht";
-  }
-
-  goodMorning.innerHTML = `${greeting}, <span style="color: #4589FF; font-weight: bold; font-size: 60px;">${userName}</span>`;
+/**
+ * this function is used to get the time of the day
+ * @returns 
+ */
+function getTimeOfDay() {
+  const currentHour = new Date().getHours();
+  if (currentHour >= 5 && currentHour < 12) return "Guten Morgen";
+  if (currentHour >= 12 && currentHour < 18) return "Guten Tag";
+  if (currentHour >= 18 && currentHour < 22) return "Guten Abend";
+  return "Gute Nacht";
 }
 
 /**
  * this function is used to get the current date
  */
-function getCurrentDtae() {
+function getCurrentDate() {
   var currentDateElement = document.getElementById("currentDate");
     var currentDate = new Date();
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
