@@ -357,7 +357,7 @@ if(!isClickedEdit){
  */
 function isFilled(requiredFieldValue,requiredField){
   
-  if (requiredFieldValue === "" || requiredFieldValue ==="Select task category" || requiredField.placeholder === "Enter a title") {
+  if (requiredFieldValue === "" || requiredFieldValue ==="Select task category" || requiredFieldValue === "") {
     requiredField.style.borderBottom =
       "2px solid red";
       requiredField.style.color = "red";
@@ -375,7 +375,7 @@ function isFilled(requiredFieldValue,requiredField){
  * @returns
  */
 function requiredNotFilled(taskTitle,taskDate,category){
-  return(    taskTitle.value === "Enter a title" ||
+  return(    taskTitle.value === "" ||
               taskDate.value === "" ||
               category.value === "Select task category"
 )
@@ -391,6 +391,21 @@ function successfullyCreated(){
     popup.classList.remove("show");
     window.location.href = "board.html";
   }, 1000);
+}
+
+function checkTitle(){
+  const taskTitle = document.getElementById("task-title");
+  isFilled(taskTitle.value,taskTitle);
+}
+
+function checkDate(){
+  const taskDate = document.getElementById("task-date");
+  isFilled(taskDate.value,taskDate);
+}
+
+function checkSelect(){
+  const category = document.querySelector(".category-select");
+  isFilled(category.value,category);
 }
 
 /**
@@ -449,6 +464,7 @@ function clearTask() {
     dropdown.removeChild(dropdown.firstChild);
     clearSelection();
   }
+  checkecdContacts=[];
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach((checkbox) => {
     checkbox.checked = false;

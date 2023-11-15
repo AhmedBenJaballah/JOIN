@@ -330,21 +330,23 @@ function templateRenderTask(
   progressPercentage,
   matchedSubtasksNumber
 ) {
-  return /*html*/ `
-  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask-${id}">
-   <div class="${
-     category === "Technical Task" ? "blueStyle" : "orangeStyle"
-   }">${category}</div>
-   <div class="renderedTaskTitle">
-    <div class="taskTitle">${title}</div>
-    <div class="descTask"anzahlDerElementeMitTaskIdVier >${description}</div>
-   </div>
+  // Überprüfen, ob subtasks gleich 0 ist
+  const subtaskProgressHTML = subtasks !== 0 ? `
    <div class="subtaskProgress">
        <div class="progress">
        <div class="progress-bar" role="progressbar" aria-valuenow="${matchedSubtasksNumber}" aria-valuemin="0" aria-valuemax="${subtasks}" id="progressBar${id}" style="width:${progressPercentage}%"></div>
        </div>
        <div id="displaysubs${id}" class="progressSubtasksInfo">${matchedSubtasksNumber}/${subtasks} Subtasks</div>
+   </div>` : '';
+
+  return /*html*/ `
+  <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask-${id}">
+   <div class="${category === "Technical Task" ? "blueStyle" : "orangeStyle"}">${category}</div>
+   <div class="renderedTaskTitle">
+    <div class="taskTitle">${title}</div>
+    <div class="descTask">${description}</div>
    </div>
+   ${subtaskProgressHTML}
    <div class="namePriority">
        <div id="${idInitials}${i}" class="names"></div>
        <img src=${path}>
@@ -371,6 +373,7 @@ function addSidebar(aTaskCategory) {
     sidebar.style.transition = "width 0.1s ease";
     sidebar.style.width = "450px";
   }, 50);
+  setDate();
 }
 
 /**

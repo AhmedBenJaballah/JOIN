@@ -346,6 +346,7 @@
   box-shadow: none;
   border-right: none;
   width: 350px;
+  margin-bottom: 40px;
 }
 
 #contacts{
@@ -398,6 +399,7 @@ border-top-left-radius: 15px;
   justify-content: flex-start;
   align-items: center;
 }
+
 
 }
 

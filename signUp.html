@@ -21,8 +21,8 @@
                 <form id="formSignUP" onsubmit="register(); return false;">
                     <input type="name" id="signUpName" placeholder="Name" class="inputSignUp" required >
                     <input type="email" id="signUpEmail" placeholder="Email" class="inputSignUp" required>
-                    <input type="password" id="signUpPassword" placeholder="Password" class="inputSignUp" onkeyup="checkPasswordMatch()" required>
-                    <input type="password" id="signUpPasswordConfirmation" placeholder="Confirm Password" class="inputSignUp" onkeyup="checkPasswordMatch()" required>
+                    <input type="password" id="signUpPassword" placeholder="Password" class="inputSignUp" onkeyup="checkPasswordMatch();handleCheckboxChange()" required>
+                    <input type="password" id="signUpPasswordConfirmation" placeholder="Confirm Password" class="inputSignUp" onkeyup="checkPasswordMatch();handleCheckboxChange()" required>
                     <span id="passwordMatchHint"></span>
                     <div id="rememberMeContainerSignUp">
                     <input type="checkbox" id="acceptSignUp" onclick="handleCheckboxChange()">
