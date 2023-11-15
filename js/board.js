@@ -111,6 +111,7 @@ async function loadid() {
  */
 function rendTaskCategory(category, categorySting) {
   const task = document.getElementById(categorySting);
+if(task){
   task.classList.remove("createdTask3");
   task.classList.add("newCreatedTask");
   task.innerHTML = "";
@@ -122,6 +123,7 @@ function rendTaskCategory(category, categorySting) {
     //console.log(category[i]["id"]);
     renderAllTasks(categorySting, i, category, task);
   }
+}
 }
 
 /**

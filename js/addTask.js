@@ -75,7 +75,9 @@ function setDate() {
   const taskDateInput = document.getElementById("task-date");
   const today = new Date();
   const formattedDate = today.toISOString().split("T")[0];
-  taskDateInput.setAttribute("min", formattedDate);
+  if(taskDateInput){
+    taskDateInput.setAttribute("min", formattedDate);
+  }
 }
 
 /**
@@ -477,7 +479,9 @@ function clearTask() {
 
 document.addEventListener("DOMContentLoaded", function () {
   const clearButton = document.querySelector(".btn-outline-secondary");
-  clearButton.addEventListener("click", clearTask);
+  if(clearButton){
+    clearButton.addEventListener("click", clearTask);
+  }
 });
 
 /**

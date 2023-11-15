@@ -62,7 +62,6 @@ function handleCheckboxChange() {
   const registerButton = document.getElementById("registerBtn");
   const password = document.getElementById("signUpPassword").value;
   const confirmPassword = document.getElementById("signUpPasswordConfirmation").value;
-
   if (acceptCheckbox.checked && password == confirmPassword) {
     registerButton.disabled = false;
   } else {
@@ -74,7 +73,6 @@ function handleCheckboxChange() {
  * this function is used to animate a div to confirm the adding of a new contact
  */
 function successfullySignedUp() {
-  
   const success = document.getElementById("signedUp");
   success.style.display = "flex";
   success.style.transition = "top 0.5s ease, transform 0.5s ease";
@@ -92,14 +90,15 @@ function successfullySignedUp() {
   }, 2000);
 }
 
+/**
+ * this function is used to check if the password is repeated correctly
+ */
 function checkPasswordMatch() {
   var password = document.getElementById("signUpPassword").value;
   var confirmPassword = document.getElementById("signUpPasswordConfirmation").value;
-
   if (password != confirmPassword) {
       document.getElementById("passwordMatchHint").style.color = "red";
       document.getElementById("passwordMatchHint").innerHTML = "Die Passwörter müssen identisch sein.";
-      
   } else {
       document.getElementById("passwordMatchHint").style.color = "green";
       document.getElementById("passwordMatchHint").innerHTML = "Die Passwörter sind identisch.";
