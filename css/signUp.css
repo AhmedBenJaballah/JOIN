@@ -121,6 +121,14 @@
     display: none;
 }
 
+#footerContainerSignup a {
+    color: white; /* Textfarbe auf Schwarz setzen */
+    text-decoration: none; /* Unterstrich entfernen */
+}
+#footerContainerSignup a:hover {
+    color: blue; /* Farbe beim Überfahren ändern */
+}
+
 @media(max-width:1040px){
     #signUpContainer{
         width: 300px !important;
