@@ -108,8 +108,8 @@ function footer() {
   setTimeout(() => {
     logIn.innerHTML += /*html*/ `
         <div id="footerContainer">
-            <div class="privacyLegal">Privacy Policy</div>
-            <div class="privacyLegal">Legal Notice</div>
+            <div class="privacyLegal"><a href="/privacyPolicy.html">Privacy Policy</a></div>
+            <div class="privacyLegal"><a href="/legalNotice.html">Legal Notice</a></div>
         </div>
         `;
   }, 800);

@@ -160,8 +160,8 @@
 }
 
 .privacyLegal:hover{
-    color: #4589FF;
-    cursor: pointer;
+    color: #4589FF ! ;
+    cursor: pointer ;
 }
 
 #footerContainerSignUp{
@@ -186,6 +186,15 @@
     top: 8px;
     left: 8px;
 }
+#footerContainer a {
+    color: black; /* Textfarbe auf Schwarz setzen */
+    text-decoration: none; /* Unterstrich entfernen */
+}
+#footerContainer a:hover {
+    color: #4589FF; /* Farbe beim Überfahren ändern */
+}
+
+
 
 @media(max-width:1040px){
 
