@@ -63,7 +63,7 @@ function createdInEdit(){
   if (subtask.value==''){subtask.style.borderBottom='1px solid red'}
   else{
     subtask.push(subtaskCreated);
-    subtaskSection.innerHTML += createdInEditTemplate(counterForEditSubtask)}
+    subtaskSection.innerHTML += createdInEditTemplate(counterForEditSubtask,subtask)}
   } 
 }
 
@@ -72,7 +72,7 @@ function createdInEdit(){
  * @param {number} counterForEditSubtask number of subtasks
  * @returns 
  */
-function createdInEditTemplate(counterForEditSubtask) {
+function createdInEditTemplate(counterForEditSubtask,subtask) {
   return /*html*/ `
   <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
   <input id='inputSubtask${counterForEditSubtask}' class="hoverToEdit" value='${subtask[counterForEditSubtask]}' disabled>  
@@ -210,8 +210,6 @@ function dropdownNotShown(icon, select, contacts) {
   select.style.height = "auto";
   select.style.flexDirection = "initial";
   for (let j = 0; j < checkecdContacts.length; j++) {
-    console.log(checkecdContacts[j]);
-    console.log(contacts[checkecdContacts[j]]);
     const optionInitials = contacts[checkecdContacts[j]].name.split(" ")
       .map((word) => word[0].toUpperCase()).join("");
     select.innerHTML += templateInitials(contacts, optionInitials, j);
@@ -257,12 +255,10 @@ async function getcha(i) {
   let checkbox = document.getElementById(`${i}`);
   if (checkbox.checked) {
     checkecdContacts.push(i);
-    console.log(checkecdContacts);
   } else {
     const index = checkecdContacts.indexOf(i);
     if (index > -1) {
       checkecdContacts.splice(index, 1);
-      console.log(checkecdContacts);
     }
   }
 }

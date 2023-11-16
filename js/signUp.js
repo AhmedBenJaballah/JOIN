@@ -102,6 +102,5 @@ function checkPasswordMatch() {
   } else {
       document.getElementById("passwordMatchHint").style.color = "green";
       document.getElementById("passwordMatchHint").innerHTML = "Die Passwörter sind identisch.";
-   
   }
 }
