@@ -308,7 +308,7 @@ function findTask() {
   for (let i = 0; i < tasks.length; i++) {
     const id = tasks[i]["id"];
     const taskElement = document.getElementById(`showTask-${id}`);
-    if (tasks[i]["title"].toUpperCase().includes(search)) {
+    if (tasks[i]["title"].toUpperCase().includes(search) || tasks[i]["description"].toUpperCase().includes(search)) {
       taskElement.style.display = "flex";
     } else {
       taskElement.style.display = "none";

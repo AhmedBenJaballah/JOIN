@@ -250,6 +250,21 @@ async function tryContact() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("click", function (event) {
+    const dropdown = document.getElementById("dropdown");
+    const icon = document.getElementById("dropIcon");
+      if(dropdown){
+            if (!dropdown.contains(event.target) && event.target !== icon) {
+              if (icon.classList.contains("bi-caret-up-fill")) {
+                dropdownNotShown(icon, dropdown, contacts);
+              }
+            }
+      }
+  });
+});
+
+
 /**
  * this function is used to verify is the checkbox is selected or not
  * @param {number} i the contact's index
