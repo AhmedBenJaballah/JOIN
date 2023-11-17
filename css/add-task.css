@@ -459,7 +459,7 @@ label > img {
     }
 
     #subtasks{
-      width: 298px;
+      width: auto;
     }
 
     #catSel{
