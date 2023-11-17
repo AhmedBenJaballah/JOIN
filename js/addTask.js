@@ -72,18 +72,21 @@ function createdInEdit(){
  * @param {number} counterForEditSubtask number of subtasks
  * @returns 
  */
-function createdInEditTemplate(counterForEditSubtask,subtask) {
+function createdInEditTemplate(counterForEditSubtask, subtask) {
+  const screenWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  const initialPopupDisplay = screenWidth <= 361 ? 'block' : 'none';
   return /*html*/ `
-  <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
-  <input id='inputSubtask${counterForEditSubtask}' class="hoverToEdit" value='${subtask[counterForEditSubtask]}' disabled>  
-  <div class="popupToEdit">
-    <img onclick="editSubtask(${counterForEditSubtask})" src="../grafiken/edit.png">
-    | 
-    <img onclick="deleteSubtask(${counterForEditSubtask})" src="../grafiken/delete.png">
-  </div>
-  </div>
+    <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
+      <input id='inputSubtask${counterForEditSubtask}' class="hoverToEdit" value='${subtask[counterForEditSubtask]}' disabled>  
+      <div class="popupToEdit" style="display: ${initialPopupDisplay};">
+        <img onclick="editSubtask(${counterForEditSubtask})" src="../grafiken/edit.png">
+        |
+        <img onclick="deleteSubtask(${counterForEditSubtask})" src="../grafiken/delete.png">
+      </div>
+    </div>
   `;
 }
+
 
 /**
  * this function is used to prevent selecting a past date

@@ -508,3 +508,13 @@ label > img {
 
   }
 }
+@media only screen and (max-width: 350px) {
+  
+  .subEditCon .hoverToEdit:disabled + .popupToEdit {
+    display: block;
+    pointer-events: none;
+    visibility: visible;
+  }
+
+  
+}
