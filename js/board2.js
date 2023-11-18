@@ -41,20 +41,32 @@ function templateRenderTask(idInitials,i,category,title,description,subtasks,id,
 }
 
 /**
- * this function checks if the the window width is 350px or less
+ * this function checks if the the window width is 850px or less
  * @param {number} id task id
  */
 function checkWindowWidth(id) {
+setTimeout(() => {
+  let mp1=  document.getElementById(`moveBtn-${id}`)
+  checkSize(mp1)
+}, 300);
   window.addEventListener('resize', () => {
     let mp=  document.getElementById(`moveBtn-${id}`)
-        if(mp){
-        if (window.innerWidth <= 350) {
-        mp.style.display = 'block';
-        } else {
-        mp.style.display = 'none';
-        }
-    }
+    checkSize(mp)
 });
+}
+
+/**
+ * this function is used to show or hide the 'move' button
+ * @param {div} moveBtn the 'move' button
+ */
+function checkSize(moveBtn) {
+  if(moveBtn){
+    if (window.innerWidth <= 850) {
+      moveBtn.style.display = 'block';
+    } else {
+      moveBtn.style.display = 'none';
+    }
+  }
 }
 
 /**
