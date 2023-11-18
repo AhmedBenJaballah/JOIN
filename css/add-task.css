@@ -385,7 +385,7 @@ label > img {
   transform: scale(0.5);
 }
 
-@media(max-width:1040px){
+@media(max-width:1400px){
 
   #btnsAddTask{
     background-color: white;

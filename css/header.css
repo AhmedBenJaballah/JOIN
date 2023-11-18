@@ -81,7 +81,7 @@ align-items: center;
   }
   
 
-  @media(max-width:1040px){
+  @media(max-width:1400px){
     header{
       height: 60px;
     }
