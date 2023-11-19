@@ -259,6 +259,7 @@ async function moveTo(category) {
   await setItem("amount", JSON.stringify(amount));
 }
 
+
 /**
  * this task is used to set the priority image of the task
  * @param {string} priority the priority case
@@ -279,6 +280,8 @@ function selectPath(priority) {
       break;
   }
 }
+
+
 
 /**
  * this function is used to render a single task

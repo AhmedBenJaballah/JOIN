@@ -1,4 +1,3 @@
-
 /**
  * this task is used to generate the HTML templae for renderTask
  * @param {*} idInitials the initials of all contacts in that task
@@ -20,6 +19,7 @@ function templateRenderTask(idInitials,i,category,title,description,subtasks,id,
          </div>
          <div id="displaysubs${id}" class="progressSubtasksInfo">${matchedSubtasksNumber}/${subtasks} Subtasks</div>
      </div>` : '';
+     checkWindowWidth(`${id}`);
     return /*html*/ `
     <div class="newTask" draggable="true" ondragstart="startDragging(${id})" onclick="showTask(${id})" id="showTask-${id}">
      <div class="${category === "Technical Task" ? "blueStyle" : "orangeStyle"}">${category}</div>
@@ -32,9 +32,86 @@ function templateRenderTask(idInitials,i,category,title,description,subtasks,id,
          <div id="${idInitials}${i}" class="names"></div>
          <img src=${path}>
      </div>
+     <button id="moveBtn-${id}" style='display:none' onclick="showMovePopup(${id})" class='btn btn-primary'>Move</button>
+     <div style="position:relative; width:100%">
+     <div id="movePopup-${id}" class="movePopup"></div>
+      </div>
      </div>
      `;
+}
+
+/**
+ * this function checks if the the window width is 850px or less
+ * @param {number} id task id
+ */
+function checkWindowWidth(id) {
+setTimeout(() => {
+  let mp1=  document.getElementById(`moveBtn-${id}`)
+  checkSize(mp1)
+}, 300);
+  window.addEventListener('resize', () => {
+    let mp=  document.getElementById(`moveBtn-${id}`)
+    checkSize(mp)
+});
+}
+
+/**
+ * this function is used to show or hide the 'move' button
+ * @param {div} moveBtn the 'move' button
+ */
+function checkSize(moveBtn) {
+  if(moveBtn){
+    if (window.innerWidth <= 850) {
+      moveBtn.style.display = 'block';
+    } else {
+      moveBtn.style.display = 'none';
+    }
   }
+}
+
+/**
+ * this function shows the move button
+ * @param {*} taskId id of the task
+ */
+function showMovePopup(taskId) {
+  event.stopPropagation();
+  const popup = document.getElementById(`movePopup-${taskId}`);
+  popup.innerHTML =/*html*/ `
+    <div onclick="moveTo2('toDo',${taskId})">To do</div>
+    <div onclick="moveTo2('inProgress',${taskId})">In progress</div>
+    <div onclick="moveTo2('awaitFeedback',${taskId})">await feedback</div>
+    <div onclick="moveTo2('done',${taskId})">Done</div>`;
+  popup.style.position = 'absolute';
+  popup.style.background = '#fff';
+  popup.style.border = '1px solid #ccc';
+  popup.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+  popup.style.padding = '10px';
+  popup.style.bottom='4px';
+  popup.style.left='4px';
+  popup.style.borderRadius='8px'
+}
+  
+/**
+ *  this task is used to change the category name
+ * @param {string} category the moved to task category
+ * @param {number} category the moved to task id
+ */
+async function moveTo2(category,taskId) {
+  event.stopPropagation();
+  const index = tasks.findIndex((c) => c.id == taskId);
+  tasks[index]["taskCategory"] = category;
+  renderHTML();
+  await setItem("tasks", JSON.stringify(tasks));
+  totalTasks =
+    amountToDo + amountInProgress + amountAawaitFeedback + amountDone;
+  amount = [{
+      totalTasks: totalTasks,
+      amountToDo: amountToDo,
+      amountInProgress: amountInProgress,
+      amountAawaitFeedback: amountAawaitFeedback,
+      amountDone: amountDone,}];
+  await setItem("amount", JSON.stringify(amount));
+}
   
   /**
    * this function is used to open the add task sidebar
@@ -128,23 +205,15 @@ function templateRenderTask(idInitials,i,category,title,description,subtasks,id,
     await setItem("idCounter", JSON.stringify(idCounter));
     tasks = JSON.parse(await getItem("tasks"));
     contacts = JSON.parse(await getItem("contacts"));
-    styleTaskAfterRendering()
+    const task = document.getElementById(selectedTaskCategory);
+    task.classList.remove("createdTask3");
+    task.classList.add("newCreatedTask");
     let i = tasks.length - 1;
     renderAllTasks(selectedTaskCategory, i, tasks, task);
     successfullyCreatedInBoar();
     subtasks = [];
     renderHTML();
   }
-
-  /**
-   * this function is used to style the task
-   */
-  function styleTaskAfterRendering() {
-    const task = document.getElementById(selectedTaskCategory);
-    task.classList.remove("createdTask3");
-    task.classList.add("newCreatedTask");
-  }
-  
   
   /**
    * this function is used to create the edit button
@@ -325,4 +394,3 @@ async function updateProgress(subtasks, taskId, k) {
   await setItem("checkecdSubtasks", JSON.stringify(checkecdSubtasks));
   updateProgressAfterCheckbox(taskId, subtasks);
 }
-  

@@ -129,7 +129,7 @@
     color: blue; /* Farbe beim Überfahren ändern */
 }
 
-@media(max-width:1040px){
+@media(max-width:1400px){
     #signUpContainer{
         width: 300px !important;
     }

@@ -97,7 +97,7 @@ if(!isClickedEdit){
   if (subtask.value==''){subtask.style.borderBottom='1px solid red'}
   else{
     subtasks.push(subtask.value);
-  subtaskSection.innerHTML += /*html*/ `<div>${subtask.value} </div>`; }
+  subtaskSection.innerHTML += /*html*/ `<div class='toBeClearedSubtasks'>${subtask.value} </div>`; }
   subtask.value = "";}
 }
 
@@ -245,6 +245,9 @@ function clearCategoryAndSubtask() {
     categorySelect.selectedIndex = 0;
     const subtasks = document.getElementById("subtasks");
     subtasks.value = "";
+    const subtaskSection = document.getElementById("subtask-section");
+    const toBeClearedSubtasks = subtaskSection.querySelectorAll('.toBeClearedSubtasks');
+    toBeClearedSubtasks.forEach(subtask => subtask.remove());
 }
 
 /**
