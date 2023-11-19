@@ -14,7 +14,8 @@ z-index: 1000;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  overflow-y:scroll;
+ 
+
 }
 
 #features{
@@ -644,7 +645,7 @@ background-color: rgba(0, 0, 0, 0.2);
 @media (max-width: 520px){
   .popup-div.show {
     width: auto;
-    min-width: auto;
+    max-width: auto;
   }
 }
 
