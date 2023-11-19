@@ -1,6 +1,8 @@
 #content {
   display: flex;
   overflow-y: scroll;
+  overflow-x: auto;
+
 }
 
 .popup-close-button {
@@ -652,6 +654,7 @@ background-color: rgba(0, 0, 0, 0.2);
 
 /* Media Queries für Bildschirmgröße von maximal 640px */
 @media (max-width: 1400px) {
+ 
   #features {
     height: 100px;
     position: fixed;
@@ -682,6 +685,7 @@ background-color: rgba(0, 0, 0, 0.2);
     height: auto;
     padding-bottom: 40px;
     padding-top: 100px;
+    
   }
 
   #board {
@@ -829,12 +833,13 @@ background-color: rgba(0, 0, 0, 0.2);
     border-radius: 0px 
 }
 
-  .aTaskAreaBoard {
-    width: 450px;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: flex-start;
+.aTaskAreaBoard {
+  width: 450px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+
 }
 
 .aTaskArea {
@@ -843,6 +848,8 @@ background-color: rgba(0, 0, 0, 0.2);
   justify-content: space-between;
   align-items: center;
   height: 30px;
+  overflow-x: scroll;
+
 }
 
 .newCreatedTask {
@@ -852,6 +859,20 @@ background-color: rgba(0, 0, 0, 0.2);
   gap: 40px;
   align-items: flex-start;
   width: 90vw;
+}
+
+::-webkit-scrollbar {
+  height: 6px;
+  
+}
+
+::-webkit-scrollbar-thumb {
+  background: gray !important;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c7c5c5;
 }
 
 .createdTask2 {
