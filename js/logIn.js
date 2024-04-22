@@ -5,7 +5,7 @@ let userInitial="" ;
  */
 function startJoin() {
   const logIn = document.getElementById("logIn");
-  logIn.innerHTML = /*html*/ `<img src="grafiken/Capa 2 (1).png" id="joinStartImage">`;
+  logIn.innerHTML = /*html*/ `<img src="./grafiken/Capa 2 (1).png" id="joinStartImage">`;
   setTimeout(() => {
     putImageAside();
     createLogInContainer();
@@ -22,7 +22,7 @@ function putImageAside() {
   const logIn = document.getElementById("logIn");
   styleJoin(joinStartImage);
   setTimeout(() => {
-    joinStartImage.src = "grafiken/Capa 2.png";
+    joinStartImage.src = "./grafiken/Capa 2.png";
   }, 800);
   logIn.style.transition = "background-color 1s ease";
   logIn.style.backgroundColor = "white";
@@ -80,7 +80,7 @@ return    /*html*/ `
 async function goToSummary() {
   await setItem('userInitial', 'G');
   await setItem('userName', 'Guest');
-  window.location.href = "/summary.html";
+  window.location.href = "./summary.html";
 }
 
 /**
@@ -102,7 +102,7 @@ function signUpBtns() {
  * this function is used to navigte to signUp
  */
 function signUpPage() {
-  window.location.href = "/signUp.html";
+  window.location.href = "./signUp.html";
 }
 
 /**
@@ -113,8 +113,8 @@ function footer() {
   setTimeout(() => {
     logIn.innerHTML += /*html*/ `
         <div id="footerContainer">
-            <div class="privacyLegal"><a href="/privacyPolicy.html">Privacy Policy</a></div>
-            <div class="privacyLegal"><a href="/legalNotice.html">Legal Notice</a></div>
+            <div class="privacyLegal"><a href="./privacyPolicy.html">Privacy Policy</a></div>
+            <div class="privacyLegal"><a href="./legalNotice.html">Legal Notice</a></div>
         </div>
         `;
   }, 800);
@@ -132,7 +132,7 @@ async function logIn(){
         if(user){userInitial= user.name.split(' ').map(word => word[0].toUpperCase()).join('')
         await setItem('userInitial', userInitial);
         await setItem('userName', user.name);
-        window.location.href = 'summary.html';}
+        window.location.href = './summary.html';}
        else if (users.some(u => u.email === email.value)) {ifPasswortWorng(password);}
        else {ifNotFound(password,email)}
     } catch(e){console.error('Loading error:', e);}

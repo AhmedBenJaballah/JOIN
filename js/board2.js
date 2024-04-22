@@ -222,7 +222,7 @@ async function moveTo2(category,taskId) {
   function creatEdit(index) {
     const editButton = document.createElement("button");
     editButton.className = "edit-button";
-    editButton.innerHTML = '<img src="/grafiken/edit.png"> Edit';
+    editButton.innerHTML = '<img src="./grafiken/edit.png"> Edit';
     editButton.onclick = function () {
       editTask(index);
     };
@@ -246,7 +246,7 @@ async function moveTo2(category,taskId) {
       category === "Technical Task" ? "blueStyle" : "orangeStyle"
     }">${category} 
   </div> 
-  <button class="close-button" onclick="closePopup()"><img src="/grafiken/close.png"></button> 
+  <button class="close-button" onclick="closePopup()"><img src="./grafiken/close.png"></button> 
   </div>
   <div class="taskTitle" id="taskTitle">${title} </div>
   <div class="descTask" id="taskDesc">${description}</div>
@@ -258,9 +258,9 @@ async function moveTo2(category,taskId) {
   <div class="noEffect" id="subtasks${taskId}">
   </div>
   <div class="popup-buttons"> 
-    <button class="delete-button" onclick="deleteTask(${index})"><img src="/grafiken/delete-popup.png"> Delete</button> 
-    <div class="divider"><img  src="/grafiken/Vector 3.png"></div>
-    <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="/grafiken/edit.png">Edit</button>
+    <button class="delete-button" onclick="deleteTask(${index})"><img src="./grafiken/delete-popup.png"> Delete</button> 
+    <div class="divider"><img  src="./grafiken/Vector 3.png"></div>
+    <button class="edit-button"  id="edit_button" onclick="editTask(${index})"><img src="./grafiken/edit.png">Edit</button>
   </div>`;
   }
   

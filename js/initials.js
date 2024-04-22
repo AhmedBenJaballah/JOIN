@@ -17,8 +17,8 @@ function displayOptions() {
   if (options.classList.contains("dNone")) {
     options.classList.remove("dNone");
     options.innerHTML = `
-    <div class="option"><a href="/privacyPolicy.html">Privacy Policy</a></div>
-    <div class="option"><a href="/legalNotice.html">Legal Notice</a></div>
+    <div class="option"><a href="./privacyPolicy.html">Privacy Policy</a></div>
+    <div class="option"><a href="./legalNotice.html">Legal Notice</a></div>
     <div class="option" onclick="goToLogIn()">Log out</div>
     `;
   } else {
@@ -30,5 +30,5 @@ function displayOptions() {
  * this function is used to navigte to log In
  */
 function goToLogIn() {
-  window.location.href = "logIn.html";
+  window.location.href = "./logIn.html";
 }

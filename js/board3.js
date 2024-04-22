@@ -40,9 +40,9 @@ async function deleteTask(index) {
  */
 function renderTaskByEdit(id) {
   return /*html*/ `
-  <img onclick="closePopup2()" class="popup-close-button" src="/grafiken/close.png"> 
+  <img onclick="closePopup2()" class="popup-close-button" src="./grafiken/close.png"> 
   <div w3-include-html="includes/add-task-template.html"></div>
-  <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="/grafiken/check.png"></button> 
+  <button class="apply-button" onclick="applyModifications(${id})">Ok <img src="./grafiken/check.png"></button> 
   </div>
 `;
 }
@@ -80,7 +80,7 @@ function renderSubtaskbyEdit(id) {
     subtaskSection.innerHTML += /*html*/ `
     <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
     <input id='inputSubtask${i}' class="hoverToEdit" value='${subtask[i]}' disabled>  
-    <div class="popupToEdit"><img onclick="editSubtask(${i})" src="../grafiken/edit.png">|<img onclick="deleteSubtask(${i})" src="../grafiken/delete.png"></div>
+    <div class="popupToEdit"><img onclick="editSubtask(${i})" src="./grafiken/edit.png">|<img onclick="deleteSubtask(${i})" src="./grafiken/delete.png"></div>
     </div>
     `;
   }
@@ -114,9 +114,9 @@ function createdInEditTemplate(counterForEditSubtask,subtask) {
   <div class="subEditCon" onmouseenter="displayPopup(this)" onmouseleave="hidePopup(this)">
   <input id='inputSubtask${counterForEditSubtask}' class="hoverToEdit" value='${subtask[counterForEditSubtask]}' disabled>  
   <div class="popupToEdit">
-    <img onclick="editSubtask(${counterForEditSubtask})" src="../grafiken/edit.png">
+    <img onclick="editSubtask(${counterForEditSubtask})" src="./grafiken/edit.png">
     | 
-    <img onclick="deleteSubtask(${counterForEditSubtask})" src="../grafiken/delete.png">
+    <img onclick="deleteSubtask(${counterForEditSubtask})" src="./grafiken/delete.png">
   </div>
   </div>
   `;
@@ -274,9 +274,9 @@ function templateClosePopup() {
     <div w3-include-html="includes/add-task-template.html"></div>
     <div class="buttons" id="btnsAddTask">
       <button type="button" class="btn btn-outline-secondary" onclick="clearTask()" aria-pressed="false"
-          autocomplete="off">Clear <img src="/grafiken/VectorX.png"></button>
+          autocomplete="off">Clear <img src="./grafiken/VectorX.png"></button>
       <button type="button" class="btn btn-primary" onclick="createTask2()"> Create Task <img
-              src="/grafiken/check.png" class="primary"></button>
+              src="./grafiken/check.png" class="primary"></button>
   </div>
 </div>
 </div>`;

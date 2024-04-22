@@ -97,7 +97,7 @@ function setSummary(amount,tasksToDo,tasksInProgress,tasksAwaitFeedback,tasksDon
  * this function is used to navigate to board
  */
 function goToBoard() {
-  window.location.href = "board.html";
+  window.location.href = "./board.html";
 }
 
 /**

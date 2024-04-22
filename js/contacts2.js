@@ -124,8 +124,8 @@ function renderInfoTemplate(name, email, color, phone) {
         <div class="renderName">
             <div class="renderOnlyName" id='${name}${email}${color}${phone}EditTask1'>${name}</div>
             <div class="editAndDelete">
-                <div class="alignImg" onclick="modification('${name}','${email}','${color}','${phone}')"><img src="grafiken/edit.png">Edit</div>
-                <div class="alignImg" onclick="deleteContact('${name}','${email}','${color}','${phone}')" ><img src="grafiken/delete.png">Delete</div>
+                <div class="alignImg" onclick="modification('${name}','${email}','${color}','${phone}')"><img src="./grafiken/edit.png">Edit</div>
+                <div class="alignImg" onclick="deleteContact('${name}','${email}','${color}','${phone}')" ><img src="./grafiken/delete.png">Delete</div>
             </div>
         </div>
     </div>
@@ -136,7 +136,7 @@ function renderInfoTemplate(name, email, color, phone) {
         <h5>Phone</h5>
         <div id='${name}${email}${color}${phone}EditTask3'>${phone}</div>
     </div>
-    <div id="backToCon"  style="display:none" onclick='backToCon()'> <img src='grafiken/arrow-left-line.png'> </div>
+    <div id="backToCon"  style="display:none" onclick='backToCon()'> <img src='./grafiken/arrow-left-line.png'> </div>
       `;
 }
 

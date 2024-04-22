@@ -4,7 +4,7 @@ let users = [];
  * this function is used to navigte to log In
  */
 function goToLogIn() {
-  window.location.href = "logIn.html";
+  window.location.href = "./logIn.html";
 }
 
 /**
@@ -86,7 +86,7 @@ function successfullySignedUp() {
     success.style.display = "none";
   }, 1800);
   setTimeout(() => {
-    window.location.href = "/logIn.html";
+    window.location.href = "./logIn.html";
   }, 2000);
 }
 
